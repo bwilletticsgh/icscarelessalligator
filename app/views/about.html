@@ -1,0 +1,28 @@
+<p>This is the about view.</p>
+
+
+<div class="row">
+  <div class="form-group">
+    <label for="FirstNameFilter" class="col-sm-2 control-label">First Name Filter</label>
+    <div class="col-sm-10">
+      <input type="text" ng-model="FirstNameFilter.firstName" id="FirstNameFilter" class="form-control"
+             placeholder="First Name Filter">
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="item in about.users | orderBy: 'firstName' | filter: FirstNameFilter">
+      {{item.lastName | uppercase}}, {{item.firstName}}
+    </li>
+  </ul>
+</div>
+
+<div class="row">
+  <button type="button" class="btn btn-large btn-block btn-primary" ng-click="about.addAwesomeThing()">button
+    <i class="fa fa-check fa-2x"/>
+  </button>
+</div>
+
