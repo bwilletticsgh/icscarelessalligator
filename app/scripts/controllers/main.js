@@ -11,11 +11,10 @@ angular.module('app6App')
   .controller('MainCtrl', function ($uibModal) {
     var vm = this;
     vm.showInfo = function(){
-      alert("asd")
       var modalInstance = $uibModal.open({
         templateUrl: 'myModalContent.html',
         controller: function($scope) {
-          $scope.title="Hello foo!";
+          $scope.title='Hello foo!';
           $scope.ok = function(){
             modalInstance.close();
           };

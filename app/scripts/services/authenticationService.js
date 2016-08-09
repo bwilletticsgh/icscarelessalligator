@@ -1,7 +1,8 @@
 (function(){
   'use strict';
   angular.module('app6App')
-    .factory('authentication', function($q, $timeout) {
+    .factory('authentication', function($q, users) {
+
         var _isAuthenticated=false;
         function isAuthenticated() {
           return _isAuthenticated;
@@ -9,15 +10,14 @@
 
         function login(username, password){
           var deferred = $q.defer();
-          var isValidUser = username==='admin' && password==='admin';
+          var user = users.getUser(username);
+          var isValidUser = user && user.email.toUpperCase() === username.toUpperCase() && user.password === password;
           if (isValidUser){
+            users.setCurrentUser(user);
             _isAuthenticated=true;
           }
 
-          $timeout(function(){
-            //simulate response time
-            deferred.resolve(isValidUser);
-          },2000);
+          deferred.resolve(isValidUser);
 
           return deferred.promise;
         }

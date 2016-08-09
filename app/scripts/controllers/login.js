@@ -3,7 +3,7 @@
 
 
 angular.module('app6App')
-  .controller('Login', function ($q, authentication) {
+  .controller('Login', function ($q, authentication, $state) {
     var vm = this;
     vm.Username='';
     vm.Password='';
@@ -17,6 +17,7 @@ angular.module('app6App')
       promise.then(function(success) {
         if (success) {
           vm.message = vm.successMessage;
+          $state.go('about');
         }
         else{
           vm.message = vm.failMessage;

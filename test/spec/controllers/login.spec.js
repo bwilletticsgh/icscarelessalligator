@@ -8,11 +8,14 @@ describe('Controller: Login', function () {
   var Login,
     $timeout,
     $httpBackend,
+    users,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$timeout_, _$httpBackend_) {
+  beforeEach(inject(function ($controller, $rootScope, _$timeout_, _$httpBackend_, _users_) {
     $timeout=_$timeout_;
+    users = _users_;
+    users.addUser({email:'someperson@somewhere.com', password:'abc'});
     $httpBackend=_$httpBackend_;
     $httpBackend.when('GET', 'views/main.html').respond(200);
     $httpBackend.when('GET', 'views/about.html').respond(200);
@@ -33,11 +36,21 @@ describe('Controller: Login', function () {
     $timeout.flush();
   });
 
-  it('should let in an the admin user', function () {
-    Login.Username='admin';
-    Login.Password='admin';
+  it('should let in a known user with the right password', function () {
+    Login.Username='someperson@somewhere.com';
+    Login.Password='abc';
     Login.Login().then(function(){
       expect(Login.message).toBe(Login.successMessage);
+    });
+    $httpBackend.flush();
+    $timeout.flush();
+  });
+
+  it('should not let in a known user with the wrong password', function () {
+    Login.Username='someperson@somewhere.com';
+    Login.Password='abcd';
+    Login.Login().then(function(){
+      expect(Login.message).toBe(Login.failMessage);
     });
     $httpBackend.flush();
     $timeout.flush();

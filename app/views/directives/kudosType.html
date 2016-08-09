@@ -1,0 +1,25 @@
+<div class="kudosType">
+
+  <div class="kudosName" ng-switch on="allowLink">
+    <a ui-sref="editKudos({id:kudo.id})" ng-switch-when="true">
+      "{{kudo.name}}"
+    </a>
+    <span ng-switch-when="false">
+      "{{kudo.name}}"
+    </span>
+  </div>
+
+  <hr/>
+
+  <div class="text-center">
+    <span class=" fa-stack fa-4x" style="color:{{kudo.color}}">
+      <i class="fa fa-circle-thin fa-stack-2x"></i>
+      <i class="fa {{kudo.icon}} fa-stack-1x"></i>
+    </span>
+  </div>
+
+
+  <h3 class="text-center">
+    <small>{{kudo.description}}</small>
+  </h3>
+</div>

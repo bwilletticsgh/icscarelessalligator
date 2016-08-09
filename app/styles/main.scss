@@ -11,6 +11,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   display: none !important;
 }
 
+.circle-border {
+  border: 6px solid #2f6fad !important;
+  border-radius: 50%;
+}
+
+.kudosType{
+  .kudosName {
+    @extend .text-center;
+    @extend h3;
+    min-height: 60px;
+  }
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
