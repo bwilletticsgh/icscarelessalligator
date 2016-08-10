@@ -1,27 +1,25 @@
 'use strict';
 
-describe('Controller: UserCtrl', function () {
+describe('Controller: UsersCtrl', function () {
 
   // load the controller's module
   beforeEach(module('app6App'));
 
-  var UserCtrl,
+  var UsersCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    UserCtrl = $controller('UserCtrl', {
+    UsersCtrl = $controller('UsersCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(UserCtrl.awesomeThings.length).toBe(3);
+  it('should have a list of users on the scope', function () {
+    expect(UsersCtrl.users).toBeDefined();
   });
 
-  it('should attach a list of awesomeThings to the scope and stuff', function () {
-    expect(UserCtrl.awesomeThings.length).toBe(3);
-  });
+
 });

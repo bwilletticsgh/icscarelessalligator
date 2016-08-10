@@ -21,7 +21,7 @@ describe('Unit: App', function () {
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $httpBackend.when('GET', 'views/main.html').respond(200);
-      $httpBackend.when('GET', 'views/about.html').respond(200);
+      $httpBackend.when('GET', 'views/users.html').respond(200);
     }));
 
     it('verifies state configuration', function () {

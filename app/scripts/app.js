@@ -26,20 +26,19 @@ angular
     $stateProvider
       .state('home', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'vm',
+        controller: 'MainCtrl as vm',
         url:'/home'
       })
       .state('kudos', {
+        pageTitle: 'Kudos List',
         templateUrl: 'views/kudos/list.html',
-        controller: 'KudosCtrl',
-        controllerAs: 'vm',
+        controller: 'KudosCtrl as vm',
         url:'/kudos/list'
       })
       .state('editKudos', {
+        pageTitle: 'Edit Kudos',
         templateUrl: 'views/kudos/edit.html',
-        controller: 'KudosEditorCtrl',
-        controllerAs: 'vm',
+        controller: 'KudosEditorCtrl as vm',
         url:'/kudos/edit/{id:int}',
         resolve: {
           kudo : function($stateParams, kudos){
@@ -48,9 +47,9 @@ angular
         }
       })
       .state('createKudos', {
+        pageTitle: 'Create Kudos',
         templateUrl: 'views/kudos/edit.html',
-        controller: 'KudosEditorCtrl',
-        controllerAs: 'vm',
+        controller: 'KudosEditorCtrl as vm',
         url:'/kudos/create/',
         resolve: {
           kudo : function(){
@@ -59,15 +58,18 @@ angular
         }
       })
       .state('about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about',
-        url:'/account/login'
+        templateUrl: 'views/users.html',
+        controller: 'UsersCtrl as vm',
+        url:'/users'
       })
       .state('login', {
         templateUrl: 'views/account/login.html',
-        controller: 'Login',
-        controllerAs: 'vm',
-        url:'/account/login.html'
+        controller: 'Login as vm',
+        url:'/account/login'
       });
+  })
+  .run(function ($rootScope) {
+    $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+      $rootScope.pageTitle = toState.pageTitle;
+    });
   });

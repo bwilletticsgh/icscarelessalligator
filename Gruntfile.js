@@ -213,7 +213,7 @@ module.exports = function (grunt) {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
               detect: {
-                js: /'(.*\.js)'/gi
+                js: /'(.*\.js)'/gi,
               },
               replace: {
                 js: '\'{{filePath}}\','

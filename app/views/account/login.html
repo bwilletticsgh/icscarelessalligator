@@ -2,13 +2,14 @@
 <div class="row">
 	<div class="col-xs-12">
 		<form name="loginForm" class="form-horizontal" role="form" ng-submit="vm.Login()" novalidate>
+
 		    <div class="form-group">
-		        <legend>Form Title</legend>
+		        <legend>Login</legend>
 		    </div>
 
-      <div class="alert alert-info">
+      <div class="alert alert-info" ng-show="vm.message.length>0">
       	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      	<strong>This is the new title and stuff</strong> {{vm.message}}
+      	{{vm.message}}
       </div>
 
       <div class="form-group" ng-class="{'has-error': loginForm.Username.$error.required && !loginForm.Username.$pristine}">
@@ -26,11 +27,11 @@
         </div>
       </div>
 
-      <div class="form-group">
-		        <div class="col-sm-10 col-sm-offset-2">
-		            <button  type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary">Submit</button>
-            </div>
-		    </div>
+      <div class="text-center">
+          <div class="col-sm-10 col-sm-offset-2">
+              <button  type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
 
 		</form>
 	</div>

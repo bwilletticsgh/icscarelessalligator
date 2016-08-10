@@ -6,7 +6,7 @@
           'id': 1,
           'firstName': 'Daniel',
           'lastName': 'Bishop',
-          'email': 'dbishop0@de.vu',
+          'email': 'admin@admin.com',
           'gender': 'Male',
           'avatar': 'https://robohash.org/voluptatequiquaerat.png?size=300x300&set=set1',
           'password': 'password123',

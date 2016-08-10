@@ -15,16 +15,15 @@ angular.module('app6App')
         templateUrl: 'myModalContent.html',
         controller: function($scope) {
           $scope.title='Hello foo!';
+          $scope.modalInstance = modalInstance;
           $scope.ok = function(){
+            modalInstance.close();
+          };
+
+          $scope.cancel = function(){
             modalInstance.close();
           };
         }
       });
     };
-
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   });

@@ -1,9 +1,16 @@
+$gray-lighter : #eee;
+$navbar-inverse-color: white;
+@import "theme/variables";
+
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 @import "font-awesome/scss/font-awesome.scss";
 @import "components-font-awesome/scss/font-awesome.scss";
 // endbower
+
+
+@import "theme/bootswatch";
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
@@ -16,11 +23,39 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   border-radius: 50%;
 }
 
+
+@keyframes fadeyFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadeyFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fadeyFade {
+  -webkit-animation: fadeyFade 2s;
+  -webkit-animation-fill-mode: forwards;
+
+  animation: fadeyFade 2s;
+  animation-fill-mode: forwards;
+}
+
 .kudosType{
   .kudosName {
     @extend .text-center;
-    @extend h3;
-    min-height: 60px;
+    @extend h4;
+    a {
+      color: $panel-primary-text;
+    }
+  }
+  .panel{
+    margin-bottom:0;
+    min-height: 250px;
+  }
+  .panel-body{
+
   }
 }
 
@@ -31,10 +66,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   padding: 0.2em 0;
 }
 
-body {
-  padding: 0;
-}
-
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -43,13 +74,9 @@ body {
   padding-right: 15px;
 }
 
-.stuff{
-  color: $alert-warning-text ;
-}
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 
   /* Make the masthead heading the same height as the navigation */
@@ -114,4 +141,6 @@ body {
     border-bottom: 0;
   }
 }
-
+@for $i from 1 through 6 {
+  .topmargin-#{$i*5} { margin-top: 5px * $i; }
+}
