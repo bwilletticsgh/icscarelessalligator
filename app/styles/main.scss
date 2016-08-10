@@ -12,6 +12,11 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 @import "theme/bootswatch";
 
+.form-signin{
+  width:350px;
+
+}
+
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

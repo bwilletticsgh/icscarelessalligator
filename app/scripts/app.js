@@ -57,7 +57,8 @@ angular
           }
         }
       })
-      .state('about', {
+      .state('users', {
+        pageTitle: 'All Users',
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl as vm',
         url:'/users'

@@ -28,10 +28,10 @@ describe('Unit: App', function () {
     it('verifies state configuration', function () {
       $rootScope.$apply();
       expect($state.current.name).toBe('');
-      $state.transitionTo('about');
+      $state.transitionTo('users');
       $httpBackend.flush();
       $rootScope.$apply();
-      expect($state.current.name).toBe('about');
+      expect($state.current.name).toBe('users');
     });
   });
 });
