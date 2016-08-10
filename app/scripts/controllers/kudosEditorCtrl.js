@@ -5,10 +5,10 @@ angular.module('app6App')
     var vm = this;
     vm.kudo = angular.copy(kudo);
     if (kudo.id){
-      vm.pageTitle="Edit Kudos";
+      vm.pageTitle='Edit Kudos';
     }
     else{
-      vm.pageTitle="Create Kudos";
+      vm.pageTitle='Create Kudos';
     }
 
     vm.saveKudo = function () {

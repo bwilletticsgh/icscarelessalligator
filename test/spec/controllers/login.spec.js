@@ -48,7 +48,7 @@ describe('Controller: Login', function () {
 
   it('should not let in a known user with the wrong password', function () {
     Login.Username='someperson@somewhere.com';
-    Login.Password='abcd';
+    Login.Password='abcde';
     Login.Login().then(function(){
       expect(Login.message).toBe(Login.failMessage);
     });

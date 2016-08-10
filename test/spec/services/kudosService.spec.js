@@ -29,7 +29,6 @@ describe('Service: kudos', function () {
   });
 
   it('should autoincrement the id', function () {
-    var currentCount = kudos.getKudos().length;
     kudos.addKudo({name:'something', id:100});
     var newKudo = {name:'something else'};
     kudos.addKudo(newKudo);

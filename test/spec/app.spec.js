@@ -1,3 +1,5 @@
+'use strict';
+
 // src/app/app.spec.js
 // Containing describe block (or "suite"), usually named for an app feature.
 // In this case the feature is the App itself.
@@ -11,7 +13,6 @@ describe('Unit: App', function () {
 
     // Instantiate global variables (global to all tests in this describe block).
     var $state,
-      state="home",
       $httpBackend,
       $rootScope;
 

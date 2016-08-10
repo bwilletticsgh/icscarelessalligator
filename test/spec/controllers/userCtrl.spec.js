@@ -20,6 +20,4 @@ describe('Controller: UsersCtrl', function () {
   it('should have a list of users on the scope', function () {
     expect(UsersCtrl.users).toBeDefined();
   });
-
-
 });
