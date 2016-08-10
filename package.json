@@ -45,6 +45,7 @@
     "start": "serve -p 80 dist"
   },
   "dependencies": {
-    "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "grunt-cli": "^1.2.0"
   }
 }
