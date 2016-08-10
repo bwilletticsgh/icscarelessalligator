@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/irtimclark/dhsbarryallen.svg?branch=master)](https://travis-ci.org/irtimclark/dhsbarryallen)
+
 # app6
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
