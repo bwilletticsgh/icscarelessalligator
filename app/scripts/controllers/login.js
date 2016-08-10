@@ -3,7 +3,7 @@
 
 
 angular.module('app6App')
-  .controller('Login', function ($q, authentication, $state, $scope) {
+  .controller('Login', function ($q, authentication, $state) {
     var vm = this;
     vm.Username='';
     vm.Password='';
