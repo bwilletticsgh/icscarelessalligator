@@ -1,0 +1,56 @@
+<form class="form-signin animated" ng-class="{'shake': vm.failed}" role="form" ng-submit="vm.failed=false; vm.Register()" novalidate name="registerForm">
+  <div class="alert alert-info" ng-show="vm.message.length>0">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{vm.message}}
+  </div>
+
+  <h3 class="form-signin-heading">Ready to register?</h3>
+
+  <div class="form-group" ng-class="{'has-error': registerForm.firstName.$error.required && !registerForm.firstName.$pristine}">
+    <label class="sr-only" for="firstName">Re-enter Password</label>
+    <input type="text" autofocus name="firstName" id="firstName" class="form-control" ng-model="vm.firstName" placeholder="First Name">
+    <span ng-show="registerForm.firstName.$error.required && !registerForm.firstName.$pristine" class="help-block">Required</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': registerForm.lastName.$error.required && !registerForm.lastName.$pristine}">
+    <label class="sr-only" for="lastName">Re-enter Password</label>
+    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="vm.lastName" placeholder="Last Name">
+    <span ng-show="registerForm.lastName.$error.required && !registerForm.lastName.$pristine" class="help-block">Required</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': registerForm.Username.$invalid && registerForm.Username.$touched}">
+    <label class="sr-only" for="userName">Email address</label>
+    <input type="email" required class="form-control" name="Username" id="userName" ng-model="vm.Username" placeholder="Email address" >
+    <span ng-show="registerForm.Username.$error.required && !registerForm.Username.$pristine" class="help-block">Required</span>
+    <span ng-show="registerForm.Username.$error.email && registerForm.Username.$touched" class="help-block">This is not a valid email</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': registerForm.password.$error.required && !registerForm.password.$pristine}">
+    <label class="sr-only" for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="password" ng-model="vm.Password" placeholder="Password">
+    <span ng-show="registerForm.password.$error.required && !registerForm.password.$pristine" class="help-block">Required</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': registerForm.password.$error.required && !registerForm.password.$pristine}">
+    <label class="sr-only" for="password2">Re-enter Password</label>
+    <input type="password" name="password2" id="password2" class="form-control" ng-model="vm.Password2" placeholder="Re-enter Password">
+    <span ng-show="registerForm.password2.$error.required && !registerForm.password2.$pristine" class="help-block">Required</span>
+  </div>
+
+
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+  </div>
+
+  <button type="submit" ng-disabled="registerForm.$invalid" class="btn btn-primary btn-lg btn-block">
+    <i class="fa fa-lock"></i>
+    Sign In
+  </button>
+
+
+
+</form>
+

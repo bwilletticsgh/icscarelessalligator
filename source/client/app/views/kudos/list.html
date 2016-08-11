@@ -1,0 +1,17 @@
+<div class="pull-left">
+
+  <p class="text-primary">Total Kudos Available: <span class="badge">{{vm.kudos.length}}</span></p>
+</div>
+
+  <a ui-sref="createKudos" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</a>
+
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-sm-6 " ng-repeat="kudo in vm.kudos">
+    <div class="topmargin-20">
+      <kudos-type allow-link="true" kudo="kudo"></kudos-type>
+    </div>
+  </div>
+</div>

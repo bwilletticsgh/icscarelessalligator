@@ -1,0 +1,41 @@
+
+      <form class="form-signin animated" ng-class="{'shake': vm.failed}" role="form" ng-submit="vm.failed=false;  vm.Login()" novalidate name="loginForm">
+        <div class="alert alert-info" ng-show="vm.message.length>0">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{vm.message}}
+        </div>
+
+        <h3 class="form-signin-heading">Sign in</h3>
+        <div class="form-group" ng-class="{'has-error': loginForm.Username.$invalid && loginForm.Username.$touched}">
+          <label class="sr-only" for="userName">Email address</label>
+          <input type="email" required autofocus class="form-control" name="Username" id="userName" ng-model="vm.Username" placeholder="Email address" >
+          <span ng-show="loginForm.Username.$error.required && !loginForm.Username.$pristine" class="help-block">Required</span>
+          <span ng-show="loginForm.Username.$error.email && loginForm.Username.$touched" class="help-block">This is not a valid email</span>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': loginForm.password.$error.required && !loginForm.password.$pristine}">
+          <label class="sr-only" for="password">Password</label>
+          <input type="password" name="password" class="form-control" id="password" ng-model="vm.Password" placeholder="Password">
+          <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="help-block">Required</span>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+
+        <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary btn-lg btn-block">
+          <i class="fa fa-lock"></i>
+          Sign In
+        </button>
+
+        <hr>
+        <p class="text-center"><strong>OR</strong></p>
+        <a ui-sref="register" class="btn btn-default btn-lg btn-block">
+          <i class="fa fa-user"></i>
+          Register
+        </a>
+
+      </form>
+
