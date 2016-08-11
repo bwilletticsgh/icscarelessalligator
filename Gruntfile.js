@@ -67,7 +67,6 @@ module.exports = function (grunt) {
         ]
       }
     },
-
     // The actual grunt server settings
     connect: {
       options: {
@@ -513,6 +512,10 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('heroku', [
+    'connect:dist:keepalive'
   ]);
 
   grunt.registerTask('default', [
