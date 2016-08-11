@@ -42,8 +42,7 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "postinstall": "npm install grunt grunt-cli && npm install dev",
-    "start": "grunt heroku"
+    "start": "grunt connect:dist"
   },
   "dependencies": {
     "bower": "^1.7.9",
