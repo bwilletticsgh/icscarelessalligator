@@ -41,6 +41,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "npm install --dev && bower install && grunt build",
     "test": "karma start test/karma.conf.js",
     "start": "node server.js"
   },
