@@ -67,7 +67,12 @@ angular
         templateUrl: 'views/account/login.html',
         controller: 'Login as vm',
         url:'/account/login'
-      });
+      })
+      .state('register', {
+      templateUrl: 'views/account/register.html',
+      controller: 'RegisterCtrl as vm',
+      url:'/account/register'
+    });
   })
   .run(function ($rootScope) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {

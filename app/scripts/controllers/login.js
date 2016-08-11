@@ -3,7 +3,7 @@
 
 
 angular.module('kudosApp')
-  .controller('Login', function ($q, authentication, $state) {
+  .controller('Login', function ($q, authentication, $state, $timeout) {
     var vm = this;
     vm.Username='';
     vm.Password='';
@@ -13,15 +13,19 @@ angular.module('kudosApp')
     vm.failed = false;
 
     vm.Login = function() {
+      vm.failed = false;
       var promise = authentication.login(vm.Username, vm.Password);
       promise.then(function(success) {
+        vm.failed = false;
         if (success) {
           vm.message = vm.successMessage;
           $state.go('users');
         }
         else{
           vm.message = vm.failMessage;
-          vm.failed = true;
+          $timeout(function(){
+            vm.failed = true;
+          },1);
         }
       }).catch(function() {
           vm.message='This was an error logging in';
