@@ -42,10 +42,11 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "start": "grunt connect:dist"
+    "start": "node server.js"
   },
   "dependencies": {
     "bower": "^1.7.9",
+    "express": "^4.14.0",
     "grunt-cli": "^1.2.0"
   }
 }
