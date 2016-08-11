@@ -13,17 +13,17 @@ angular.module('app6App')
     vm.showInfo = function(){
       var modalInstance = $uibModal.open({
         templateUrl: 'myModalContent.html',
-        controller: function($scope) {
+        controller: ['$scope', function($scope) {
           $scope.title='Hello foo!';
           $scope.modalInstance = modalInstance;
           $scope.ok = function(){
             modalInstance.close();
           };
 
-          $scope.cancel = function(){
+          $scope.cancel = function() {
             modalInstance.close();
           };
-        }
+        }]
       });
     };
   });
