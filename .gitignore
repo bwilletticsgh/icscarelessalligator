@@ -1,6 +1,6 @@
-/node_modules
-/dist
-/.tmp
-/.sass-cache
-/bower_components
-/.idea
+/source/client/node_modules
+/source/client/dist
+/source/client/.tmp
+/source/client/.sass-cache
+/source/client/bower_components
+/source/client/.idea
