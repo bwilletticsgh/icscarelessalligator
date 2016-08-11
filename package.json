@@ -42,7 +42,8 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "start": "grunt connect:dist"
+    "postinstall": "npm install --only=dev && grunt build",
+    "start": "grunt heroku"
   },
   "dependencies": {
     "bower": "^1.7.9",
