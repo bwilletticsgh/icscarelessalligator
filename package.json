@@ -42,8 +42,7 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "postinstall": "bower install && grunt build",
-    "start": "serve -p 80 dist"
+    "start": "grunt connect:dist"
   },
   "dependencies": {
     "bower": "^1.7.9",
