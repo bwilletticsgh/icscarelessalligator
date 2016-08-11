@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-angular.module('app6App')
+angular.module('kudosApp')
   .controller('KudosEditorCtrl', function (kudo, kudos, _, $state) {
     var vm = this;
     vm.kudo = angular.copy(kudo);

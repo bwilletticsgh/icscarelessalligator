@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name app6App
+ * @name kudosApp
  * @description
- * # app6App
+ * # kudosApp
  *
  * Main module of the application.
  */
 angular
-  .module('app6App', [
+  .module('kudosApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

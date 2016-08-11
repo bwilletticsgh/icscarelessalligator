@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name app6App.controller:MainCtrl
+ * @name kudosApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the app6App
+ * Controller of the kudosApp
  */
-angular.module('app6App')
+angular.module('kudosApp')
   .controller('MainCtrl', function ($uibModal) {
     var vm = this;
     vm.showInfo = function(){

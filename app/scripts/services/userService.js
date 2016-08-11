@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  angular.module('app6App')
+  angular.module('kudosApp')
     .factory('users', function(_) {
         var users = [{
           'id': 1,

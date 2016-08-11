@@ -3,7 +3,7 @@
 describe('Controller: UsersCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('app6App'));
+  beforeEach(module('kudosApp'));
 
   var UsersCtrl,
     scope;

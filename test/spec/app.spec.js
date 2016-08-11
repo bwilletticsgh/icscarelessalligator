@@ -6,7 +6,7 @@
 describe('Unit: App', function () {
 
   // Include Modules
-  beforeEach(module('app6App'));
+  beforeEach(module('kudosApp'));
 
   // Suite for testing an individual piece of our feature.
   describe('App Abstract Route', function () {

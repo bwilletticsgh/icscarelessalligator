@@ -21,7 +21,7 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "app6App",
+  "moduleName": "kudosApp",
   "overrides": {
     "bootstrap": {
       "main": [

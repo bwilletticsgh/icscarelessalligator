@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-angular.module('app6App')
+angular.module('kudosApp')
   .controller('KudosCtrl', function (kudos) {
     var vm = this;
     vm.kudos = kudos.getKudos();

@@ -1,7 +1,7 @@
 (function() {
 'use strict';
     angular
-        .module('app6App')
+        .module('kudosApp')
         .controller('NavbarCtrl', function(authentication, users) {
             var vm = this;
             vm.authentication = authentication;

@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  angular.module('app6App')
+  angular.module('kudosApp')
     .factory('authentication', function($q, users) {
 
         var _isAuthenticated=false;

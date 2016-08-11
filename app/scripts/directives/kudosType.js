@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  angular.module('app6App')
+  angular.module('kudosApp')
     .directive('kudosType', function() {
         return{
             restrict: 'E',

@@ -2,7 +2,7 @@
   'use strict';
 
 
-angular.module('app6App')
+angular.module('kudosApp')
   .controller('Login', function ($q, authentication, $state) {
     var vm = this;
     vm.Username='';

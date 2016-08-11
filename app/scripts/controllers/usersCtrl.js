@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name app6App.controller:UsersCtrl
+ * @name kudosApp.controller:UsersCtrl
  * @description
  * # UsersCtrl
- * Controller of the app6App
+ * Controller of the kudosApp
  */
-angular.module('app6App')
+angular.module('kudosApp')
   .controller('UsersCtrl', function (users) {
     var vm = this;
     vm.users = users.getUsers();
