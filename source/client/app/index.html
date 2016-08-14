@@ -46,7 +46,7 @@
           <li ui-sref-active="active"><a ui-sref="users">Users</a></li>
           <li ng-hide="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="login">Log In</a></li>
           <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active"><a
-            ng-click="vm.authentication.logOut()">Log Out</a></li>
+            ng-click="vm.logout()">Log Out</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right ">
           <li class="navbar-text" ng-show="vm.authentication.isAuthenticated()">
@@ -106,6 +106,7 @@
 <script src="scripts/controllers/kudosCtrl.js"></script>
 <script src="scripts/controllers/usersCtrl.js"></script>
 <script src="scripts/directives/kudosType.js"></script>
+<script src="scripts/directives/equalsElement.js"></script>
 <script src="scripts/controllers/kudosEditorCtrl.js"></script>
 <script src="scripts/controllers/RegisterCtrl.js"></script>
 <!-- endbuild -->

@@ -3,7 +3,7 @@
 
 
 angular.module('kudosApp')
-  .controller('RegisterCtrl', function ($q, authentication, $state, $timeout) {
+  .controller('RegisterCtrl', function ($q, authentication, $state) {
     var vm = this;
     vm.Username='';
     vm.Password='';

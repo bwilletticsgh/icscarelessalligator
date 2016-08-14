@@ -38,6 +38,11 @@
           return deferred.promise;
         }
 
+        function logout() {
+          users.setCurrentUser(null);
+          _isAuthenticated=false;
+        }
+
         function login(username, password) {
           var deferred = $q.defer();
           var user = users.getUser(username);
@@ -55,6 +60,7 @@
         return {
           isAuthenticated: isAuthenticated,
           login: login,
+          logout: logout,
           register : register
         };
     });

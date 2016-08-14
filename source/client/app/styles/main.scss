@@ -48,6 +48,29 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
   animation-fill-mode: forwards;
 }
 
+.userHolder {
+  transform: scale(1,1);
+  transition: all 0.1s ease-in;
+  position: relative;
+}
+
+.userHolder:hover {
+  transform: scale(1.2,1.2);
+  z-index: 2;
+}
+
+@media screen and (max-width: $screen-xs-max) {
+  .kudosTitle {
+    font-size: 12vw !important;
+  }
+}
+
+@media screen and (min-width: $screen-xs-max)  {
+  .kudosTitle {
+    font-size: 8em !important;
+  }
+}
+
 .kudosType{
   .kudosName {
     @extend .text-center;
