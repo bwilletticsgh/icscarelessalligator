@@ -3,14 +3,9 @@ FROM node:latest
 # File Author / Maintainer
 MAINTAINER Ben Willett
 
+# CLIENT PART
+
 RUN apt-get update
-
-RUN more /etc/apt/sources.list
-
-# Add the application resources URL
-
-RUN echo "deb http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
-RUN echo "deb-src http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
 
 RUN \
   apt-get update && \
@@ -36,6 +31,13 @@ RUN grunt build
 ENV NODE_ENV test
 
 EXPOSE 3000
+
+# SERVER PART
+
+# Add the application resources URL
+
+RUN echo "deb http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
+RUN echo "deb-src http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
 
 # Install basic applications
 RUN apt-get install -y openjdk-8-jre-headless wget unzip
