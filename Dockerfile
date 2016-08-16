@@ -47,14 +47,11 @@ RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-to
 RUN unzip apache-tomcat-8.0.36.zip
 
 # Copy the application folder inside the container
-#RUN cd /apache-tomcat-8.0.36/webapps/; mkdir KudosREST
-#COPY source/server/dist/KudosREST.war /apache-tomcat-8.0.36/webapps/KudosREST/
-
-# Set the default directory where CMD will execute
-#WORKDIR /apache-tomcat-8.0.36/webapps/KudosREST
+RUN mkdir /usr/src/app/apache-tomcat-8.0.36/webapps/KudosREST
+COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/KudosREST/
 
 # Set the default command to execute    
 # when creating a new container
-#CMD sh npm start
-#CMD sh /apache-tomcat-8.0.36/bin/catalina.sh start
+CMD sh npm start
+CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
 CMD /bin/bash
