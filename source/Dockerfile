@@ -1,0 +1,27 @@
+FROM node:latest
+
+RUN \
+  apt-get update && \
+  apt-get install -y ruby ruby-dev
+
+RUN gem install compass
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Bundle app source
+COPY . /usr/src/app
+
+COPY package.json /usr/src/app/
+COPY bower.json /usr/src/app/
+COPY Gruntfile.js /usr/src/app/
+RUN npm install -g bower grunt-cli grunt
+RUN npm install
+RUN bower --allow-root install
+RUN grunt build
+
+ENV NODE_ENV test
+
+EXPOSE 3000
+CMD [ "npm","start" ]
