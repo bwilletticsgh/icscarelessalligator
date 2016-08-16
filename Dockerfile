@@ -40,7 +40,7 @@ RUN echo "deb http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> 
 RUN echo "deb-src http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
 
 # Install basic applications
-RUN apt-get install -y openjdk-8-jre-headless wget unzip
+RUN apt-get install -y openjdk-8-jre wget unzip
 RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
 RUN unzip apache-tomcat-8.0.36.zip
 
