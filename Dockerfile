@@ -16,7 +16,7 @@ MAINTAINER Ben Willett
 
 RUN \
   apt-get update && \
-  apt-get install -y nodejs-legacy npm ruby ruby-dev
+  apt-get install -y git nodejs-legacy npm ruby ruby-dev
 
 RUN gem install compass
 
