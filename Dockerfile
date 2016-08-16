@@ -1,4 +1,4 @@
-FROM node:latest
+FROM ubuntu
 
 # File Author / Maintainer
 MAINTAINER Ben Willett
@@ -42,15 +42,8 @@ RUN apt-get install -y openjdk-8-jre-headless wget unzip
 RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
 RUN unzip apache-tomcat-8.0.36.zip
 
-RUN sed 's/8080/12345/' /apache-tomcat-8.0.36/conf/server.xml > /apache-tomcat-8.0.36/conf/server2.xml
-RUN cp /apache-tomcat-8.0.36/conf/server2.xml /apache-tomcat-8.0.36/conf/server.xml
-RUN rm /apache-tomcat-8.0.36/conf/server2.xml
-
 # Copy the application folder inside the container
 ADD source/server/dist/ /apache-tomcat-8.0.36/webapps/KudosREST
-
-# Expose port 12345
-EXPOSE 12345
 
 # Set the default directory where CMD will execute
 WORKDIR /apache-tomcat-8.0.36/webapps/KudosREST
