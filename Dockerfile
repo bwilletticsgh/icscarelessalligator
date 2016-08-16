@@ -3,9 +3,9 @@ FROM node:latest
 # File Author / Maintainer
 MAINTAINER Ben Willett
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 RUN apt-get update
+
+RUN more /etc/apt/sources.list
 
 # Add the application resources URL
 #RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie main restricted" >> /etc/apt/sources.list
