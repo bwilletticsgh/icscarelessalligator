@@ -8,13 +8,13 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 RUN apt-get update
 
 # Add the application resources URL
-RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial main restricted" >> /etc/apt/sources.list
-RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial-updates main restricted" >> /etc/apt/sources.list
-RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial multiverse" >> /etc/apt/sources.list
-RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial-updates multiverse" >> /etc/apt/sources.list
-RUN echo "deb http://security.ubuntu.com/ubuntu xenial-security main" >> /etc/apt/sources.list
-RUN echo "deb http://security.ubuntu.com/ubuntu xenial-security universe" >> /etc/apt/sources.list
-RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie main restricted" >> /etc/apt/sources.list
+RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie-updates main restricted" >> /etc/apt/sources.list
+RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie-updates multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://security.ubuntu.com/ubuntu jessie-security main" >> /etc/apt/sources.list
+RUN echo "deb http://security.ubuntu.com/ubuntu jessie-security universe" >> /etc/apt/sources.list
+RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie-backports main restricted universe multiverse" >> /etc/apt/sources.list
 
 RUN \
   apt-get update && \
