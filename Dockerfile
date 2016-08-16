@@ -23,11 +23,11 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Bundle app source
-COPY client/. /usr/src/app
+COPY source/client/. /usr/src/app
 
-COPY client/package.json /usr/src/app/
-COPY client/bower.json /usr/src/app/
-COPY client/Gruntfile.js /usr/src/app/
+COPY source/client/package.json /usr/src/app/
+COPY source/client/bower.json /usr/src/app/
+COPY source/client/Gruntfile.js /usr/src/app/
 RUN npm install -g bower grunt-cli grunt
 RUN npm install
 RUN bower --allow-root install
