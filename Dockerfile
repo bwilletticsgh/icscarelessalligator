@@ -8,13 +8,9 @@ RUN apt-get update
 RUN more /etc/apt/sources.list
 
 # Add the application resources URL
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie main restricted" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie-updates main restricted" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie multiverse" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie-updates multiverse" >> /etc/apt/sources.list
-#RUN echo "deb http://security.ubuntu.com/ubuntu jessie-security main" >> /etc/apt/sources.list
-#RUN echo "deb http://security.ubuntu.com/ubuntu jessie-security universe" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ jessie-backports main restricted universe multiverse" >> /etc/apt/sources.list
+
+RUN echo "deb http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
+RUN echo "deb-src http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
 
 RUN \
   apt-get update && \
