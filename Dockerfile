@@ -54,4 +54,6 @@ WORKDIR /apache-tomcat-8.0.36/webapps/KudosREST
 
 # Set the default command to execute    
 # when creating a new container
-CMD sh npm start; /apache-tomcat-8.0.36/bin/catalina.sh start; /bin/bash
+CMD sh npm start
+CMD /apache-tomcat-8.0.36/bin/catalina.sh start
+CMD /bin/bash
