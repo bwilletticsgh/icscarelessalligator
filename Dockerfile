@@ -4,7 +4,7 @@ FROM ubuntu:latest
 MAINTAINER Ben Willett
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 # Add the application resources URL
 #RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial main restricted" >> /etc/apt/sources.list
