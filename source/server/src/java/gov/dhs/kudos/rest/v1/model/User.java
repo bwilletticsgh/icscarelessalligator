@@ -1,7 +1,6 @@
 package gov.dhs.kudos.rest.v1.model;
 
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /**
@@ -9,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author bsuneson
  */
 @SuppressWarnings("serial")
-@Document(collection = "coworkers")
 public class User extends BaseEntity
 {        
     @Indexed(unique=true)
