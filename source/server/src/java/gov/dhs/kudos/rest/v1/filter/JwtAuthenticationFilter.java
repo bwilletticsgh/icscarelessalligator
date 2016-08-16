@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JwtAuthenticationFilter extends org.springframework.web.filter.DelegatingFilterProxy
 {
+    private static final Logger LOG = Logger.getLogger(JwtAuthenticationFilter.class);
+    
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException 
     {
@@ -36,6 +39,8 @@ public class JwtAuthenticationFilter extends org.springframework.web.filter.Dele
                 return;
             }
         }
+        else if(LOG.isDebugEnabled())
+            LOG.debug("[Filter] User login attempt from: " + request.getRemoteAddr());
         
         filterChain.doFilter(request, response);        
     }    

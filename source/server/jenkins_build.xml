@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="KudosREST">	
+    <property name="package.name" value="KudosREST" />
+
+    <property name="build.dir" value="build" />
+    <property name="build.meta.dir" value="${build.dir}/META-INF" />
+    <property name="build.web.dir" value="${build.dir}/WEB-INF" />
+    <property name="build.web.classes.dir" value="${build.web.dir}/classes" />
+    <property name="build.web.lib.dir" value="${build.web.dir}/lib" />
+
+    <property name="lib.dir" value="libs" />
+    <property name="src.dir" value="src" />
+    <property name="web.dir" value="web" />
+    <property name="dist.dir" value="dist" />
+
+    <property name="war.file" value="${dist.dir}/${package.name}.war" />	
+    <property name="manifest.file" value="${src.dir}/conf/MANIFEST.MF" />
+    <property name="web.xml.file" value="${build.web.dir}/web.xml" />
+
+    <path id="build.class.path">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <target name="build_jenkins" depends="clean_jenkins,copy_jenkins,compile_jenkins,package_jenkins" />
+
+    <target name="clean_jenkins">
+        <echo>Cleaning...</echo>
+        <delete dir="${dist.dir}" />
+        <delete dir="${build.dir}" />		
+        <mkdir dir="${dist.dir}" />
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.web.classes.dir}" />
+    </target>
+
+    <target name="copy_jenkins">
+        <echo>Copying files...</echo>
+        <copy todir="${build.dir}">
+            <fileset dir="${web.dir}">
+                <include name="**/*" />
+            </fileset>
+        </copy>
+        <copy file="${manifest.file}" tofile="${build.meta.dir}/MANIFEST.MF" overwrite="true" />
+    </target>
+
+    <target name="compile_jenkins">
+        <echo>Compiling...</echo>
+        <javac debug="on" srcdir="${src.dir}" destdir="${build.web.classes.dir}" includes="java/**" includeantruntime="false" >
+            <classpath refid="build.class.path" />
+        </javac>
+    </target>
+
+    <target name="package_jenkins">
+        <echo>Building WAR...</echo>
+        <war destfile="${war.file}" webxml="${web.xml.file}">
+            <fileset dir="${build.dir}" />
+            <lib dir="${lib.dir}" />
+        </war>
+    </target>	
+</project>

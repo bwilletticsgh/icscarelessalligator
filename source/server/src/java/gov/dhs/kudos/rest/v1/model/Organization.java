@@ -3,6 +3,7 @@ package gov.dhs.kudos.rest.v1.model;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
  *
@@ -13,11 +14,12 @@ public class Organization extends BaseEntity
 {
     @Indexed(unique=true)
     private String orgName;
-    private List<String> userIds;
+    @DBRef
+    private List<User> users;
 
-    public Organization(String orgName, List<String> userIds) {
+    public Organization(String orgName, List<User> users) {
         this.orgName = orgName;
-        this.userIds = userIds;
+        this.users = users;
     }
 
     public Organization(String orgName) {
@@ -27,11 +29,11 @@ public class Organization extends BaseEntity
     public Organization() {
     }
     
-    public void addUser(String userId){
-        if(userIds == null)
-            userIds = new ArrayList<>();
+    public void addUser(User user){
+        if(users == null)
+            users = new ArrayList<>();
         
-        userIds.add(userId);
+        users.add(user);
     }
 
     public String getOrgName() {
@@ -42,11 +44,11 @@ public class Organization extends BaseEntity
         this.orgName = orgName;
     }
 
-    public List<String> getUserIds() {
-        return userIds;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUserIds(List<String> userIds) {
-        this.userIds = userIds;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

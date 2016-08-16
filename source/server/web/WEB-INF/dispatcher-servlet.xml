@@ -27,15 +27,21 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
     
-    <!--<context:property-placeholder location="classpath:/com/myapp/mongodb/config/mongo.properties"/>-->
-    <!--<mongo:db-factory id="localDb" dbname="LocalMongo" host="localhost" port="27017" mongo-ref="mongo"/>-->
+    <!--<context:property-placeholder location="classpath:/gov/dhs/kudos/config/mongo.properties"/>-->
     <mongo:mongo host="localhost" port="27017"/>
     <mongo:repositories base-package="gov.dhs.kudos.rest.v1.repo"/>
     
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg ref="mongo"/>
         <constructor-arg name="databaseName" value="LocalMongo"/>
+        <!--<constructor-arg name="userCredentials" ref="userCredentials"/>-->
     </bean>
+    
+<!--    <bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
+        <constructor-arg name="username" value="username" />
+        <constructor-arg name="password" value="password" />
+    </bean>-->
 
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 </beans>

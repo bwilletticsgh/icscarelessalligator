@@ -18,6 +18,7 @@ import java.security.SecureRandom;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
 
@@ -27,10 +28,15 @@ import org.springframework.http.HttpStatus;
  */
 public class JwtTokenUtil 
 {
+    private static final Logger LOG = Logger.getLogger(JwtTokenUtil.class);
+    
     private static KeyPair keys;
     
     public static String generateToken(User user, HttpServletResponse response) throws KudosException
     {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Generating token for User: " + user.getEmail());
+        
         try
         {
             String token = Jwts.builder().setSubject(user.getEmail())
@@ -45,12 +51,16 @@ public class JwtTokenUtil
         }
         catch(Exception e)
         {
+            LOG.error(e);
             throw new KudosException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
     public static User validateToken(HttpServletRequest httpRequest, HttpServletResponse response) throws KudosException
     {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Validating token...");
+        
         try
         {
             String header = httpRequest.getHeader("Authorization");
@@ -63,11 +73,16 @@ public class JwtTokenUtil
 
             String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.RS512, keys.getPrivate()).compact();
             response.setHeader("Authorization", "Bearer " + token);
+            
+            if(LOG.isDebugEnabled())
+                LOG.debug("Token validated for User: " + claims.get("kudosUser", User.class).getEmail());
 
             return claims.get("kudosUser", User.class);
         }
         catch(ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e)
         {
+            LOG.error(e);
+            
             if((e instanceof SignatureException) || (e instanceof MalformedJwtException) || (e instanceof IllegalArgumentException))
                 throw new KudosException(e.getMessage(), HttpStatus.UNAUTHORIZED);
             else if(e instanceof ExpiredJwtException)
@@ -80,7 +95,10 @@ public class JwtTokenUtil
     static
     {
         try
-        {            
+        {  
+            if(LOG.isDebugEnabled())
+                LOG.debug("Generating strong Json Web Token...");
+            
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             
@@ -89,8 +107,7 @@ public class JwtTokenUtil
         }
         catch(NoSuchAlgorithmException | NoSuchProviderException e)
         {
-            // TODO handle
-            e.printStackTrace();
+            LOG.error(e);
         }
     }
 }
