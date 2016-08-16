@@ -1,6 +1,7 @@
 package gov.dhs.kudos.rest.v1.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -12,6 +13,8 @@ public abstract class BaseEntity implements Serializable
 {
     @Id
     private String id;
+    private Timestamp dateCreated;
+    private Timestamp dateModified;
     
     public String getId() 
     {
@@ -21,6 +24,26 @@ public abstract class BaseEntity implements Serializable
     public void setId(String id) 
     {
         this.id = id;
+    }
+
+    public Timestamp getDateCreated()
+    {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Timestamp dateCreated)
+    {
+        this.dateCreated = dateCreated;
+    }
+
+    public Timestamp getDateModified()
+    {
+        return dateModified;
+    }
+
+    public void setDateModified(Timestamp dateModified)
+    {
+        this.dateModified = dateModified;
     }
     
     @Override

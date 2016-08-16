@@ -16,13 +16,11 @@ public class UsageStatistic extends BaseEntity
 {
     private String uri;
     private String user;
-    private Timestamp accessDate;
     
-    public UsageStatistic(String uri, String user, Timestamp accessDate)
+    public UsageStatistic(String uri, String user)
     {
         this.uri = uri;
         this.user = user;
-        this.accessDate = accessDate;
     }
 
     public String getUri()
@@ -44,16 +42,4 @@ public class UsageStatistic extends BaseEntity
     {
         this.user = user;
     }
-
-    public Timestamp getAccessDate()
-    {
-        return accessDate;
-    }
-
-    public void setAccessDate(Timestamp accessDate)
-    {
-        this.accessDate = accessDate;
-    }
-    
-    
 }
