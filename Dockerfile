@@ -52,6 +52,4 @@ COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
 # Set the default command to execute    
 # when creating a new container
-CMD sh npm start
-CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
-CMD /bin/bash
+CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
