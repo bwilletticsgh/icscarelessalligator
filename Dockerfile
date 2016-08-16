@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM node:latest
 
 # File Author / Maintainer
 MAINTAINER Ben Willett
