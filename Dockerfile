@@ -3,18 +3,6 @@ FROM ubuntu:latest
 # File Author / Maintainer
 MAINTAINER Ben Willett
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-
-# Add the application resources URL
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial main restricted" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial-updates main restricted" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial multiverse" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial-updates multiverse" >> /etc/apt/sources.list
-#RUN echo "deb http://security.ubuntu.com/ubuntu xenial-security main" >> /etc/apt/sources.list
-#RUN echo "deb http://security.ubuntu.com/ubuntu xenial-security universe" >> /etc/apt/sources.list
-#RUN echo "deb http://us-west-2.ec2.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse" >> /etc/apt/sources.list
-
 # CLIENT PART
 
 RUN \
@@ -53,8 +41,11 @@ RUN unzip apache-tomcat-8.0.36.zip
 COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
 # DATABASE PART
-RUN apt-get install -y mongodb
-#
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+RUN apt-get update
+RUN apt-get install -y mongodb-org=3.2.9 mongodb-org-server=3.2.9 mongodb-org-shell=3.2.9 mongodb-org-mongos=3.2.9 mongodb-org-tools=3.2.9
 
 # Set the default command to execute when creating the new container
 CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
