@@ -54,6 +54,6 @@ RUN \
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
 RUN mkdir /data
 RUN mkdir /data/db
-RUN /usr/bin/mongod && \
-    sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
+RUN /usr/bin/mongod &
+RUN sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
 CMD /bin/bash
