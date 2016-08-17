@@ -50,12 +50,11 @@ RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-to
 RUN unzip apache-tomcat-8.0.36.zip
 
 # Copy the application folder inside the container
-RUN mkdir /usr/src/app/apache-tomcat-8.0.36/webapps/KudosREST
-COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/KudosREST/
+COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
 # DATABASE PART
 RUN apt-get install -y mongodb
 
 # Set the default command to execute    
 # when creating a new container
-CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; service mongodb start; npm start
+CMD sh service mongodb start; /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
