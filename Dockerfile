@@ -54,8 +54,8 @@ RUN mkdir /usr/src/app/apache-tomcat-8.0.36/webapps/KudosREST
 COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/KudosREST/
 
 # DATABASE PART
-RUN apt-get install mongodb
+RUN apt-get install -y mongodb
 
 # Set the default command to execute    
 # when creating a new container
-CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; service mongod start; npm start
+CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; service mongodb start; npm start
