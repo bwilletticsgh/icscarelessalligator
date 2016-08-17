@@ -54,6 +54,7 @@ RUN apt-get install -y openjdk-8-jre-headless wget unzip tomcat7
 
 # DATABASE PART
 #RUN apt-get install -y mongodb
+#
 
 # Set the default command to execute when creating the new container
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
