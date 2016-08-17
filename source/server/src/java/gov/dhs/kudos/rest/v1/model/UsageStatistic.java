@@ -13,7 +13,7 @@ public class UsageStatistic extends BaseEntity
             + "  [ "
             + "    {'user' : ?0}, "
             + "    {$or : [{ ?1 : null}, { 'dateCreated' : {$gte : ?1}}]}, "
-            + "    {$or [{ ?2 : null}, { 'dateCreated' : {$lte : ?2}}]} "
+            + "    {$or : [{ ?2 : null}, { 'dateCreated' : {$lte : ?2}}]} "
             + "  ] "
             + "}";
     
@@ -23,7 +23,7 @@ public class UsageStatistic extends BaseEntity
             + "  [ "
             + "    {'uri' : ?0}, "
             + "    {$or : [{ ?1 : null}, { 'dateCreated' : {$gte : ?1}}]}, "
-            + "    {$or [{ ?2 : null}, { 'dateCreated' : {$lte : ?2}}]} "
+            + "    {$or : [{ ?2 : null}, { 'dateCreated' : {$lte : ?2}}]} "
             + "  ] "
             + "}";
     
