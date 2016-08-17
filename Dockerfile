@@ -5,30 +5,30 @@ MAINTAINER Ben Willett
 
 # CLIENT PART
 
-RUN \
-  apt-get update && \
-  apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev
+#RUN \
+#  apt-get update && \
+#  apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev
 
-RUN gem install compass
+#RUN gem install compass
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+#RUN mkdir -p /usr/src/app
+#WORKDIR /usr/src/app
 
 # Bundle app source
-COPY source/client/. /usr/src/app
+#COPY source/client/. /usr/src/app
 
-COPY source/client/package.json /usr/src/app/
-COPY source/client/bower.json /usr/src/app/
-COPY source/client/Gruntfile.js /usr/src/app/
-RUN npm install -g bower grunt-cli grunt
-RUN npm install
-RUN bower --allow-root install
-RUN grunt build
+#COPY source/client/package.json /usr/src/app/
+#COPY source/client/bower.json /usr/src/app/
+#COPY source/client/Gruntfile.js /usr/src/app/
+#RUN npm install -g bower grunt-cli grunt
+#RUN npm install
+#RUN bower --allow-root install
+#RUN grunt build
 
-ENV NODE_ENV test
+#ENV NODE_ENV test
 
-EXPOSE 3000
+#EXPOSE 3000
 
 # SERVER PART
 
@@ -48,4 +48,5 @@ RUN apt-get update
 RUN apt-get install -y mongodb-org=3.2.9 mongodb-org-server=3.2.9 mongodb-org-shell=3.2.9 mongodb-org-mongos=3.2.9 mongodb-org-tools=3.2.9
 
 # Set the default command to execute when creating the new container
-CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
+#CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
+CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; /bin/bash
