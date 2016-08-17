@@ -1,7 +1,7 @@
 package gov.dhs.kudos.rest.v1.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -13,8 +13,8 @@ public abstract class BaseEntity implements Serializable
 {
     @Id
     private String id;
-    private Timestamp dateCreated;
-    private Timestamp dateModified;
+    private Date dateCreated;
+    private Date dateModified;
     
     public String getId() 
     {
@@ -26,22 +26,22 @@ public abstract class BaseEntity implements Serializable
         this.id = id;
     }
 
-    public Timestamp getDateCreated()
+    public Date getDateCreated()
     {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated)
+    public void setDateCreated(Date dateCreated)
     {
         this.dateCreated = dateCreated;
     }
 
-    public Timestamp getDateModified()
+    public Date getDateModified()
     {
         return dateModified;
     }
 
-    public void setDateModified(Timestamp dateModified)
+    public void setDateModified(Date dateModified)
     {
         this.dateModified = dateModified;
     }

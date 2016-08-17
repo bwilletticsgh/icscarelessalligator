@@ -6,7 +6,7 @@
 package gov.dhs.kudos.rest.v1.repo;
 
 import gov.dhs.kudos.rest.v1.model.UsageStatistic;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -16,5 +16,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface UsageStatisticRepo extends MongoRepository<UsageStatistic, String>
 {
-    List<UsageStatistic> findAccessDateBetween(Timestamp from, Timestamp to);
+    List<UsageStatistic> findCreateDateBetween(Date from, Date to);
+    List<UsageStatistic> findByUser(String user);
+    List<UsageStatistic> findByUri(String uri);
 }
