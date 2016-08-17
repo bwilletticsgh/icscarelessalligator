@@ -45,15 +45,16 @@ EXPOSE 3000
 # SERVER PART
 
 # Install basic applications
-RUN apt-get install -y openjdk-8-jre-headless wget unzip
-RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
-RUN unzip apache-tomcat-8.0.36.zip
+RUN apt-get install -y openjdk-8-jre-headless wget unzip tomcat7
+#RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
+#RUN unzip apache-tomcat-8.0.36.zip
 
 # Copy the application folder inside the container
-COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
+#COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
 # DATABASE PART
-RUN apt-get install -y mongodb
+#RUN apt-get install -y mongodb
 
 # Set the default command to execute when creating the new container
-CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
+#CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
+CMD npm start
