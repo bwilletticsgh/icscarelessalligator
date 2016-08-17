@@ -1,15 +1,15 @@
 package gov.dhs.kudos.rest.v1.service;
 
-import gov.dhs.kudos.rest.v1.model.User;
+import gov.dhs.kudos.rest.v1.model.UsageStatistic;
+import java.util.Date;
+import java.util.List;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author bsuneson
  */
-@Service
-public class StatsService 
+public class StatsService extends WiredService
 {
     private static final Logger LOG = Logger.getLogger(StatsService.class);
     
@@ -17,16 +17,28 @@ public class StatsService
     {
         
     }
-
-    public void record(String uri, User user) 
+    
+    public List<UsageStatistic> findAllUsageStats(Date fromDate, Date toDate)
     {
-        try
-        {
-            
-        }
-        catch(Exception e)
-        {
-            LOG.error(e);
-        }
+        if(fromDate != null)
+            return usageStatisticRepo.findByDateCreatedBetween(fromDate, (toDate == null ? new Date() : toDate));
+        else
+            return usageStatisticRepo.findAll();
+    }
+    
+    public List<UsageStatistic> findAllUsageStatsByEmail(String email, Date fromDate, Date toDate)
+    {
+//        if(fromDate != null)
+//            return usageStatisticRepo.findByDateCreatedBetween(fromDate, (toDate == null ? new Date() : toDate), email);
+//        else
+            return usageStatisticRepo.findByUser(email);
+    }
+    
+    public List<UsageStatistic> findAllUsageStatsByUri(String uri, Date fromDate, Date toDate)
+    {
+//        if(fromDate != null)
+//            return usageStatisticRepo.findByDateCreatedBetween(fromDate, (toDate == null ? new Date() : toDate), email);
+//        else
+            return usageStatisticRepo.findByUri(uri);
     }
 }

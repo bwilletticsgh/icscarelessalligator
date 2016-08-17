@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
  *
  * @author bsuneson
  */
-public class OrganizationService extends WiredService
+public class OrganizationService extends StatsService
 {
     private static final Logger LOG = Logger.getLogger(OrganizationService.class);
     

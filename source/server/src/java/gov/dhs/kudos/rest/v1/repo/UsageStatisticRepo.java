@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gov.dhs.kudos.rest.v1.repo;
 
 import gov.dhs.kudos.rest.v1.model.UsageStatistic;
@@ -16,7 +11,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface UsageStatisticRepo extends MongoRepository<UsageStatistic, String>
 {
-    List<UsageStatistic> findCreateDateBetween(Date from, Date to);
+    List<UsageStatistic> findByDateCreatedBetween(Date from, Date to);
     List<UsageStatistic> findByUser(String user);
     List<UsageStatistic> findByUri(String uri);
 }
