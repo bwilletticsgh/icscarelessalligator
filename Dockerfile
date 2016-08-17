@@ -53,5 +53,5 @@ RUN \
 # Set the default command to execute when creating the new container
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
 #RUN /usr/bin/mongo && \
-    sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
+#    sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
 CMD /bin/bash
