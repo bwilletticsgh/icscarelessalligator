@@ -7,7 +7,7 @@ package gov.dhs.kudos.rest.v1.repo.listener;
 
 import com.mongodb.DBObject;
 import gov.dhs.kudos.rest.v1.model.BaseEntity;
-import java.sql.Timestamp;
+import java.util.Date;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 
 /**
@@ -21,14 +21,16 @@ public class BeforeSaveListener extends AbstractMongoEventListener<BaseEntity>
     @Override
     public void onBeforeSave(BaseEntity source, DBObject dbo)
     {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Date now = new Date();
         
         if(source.getDateCreated() == null)
-            source.setDateCreated(now);
+            dbo.put("dateCreated", now);
         
-        source.setDateModified(now);
+        dbo.put("dateModified", now);
         
         super.onBeforeSave(source, dbo);
     }
+    
+    
     
 }
