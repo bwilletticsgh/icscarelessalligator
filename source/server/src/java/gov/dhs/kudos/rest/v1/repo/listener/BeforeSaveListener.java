@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gov.dhs.kudos.rest.v1.repo.listener;
 
 import com.mongodb.DBObject;
@@ -27,10 +22,5 @@ public class BeforeSaveListener extends AbstractMongoEventListener<BaseEntity>
             dbo.put("dateCreated", now);
         
         dbo.put("dateModified", now);
-        
-        super.onBeforeSave(source, dbo);
-    }
-    
-    
-    
+    }    
 }

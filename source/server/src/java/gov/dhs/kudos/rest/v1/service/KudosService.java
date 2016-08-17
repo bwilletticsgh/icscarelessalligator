@@ -75,9 +75,11 @@ public class KudosService extends KudosCategoryService
     
     public void initDumbydata() 
     {
+//        usageStatisticRepo.deleteAll();
 //        userRepo.deleteAll();
 //        organizationRepo.deleteAll();
 //        
+//
 //        User user1 = new User("John Luke","Pichard","JL@nowhere.com","123");
 //        User user2 = new User("Geordi","LaForge","GL@nowhere.com","123");
 //        User user3 = new User("Brian","Suneson","BS@nowhere.com","123");

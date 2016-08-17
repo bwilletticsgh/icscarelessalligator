@@ -1,9 +1,10 @@
 package gov.dhs.kudos.rest.v1.filter;
 
-import gov.dhs.kudos.rest.v1.util.JwtTokenUtil;
 import gov.dhs.kudos.rest.v1.exception.KudosException;
+import gov.dhs.kudos.rest.v1.model.UsageStatistic;
 import gov.dhs.kudos.rest.v1.model.User;
-import gov.dhs.kudos.rest.v1.service.StatsService;
+import gov.dhs.kudos.rest.v1.repo.UsageStatisticRepo;
+import gov.dhs.kudos.rest.v1.util.JwtTokenUtil;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,20 +15,22 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author bsuneson
  */
+@Component("jwtAuthenticationFilter")
 public class JwtAuthenticationFilter implements Filter
 {
     private static final Logger LOG = Logger.getLogger(JwtAuthenticationFilter.class);
     
-    private final StatsService statsService;
+    @Autowired
+    protected UsageStatisticRepo usageStatisticRepo;
 
-    public JwtAuthenticationFilter(StatsService statsService) 
-    {
-        this.statsService = statsService;
+    public JwtAuthenticationFilter() {
     }
     
     @Override
@@ -54,7 +57,7 @@ public class JwtAuthenticationFilter implements Filter
         else if(LOG.isDebugEnabled())
             LOG.debug("[Filter] User login attempt from: " + request.getRemoteAddr());
         
-        statsService.record(path, user);
+        record(path, (user == null ? request.getRemoteAddr() : user.getEmail()));
         
         filterChain.doFilter(request, response);
     }    
@@ -69,5 +72,20 @@ public class JwtAuthenticationFilter implements Filter
     public void destroy() 
     {
         
+    }
+    
+    private void record(String uri, String user)
+    {        
+        LOG.info("[Usage] " + user + " accessing " + uri);
+        
+        try
+        {            
+            if(uri != null && uri.length() > 1)
+                usageStatisticRepo.save(new UsageStatistic(uri, user));
+        }
+        catch(Exception e)
+        {
+            LOG.error(e);
+        }
     }
 }
