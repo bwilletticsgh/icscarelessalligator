@@ -55,7 +55,7 @@ CMD service tomcat7 stop
 
 # DATABASE PART
 RUN apt-get install -y mongodb
-
+#
 # Set the default command to execute when creating the new container
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
 CMD service mongodb start; service tomcat7 start; npm start
