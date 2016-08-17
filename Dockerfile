@@ -58,4 +58,4 @@ RUN apt-get install -y mongodb
 
 # Set the default command to execute    
 # when creating a new container
-CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; service mongod start; npm start
+CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; service mongodb start; npm start
