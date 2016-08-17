@@ -13,7 +13,7 @@ MAINTAINER Ben Willett
 
 # Create app directory
 #RUN mkdir -p /usr/src/app
-#WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
 # Bundle app source
 #COPY source/client/. /usr/src/app
@@ -52,4 +52,6 @@ RUN \
 
 # Set the default command to execute when creating the new container
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
-CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; /bin/bash
+RUN /etc/init.d/mongo start && \
+RUN sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
+CMD /bin/bash
