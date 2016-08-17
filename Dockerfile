@@ -35,7 +35,7 @@ WORKDIR /usr/src/app
 # Install basic applications
 RUN \
   apt-get update && \
-  apt-get install -y openjdk-8-jre-headless wget unzip
+  apt-get install -y net-tools links openjdk-8-jre-headless wget unzip
 RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
 RUN unzip apache-tomcat-8.0.36.zip
 
@@ -52,6 +52,8 @@ RUN \
 
 # Set the default command to execute when creating the new container
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
-#RUN /usr/bin/mongo && \
-#    sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
+RUN mkdir /data
+RUN mkdir /data/db
+RUN /usr/bin/mongod && \
+    sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
 CMD /bin/bash
