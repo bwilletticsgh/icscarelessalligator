@@ -5,33 +5,32 @@ MAINTAINER Ben Willett
 
 # CLIENT PART
 
-#RUN \
-#  apt-get update && \
-#  apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev
+RUN \
+  apt-get update && \
+  apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev
 
 #RUN gem install compass
 
 # Create app directory
-#RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Bundle app source
-#COPY source/client/. /usr/src/app
+COPY source/client/. /usr/src/app
 
-#COPY source/client/package.json /usr/src/app/
-#COPY source/client/bower.json /usr/src/app/
-#COPY source/client/Gruntfile.js /usr/src/app/
-#RUN npm install -g bower grunt-cli grunt
-#RUN npm install
-#RUN bower --allow-root install
-#RUN grunt build
+COPY source/client/package.json /usr/src/app/
+COPY source/client/bower.json /usr/src/app/
+COPY source/client/Gruntfile.js /usr/src/app/
+RUN npm install -g bower grunt-cli grunt
+RUN npm install
+RUN bower --allow-root install
+RUN grunt build
 
-#ENV NODE_ENV test
+ENV NODE_ENV test
 
-#EXPOSE 3000
+EXPOSE 3000
 
 # SERVER PART
-
 # Install basic applications
 RUN \
   apt-get update && \
@@ -54,6 +53,6 @@ RUN \
 #CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
 RUN mkdir /data
 RUN mkdir /data/db
-#RUN /usr/bin/mongod &
-#RUN sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
+RUN /usr/bin/mongod > /tmp/mongostart.log 2>&1 &
+RUN sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
 CMD /bin/bash
