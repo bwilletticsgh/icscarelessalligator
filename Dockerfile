@@ -54,6 +54,6 @@ RUN \
 RUN mkdir /data
 RUN mkdir /data/db
 RUN \
-	/usr/bin/mongod > /tmp/mongostart.log 2>&1 && \
+	/usr/bin/mongod > /tmp/mongostart.log 2>&1 & && \
 	sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start
 CMD npm start
