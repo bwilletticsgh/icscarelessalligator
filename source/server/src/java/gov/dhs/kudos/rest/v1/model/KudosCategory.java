@@ -1,6 +1,6 @@
 package gov.dhs.kudos.rest.v1.model;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 /**
  *
@@ -9,22 +9,21 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 @SuppressWarnings("serial")
 public class KudosCategory extends BaseEntity
 {
-    @DBRef
-    private Organization org;
+    @Indexed(unique=true)
     private String name;    
     private String desc;
+    private String icon;
+    private String color;
 
-    public KudosCategory(String name, String desc, Organization org) 
+    public KudosCategory(String name, String desc) 
     {
         this.name = name;
         this.desc = desc;
-        this.org = org;
     }
 
-    public KudosCategory(String name, Organization org) 
+    public KudosCategory(String name) 
     {
         this.name = name;
-        this.org = org;
     }
 
     public KudosCategory() {
@@ -46,11 +45,25 @@ public class KudosCategory extends BaseEntity
         this.desc = desc;
     }
 
-    public Organization getOrg() {
-        return org;
+    public String getIcon()
+    {
+        return icon;
     }
 
-    public void setOrg(Organization org) {
-        this.org = org;
+    public void setIcon(String icon)
+    {
+        this.icon = icon;
     }
+
+    public String getColor()
+    {
+        return color;
+    }
+
+    public void setColor(String color)
+    {
+        this.color = color;
+    }
+    
+    
 }

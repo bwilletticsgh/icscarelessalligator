@@ -15,6 +15,7 @@ public class User extends BaseEntity
     private String firstName;
     private String lastName;    
     private String password;
+    private boolean isAdmin;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -68,4 +69,16 @@ public class User extends BaseEntity
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isIsAdmin()
+    {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin)
+    {
+        this.isAdmin = isAdmin;
+    }
+    
+    
 }
