@@ -28,7 +28,7 @@ RUN grunt build
 
 ENV NODE_ENV test
 
-EXPOSE 3000
+EXPOSE 80
 
 # SERVER PART
 # Install basic applications
