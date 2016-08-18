@@ -49,8 +49,9 @@ RUN \
   apt-get update && \
   apt-get install -y mongodb-org=3.2.9 mongodb-org-server=3.2.9 mongodb-org-shell=3.2.9 mongodb-org-mongos=3.2.9 mongodb-org-tools=3.2.9
 
-# Set the default command to execute when creating the new container
-#CMD service mongodb start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start; npm start
-RUN mkdir /data
-RUN mkdir /data/db
+RUN \
+  mkdir /data && \
+  mkdir /data/db
+
+# Set the default command to execute when creating the new container  
 CMD /usr/bin/mongod --fork --syslog ; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; npm start
