@@ -9,7 +9,7 @@ RUN \
   apt-get update && \
   apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev
 
-#RUN gem install compass
+RUN gem install compass
 
 # Create app directory
 RUN mkdir -p /usr/src/app
