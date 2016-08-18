@@ -32,40 +32,38 @@ public class KudosCategoryRest
         
     }
     
-    @RequestMapping(value = "/all/{orgName}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getKudosCats(@PathVariable String orgName)
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getKudosCats()
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("[/v1/cat/all/{orgName}] orgName: " + (orgName == null ? "NO orgName SUPPLIED" : orgName));
+            LOG.debug("[/v1/cat/all]");
         
-        return new ResponseEntity(kudosService.findAllKudosCats(orgName), HttpStatus.OK);
+        return new ResponseEntity(kudosService.findAllKudosCats(), HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{orgName}/{name}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getKudosCatByName(@PathVariable String orgName, @PathVariable String name)
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getKudosCatByName(@PathVariable String name)
     {
         if(LOG.isDebugEnabled())
         {
-            LOG.debug("[/v1/cat/{orgName}/{name}] orgName: " + (orgName == null ? "NO orgName SUPPLIED" : orgName));
-            LOG.debug("[/v1/cat/{orgName}/{name}] name: " + (name == null ? "NO name SUPPLIED" : name));
+            LOG.debug("[/v1/cat/{name}] name: " + (name == null ? "NO name SUPPLIED" : name));
         }
         
-        return new ResponseEntity(kudosService.findKudosCatByName(name, orgName), HttpStatus.OK);
+        return new ResponseEntity(kudosService.findKudosCatByName(name), HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/create/{orgName}", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity createKudosCat(@PathVariable String orgName, @RequestBody(required = false) KudosCategory kudosCat)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity createKudosCat(@RequestBody(required = false) KudosCategory kudosCat)
     {
         if(LOG.isDebugEnabled())
         {
-            LOG.debug("[/v1/cat/create/{orgName}] orgName: " + (orgName == null ? "NO orgName SUPPLIED" : orgName));
-            LOG.debug("[/v1/cat/create/{orgName}] kudosCat: " + (kudosCat == null ? "NO kudosCat OBJECT" : LogUtils.objectToJson(kudosCat)));
+            LOG.debug("[/v1/cat/create] kudosCat: " + (kudosCat == null ? "NO kudosCat OBJECT" : LogUtils.objectToJson(kudosCat)));
         }
         
         try
         {
-            kudosService.validateCreateKudosCat(kudosCat, orgName);
-            return new ResponseEntity(kudosService.saveKudosCat(kudosCat, orgName), HttpStatus.OK);
+            kudosService.validateCreateKudosCat(kudosCat);
+            return new ResponseEntity(kudosService.saveKudosCat(kudosCat), HttpStatus.OK);
         }
         catch(KudosException e)
         {

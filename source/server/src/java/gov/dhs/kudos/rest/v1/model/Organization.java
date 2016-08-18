@@ -16,6 +16,8 @@ public class Organization extends BaseEntity
     private String orgName;
     @DBRef
     private List<User> users;
+    @DBRef
+    private List<KudosCategory> kudosCategories;
 
     public Organization(String orgName, List<User> users) {
         this.orgName = orgName;
@@ -51,4 +53,16 @@ public class Organization extends BaseEntity
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+    public List<KudosCategory> getKudosCategories()
+    {
+        return kudosCategories;
+    }
+
+    public void setKudosCategories(List<KudosCategory> kudosCategories)
+    {
+        this.kudosCategories = kudosCategories;
+    }
+    
+    
 }
