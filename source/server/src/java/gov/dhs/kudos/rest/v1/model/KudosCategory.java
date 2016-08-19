@@ -15,6 +15,13 @@ public class KudosCategory extends BaseEntity
     private String icon;
     private String color;
 
+    public KudosCategory(String name, String desc, String icon, String color) {
+        this.name = name;
+        this.desc = desc;
+        this.icon = icon;
+        this.color = color;
+    }
+
     public KudosCategory(String name, String desc) 
     {
         this.name = name;

@@ -5,13 +5,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 
 /**
- *
+ * Utility for logging
  * @author bsuneson
  */
 public class LogUtils 
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(LogUtils.class);
     
+    /**
+     * Convert the object to a JSON string
+     * @param obj The object to convert
+     * @return A JSON string representation of the object
+     */
     public static String objectToJson(Object obj)
     {
         if(LOG.isDebugEnabled())

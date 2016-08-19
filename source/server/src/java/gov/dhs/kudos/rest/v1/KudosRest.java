@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Restful v1 endpoint for handling all kudos transactions
  * @author bsuneson
  */
 @RestController
 @RequestMapping(value = "/v1/kudos")
 public class KudosRest 
 {
+    /** the logger for this class **/
     private static final Logger LOG = Logger.getLogger(KudosRest.class);
     
+    /** The service layer for logic **/
     @Autowired 
     private KudosService kudosService;
     
@@ -37,9 +39,14 @@ public class KudosRest
     @PostConstruct
     public void initData()
     {
-        kudosService.initDumbydata();
+        kudosService.initAdminData();
     }
     
+    /**
+     * Endpoint for retrieving all kudos from a user
+     * @param fromUserId The PathVariable of the users id
+     * @return All kudos from a user
+     */
     @RequestMapping(value = "/fromUser/all/{fromUserId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getKudosFromUser(@PathVariable String fromUserId)
     {
@@ -49,6 +56,11 @@ public class KudosRest
         return new ResponseEntity(kudosService.findAllKudosFromUser(fromUserId), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving all kudos to a user
+     * @param toUserId The PathVariable of the users id
+     * @return All kudos to a user
+     */
     @RequestMapping(value = "/toUser/all/{toUserId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getKudosToUser(@PathVariable String toUserId)
     {
@@ -58,6 +70,11 @@ public class KudosRest
         return new ResponseEntity(kudosService.findAllKudosToUser(toUserId), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving all kudos for a category
+     * @param catId The PathVariable of the category id
+     * @return All kudos for a category
+     */
     @RequestMapping(value = "/cat/all/{catId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getKudosForCat(@PathVariable String catId)
     {
@@ -67,6 +84,14 @@ public class KudosRest
         return new ResponseEntity(kudosService.findAllKudosForCat(catId), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for giving a kudo to a user
+     * @param fromUserId The PathVariable of a user id
+     * @param toUserId The PathVariable of a user id
+     * @param kudosCatId The PathVariable of a category id
+     * @param kudos The RequestBody object for a kudos - must contain comments
+     * @return The created Kudo object
+     */
     @RequestMapping(value = "/create/{fromUserId}/{toUserId}/{kudosCatId}", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity createKudos(@PathVariable String fromUserId, @PathVariable String toUserId, @PathVariable String kudosCatId, @RequestBody(required = false) Kudos kudos)
     {

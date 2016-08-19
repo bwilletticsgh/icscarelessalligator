@@ -1,5 +1,6 @@
 package gov.dhs.kudos.rest.v1.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.User;
 import io.jsonwebtoken.Claims;
@@ -10,6 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.crypto.RsaProvider;
+import java.io.IOException;
 import java.security.KeyPair;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,16 +25,19 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
 
 /**
- *
+ * Utility for JSON Web Tokens
  * @author bsuneson
  */
 public class JwtTokenUtil 
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(JwtTokenUtil.class);
-    
+    /** The strong crypto keys **/
     private static KeyPair keys;
+    /** JSON to Object to JSON MAPPER **/
+    private static final ObjectMapper MAPPER = new ObjectMapper();
     
-    public static String generateToken(User user, HttpServletResponse response) throws KudosException
+    public static synchronized String generateToken(User user, HttpServletResponse response) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Generating token for User: " + user.getEmail());
@@ -42,7 +47,7 @@ public class JwtTokenUtil
             String token = Jwts.builder().setSubject(user.getEmail())
                 .setIssuer("KudosREST")
                 .setExpiration(new Date(System.currentTimeMillis() + 900000))
-                .claim("kudosUser", user)
+                .claim("kudosUser", MAPPER.writeValueAsString(user))
                 .signWith(SignatureAlgorithm.RS512, keys.getPrivate()).compact();
         
             response.setHeader("Authorization", "Bearer " + token);
@@ -56,7 +61,7 @@ public class JwtTokenUtil
         }
     }
     
-    public static User validateToken(HttpServletRequest httpRequest, HttpServletResponse response) throws KudosException
+    public static synchronized User validateToken(HttpServletRequest httpRequest, HttpServletResponse response) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Validating token...");
@@ -68,18 +73,20 @@ public class JwtTokenUtil
             if(header == null || !header.startsWith("Bearer "))
                 throw new KudosException("No Kudos Token found in request headers", HttpStatus.BAD_REQUEST);
 
-            Claims claims = Jwts.parser().setSigningKey(keys.getPrivate()).parseClaimsJws(header.substring(7)).getBody();
+            Claims claims = Jwts.parser().setSigningKey(keys.getPrivate()).parseClaimsJws(header.substring(7)).getBody();            
             claims.setExpiration(new Date(System.currentTimeMillis() + 900000));
 
+            User user = MAPPER.readValue((String)claims.get("kudosUser"), User.class);
+            
             String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.RS512, keys.getPrivate()).compact();
             response.setHeader("Authorization", "Bearer " + token);
             
             if(LOG.isDebugEnabled())
-                LOG.debug("Token validated for User: " + claims.get("kudosUser", User.class).getEmail());
+                LOG.debug("Token validated for User: " + user.getEmail());
 
-            return claims.get("kudosUser", User.class);
+            return user;
         }
-        catch(ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e)
+        catch(ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException | IOException e)
         {
             LOG.error(e);
             
@@ -97,7 +104,7 @@ public class JwtTokenUtil
         try
         {  
             if(LOG.isDebugEnabled())
-                LOG.debug("Generating strong Json Web Token...");
+                LOG.debug("Generating strong KeyPair...");
             
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
             MessageDigest md = MessageDigest.getInstance("SHA-256");

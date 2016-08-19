@@ -17,15 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Restful v1 endpoint for handling all user transactions
  * @author bsuneson
  */
 @RestController
 @RequestMapping(value = "/v1/user")
 public class UserRest 
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(UserRest.class);
     
+    /** The service layer for logic **/
     @Autowired 
     private KudosService kudosService;
 
@@ -34,6 +36,12 @@ public class UserRest
         
     }
     
+    /**
+     * Endpoint for registering users
+     * @param user The RequestBody User object - expects email, firstName, lastName and password
+     * @param response The HttpServletResponse for replying back with a valid JSON Web Token
+     * @return Updated User object and JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity register(@RequestBody(required = false) User user, HttpServletResponse response)
     {
@@ -56,7 +64,13 @@ public class UserRest
         }      
     }
   
-    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json")
+    /**
+     * Endpoint for logging in
+     * @param user The RequestBody User object - expects email and password
+     * @param response The HttpServletResponse for replying back with a valid JSON Web Token
+     * @return Updated User object and JSON Web Token in the Authorization Header
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity login(@RequestBody(required = false) User user, HttpServletResponse  response)
     {
         if(LOG.isDebugEnabled())
@@ -78,6 +92,11 @@ public class UserRest
         }
     }
     
+    /**
+     * Endpoint for updating a User
+     * @param user The RequestBody User object - expects id
+     * @return Updated User object and updated expiry time JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity updateUser(@RequestBody(required = false) User user)
     {
@@ -87,7 +106,7 @@ public class UserRest
         try
         {
             kudosService.validateUserUpdate(user);
-            return new ResponseEntity(kudosService.saveUser(user), HttpStatus.OK);
+            return new ResponseEntity(kudosService.updateUser(user), HttpStatus.OK);
         }
         catch(KudosException e)
         {
@@ -96,6 +115,10 @@ public class UserRest
         }
     }
     
+    /**
+     * Endpoint for retrieving all Users
+     * @return All Users and updated expiry time JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getAllUsers()
     {
@@ -105,6 +128,11 @@ public class UserRest
         return new ResponseEntity(kudosService.findAllUsers(), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving a User by their email address
+     * @param email The PathVariable for a users email
+     * @return A User object and updated expiry time JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/byEmail/{email}/", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUserByEmail(@PathVariable String email)
     {
@@ -114,6 +142,11 @@ public class UserRest
         return new ResponseEntity(kudosService.findUserByEmail(email), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving a User by their id
+     * @param id The PathVariable for a users id
+     * @return A User object and updated expiry time JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/byId/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUserById(@PathVariable String id)
     {
@@ -123,6 +156,11 @@ public class UserRest
         return new ResponseEntity(kudosService.findUserById(id), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for searching users based on their first name
+     * @param firstName The PathVariable for a users firstName
+     * @return A list of Users that matched the PathVariable and updated expiry time JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/byFirstName/{firstName}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUsersByFirstName(@PathVariable String firstName)
     {
@@ -132,6 +170,11 @@ public class UserRest
         return new ResponseEntity(kudosService.findUsersByFirstName(firstName), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for searching users based on their last name
+     * @param lastName The PathVariable for a users lastName
+     * @return A list of Users that matched the PathVariable and updated expiry time JSON Web Token in the Authorization Header
+     */
     @RequestMapping(value = "/byLastName/{lastName}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUsersByLastName(@PathVariable String lastName)
     {

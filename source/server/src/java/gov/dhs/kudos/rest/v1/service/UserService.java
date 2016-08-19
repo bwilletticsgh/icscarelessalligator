@@ -14,39 +14,6 @@ public class UserService extends OrganizationService
 {
     private static final Logger LOG = Logger.getLogger(UserService.class);
     
-    public void validateUserRegister(User user) throws KudosException
-    {
-        if(LOG.isDebugEnabled())
-            LOG.debug("Validating required fields for user registration");
-        
-        if(user == null)
-            throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getFirstName() == null || user.getLastName() == null || user.getPassword() == null)
-            throw new KudosException("A required field for registration was null", HttpStatus.BAD_REQUEST);
-    }
-    
-    public void validateUserLogin(User user) throws KudosException
-    {
-        if(LOG.isDebugEnabled())
-            LOG.debug("Validating required fields for user login");
-        
-        if(user == null)
-            throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getPassword() == null)
-            throw new KudosException("A required field for login was null", HttpStatus.BAD_REQUEST);
-    }
-    
-    public void validateUserUpdate(User user) throws KudosException
-    {
-        if(LOG.isDebugEnabled())
-            LOG.debug("Validating required fields for user update");
-        
-        if(user == null)
-            throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getId() == null)
-            throw new KudosException("A required field for user update was null - need id", HttpStatus.BAD_REQUEST);
-    }
-    
     public User saveUser(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -67,7 +34,7 @@ public class UserService extends OrganizationService
         
         User foundUser = userRepo.findByEmail(user.getEmail());
         
-        if(foundUser.getPassword().equals(user.getEmail()))
+        if(foundUser != null && foundUser.getPassword().equals(user.getPassword()))
             return foundUser;
         else
             throw new KudosException("Bad Credentials", HttpStatus.UNAUTHORIZED);
