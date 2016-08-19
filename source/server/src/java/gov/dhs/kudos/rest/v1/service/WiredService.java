@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author bsuneson
  */
-public class WiredService 
+public class WiredService
 {
     @Autowired 
     protected OrganizationRepo organizationRepo;

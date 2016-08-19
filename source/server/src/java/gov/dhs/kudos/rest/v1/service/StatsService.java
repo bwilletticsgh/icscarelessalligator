@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  *
  * @author bsuneson
  */
-public class StatsService extends WiredService
+public class StatsService extends EndpointValidation
 {
     private static final Logger LOG = Logger.getLogger(StatsService.class);
     
@@ -28,17 +28,17 @@ public class StatsService extends WiredService
     
     public List<UsageStatistic> findAllUsageStatsByEmail(String email, Date fromDate, Date toDate)
     {
-//        if(fromDate != null)
-//            return usageStatisticRepo.findByDateCreatedBetween(fromDate, (toDate == null ? new Date() : toDate), email);
-//        else
+        if(fromDate != null)
+            return usageStatisticRepo.findByUserAndDate(email, fromDate, (toDate == null ? new Date() : toDate));
+        else
             return usageStatisticRepo.findByUser(email);
     }
     
     public List<UsageStatistic> findAllUsageStatsByUri(String uri, Date fromDate, Date toDate)
     {
-//        if(fromDate != null)
-//            return usageStatisticRepo.findByDateCreatedBetween(fromDate, (toDate == null ? new Date() : toDate), email);
-//        else
+        if(fromDate != null)
+            return usageStatisticRepo.findByUriAndDate(uri, fromDate, (toDate == null ? new Date() : toDate));
+        else
             return usageStatisticRepo.findByUri(uri);
     }
 }

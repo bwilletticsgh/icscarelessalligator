@@ -19,6 +19,12 @@ public class Organization extends BaseEntity
     @DBRef
     private List<KudosCategory> kudosCategories;
 
+    public Organization(String orgName, List<User> users, List<KudosCategory> kudosCategories) {
+        this.orgName = orgName;
+        this.users = users;
+        this.kudosCategories = kudosCategories;
+    }
+
     public Organization(String orgName, List<User> users) {
         this.orgName = orgName;
         this.users = users;
@@ -64,5 +70,11 @@ public class Organization extends BaseEntity
         this.kudosCategories = kudosCategories;
     }
     
-    
+    public void addKudosCat(KudosCategory kudosCat)
+    {
+        if(kudosCategories == null)
+            kudosCategories = new ArrayList<>();
+        
+        kudosCategories.add(kudosCat);
+    }
 }

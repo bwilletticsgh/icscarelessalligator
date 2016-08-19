@@ -1,10 +1,12 @@
 package gov.dhs.kudos.rest.v1.service;
 
-import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.Kudos;
+import gov.dhs.kudos.rest.v1.model.KudosCategory;
+import gov.dhs.kudos.rest.v1.model.Organization;
+import gov.dhs.kudos.rest.v1.model.User;
+import java.util.Arrays;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,23 +21,6 @@ public class KudosService extends KudosCategoryService
     public KudosService() 
     {
         
-    }
-    
-    public void validateCreateKudos(String fromUserId, String toUserId, String kudosCatId, Kudos kudos) throws KudosException
-    {
-        if(LOG.isDebugEnabled())
-            LOG.debug("Validating required fields for kudos creation");
-        
-        if(fromUserId == null || toUserId == null || kudosCatId == null || kudos == null)
-            throw new KudosException("Reuired obejct(s) was null - required fromUserId, toUserId, kudosCatId, and Kudos", HttpStatus.BAD_REQUEST);
-        if(kudos.getComments() == null)
-            throw new KudosException("No comments in the Kudos object", HttpStatus.BAD_REQUEST);
-        if(!userExists(fromUserId))
-            throw new KudosException("No User exists for fromUserId", HttpStatus.BAD_REQUEST);
-        if(!userExists(toUserId))
-            throw new KudosException("No User exists for toUserId", HttpStatus.BAD_REQUEST);
-        if(!kudosCatExists(kudosCatId))
-            throw new KudosException("No KudosCategory exists for kudosCatId", HttpStatus.BAD_REQUEST);
     }
     
     public List<Kudos> findAllKudosFromUser(String fromUserId)
@@ -73,32 +58,22 @@ public class KudosService extends KudosCategoryService
         return kudosRepo.save(kudo);
     }
     
-    public void initDumbydata() 
+    public void initAdminData() 
     {
-//        usageStatisticRepo.deleteAll();
-//        userRepo.deleteAll();
-//        organizationRepo.deleteAll();
-//        
-//
-//        User user1 = new User("John Luke","Pichard","JL@nowhere.com","123");
-//        User user2 = new User("Geordi","LaForge","GL@nowhere.com","123");
-//        User user3 = new User("Brian","Suneson","BS@nowhere.com","123");
-//        User user4 = new User("Ben","Willett","BW@nowhere.com","123");
-//        
-//        userRepo.save(user1);
-//        userRepo.save(user2);
-//        userRepo.save(user3);
-//        userRepo.save(user4);
-//        
-//        Organization org1 = new Organization();
-//        org1.setOrgName("StarFleet");
-//        org1.setUsers(Arrays.<User>asList(new User[] {user1, user2}));
-//        
-//        Organization org2 = new Organization();
-//        org2.setOrgName("BobsBurgers");
-//        org2.setUsers(Arrays.<User>asList(new User[] {user3, user4}));
-//        
-//        organizationRepo.save(org1);
-//        organizationRepo.save(org2);
+        Organization dhs = organizationRepo.findByOrgName("DHS");
+        if(dhs == null)
+        {
+            usageStatisticRepo.deleteAll();
+            userRepo.deleteAll();
+            kudosRepo.deleteAll();
+            kudosCatRepo.deleteAll();
+            organizationRepo.deleteAll();
+            
+            User admin = userRepo.save(new User("admin@kudos.com", "kudos", "admin", "11!!qqQQaaAAzzZZ", true));
+            KudosCategory dhsKudosCat = kudosCatRepo.save(new KudosCategory("SAMPLE 1", "AWW SNAP"));            
+            dhs = organizationRepo.save(new Organization("DHS", Arrays.<User>asList(new User[] {admin}), Arrays.<KudosCategory>asList(new KudosCategory[] {dhsKudosCat})));
+            
+            kudosCatRepo.save(new KudosCategory("GLOBAL 1", "BANG"));
+        }
     }
 }

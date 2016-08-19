@@ -15,15 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Restful v1 endpoint for handling all usage statistic transactions
  * @author bsuneson
  */
 @RestController
 @RequestMapping(value = "/v1/usage")
 public class UsageStatisticRest 
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(UsageStatisticRest.class);
     
+    /** The service layer for logic **/
     @Autowired 
     private KudosService kudosService;
     
@@ -32,6 +34,12 @@ public class UsageStatisticRest
         
     }
     
+    /**
+     * Endpoint for retrieving all usage statistics
+     * @param fromDate Filter for query (RequestParam) - not required
+     * @param toDate Filter for query (RequestParam) - not required
+     * @return All usage statistics
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getAllUsageStats(@RequestParam(required = false, value = "fromDate") @DateTimeFormat(iso = ISO.DATE) Date fromDate, 
                                            @RequestParam(required = false, value = "toDate") @DateTimeFormat(iso = ISO.DATE) Date toDate)
@@ -42,6 +50,13 @@ public class UsageStatisticRest
         return new ResponseEntity(kudosService.findAllUsageStats(fromDate, toDate), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving usage statistics for a user
+     * @param fromDate Filter for query (RequestParam) - not required
+     * @param toDate Filter for query (RequestParam) - not required
+     * @param email PathVariable for a users email
+     * @return All usage statistics for a user
+     */
     @RequestMapping(value = "/byEmail/{email}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUsageStatByUserId(@RequestParam(required = false, value = "fromDate") @DateTimeFormat(iso = ISO.DATE) Date fromDate, 
                                                @RequestParam(required = false, value = "toDate") @DateTimeFormat(iso = ISO.DATE) Date toDate,
@@ -53,6 +68,13 @@ public class UsageStatisticRest
         return new ResponseEntity(kudosService.findAllUsageStatsByEmail(email, fromDate, toDate), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving usage statistics for a uri
+     * @param fromDate Filter for query (RequestParam) - not required
+     * @param toDate Filter for query (RequestParam) - not required
+     * @param uri PathVariable for a uri - must be URLEncoded
+     * @return All usage statistics for a uri
+     */
     @RequestMapping(value = "/byUri/{uri}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUsageStatByURI(@RequestParam(required = false, value = "fromDate") @DateTimeFormat(iso = ISO.DATE) Date fromDate, 
                                             @RequestParam(required = false, value = "toDate") @DateTimeFormat(iso = ISO.DATE) Date toDate,

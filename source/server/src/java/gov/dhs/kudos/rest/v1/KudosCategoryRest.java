@@ -45,9 +45,7 @@ public class KudosCategoryRest
     public ResponseEntity getKudosCatByName(@PathVariable String name)
     {
         if(LOG.isDebugEnabled())
-        {
             LOG.debug("[/v1/cat/{name}] name: " + (name == null ? "NO name SUPPLIED" : name));
-        }
         
         return new ResponseEntity(kudosService.findKudosCatByName(name), HttpStatus.OK);
     }
@@ -56,9 +54,7 @@ public class KudosCategoryRest
     public ResponseEntity createKudosCat(@RequestBody(required = false) KudosCategory kudosCat)
     {
         if(LOG.isDebugEnabled())
-        {
             LOG.debug("[/v1/cat/create] kudosCat: " + (kudosCat == null ? "NO kudosCat OBJECT" : LogUtils.objectToJson(kudosCat)));
-        }
         
         try
         {
