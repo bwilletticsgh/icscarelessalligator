@@ -41,8 +41,8 @@
         <th>Comments</th>
       </tr>
       <tr ng-repeat="kudos in vm.kudosInCategory">
-        <td><a ui-sref="user({id:kudos.toUser})">{{kudos.toUser}}</a></td>
-        <td><a ui-sref="user({id:kudos.fromUser})">{{kudos.fromUser}}</a></td>
+        <td><a ui-sref="user({id:kudos.toUser})">{{kudos.toUserVM.firstName}} {{kudos.toUserVM.lastName}}</a></td>
+        <td><a ui-sref="user({id:kudos.fromUser})">{{kudos.fromUserVM.lastName}} {{kudos.toUserVM.lastName}}</a></td>
         <td>{{kudos.comments}}</td>
       </tr>
     </table>

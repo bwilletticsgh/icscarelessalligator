@@ -58,9 +58,21 @@ angular
           }
         }
       })
+      .state('createKudos', {
+        pageTitle: 'Create Kudos',
+        templateUrl: 'views/kudos/create.html',
+        controller: 'KudosCtrl as vm',
+        url: '/kudos/create/',
+        result: {
+          kudo: function() {
+            console.log(kudos.getKudos(''));
+            return kudos.getKudos('');
+          }
+        }
+      })
       .state('users', {
         pageTitle: 'All Users',
-        templateUrl: 'views/users.html',
+        templateUrl: 'views/users/list.html',
         controller: 'UsersCtrl as vm',
         url:'/users'
       })

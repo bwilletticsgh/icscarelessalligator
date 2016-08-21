@@ -1,0 +1,35 @@
+<form class="form-horizontal">
+
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <select name="toUser" id="toUser" ng-model="vm.kudo.toUser">
+        <option ng-repeat="user in vm.users" value="{{user.id}}">{{user.lastName}}, {{user.firstName}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Category</label>
+    <div class="col-sm-10">
+      <select name="kudosCat" id="kudosCat" ng-model="vm.kudo.kudosCat">
+        <option ng-repeat="cat in vm.kudosCategories" value="{{cat.id}}">{{cat.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Comments</label>
+    <div class="col-sm-10">
+      <textarea type="text" class="form-control" id="comments" ng-model="vm.kudo.comments"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary" ng-click="vm.saveKudos()">Send Kudos!</button>
+      <button type="button" ui-sref="home" class="btn btn-default">Cancel</button>
+    </div>
+  </div>
+</form>
+

@@ -18,7 +18,7 @@ describe('Controller: Login', function () {
     users.addUser({email:'someperson@somewhere.com', password:'abc'});
     $httpBackend=_$httpBackend_;
     $httpBackend.when('GET', 'views/main.html').respond(200);
-    $httpBackend.when('GET', 'views/users.html').respond(200);
+    $httpBackend.when('GET', 'views/users/list.html').respond(200);
     scope = $rootScope.$new();
     Login = $controller('Login', {
       $scope: scope
