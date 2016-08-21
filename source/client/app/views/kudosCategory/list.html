@@ -1,0 +1,15 @@
+<div class="pull-left">
+  <p class="text-primary">Total Kudos Available: <span class="badge">{{vm.kudosCategories.length}}</span></p>
+</div>
+
+<a id="addNewKudosCategory" ui-sref="createKudosCategory" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add</a>
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-sm-6 " ng-repeat="kudosCategory in vm.kudosCategories">
+    <div class="topmargin-20">
+      <kudos-category-type allow-link="true" category="kudosCategory"></kudos-category-type>
+    </div>
+  </div>
+</div>

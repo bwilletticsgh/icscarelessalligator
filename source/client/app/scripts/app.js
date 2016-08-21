@@ -30,30 +30,30 @@ angular
         controller: 'MainCtrl as vm',
         url:'/home'
       })
-      .state('kudos', {
-        pageTitle: 'Kudos List',
-        templateUrl: 'views/kudos/list.html',
-        controller: 'KudosCtrl as vm',
-        url:'/kudos/list'
+      .state('kudosCategories', {
+        pageTitle: 'Kudos Category List',
+        templateUrl: 'views/kudosCategory/list.html',
+        controller: 'KudosCategoryCtrl as vm',
+        url:'/kudosCategory/list'
       })
-      .state('editKudos', {
-        pageTitle: 'Edit Kudos',
-        templateUrl: 'views/kudos/edit.html',
-        controller: 'KudosEditorCtrl as vm',
-        url:'/kudos/edit/{id:int}',
+      .state('editKudosCategory', {
+        pageTitle: 'Edit Kudos Category',
+        templateUrl: 'views/kudosCategory/edit.html',
+        controller: 'KudosCategoryEditorCtrl as vm',
+        url:'/kudosCategory/edit/{id:string}',
         resolve: {
-          kudo : function($stateParams, kudos){
-            return kudos.getKudo($stateParams.id);
+          kudosCategory : function($stateParams, kudosCategories){
+            return kudosCategories.getKudosCategory($stateParams.id);
           }
         }
       })
-      .state('createKudos', {
-        pageTitle: 'Create Kudos',
-        templateUrl: 'views/kudos/edit.html',
-        controller: 'KudosEditorCtrl as vm',
-        url:'/kudos/create/',
+      .state('createKudosCategory', {
+        pageTitle: 'Create Kudos Category',
+        templateUrl: 'views/kudosCategory/edit.html',
+        controller: 'KudosCategoryEditorCtrl as vm',
+        url:'/kudosCategory/create/',
         resolve: {
-          kudo : function(){
+          kudosCategory : function(){
             return {};
           }
         }
@@ -65,13 +65,21 @@ angular
         url:'/users'
       })
       .state('user', {
-        pageTitle: "User",
+        pageTitle: 'User',
         templateUrl: 'views/users/details.html',
         controller: 'UserDetailsCtrl as vm',
         url:'/user/{id:string}',
         resolve: {
           user: function($stateParams, users){
             return users.getUser($stateParams.id);
+          },
+          kudosToUser: function($stateParams, kudos) {
+            // var k = kudos.getKudosToUser($stateParams.id);
+            // console.log(k);
+            return kudos.getKudosToUser($stateParams.id);
+          },
+          kudosFromUser: function($stateParams, kudos) {
+            return kudos.getKudosFromUser($stateParams.id);
           }
         }
       })

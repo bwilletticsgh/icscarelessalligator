@@ -1,27 +1,26 @@
-<div class="kudosType">
-
+<div class="kudosCategoryType">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <div class="kudosName" ng-switch on="allowLink">
-          <a ui-sref="editKudos({id:kudo.id})" ng-switch-when="true">
-            {{kudo.name}}
+        <div class="kudosCategoryName" ng-switch on="allowLink">
+          <a ui-sref="editKudosCategory({id:category.id})" ng-switch-when="true">
+            {{category.name}}
           </a>
           <span ng-switch-when="false">
-            {{kudo.name}}
+            {{category.name}}
           </span>
         </div>
       </h3>
     </div>
     <div class="panel-body">
       <h5 class="text-center">
-        <small>{{kudo.description}}</small>
+        <small>{{category.description}}</small>
       </h5>
 
       <div class="text-center">
-        <span class=" fa-stack fa-4x" ng-style="{'color': kudo.color}">
+        <span class=" fa-stack fa-4x" ng-style="{'color': category.color}">
           <i class="fa fa-circle-thin fa-stack-2x"></i>
-          <i class="fa {{kudo.icon}} fa-stack-1x"></i>
+          <i class="fa {{category.icon}} fa-stack-1x"></i>
         </span>
       </div>
     </div>

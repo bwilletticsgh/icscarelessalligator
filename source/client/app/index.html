@@ -42,7 +42,7 @@
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
         <ul class="nav navbar-nav">
           <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
-          <li ui-sref-active="active"><a ui-sref="kudos">Manage Kudos</a></li>
+          <li ui-sref-active="active"><a ui-sref="kudosCategories">Manage Kudos</a></li>
           <li ui-sref-active="active"><a ui-sref="users">Users</a></li>
           <li ng-hide="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="login">Log In</a></li>
           <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active"><a
@@ -102,13 +102,15 @@
 <script src="scripts/controllers/login.js"></script>
 <script src="scripts/services/authenticationService.js"></script>
 <script src="scripts/services/userService.js"></script>
+<script src="scripts/services/kudosCategoryService.js"></script>
 <script src="scripts/services/kudosService.js"></script>
-<script src="scripts/controllers/kudosCtrl.js"></script>
+<script src="scripts/controllers/kudosCategoryCtrl.js"></script>
 <script src="scripts/controllers/usersCtrl.js"></script>
 <script src="scripts/controllers/userDetailsCtrl.js"></script>
-<script src="scripts/directives/kudosType.js"></script>
+<script src="scripts/directives/kudosCategoryType.js"></script>
 <script src="scripts/directives/equalsElement.js"></script>
-<script src="scripts/controllers/kudosEditorCtrl.js"></script>
+<script src="scripts/directives/userKudosType.js"></script>
+<script src="scripts/controllers/kudosCategoryEditorCtrl.js"></script>
 <script src="scripts/controllers/RegisterCtrl.js"></script>
 <!-- endbuild -->
 </body>

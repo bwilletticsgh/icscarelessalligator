@@ -2,13 +2,13 @@
 (function(){
   'use strict';
   angular.module('kudosApp')
-    .directive('kudosType', function() {
+    .directive('kudosCategoryType', function() {
         return{
             restrict: 'E',
             replace:true,
-            templateUrl: 'views/directives/kudosType.html',
+            templateUrl: 'views/directives/kudosCategoryType.html',
             scope:{
-              kudo: '=',
+              category: '=',
               allowLink: '='
             }
         };

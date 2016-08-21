@@ -1,0 +1,25 @@
+<div class="userKudosType">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        {{kudos.kudosCat}}
+      </h3>
+    </div>
+    <div class="panel-body">
+      <h5>Kudos!</h5>
+      {{kudos.comments}}
+    </div>
+    <div class="panel-footer" ng-switch on="typeLink">
+      <div ng-switch-when="to">
+        <a ui-sref="user({id:kudos.toUser})">To {{kudos.toUser}}</a>
+      </div>
+      <div ng-switch-when="from">
+        <a ui-sref="user({id:kudos.fromUser})">From {{kudos.fromUser}}</a>
+      </div>
+      <div ng-switch-default>
+        <a ui-sref="user({id:kudos.toUser})">To {{kudos.toUser}}</a> |
+        <a ui-sref="user({id:kudos.fromUser})">From {{kudos.fromUser}}</a>
+      </div>
+    </div>
+  </div>
+</div>
