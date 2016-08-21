@@ -25,6 +25,7 @@ angular
 
     $stateProvider
       .state('home', {
+        pageTitle: 'Home',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl as vm',
         url:'/home'
@@ -62,6 +63,17 @@ angular
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl as vm',
         url:'/users'
+      })
+      .state('user', {
+        pageTitle: "User",
+        templateUrl: 'views/users/details.html',
+        controller: 'UserDetailsCtrl as vm',
+        url:'/user/{id:string}',
+        resolve: {
+          user: function($stateParams, users){
+            return users.getUser($stateParams.id);
+          }
+        }
       })
       .state('login', {
         templateUrl: 'views/account/login.html',

@@ -1,0 +1,15 @@
+
+
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-6">
+    <div class="userHolder" >
+      <img ng-src="{{vm.user.avatar}}" class="circle-border img-responsive center-block" />
+      <div class="well text-center" style="z-index: 1000">
+        {{vm.user.lastName | uppercase}}, {{vm.user.firstName}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-6 col-xs-6">
+    {{vm.user.firstName}}'s kudos
+  </div>
+</div>

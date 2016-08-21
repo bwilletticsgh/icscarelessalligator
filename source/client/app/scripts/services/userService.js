@@ -3,7 +3,7 @@
   angular.module('kudosApp')
     .factory('users', function(_) {
         var users = [{
-          'id': 1,
+          'id': '1',
           'firstName': 'Daniel',
           'lastName': 'Bishop',
           'email': 'admin@admin.com',
@@ -12,7 +12,7 @@
           'password': 'password123',
           'isAdmin': true
         }, {
-          'id': 2,
+          'id': '2',
           'firstName': 'Judith',
           'lastName': 'Grant',
           'email': 'jgrant1@networksolutions.com',
@@ -21,7 +21,7 @@
           'password': 'a',
           'isAdmin': false
         }, {
-          'id': 3,
+          'id': '3',
           'firstName': 'Jeffrey',
           'lastName': 'Freeman',
           'email': 'jfreeman2@soup.io',
@@ -30,7 +30,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 4,
+          'id': '4',
           'firstName': 'Sharon',
           'lastName': 'Gomez',
           'email': 'sgomez3@amazon.co.uk',
@@ -39,7 +39,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 5,
+          'id': '5',
           'firstName': 'Kathy',
           'lastName': 'Meyer',
           'email': 'kmeyer4@dion.ne.jp',
@@ -48,7 +48,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 6,
+          'id': '6',
           'firstName': 'Jesse',
           'lastName': 'Griffin',
           'email': 'jgriffin5@hhs.gov',
@@ -57,7 +57,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 7,
+          'id': '7',
           'firstName': 'Tina',
           'lastName': 'Cook',
           'email': 'tcook6@reverbnation.com',
@@ -66,7 +66,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 8,
+          'id': '8',
           'firstName': 'George',
           'lastName': 'Williamson',
           'email': 'gwilliamson7@github.io',
@@ -75,7 +75,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 9,
+          'id': '9',
           'firstName': 'Peter',
           'lastName': 'Arnold',
           'email': 'parnold8@cyberchimps.com',
@@ -84,7 +84,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 10,
+          'id': '10',
           'firstName': 'Bonnie',
           'lastName': 'Wells',
           'email': 'bwells9@mit.edu',
@@ -93,7 +93,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 11,
+          'id': '11',
           'firstName': 'Wanda',
           'lastName': 'Parker',
           'email': 'wparkera@mapquest.com',
@@ -102,7 +102,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 12,
+          'id': '12',
           'firstName': 'Joshua',
           'lastName': 'Porter',
           'email': 'jporterb@a8.net',
@@ -111,7 +111,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 13,
+          'id': '13',
           'firstName': 'Carl',
           'lastName': 'Carpenter',
           'email': 'ccarpenterc@hc360.com',
@@ -120,7 +120,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 14,
+          'id': '14',
           'firstName': 'Adam',
           'lastName': 'White',
           'email': 'awhited@google.com.hk',
@@ -129,7 +129,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 15,
+          'id': '15',
           'firstName': 'Johnny',
           'lastName': 'Wilson',
           'email': 'jwilsone@skype.com',
@@ -138,7 +138,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 16,
+          'id': '16',
           'firstName': 'Ruby',
           'lastName': 'Kelley',
           'email': 'rkelleyf@live.com',
@@ -147,7 +147,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 17,
+          'id': '17',
           'firstName': 'Rebecca',
           'lastName': 'Boyd',
           'email': 'rboydg@nbcnews.com',
@@ -156,7 +156,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 18,
+          'id': '18',
           'firstName': 'Mary',
           'lastName': 'Clark',
           'email': 'mclarkh@newsvine.com',
@@ -165,7 +165,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 19,
+          'id': '19',
           'firstName': 'Sean',
           'lastName': 'Elliott',
           'email': 'selliotti@elpais.com',
@@ -174,7 +174,7 @@
           'password': 'password123',
           'isAdmin': false
         }, {
-          'id': 20,
+          'id': '20',
           'firstName': 'Willie',
           'lastName': 'Ryan',
           'email': 'wryanj@e-recht24.de',
@@ -202,8 +202,8 @@
           users.push(user);
         }
 
-        function getUser(email) {
-          return _(users).find(function(p) {return p.email.toUpperCase() === email.toUpperCase();});
+        function getUser(id) {
+          return _(users).find(function(p) {return p.id === id;});
         }
 
         return {

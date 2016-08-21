@@ -96,6 +96,14 @@
           angular.copy(kudo,getKudo(kudo.id));
         }
 
+        // function getKudosToUser(id) {
+        //
+        // }
+        //
+        // function getKudosFromUser(id) {
+        //
+        // }
+
         return {
           addKudo: addKudo,
           updateKudo: updateKudo,

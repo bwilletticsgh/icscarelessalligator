@@ -4,12 +4,6 @@ angular.module('kudosApp')
   .controller('KudosEditorCtrl', function (kudo, kudos, _, $state) {
     var vm = this;
     vm.kudo = angular.copy(kudo);
-    if (kudo.id){
-      vm.pageTitle='Edit Kudos';
-    }
-    else{
-      vm.pageTitle='Create Kudos';
-    }
 
     vm.saveKudo = function () {
       if (!kudo.id){
