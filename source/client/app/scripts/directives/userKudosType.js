@@ -4,9 +4,9 @@
     .directive('userKudosType', function() {
       return{
         restrict: 'E',
-        replace:true,
+        replace: true,
         templateUrl: 'views/directives/userKudosType.html',
-        scope:{
+        scope: {
           kudos: '=',
           typeLink: '='
         }

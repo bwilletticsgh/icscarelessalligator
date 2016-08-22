@@ -1,5 +1,29 @@
 /*
 
+ var kudos = [{
+ 'id': '1',
+ 'kudosCat': '1',
+ 'fromUser': '2',
+ 'toUser': '4',
+ 'comments': 'Kudo of cat 1 from user 2 to user 4',
+ 'dateCreated' : 1471878773719
+ }, {
+ 'id': '2',
+ 'kudosCat': '1',
+ 'fromUser': '3',
+ 'toUser': '4',
+ 'comments': 'Kudo of cat 1 from user 3 to user 4',
+ 'dateCreated' : 1471878773719
+ }, {
+ 'id': '2',
+ 'kudosCat': '2',
+ 'fromUser': '4',
+ 'toUser': '5',
+ 'comments': 'Kudo of cat 2 from user 4 to user 5',
+ 'dateCreated' : 1471878773719
+ }
+ ];
+
  # kudos
  id 			<- Unique
  kudosCat 	<- DBRef to KudosCategory
@@ -14,70 +38,61 @@
 (function(){
   'use strict';
   angular.module('kudosApp')
-    .factory('kudos', function(_) {
+    .factory('kudos', function(_, $resource, restUrl) {
 
-        var kudos = [{
-          'id': '1',
-          'kudosCat': '1',
-          'fromUser': '2',
-          'toUser': '4',
-          'comments': 'Kudo of cat 1 from user 2 to user 4',
-          'dateCreated' : 1471878773719
-        }, {
-          'id': '2',
-          'kudosCat': '1',
-          'fromUser': '3',
-          'toUser': '4',
-          'comments': 'Kudo of cat 1 from user 3 to user 4',
-          'dateCreated' : 1471878773719
-        }, {
-          'id': '2',
-          'kudosCat': '2',
-          'fromUser': '4',
-          'toUser': '5',
-          'comments': 'Kudo of cat 2 from user 4 to user 5',
-          'dateCreated' : 1471878773719
-        }
-        ];
+      var url = restUrl + '/kudos';
 
-        function getAllKudos() {
-          return kudos;
-        }
+      var kudosResources = $resource(url, {}, {
+        getAllFromUser: { method: 'get', isArray: true, url: url + '/fromUser/all/:id'},
+        getAllToUser: { method: 'get', isArray: true, url: url + '/toUser/all/:id'},
+        getAllByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:id'}
+      });
 
-        function getKudosByCategory(id) {
-          return _.filter(kudos, {kudosCat: id});
-        }
+      function getKudosByCategory(id) {
+        var kudos = kudosResources.getAllByCategory({ id: id });
+        return kudos;
+      }
 
-        function addKudos(kudo){
-          kudo.id = kudo.id || _.maxBy(kudos,'id').id+1;
-          kudos.push(kudo);
-        }
+      function addKudos(kudo){
+        kudo.id = kudo.id || _.maxBy(kudos,'id').id+1;
+        kudos.push(kudo);
+      }
 
-        function getKudos(id) {
-          return _(kudos).find({id: id});
-        }
+      function getKudos(id) {
+        return _(kudos).find({id: id});
+      }
 
-        function getKudosToUser(id) {
-          //return _(kudos).filter({toUser: id});
-          return _.filter(kudos, {toUser: id});
-        }
+      function getKudosToUser(id) {
+        var kudos = kudosResources.getAllToUser({ id: id });
+        kudos.$promise.then(function(data) {
+          console.log('getKudosToUser(' + id + ')');
+          console.log(data);
+        });
+        return kudos;
+      }
 
-        function getKudosFromUser(id) {
-          return _.filter(kudos, {fromUser: id});
-        }
+      function getKudosFromUser(id) {
+        var kudos = kudosResources.getAllFromUser({ id: id});
+        kudos.$promise.then(function(data) {
+          console.log('getKudosFromUser(' + id + ')');
+          console.log(data);
+        });
 
-        function updateKudos(kudo){
-          angular.copy(kudo,getKudos(kudo.id));
-        }
+        console.log(kudos);
+        return kudos;
+      }
 
-        return {
-          addKudos: addKudos,
-          updateKudos: updateKudos,
-          getAllKudos: getAllKudos,
-          getKudosByCategory: getKudosByCategory,
-          getKudos: getKudos,
-          getKudosToUser: getKudosToUser,
-          getKudosFromUser: getKudosFromUser
-        };
+      function updateKudos(kudo){
+        angular.copy(kudo,getKudos(kudo.id));
+      }
+
+      return {
+        addKudos: addKudos,
+        updateKudos: updateKudos,
+        getKudosByCategory: getKudosByCategory,
+        getKudos: getKudos,
+        getKudosToUser: getKudosToUser,
+        getKudosFromUser: getKudosFromUser
+      };
     });
 })();

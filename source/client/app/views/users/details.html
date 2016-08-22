@@ -14,7 +14,7 @@
     <div class="row" ng-switch on="vm.toUser.length > 0">
       <div class="col-sm-6" ng-repeat="toUserKudos in vm.toUser" ng-switch-when="true">
         <div class="topmargin-20">
-          <user-kudos-type type-link="to" kudos="toUserKudos"></user-kudos-type>
+          <user-kudos-type typeLink="to" kudos="toUserKudos"></user-kudos-type>
         </div>
       </div>
       <div class="col-sm-12" ng-switch-when="false">
@@ -26,7 +26,7 @@
     <div class="row" ng-switch on="vm.fromUser.length > 0">
       <div class="col-sm-6 " ng-repeat="fromUserKudos in vm.fromUser" ng-switch-when="true">
         <div class="topmargin-20">
-          <user-kudos-type type-link="from" kudos="fromUserKudos"></user-kudos-type>
+          <user-kudos-type typeLink="from" kudos="fromUserKudos"></user-kudos-type>
         </div>
       </div>
       <div class="col-sm-12" ng-switch-when="false">

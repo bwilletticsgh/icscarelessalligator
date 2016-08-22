@@ -2,13 +2,13 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <a ui-sref="editKudosCategory({id:kudos.kudosCat})">{{kudos.category.name}}</a>
+        <a ui-sref="editKudosCategory({id:kudos.kudosCat.id})">{{kudos.kudosCat.name}}</a>
       </h3>
     </div>
     <div class="panel-body">
-      <div>
-        <strong ng-if="kudos.toUserVM">Kudos from {{kudos.toUserVM.firstName}} {{kudos.toUserVM.lastName}}!</strong>
-        <strong ng-if="kudos.fromUserVM">Kudos from {{kudos.fromUserVM.firstName}} {{kudos.fromUserVM.lastName}}!</strong>
+      <div ng-switch on="typeLink" data="tlink">
+        <strong ng-switch-when="to">Kudos from {{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}!</strong>
+        <strong ng-switch-when="from">Kudos from {{kudos.toUser.firstName}} {{kudos.toUser.lastName}}!</strong>
       </div>
       <div>
         <em>{{kudos.comments}}</em>
