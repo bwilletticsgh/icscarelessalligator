@@ -60,19 +60,19 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 }
 
 @media screen and (max-width: $screen-xs-max) {
-  .kudosTitle {
+  .kudosCategoryTitle {
     font-size: 12vw !important;
   }
 }
 
 @media screen and (min-width: $screen-xs-max)  {
-  .kudosTitle {
+  .kudosCategoryTitle {
     font-size: 8em !important;
   }
 }
 
-.kudosType{
-  .kudosName {
+.kudosCategoryType{
+  .kudosCategoryName {
     @extend .text-center;
     @extend h4;
     a {

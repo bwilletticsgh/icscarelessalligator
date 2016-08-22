@@ -34,9 +34,16 @@ public class JwtTokenUtil
     private static final Logger LOG = Logger.getLogger(JwtTokenUtil.class);
     /** The strong crypto keys **/
     private static KeyPair keys;
-    /** JSON to Object to JSON MAPPER **/
+    /** JSON to POJO to JSON MAPPER **/
     private static final ObjectMapper MAPPER = new ObjectMapper();
     
+    /**
+     * Generates a JWT for the given user and places the token within the Authorization header
+     * @param user The user object to generate a token for
+     * @param response The HttpServletResponse to place the token into
+     * @return The JSON Web Token
+     * @throws KudosException 
+     */
     public static synchronized String generateToken(User user, HttpServletResponse response) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -61,6 +68,13 @@ public class JwtTokenUtil
         }
     }
     
+    /**
+     * Validates the JWT from the incoming request
+     * @param httpRequest The HttpServletRequest that should contain the JWT
+     * @param response The response that will obtain an updated JWT with an extended 15min expiry time
+     * @return The User object associated with the request and within the JWT
+     * @throws KudosException 
+     */
     public static synchronized User validateToken(HttpServletRequest httpRequest, HttpServletResponse response) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -99,6 +113,9 @@ public class JwtTokenUtil
         }        
     }
     
+    /**
+     * Initialize the strong KeyPair
+     */
     static
     {
         try

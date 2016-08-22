@@ -32,43 +32,67 @@ angular
     $stateProvider
       .state('home', {
         allowAnon: true,
+        pageTitle: 'Home',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl as vm',
         url:'/home'
       })
-      .state('kudos', {
-        pageTitle: 'Kudos List',
-        templateUrl: 'views/kudos/list.html',
-        controller: 'KudosCtrl as vm',
-        url:'/kudos/list'
+      .state('kudosCategories', {
+        pageTitle: 'Kudos Category List',
+        templateUrl: 'views/kudosCategory/list.html',
+        controller: 'KudosCategoryCtrl as vm',
+        url:'/kudosCategory/list'
       })
-      .state('editKudos', {
-        pageTitle: 'Edit Kudos',
-        templateUrl: 'views/kudos/edit.html',
-        controller: 'KudosEditorCtrl as vm',
-        url:'/kudos/edit/{id:int}',
+      .state('editKudosCategory', {
+        pageTitle: 'Edit Kudos Category',
+        templateUrl: 'views/kudosCategory/edit.html',
+        controller: 'KudosCategoryEditorCtrl as vm',
+        url:'/kudosCategory/edit/{id:string}',
         resolve: {
-          kudo : function($stateParams, kudos){
-            return kudos.getKudo($stateParams.id);
+          kudosCategory : function($stateParams, kudosCategories){
+            return kudosCategories.getKudosCategory($stateParams.id);
+          }
+        }
+      })
+      .state('createKudosCategory', {
+        pageTitle: 'Create Kudos Category',
+        templateUrl: 'views/kudosCategory/edit.html',
+        controller: 'KudosCategoryEditorCtrl as vm',
+        url:'/kudosCategory/create/',
+        resolve: {
+          kudosCategory : function(){
+            return {};
           }
         }
       })
       .state('createKudos', {
         pageTitle: 'Create Kudos',
-        templateUrl: 'views/kudos/edit.html',
-        controller: 'KudosEditorCtrl as vm',
-        url:'/kudos/create/',
-        resolve: {
-          kudo : function(){
-            return {};
-          }
-        }
+        templateUrl: 'views/kudos/create.html',
+        controller: 'KudosCtrl as vm',
+        url: '/kudos/create/'
       })
       .state('users', {
         pageTitle: 'All Users',
-        templateUrl: 'views/users.html',
+        templateUrl: 'views/users/list.html',
         controller: 'UsersCtrl as vm',
         url:'/users'
+      })
+      .state('user', {
+        pageTitle: 'User',
+        templateUrl: 'views/users/details.html',
+        controller: 'UserDetailsCtrl as vm',
+        url:'/user/{id:string}',
+        resolve: {
+          user: function($stateParams, users){
+            return users.getUser($stateParams.id);
+          },
+          kudosToUser: function($stateParams, kudos) {
+            return kudos.getKudosToUser($stateParams.id);
+          },
+          kudosFromUser: function($stateParams, kudos) {
+            return kudos.getKudosFromUser($stateParams.id);
+          }
+        }
       })
       .state('login', {
         allowAnon: true,
@@ -97,7 +121,6 @@ angular
           console.log(response.headers('Date'));
           console.log(response.headers('Authorization'));
           if (response.headers('Authorization')){
-            console.log('ah ha' + response.headers('Authorization'));
             $cookieStore.put('token', response.headers('Authorization'));
           }
           return response;
@@ -105,7 +128,6 @@ angular
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {
-
           $injector.invoke(function($state, $timeout) {
             $timeout(function(){
               $state.go('login');

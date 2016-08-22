@@ -1,0 +1,18 @@
+<div class="userKudosType">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a ui-sref="editKudosCategory({id:kudos.kudosCat})">{{kudos.category.name}}</a>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <strong ng-if="kudos.toUserVM">Kudos from {{kudos.toUserVM.firstName}} {{kudos.toUserVM.lastName}}!</strong>
+        <strong ng-if="kudos.fromUserVM">Kudos from {{kudos.fromUserVM.firstName}} {{kudos.fromUserVM.lastName}}!</strong>
+      </div>
+      <div>
+        <em>{{kudos.comments}}</em>
+      </div>
+    </div>
+  </div>
+</div>

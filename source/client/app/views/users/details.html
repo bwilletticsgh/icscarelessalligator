@@ -1,0 +1,37 @@
+
+
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-6">
+    <div class="userHolder" >
+      <img ng-src="{{vm.user.avatar}}" class="circle-border img-responsive center-block" />
+      <div class="well text-center" style="z-index: 1000">
+        {{vm.user.lastName | uppercase}}, {{vm.user.firstName}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-6 col-xs-6">
+    <h5>Kudos From Others</h5>
+    <div class="row" ng-switch on="vm.toUser.length > 0">
+      <div class="col-sm-6" ng-repeat="toUserKudos in vm.toUser" ng-switch-when="true">
+        <div class="topmargin-20">
+          <user-kudos-type type-link="to" kudos="toUserKudos"></user-kudos-type>
+        </div>
+      </div>
+      <div class="col-sm-12" ng-switch-when="false">
+        No kudos for {{vm.user.firstName}} yet!
+      </div>
+    </div>
+    <hr />
+    <h5>Kudos to Others</h5>
+    <div class="row" ng-switch on="vm.fromUser.length > 0">
+      <div class="col-sm-6 " ng-repeat="fromUserKudos in vm.fromUser" ng-switch-when="true">
+        <div class="topmargin-20">
+          <user-kudos-type type-link="from" kudos="fromUserKudos"></user-kudos-type>
+        </div>
+      </div>
+      <div class="col-sm-12" ng-switch-when="false">
+        No kudos from {{vm.user.firstName}} yet!
+      </div>
+    </div>
+  </div>
+</div>

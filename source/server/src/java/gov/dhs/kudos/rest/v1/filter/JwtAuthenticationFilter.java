@@ -19,20 +19,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * A custom servlet filter implementation for authenticating all request to the REST API
  * @author bsuneson
  */
 @Component("jwtAuthenticationFilter")
 public class JwtAuthenticationFilter implements Filter
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(JwtAuthenticationFilter.class);
     
+    /** The usage statistics mono repository for storing usage **/
     @Autowired
     protected UsageStatisticRepo usageStatisticRepo;
 
-    public JwtAuthenticationFilter() {
+    public JwtAuthenticationFilter() 
+    {
+        
     }
     
+    /**
+     * Parses the request for a valid JSON Web Token if the incoming request is
+     * not for login or registration.  Logs all usage.
+     * @param request The incoming request
+     * @param response The response to update a JWT's expiry time - if valid
+     * @param filterChain Spring's remaining default filters
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException 
     {
@@ -87,6 +100,11 @@ public class JwtAuthenticationFilter implements Filter
         
     }
     
+    /**
+     * Logs and stores the endpoint usage
+     * @param uri
+     * @param user 
+     */
     private void record(String uri, String user)
     {        
         LOG.info("[Usage] " + user + " accessing " + uri);

@@ -10,7 +10,6 @@
 angular.module('kudosApp')
   .controller('MainCtrl', function ($uibModal) {
     var vm = this;
-    vm.pageTitle = 'Home';
     vm.showInfo = function(){
       var modalInstance = $uibModal.open({
         templateUrl: 'myModalContent.html',

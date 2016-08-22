@@ -1,12 +1,14 @@
 (function(){
   'use strict';
   angular.module('kudosApp')
+
     .factory('users', function(_, $resource, restUrl) {
 
         var url = restUrl + '/user';
 
         var userResource = $resource(url, {}, {
-          all: {method:"get",isArray:true, url: url + "/all"}
+          all: {method:"get",isArray:true, url: url + "/all"},
+          getUserById: {method:"get",url: url + "/byId/:id"}
         });
 
         var _currentUser;
@@ -34,8 +36,14 @@
           //users.push(user);
         }
 
-        function getUser(email) {
-          //return _(users).find(function(p) {return p.email.toUpperCase() === email.toUpperCase();});
+
+        function getUser(id) {
+          var res = userResource.getUserById({id: id});
+          res.$promise.then(function(user){
+            user.avatar="http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
+          });
+
+          return res;
         }
 
         return {

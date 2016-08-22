@@ -3,7 +3,7 @@ package gov.dhs.kudos.rest.v1.model;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 /**
- *
+ * The entity representing a KudosCategory object
  * @author bsuneson
  */
 @SuppressWarnings("serial")

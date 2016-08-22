@@ -1,0 +1,50 @@
+
+
+<form class="form-horizontal">
+
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" placeholder="Name" ng-model="vm.kudosCategory.name">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Icon</label>
+    <div class="col-sm-10">
+      <i style="color:{{vm.kudo.color}}" class="fa fa-5x {{vm.kudosCategory.icon}}"></i>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <textarea type="text" class="form-control" id="description" ng-model="vm.kudosCategory.description"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary" ng-click="vm.saveKudosCategory()">Save Kudo Category</button>
+      <button type="button" ui-sref="kudosCategories" class="btn btn-default">Cancel</button>
+    </div>
+  </div>
+</form>
+
+<div ng-if="vm.kudosCategory.id">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4>Kudos in Category</h4></div>
+    <table class="table">
+      <tr>
+        <th>To</th>
+        <th>From</th>
+        <th>Comments</th>
+      </tr>
+      <tr ng-repeat="kudos in vm.kudosInCategory">
+        <td><a ui-sref="user({id:kudos.toUser})">{{kudos.toUserVM.firstName}} {{kudos.toUserVM.lastName}}</a></td>
+        <td><a ui-sref="user({id:kudos.fromUser})">{{kudos.fromUserVM.lastName}} {{kudos.toUserVM.lastName}}</a></td>
+        <td>{{kudos.comments}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

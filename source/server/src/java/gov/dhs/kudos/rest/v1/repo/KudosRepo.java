@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- *
+ * The mongo repository interface for Kudos queries
  * @author bsuneson
  */
 public interface KudosRepo extends MongoRepository<Kudos, String>

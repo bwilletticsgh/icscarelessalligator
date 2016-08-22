@@ -9,7 +9,7 @@
 
 <div class="row topmargin-20 ">
   <div class="col-md-4 col-sm-6 col-xs-6" ng-repeat="item in vm.users | orderBy: 'firstName' | filter: FirstNameFilter">
-    <div class="userHolder" >
+    <div class="userHolder" ui-sref="user({ id: '{{item.id}}' })" >
       <img ng-src="{{item.avatar}}" class="circle-border img-responsive center-block" />
       <div class="well text-center" style="z-index: 1000">
         {{item.lastName | uppercase}}, {{item.firstName}}

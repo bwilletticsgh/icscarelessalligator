@@ -1,7 +1,7 @@
 package gov.dhs.kudos.rest.v1.model;
 
 /**
- *
+ * The entity representing a UsageStatistic object
  * @author tdickerson
  */
 @SuppressWarnings("serial")

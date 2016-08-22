@@ -8,19 +8,24 @@ import gov.dhs.kudos.rest.v1.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * Service layer for auto-wiring mongodb repositories
  * @author bsuneson
  */
 public class WiredService
 {
+    /** The organization mongo repository **/
     @Autowired 
     protected OrganizationRepo organizationRepo;
+    /** The user mongo repository **/
     @Autowired 
     protected UserRepo userRepo;
+    /** The kudos category mongo repository **/
     @Autowired
     protected KudosCategoryRepo kudosCatRepo;
-    @Autowired
+    /** The kudos mongo repository **/
+    @Autowired    
     protected KudosRepo kudosRepo;
+    /** The usage statistics mongo repository **/
     @Autowired
     protected UsageStatisticRepo usageStatisticRepo;
 }
