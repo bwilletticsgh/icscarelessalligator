@@ -21,19 +21,22 @@
           'kudosCat': '1',
           'fromUser': '2',
           'toUser': '4',
-          'comments': 'Kudo of cat 1 from user 2 to user 4'
+          'comments': 'Kudo of cat 1 from user 2 to user 4',
+          'dateCreated' : 1471878773719
         }, {
           'id': '2',
           'kudosCat': '1',
           'fromUser': '3',
           'toUser': '4',
-          'comments': 'Kudo of cat 1 from user 3 to user 4'
+          'comments': 'Kudo of cat 1 from user 3 to user 4',
+          'dateCreated' : 1471878773719
         }, {
           'id': '2',
           'kudosCat': '2',
           'fromUser': '4',
           'toUser': '5',
-          'comments': 'Kudo of cat 2 from user 4 to user 5'
+          'comments': 'Kudo of cat 2 from user 4 to user 5',
+          'dateCreated' : 1471878773719
         }
         ];
 

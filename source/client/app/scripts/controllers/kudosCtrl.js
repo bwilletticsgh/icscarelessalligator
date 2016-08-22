@@ -3,7 +3,7 @@
   angular.module('kudosApp')
     .controller('KudosCtrl', function (kudos, users, kudosCategories, _, $state) {
       var vm = this;
-      vm.kudo = kudos.getKudos('');
+      vm.kudo = {};
       vm.users = users.getUsers();
       vm.kudosCategories = kudosCategories.getKudosCategories();
 
