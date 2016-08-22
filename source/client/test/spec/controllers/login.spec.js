@@ -6,14 +6,13 @@ describe('Controller: Login', function () {
   beforeEach(module('kudosApp'));
 
   var Login,
-    $timeout,
     $httpBackend,
     users,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$timeout_, _$httpBackend_, _users_) {
-    $timeout=_$timeout_;
+  beforeEach(inject(function ($controller, $rootScope, _users_, _$httpBackend_) {
+    console.log(sinon);
     users = _users_;
     users.addUser({email:'someperson@somewhere.com', password:'abc'});
     $httpBackend=_$httpBackend_;

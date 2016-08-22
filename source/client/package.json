@@ -3,8 +3,11 @@
   "private": true,
   "dependencies": {
     "autoprefixer-core": "^5.2.1",
+    "bower": "^1.7.9",
+    "express": "^4.14.0",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
+    "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compass": "^1.0.0",
@@ -33,11 +36,10 @@
     "karma": "^1.1.2",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
+    "karma-sinon": "^1.0.5",
     "phantomjs-prebuilt": "^2.1.8",
-    "time-grunt": "^1.0.0",
-    "express": "^4.14.0",
-    "bower": "^1.7.9",
-    "grunt-cli": "^1.2.0"
+    "sinon": "^1.17.5",
+    "time-grunt": "^1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"

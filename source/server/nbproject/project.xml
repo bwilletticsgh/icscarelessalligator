@@ -24,11 +24,11 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.spring-data-mongodb-1.2.0.RELEASE.jar}</file>
+                    <file>${file.reference.spring-data-mongodb-1.5.0.RELEASE.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.spring-data-commons-1.5.0.RELEASE.jar}</file>
+                    <file>${file.reference.spring-data-commons-1.8.0.RELEASE.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -40,7 +40,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.mongo-java-driver-2.9.1.jar}</file>
+                    <file>${file.reference.mongo-java-driver-2.12.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
