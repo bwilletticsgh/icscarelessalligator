@@ -86,8 +86,6 @@ angular
             return users.getUser($stateParams.id);
           },
           kudosToUser: function($stateParams, kudos) {
-            // var k = kudos.getKudosToUser($stateParams.id);
-            // console.log(k);
             return kudos.getKudosToUser($stateParams.id);
           },
           kudosFromUser: function($stateParams, kudos) {

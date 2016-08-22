@@ -7,7 +7,7 @@ angular.module('kudosApp')
     vm.toUser = angular.copy(kudosToUser);
     vm.fromUser = angular.copy(kudosFromUser);
 
-    //TODO: replace with a VM from the api
+    //TODO: when retrieving from API, this won't be necessary
     _.forEach(vm.toUser, function(u) {
       u.fromUserVM = users.getUser(u.fromUser);
       u.category = kudosCategories.getKudosCategory(u.kudosCat);
