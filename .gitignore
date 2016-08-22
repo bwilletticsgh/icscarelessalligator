@@ -6,4 +6,5 @@
 /source/client/.idea
 /source/server/build
 /source/server/dist
+/source/server/nbproject/private
 /.idea

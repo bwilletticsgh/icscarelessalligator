@@ -8,7 +8,7 @@
         templateUrl: 'views/directives/userKudosType.html',
         scope: {
           kudos: '=',
-          typeLink: '='
+          association: '='
         }
       };
     });
