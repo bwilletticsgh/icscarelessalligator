@@ -1,7 +1,7 @@
 package gov.dhs.kudos.rest.v1.repo.query;
 
 /**
- *
+ * Commons holder for Usage Statistic queries
  * @author bsuneson
  */
 public class UsageStatisticQuery 

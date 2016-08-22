@@ -3,7 +3,7 @@ package gov.dhs.kudos.rest.v1.exception;
 import org.springframework.http.HttpStatus;
 
 /**
- *
+ * Convenience exception class for passing back an appropriate http status
  * @author bsuneson
  */
 @SuppressWarnings("serial")

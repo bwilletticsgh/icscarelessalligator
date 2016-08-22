@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/kudos")
 public class KudosRest 
 {
-    /** the logger for this class **/
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(KudosRest.class);
     
     /** The service layer for logic **/

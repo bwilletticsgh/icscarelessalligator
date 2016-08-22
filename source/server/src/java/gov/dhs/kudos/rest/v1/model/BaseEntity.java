@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 
 /**
- *
+ * The entity sub-classed for all other entities to include default variables
  * @author bsuneson
  */
 @SuppressWarnings("serial")

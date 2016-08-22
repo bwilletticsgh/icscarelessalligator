@@ -7,13 +7,20 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 
 /**
- *
+ * Service layer for handling logic for the User v1 endpoints
  * @author bsuneson
  */
 public class UserService extends OrganizationService
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(UserService.class);
     
+    /**
+     * Saves the user object
+     * @param user The user object to save
+     * @return The saved user object
+     * @throws KudosException 
+     */
     public User saveUser(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -27,6 +34,12 @@ public class UserService extends OrganizationService
         return userRepo.save(user);
     }
     
+    /**
+     * Login a user
+     * @param user The user object to login
+     * @return The complete user object
+     * @throws KudosException 
+     */
     public User loginUser(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -40,6 +53,12 @@ public class UserService extends OrganizationService
             throw new KudosException("Bad Credentials", HttpStatus.UNAUTHORIZED);
     }
     
+    /**
+     * Updates a user object
+     * @param user The user object to update - must already exists and email must be unique
+     * @return The updated user object
+     * @throws KudosException 
+     */
     public User updateUser(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -47,12 +66,16 @@ public class UserService extends OrganizationService
         
         User alreadyExistUser = userRepo.findByEmail(user.getEmail());
         
-        if(alreadyExistUser != null && !alreadyExistUser.getId().equals(user.getId()) && alreadyExistUser.getEmail().equals(user.getEmail()))
+        if(alreadyExistUser != null && !alreadyExistUser.getId().equals(user.getId()))
             throw new KudosException("Email address already in use by someone", HttpStatus.INTERNAL_SERVER_ERROR);
         
         return userRepo.save(user);
     }
     
+    /**
+     * Finds all users
+     * @return A List of user objects
+     */
     public List<User> findAllUsers() 
     {
         if(LOG.isDebugEnabled())
@@ -61,6 +84,11 @@ public class UserService extends OrganizationService
         return userRepo.findAll();
     }
     
+    /**
+     * Finds a user based on their email
+     * @param email The email address to search for
+     * @return A User object matching the email
+     */
     public User findUserByEmail(String email)
     {
         if(LOG.isDebugEnabled())
@@ -69,6 +97,11 @@ public class UserService extends OrganizationService
         return userRepo.findByEmail(email);
     }
     
+    /**
+     * Finds a user based on their id
+     * @param id The id to search for
+     * @return A User object matching the id
+     */
     public User findUserById(String id)
     {
         if(LOG.isDebugEnabled())
@@ -77,6 +110,11 @@ public class UserService extends OrganizationService
         return userRepo.findOne(id);
     }
     
+    /**
+     * Finds all users based on first name
+     * @param firstName The first name to search for
+     * @return A List of users matching the first name
+     */
     public List<User> findUsersByFirstName(String firstName)
     {
         if(LOG.isDebugEnabled())
@@ -85,6 +123,11 @@ public class UserService extends OrganizationService
         return userRepo.findByFirstName(firstName);
     }
     
+    /**
+     * Finds all users based on last name
+     * @param lastName The last name to search for
+     * @return A List of users matching the last name
+     */
     public List<User> findUsersByLastName(String lastName)
     {
         if(LOG.isDebugEnabled())
