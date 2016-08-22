@@ -21,6 +21,7 @@ COPY source/client/. /usr/src/app
 COPY source/client/package.json /usr/src/app/
 COPY source/client/bower.json /usr/src/app/
 COPY source/client/Gruntfile.js /usr/src/app/
+RUN npm config set registry http://registry.npmjs.org/
 RUN npm install -g bower grunt-cli grunt
 RUN npm install
 RUN bower --allow-root install
