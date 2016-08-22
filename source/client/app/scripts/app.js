@@ -62,13 +62,7 @@ angular
         pageTitle: 'Create Kudos',
         templateUrl: 'views/kudos/create.html',
         controller: 'KudosCtrl as vm',
-        url: '/kudos/create/',
-        result: {
-          kudo: function() {
-            console.log(kudos.getKudos(''));
-            return kudos.getKudos('');
-          }
-        }
+        url: '/kudos/create/'
       })
       .state('users', {
         pageTitle: 'All Users',
