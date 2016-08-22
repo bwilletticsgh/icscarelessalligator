@@ -40,7 +40,7 @@
   angular.module('kudosApp')
     .factory('kudos', function(_, $resource, restUrl) {
 
-      var url = restUrl + '/kudos';
+      var url = restUrl + 'kudos';
 
       var kudosResources = $resource(url, {}, {
         getAllFromUser: { method: 'get', isArray: true, url: url + '/fromUser/all/:id'},
@@ -49,6 +49,7 @@
       });
 
       function getKudosByCategory(id) {
+        console.log(id);
         var kudos = kudosResources.getAllByCategory({ id: id });
         return kudos;
       }
@@ -64,21 +65,11 @@
 
       function getKudosToUser(id) {
         var kudos = kudosResources.getAllToUser({ id: id });
-        kudos.$promise.then(function(data) {
-          console.log('getKudosToUser(' + id + ')');
-          console.log(data);
-        });
         return kudos;
       }
 
       function getKudosFromUser(id) {
         var kudos = kudosResources.getAllFromUser({ id: id});
-        kudos.$promise.then(function(data) {
-          console.log('getKudosFromUser(' + id + ')');
-          console.log(data);
-        });
-
-        console.log(kudos);
         return kudos;
       }
 

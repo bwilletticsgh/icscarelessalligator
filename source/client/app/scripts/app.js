@@ -47,11 +47,15 @@ angular
         pageTitle: 'Edit Kudos Category',
         templateUrl: 'views/kudosCategory/edit.html',
         controller: 'KudosCategoryEditorCtrl as vm',
-        url:'/kudosCategory/edit/{id:string}',
+        url:'/kudosCategory/edit/{name:string}',
         resolve: {
-          kudosCategory : function($stateParams, kudosCategories){
-            return kudosCategories.getKudosCategory($stateParams.id);
+          kudosCategory: function($stateParams, kudosCategories){
+            return kudosCategories.getKudosCategoryByName($stateParams.name);
           }
+          // ,
+          // kudosInCategory: function(kudosCategory) {
+          //   return kudos.getKudosByCategory(kudosCategory.id);
+          // }
         }
       })
       .state('createKudosCategory', {
@@ -118,7 +122,7 @@ angular
         return config;
       },
       response: function(response){
-          console.log(response.headers('Date'));
+          //console.log(response.headers('Date'));
           console.log(response.headers('Authorization'));
           if (response.headers('Authorization')){
             $cookieStore.put('token', response.headers('Authorization'));
