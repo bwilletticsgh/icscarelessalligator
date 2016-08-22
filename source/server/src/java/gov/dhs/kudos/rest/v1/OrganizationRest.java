@@ -136,6 +136,12 @@ public class OrganizationRest
         }
     }
     
+    /**
+     * Endpoint for cloning a kudos category into an organization
+     * @param catId The PathVariable id of the kudos category to clone
+     * @param orgName The PathVariable organization to clone the kudos category into
+     * @return The updated organization object
+     */
     @RequestMapping(value = "/cloneCat/{catId}/{orgName}", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity orgCloneUser(@PathVariable String catId, @PathVariable String orgName)
     {
@@ -157,6 +163,12 @@ public class OrganizationRest
         }
     }
     
+    /**
+     * Endpoint for creating a new kudos category for an organization
+     * @param orgName The PathVariable name of the organization that will have the new kudos category
+     * @param kudosCat The RequestBody of the new kudos category object
+     * @return The updated organization object
+     */
     @RequestMapping(value = "/createCat/{orgName}", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity orgCreateCat(@PathVariable String orgName, @RequestBody(required = false) KudosCategory kudosCat)
     {

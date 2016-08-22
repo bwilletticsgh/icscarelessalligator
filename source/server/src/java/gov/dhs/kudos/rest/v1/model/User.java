@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 
 
 /**
- *
+ * The entity representing a User object
  * @author bsuneson
  */
 @SuppressWarnings("serial")

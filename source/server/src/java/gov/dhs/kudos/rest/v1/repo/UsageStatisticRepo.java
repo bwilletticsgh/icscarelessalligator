@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 /**
- *
+ * The mongo repository interface for UsageStatistic queries
  * @author tdickerson
  */
 public interface UsageStatisticRepo extends MongoRepository<UsageStatistic, String>

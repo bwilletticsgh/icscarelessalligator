@@ -6,11 +6,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
- *
+ * Service layer for handling logic for the Usage Statistics v1 endpoints
  * @author bsuneson
  */
 public class StatsService extends EndpointValidation
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(StatsService.class);
     
     public StatsService()
@@ -18,6 +19,12 @@ public class StatsService extends EndpointValidation
         
     }
     
+    /**
+     * Finds all usage statistic objects
+     * @param fromDate Narrow the query - may be null
+     * @param toDate Narrow the query - may be null
+     * @return A List of usage statistic objects
+     */
     public List<UsageStatistic> findAllUsageStats(Date fromDate, Date toDate)
     {
         if(fromDate != null)
@@ -26,6 +33,13 @@ public class StatsService extends EndpointValidation
             return usageStatisticRepo.findAll();
     }
     
+    /**
+     * Finds all usage statistics by email
+     * @param email The email to search for
+     * @param fromDate Narrow the query - may be null
+     * @param toDate Narrow the query - may be null
+     * @return A List of usage statistic objects
+     */
     public List<UsageStatistic> findAllUsageStatsByEmail(String email, Date fromDate, Date toDate)
     {
         if(fromDate != null)
@@ -34,6 +48,13 @@ public class StatsService extends EndpointValidation
             return usageStatisticRepo.findByUser(email);
     }
     
+    /**
+     * Finds all usage statistics by uri
+     * @param uri The uri to search for
+     * @param fromDate Narrow the query - may be null
+     * @param toDate Narrow the query - may be null
+     * @return A List of usage statistic objects
+     */
     public List<UsageStatistic> findAllUsageStatsByUri(String uri, Date fromDate, Date toDate)
     {
         if(fromDate != null)

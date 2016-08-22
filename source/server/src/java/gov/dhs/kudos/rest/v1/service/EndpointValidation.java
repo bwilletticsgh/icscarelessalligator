@@ -9,13 +9,19 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 
 /**
- *
+ * Service layer for handling logic for validating all v1 endpoints
  * @author bsuneson
  */
 public class EndpointValidation extends WiredService
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(EndpointValidation.class);
     
+    /**
+     * Validates the a user prior to registration
+     * @param user The user object to validate
+     * @throws KudosException 
+     */
     public void validateUserRegister(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -31,6 +37,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates a user prior to login
+     * @param user The user object to validate
+     * @throws KudosException 
+     */
     public void validateUserLogin(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -42,6 +53,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("A required field for login was null", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates a user prior to an update
+     * @param user The user to validate
+     * @throws KudosException 
+     */
     public void validateUserUpdate(User user) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -57,6 +73,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates an organization prior to saving
+     * @param orgName The organization name to validate
+     * @throws KudosException 
+     */
     public void validateOrgSave(String orgName) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -66,6 +87,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Organization name already used", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates an organization prior to updating
+     * @param org The organization to validate
+     * @throws KudosException 
+     */
     public void validateOrgUpdate(Organization org) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -81,6 +107,12 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Organization name already exists", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates the user and organization prior to saving
+     * @param user The user to validate
+     * @param orgName The organization name to validate
+     * @throws KudosException 
+     */
     public void validateOrgAddUser(User user, String orgName) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -100,6 +132,12 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Organization already contains User", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates the kudos category and organization prior to cloning a category into an organization
+     * @param catId The kudos category id to validate
+     * @param orgName The organization name to validate
+     * @throws KudosException 
+     */
     public void validateOrgCloneCat(String catId, String orgName) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -115,6 +153,12 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Organization doesn't exists", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates a kudos category and organization prior to saving a new category within an organization
+     * @param kudosCat The kudos category object to validate
+     * @param orgName The organization name to validate
+     * @throws KudosException 
+     */
     public void validateOrgCreateCat(KudosCategory kudosCat, String orgName) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -130,6 +174,14 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Organization doesn't exists", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates from user, to user, kudos category, and kudos object prior to saving a kudos
+     * @param fromUserId The from user id
+     * @param toUserId The to user id
+     * @param kudosCatId The kudos category id
+     * @param kudos The Kudos object
+     * @throws KudosException 
+     */
     public void validateCreateKudos(String fromUserId, String toUserId, String kudosCatId, Kudos kudos) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -147,6 +199,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("No KudosCategory exists for kudosCatId", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates a kudos category prior to creating
+     * @param kudosCat The kudos category to save
+     * @throws KudosException 
+     */
     public void validateCreateKudosCat(KudosCategory kudosCat) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -158,6 +215,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("A required field for KudosCategory save was null - need name", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates a kudos category prior to updating
+     * @param kudosCat The kudos category to update
+     * @throws KudosException 
+     */
     public void validateUpdateKudosCat(KudosCategory kudosCat) throws KudosException
     {
         if(LOG.isDebugEnabled())
@@ -169,21 +231,42 @@ public class EndpointValidation extends WiredService
             throw new KudosException("A required field for KudosCategory update was null - need id", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Determines if the kudos category already exists by id
+     * @param id The id of the kudos category
+     * @return Whether or not the kudos category already exists
+     */
     private boolean kudosCatExists(String id)
     {
         return (kudosCatRepo.findOne(id) != null);
     }
     
+    /**
+     * Determines if the organization already exists by name
+     * @param orgName The name of the organization
+     * @return Whether or not the organization already exists
+     */
     private boolean orgExists(String orgName)
     {
         return (organizationRepo.findByOrgName(orgName) != null);
     }
     
+    /**
+     * Determines if the user already exists based on id
+     * @param userId The id of the user
+     * @return Whether or not the user already exists
+     */
     private boolean userExists(String userId)
     {
         return (userRepo.findOne(userId) != null);
     }
     
+    /**
+     * Determines if an organization already has a user
+     * @param user The User object
+     * @param orgName The name of the organization
+     * @return Whether or not the organization already has a user
+     */
     private boolean orgHasUser(User user, String orgName)
     {
         Organization org = organizationRepo.findByOrgName(orgName);

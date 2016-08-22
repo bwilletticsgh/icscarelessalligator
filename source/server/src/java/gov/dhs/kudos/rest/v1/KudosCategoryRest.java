@@ -15,15 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Restful v1 endpoint for handling all kudos category transactions
  * @author bsuneson
  */
 @RestController
 @RequestMapping(value = "/v1/cat")
 public class KudosCategoryRest 
 {
+    /** The logger for this class **/
     private static final Logger LOG = Logger.getLogger(KudosCategoryRest.class);
     
+    /** The service layer for logic **/
     @Autowired 
     private KudosService kudosService;
     
@@ -32,6 +34,10 @@ public class KudosCategoryRest
         
     }
     
+    /**
+     * Endpoint for retrieving all kudos categories
+     * @return All kudos categories
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getKudosCats()
     {
@@ -41,6 +47,11 @@ public class KudosCategoryRest
         return new ResponseEntity(kudosService.findAllKudosCats(), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for retrieving a kudos category by name
+     * @param name The PathVariable of the kudos category name
+     * @return A Kudos Category object
+     */
     @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getKudosCatByName(@PathVariable String name)
     {
@@ -50,6 +61,11 @@ public class KudosCategoryRest
         return new ResponseEntity(kudosService.findKudosCatByName(name), HttpStatus.OK);
     }
     
+    /**
+     * Endpoint for creating a new kudos category
+     * @param kudosCat The RequestBody object of a new kudos category
+     * @return The saved kudos category object
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity createKudosCat(@RequestBody(required = false) KudosCategory kudosCat)
     {
@@ -68,6 +84,11 @@ public class KudosCategoryRest
         }
     }
     
+    /**
+     * Endpoint for updating a kudos category
+     * @param kudosCat The RequestBody object of a new kudos category
+     * @return The updated kudos category object
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity updateKudosCat(@RequestBody(required = false) KudosCategory kudosCat)
     {

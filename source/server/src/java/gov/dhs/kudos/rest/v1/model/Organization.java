@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
- *
+ * The entity representing a Organization object
  * @author bsuneson
  */
 @SuppressWarnings("serial")
