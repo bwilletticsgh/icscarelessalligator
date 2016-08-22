@@ -49,6 +49,18 @@ public class JwtAuthenticationFilter implements Filter
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException 
     {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;        
+        
+            
+        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
+        ((HttpServletResponse) response).addHeader("Access-Control-Expose-Headers", "Authorization");
+        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+        
+        if (httpRequest.getMethod().equalsIgnoreCase("OPTIONS")){
+            filterChain.doFilter(request, response);
+            return;
+        }       
+        
         User user = null;
         String path = ((HttpServletRequest) request).getPathInfo();
         
@@ -69,10 +81,11 @@ public class JwtAuthenticationFilter implements Filter
         }
         else if(LOG.isDebugEnabled())
             LOG.debug("[Filter] User login attempt from: " + request.getRemoteAddr());
-        
+       
         record(path, (user == null ? request.getRemoteAddr() : user.getEmail()));
         
         filterChain.doFilter(request, response);
+        
     }    
 
     @Override

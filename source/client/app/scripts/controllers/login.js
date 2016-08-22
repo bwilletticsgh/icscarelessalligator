@@ -27,8 +27,8 @@ angular.module('kudosApp')
             vm.failed = true;
           },1);
         }
-      }).catch(function() {
-          vm.message='This was an error logging in';
+      }).catch(function(response) {
+          vm.message=response.data;
       });
 
       return promise;

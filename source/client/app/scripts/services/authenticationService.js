@@ -1,7 +1,14 @@
 (function(){
   'use strict';
   angular.module('kudosApp')
-    .factory('authentication', function($q, users) {
+    .factory('authentication', function($q, users, $resource, restUrl, $cookieStore) {
+
+        var url = restUrl + '/user';
+
+        var UserResource = $resource(url, {}, {
+          register: {method:"POST", url: url + "/register"},
+          login: {method:"POST", url: url + "/login"}
+        });
 
         var _isAuthenticated=false;
         function isAuthenticated() {
@@ -14,26 +21,27 @@
             message:'Success'
           };
 
-          var deferred = $q.defer();
-          if (users.getUser(email)){
-            ret.message='Email address is already in use';
-            ret.success=false;
-            deferred.resolve(ret);
-          }
-          else{
-            users.addUser({id: users.getUsers().length,
-              email: email,
-              password: password,
-              firstName: firstName,
-              lastName: lastName,
-              isAdmin: false,
-              avatar: 'https://robohash.org/' + users.getUsers().length+ '.png?size=300x300&set=set1'
-            });
+          var newUser = {
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
+          };
 
-            login(email, password).then(function(){
+          var deferred = $q.defer();
+
+          UserResource.register(newUser).$promise.then(
+            function(){
+              login(email, password).then(function(){
+                deferred.resolve(ret);
+              });
+            },
+            function(resp){
+              ret.message=resp.data;
+              ret.success=false;
               deferred.resolve(ret);
-            });
-          }
+            }
+          );
 
           return deferred.promise;
         }
@@ -41,27 +49,28 @@
         function logout() {
           users.setCurrentUser(null);
           _isAuthenticated=false;
+          $cookieStore.remove('token');
         }
 
         function login(username, password) {
-          var deferred = $q.defer();
-          var user = users.getUser(username);
-          var isValidUser = user && user.email.toUpperCase() === username.toUpperCase() && user.password === password;
-          if (isValidUser){
+          return UserResource.login({ email: username, password: password },function(user){
             users.setCurrentUser(user);
             _isAuthenticated=true;
-          }
+          }).$promise;
+        }
 
-          deferred.resolve(isValidUser);
-
-          return deferred.promise;
+        function setAuthenticationFromToken(token) {
+          var claims = JSON.parse(atob(token.split('.')[1]));
+          _isAuthenticated=true;
+          users.setCurrentUser(JSON.parse(claims.kudosUser));
         }
 
         return {
           isAuthenticated: isAuthenticated,
           login: login,
           logout: logout,
-          register : register
+          register : register,
+          setAuthenticationFromToken: setAuthenticationFromToken
         };
     });
 })();

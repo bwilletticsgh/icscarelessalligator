@@ -11,6 +11,6 @@
         vm.kudo.fromUser = '1'; //users.getCurrentUser().id;
         kudos.addKudos(vm.kudo);
         $state.go('home');
-      }
+      };
     });
 })();

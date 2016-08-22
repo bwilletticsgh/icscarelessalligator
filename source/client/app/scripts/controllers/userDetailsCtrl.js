@@ -3,7 +3,8 @@
 angular.module('kudosApp')
   .controller('UserDetailsCtrl', function (user, kudosToUser, kudosFromUser, users, kudosCategories, _, $state, $rootScope) {
     var vm = this;
-    vm.user = angular.copy(user);
+
+    vm.user = user;
     vm.toUser = angular.copy(kudosToUser);
     vm.fromUser = angular.copy(kudosFromUser);
 

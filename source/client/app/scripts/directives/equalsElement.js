@@ -15,7 +15,7 @@
               viewValue = '';
             }
 
-            return viewValue == attrs.equalsElement ;
+            return viewValue === attrs.equalsElement ;
           };
         }
       };
