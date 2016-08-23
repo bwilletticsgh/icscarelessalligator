@@ -5,6 +5,7 @@ import gov.dhs.kudos.rest.v1.model.UsageStatistic;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.repo.UsageStatisticRepo;
 import gov.dhs.kudos.rest.v1.util.JwtTokenUtil;
+import gov.dhs.kudos.rest.v1.util.LogUtils;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -49,18 +50,6 @@ public class JwtAuthenticationFilter implements Filter
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException 
     {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;        
-        
-            
-        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
-        ((HttpServletResponse) response).addHeader("Access-Control-Expose-Headers", "Authorization");
-        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-        
-        if (httpRequest.getMethod().equalsIgnoreCase("OPTIONS")){
-            filterChain.doFilter(request, response);
-            return;
-        }       
-        
         User user = null;
         String path = ((HttpServletRequest) request).getPathInfo();
         
@@ -81,11 +70,10 @@ public class JwtAuthenticationFilter implements Filter
         }
         else if(LOG.isDebugEnabled())
             LOG.debug("[Filter] User login attempt from: " + request.getRemoteAddr());
-       
+        
         record(path, (user == null ? request.getRemoteAddr() : user.getEmail()));
         
         filterChain.doFilter(request, response);
-        
     }    
 
     @Override
@@ -112,7 +100,10 @@ public class JwtAuthenticationFilter implements Filter
         try
         {            
             if(uri != null && uri.length() > 1)
+            {
+                uri = LogUtils.filterUsageURI(uri);
                 usageStatisticRepo.save(new UsageStatistic(uri, user));
+            }                
         }
         catch(Exception e)
         {
