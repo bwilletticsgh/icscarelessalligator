@@ -143,7 +143,7 @@ public class OrganizationRest
      * @return The updated organization object
      */
     @RequestMapping(value = "/cloneCat/{catId}/{orgName}", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity orgCloneUser(@PathVariable String catId, @PathVariable String orgName)
+    public ResponseEntity orgCloneCat(@PathVariable String catId, @PathVariable String orgName)
     {
         if(LOG.isDebugEnabled())
         {
