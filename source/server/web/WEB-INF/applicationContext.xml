@@ -31,5 +31,7 @@
     
     <bean id="jwtAuthenticationFilter" class="gov.dhs.kudos.rest.v1.filter.JwtAuthenticationFilter"/>    
     <bean id="beforeSaveListener" class="gov.dhs.kudos.rest.v1.repo.listener.BeforeSaveListener"/>
-    <bean id="kudosService" class="gov.dhs.kudos.rest.v1.service.KudosService"/>    
+    <bean id="kudosService" class="gov.dhs.kudos.rest.v1.service.KudosService"/> 
+    <bean class="gov.dhs.kudos.rest.spring.SwaggerConfig"/>
+    <bean id="requestMappingHandlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 </beans>

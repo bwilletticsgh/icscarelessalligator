@@ -20,6 +20,10 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
+        <servlet-name>default</servlet-name>
+          <url-pattern>/swagger-ui.html</url-pattern>
+      </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
@@ -42,6 +46,6 @@
     </filter-mapping>
     <filter-mapping>
 	<filter-name>jwtAuthenticationFilter</filter-name>
-	<url-pattern>/*</url-pattern>
+	<url-pattern>/v1/*</url-pattern>
     </filter-mapping>
 </web-app>

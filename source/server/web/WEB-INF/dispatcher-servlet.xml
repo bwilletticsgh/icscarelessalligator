@@ -18,6 +18,8 @@
         http://www.springframework.org/schema/data/mongo
         http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
     
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+    
     <context:component-scan base-package="gov.dhs.kudos"/>
     <mvc:annotation-driven>
         <mvc:message-converters>
