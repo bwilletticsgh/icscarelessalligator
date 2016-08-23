@@ -84,7 +84,7 @@ public class OrganizationService extends StatsService
             LOG.debug("Cloning global cat into org");
         
         KudosCategory kudosCat = kudosCatRepo.findOne(catId);
-        KudosCategory cloned = new KudosCategory(kudosCat.getName(), kudosCat.getDesc(), kudosCat.getIcon(), kudosCat.getColor());
+        KudosCategory cloned = new KudosCategory(kudosCat.getName() + "-" + orgName, kudosCat.getDesc(), kudosCat.getIcon(), kudosCat.getColor());
         cloned = kudosCatRepo.save(cloned);        
         
         Organization org = organizationRepo.findByOrgName(orgName);        
