@@ -51,6 +51,7 @@ public class UserRest
         try
         {
             kudosService.validateUserRegister(user);
+            
             user = kudosService.saveUser(user);
             JwtTokenUtil.generateToken(user, response);
             
