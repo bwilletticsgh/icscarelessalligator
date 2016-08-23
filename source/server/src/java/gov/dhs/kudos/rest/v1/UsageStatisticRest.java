@@ -57,13 +57,13 @@ public class UsageStatisticRest
      * @param email PathVariable for a users email
      * @return All usage statistics for a user
      */
-    @RequestMapping(value = "/byEmail/{email}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/byEmail/{email}/", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUsageStatByUserId(@RequestParam(required = false, value = "fromDate") @DateTimeFormat(iso = ISO.DATE) Date fromDate, 
                                                @RequestParam(required = false, value = "toDate") @DateTimeFormat(iso = ISO.DATE) Date toDate,
                                                @PathVariable("email") String email)
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("[/v1/usage/byEmail/{email}]");
+            LOG.debug("[/v1/usage/byEmail/{email}/]");
         
         return new ResponseEntity(kudosService.findAllUsageStatsByEmail(email, fromDate, toDate), HttpStatus.OK);
     }
@@ -75,13 +75,13 @@ public class UsageStatisticRest
      * @param uri PathVariable for a uri - must be URLEncoded
      * @return All usage statistics for a uri
      */
-    @RequestMapping(value = "/byUri/{uri}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/byUri", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUsageStatByURI(@RequestParam(required = false, value = "fromDate") @DateTimeFormat(iso = ISO.DATE) Date fromDate, 
                                             @RequestParam(required = false, value = "toDate") @DateTimeFormat(iso = ISO.DATE) Date toDate,
-                                            @PathVariable("uri") String uri)
+                                            @RequestParam("uri") String uri)
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("[/v1/usage/byUri/{uri}]");
+            LOG.debug("[/v1/usage/byUri]");
         
         return new ResponseEntity(kudosService.findAllUsageStatsByUri(uri, fromDate, toDate), HttpStatus.OK);
     }
