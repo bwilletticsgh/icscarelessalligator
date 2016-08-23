@@ -51,9 +51,12 @@ public class JwtTokenUtil
         
         try
         {
+            long devExp = 30*1000*60*60*24;
+            long prodExp = 900000;
+            
             String token = Jwts.builder().setSubject(user.getEmail())
                 .setIssuer("KudosREST")
-                .setExpiration(new Date(System.currentTimeMillis() + 900000))
+                .setExpiration(new Date(System.currentTimeMillis() + devExp))//prodExp))
                 .claim("kudosUser", MAPPER.writeValueAsString(user))
                 .signWith(SignatureAlgorithm.RS512, keys.getPrivate()).compact();
         
@@ -83,6 +86,8 @@ public class JwtTokenUtil
         try
         {
             String header = httpRequest.getHeader("Authorization");
+            if(header == null || header.length() == 0)
+                header = "Bearer " + httpRequest.getHeader("api_key");
         
             if(header == null || !header.startsWith("Bearer "))
                 throw new KudosException("No Kudos Token found in request headers", HttpStatus.UNAUTHORIZED);
