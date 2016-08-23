@@ -27,6 +27,19 @@ public class KudosCategoryService extends UserService
     }
     
     /**
+     * Finds a kudos category by id
+     * @param id The id of the kudos category
+     * @return A matching kudos category object
+     */
+    public KudosCategory findKudosCatById(String id) 
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Finding kudos-category by id");
+        
+        return kudosCatRepo.findOne(id);
+    }
+    
+    /**
      * Finds all kudos categories
      * @return A List of all kudos categories
      */
