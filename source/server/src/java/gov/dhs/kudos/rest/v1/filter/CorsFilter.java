@@ -7,6 +7,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -27,7 +28,8 @@ public class CorsFilter implements Filter
         ((HttpServletResponse) response).setHeader("Access-Control-Expose-Headers", "Authorization");
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
         
-        chain.doFilter(request, response);
+        if(!((HttpServletRequest) request).getMethod().equalsIgnoreCase("OPTIONS"))
+            chain.doFilter(request, response);
     }
 
     @Override
