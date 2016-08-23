@@ -17,7 +17,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -50,13 +49,10 @@ public class JwtTokenUtil
             LOG.debug("Generating token for User: " + user.getEmail());
         
         try
-        {
-            long devExp = 30*1000*60*60*24;
-            long prodExp = 900000;
-            
+        {            
             String token = Jwts.builder().setSubject(user.getEmail())
                 .setIssuer("KudosREST")
-                .setExpiration(new Date(System.currentTimeMillis() + devExp))//prodExp))
+                //.setExpiration(new Date(System.currentTimeMillis() + 900000))
                 .claim("kudosUser", MAPPER.writeValueAsString(user))
                 .signWith(SignatureAlgorithm.RS512, keys.getPrivate()).compact();
         
@@ -93,7 +89,7 @@ public class JwtTokenUtil
                 throw new KudosException("No Kudos Token found in request headers", HttpStatus.UNAUTHORIZED);
 
             Claims claims = Jwts.parser().setSigningKey(keys.getPrivate()).parseClaimsJws(header.substring(7)).getBody();            
-            claims.setExpiration(new Date(System.currentTimeMillis() + 900000));
+            //claims.setExpiration(new Date(System.currentTimeMillis() + 900000));
 
             User user = MAPPER.readValue((String)claims.get("kudosUser"), User.class);
             
