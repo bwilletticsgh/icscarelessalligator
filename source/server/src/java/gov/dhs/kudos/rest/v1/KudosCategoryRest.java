@@ -52,13 +52,27 @@ public class KudosCategoryRest
      * @param name The PathVariable of the kudos category name
      * @return A Kudos Category object
      */
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getKudosCatByName(@PathVariable String name)
     {
         if(LOG.isDebugEnabled())
             LOG.debug("[/v1/cat/{name}] name: " + (name == null ? "NO name SUPPLIED" : name));
         
         return new ResponseEntity(kudosService.findKudosCatByName(name), HttpStatus.OK);
+    }
+    
+    /**
+     * Endpoint for retrieving a kudos category by id
+     * @param id The PathVariable of the kudos category id
+     * @return A Kudos Category object
+     */
+    @RequestMapping(value = "/byId/{id}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getKudosCatById(@PathVariable String id)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/cat/{id}] id: " + (id == null ? "NO id SUPPLIED" : id));
+        
+        return new ResponseEntity(kudosService.findKudosCatById(id), HttpStatus.OK);
     }
     
     /**
