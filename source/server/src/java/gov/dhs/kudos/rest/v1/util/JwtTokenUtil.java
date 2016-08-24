@@ -85,7 +85,7 @@ public class JwtTokenUtil
             if(header == null || header.length() == 0)
                 header = "Bearer " + httpRequest.getHeader("api_key");
         
-            if(header == null || !header.startsWith("Bearer "))
+            if(header == null || !header.startsWith("Bearer ") || header.equals("Bearer null"))
                 throw new KudosException("No Kudos Token found in request headers", HttpStatus.UNAUTHORIZED);
 
             Claims claims = Jwts.parser().setSigningKey(keys.getPrivate()).parseClaimsJws(header.substring(7)).getBody();            
