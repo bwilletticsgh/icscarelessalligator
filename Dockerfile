@@ -42,6 +42,8 @@ RUN unzip apache-tomcat-8.0.36.zip
 # Copy the application folder inside the container
 COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
+EXPOSE 8080
+
 # DATABASE PART
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
