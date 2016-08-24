@@ -1,5 +1,7 @@
 package gov.dhs.kudos.rest.v1.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 
@@ -70,10 +72,12 @@ public class User extends BaseEntity
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -87,6 +91,4 @@ public class User extends BaseEntity
     {
         this.isAdmin = isAdmin;
     }
-    
-    
 }
