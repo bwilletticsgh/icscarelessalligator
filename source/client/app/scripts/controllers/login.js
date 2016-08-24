@@ -23,12 +23,11 @@ angular.module('kudosApp')
         }
         else{
           vm.message = vm.failMessage;
-          $timeout(function(){
-            vm.failed = true;
-          },1);
+          $timeout(function(){ vm.failed = true; });
         }
       }).catch(function(response) {
           vm.message=response.data;
+          $timeout(function(){ vm.failed = true; });
       });
 
       return promise;

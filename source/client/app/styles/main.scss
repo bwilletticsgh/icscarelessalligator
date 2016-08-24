@@ -73,17 +73,23 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 
 .kudosCategoryType{
   .kudosCategoryName {
-    @extend .text-center;
     @extend h4;
+    @extend .text-center;
     a {
       color: $panel-primary-text;
     }
+
   }
   .panel{
     margin-bottom:0;
     min-height: 250px;
   }
-  .panel-body{
+
+  .panel-heading{
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
   }
 }
@@ -124,52 +130,62 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
   border-top: 1px solid #e5e5e5;
 }
 
+.kudosComment {
+  white-space: pre-wrap;
+}
+
 .container-narrow > hr {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
-  }
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
+  /* Main marketing message and sign up button */
   .jumbotron {
-    border-bottom: 0;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+
+    .btn {
+      font-size: 21px;
+      padding: 14px 24px;
+    }
   }
-}
-@for $i from 1 through 6 {
-  .topmargin-#{$i*5} { margin-top: 5px * $i; }
-}
+
+  /* Supporting marketing content */
+  .marketing {
+    margin: 40px 0;
+
+    p + h4 {
+      margin-top: 28px;
+    }
+  }
+
+  .circle-border-small{
+    @extend .circle-border;
+    border-width:2px !important;
+  }
+  /* Responsive: Portrait tablets and up */
+  @media screen and (min-width: 768px) {
+    .container {
+      max-width: 730px;
+    }
+
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    /* Space out the masthead */
+    .header {
+      margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+      border-bottom: 0;
+    }
+  }
+  @for $i from 1 through 6 {
+    .topmargin-#{$i*5} { margin-top: 5px * $i; }
+  }
+
+

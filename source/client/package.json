@@ -48,5 +48,11 @@
     "postinstall": "bower install && grunt build",
     "test": "karma start test/karma.conf.js",
     "start": "node server.js"
+  },
+  "devDependencies": {
+    "karma-sinon-as-promised": "^0.1.6",
+    "karma-sinon-stub-promise": "^1.0.0",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-stub-promise": "^3.0.1"
   }
 }

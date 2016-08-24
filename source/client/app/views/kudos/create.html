@@ -1,33 +1,39 @@
-<form class="form-horizontal">
+<form class="form-horizontal" role="form" ng-submit="vm.saveKudos()" novalidate name="createForm">
 
-  <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
+  <div class="form-group" ng-class="{'has-error': createForm.toUser.$invalid && !createForm.toUser.$pristine}">
+    <label for="toUser" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
-      <select name="toUser" id="toUser" ng-model="vm.kudo.toUser">
+      <select class="form-control" name="toUser" required id="toUser" ng-model="vm.kudo.toUser">
         <option ng-repeat="user in vm.users" value="{{user.id}}">{{user.lastName}}, {{user.firstName}}</option>
       </select>
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Category</label>
+  <div class="form-group" ng-class="{'has-error': createForm.kudosCat.$invalid && !createForm.kudosCat.$pristine}">
+    <label for="kudosCat" class="col-sm-2 control-label">Category</label>
     <div class="col-sm-10">
-      <select name="kudosCat" id="kudosCat" ng-model="vm.kudo.kudosCat">
+      <select class="form-control" required name="kudosCat" id="kudosCat" ng-model="vm.kudo.kudosCat">
         <option ng-repeat="cat in vm.kudosCategories" value="{{cat.id}}">{{cat.name}}</option>
       </select>
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="description" class="col-sm-2 control-label">Comments</label>
+  <div class="form-group" ng-class="{'has-error': createForm.comments.$error.required && !createForm.comments.$pristine}">
+    <label for="comments" class="col-sm-2 control-label">Comments</label>
     <div class="col-sm-10">
-      <textarea type="text" class="form-control" id="comments" ng-model="vm.kudo.comments"></textarea>
+      <textarea rows="5" required type="text" class="form-control" name="comments" id="comments" ng-model="vm.kudo.comments"></textarea>
+      <span ng-show="createForm.comments.$error.required && !createForm.comments.$pristine" class="help-block">Comments are required</span>
     </div>
+
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary" ng-click="vm.saveKudos()">Send Kudos!</button>
+      <button type="submit" ng-disabled="createForm.$invalid" class="btn btn-primary">
+        <i class="fa fa-thumbs-up"></i>
+        Send Kudos!
+      </button>
+
       <button type="button" ui-sref="home" class="btn btn-default">Cancel</button>
     </div>
   </div>

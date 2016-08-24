@@ -45,7 +45,9 @@
       var kudosResources = $resource(url, {}, {
         getAllFromUser: { method: 'get', isArray: true, url: url + '/fromUser/all/:id'},
         getAllToUser: { method: 'get', isArray: true, url: url + '/toUser/all/:id'},
-        getAllByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:id'}
+        getAllByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:id'},
+        create: { method: 'post', url: url + '/create/:fromUserId/:toUserId/:kudosCatId'}
+          //POST /v1/kudos/create/{fromUserId}/{toUserId}/{kudosCatId}
       });
 
       function getKudosByCategory(id) {
@@ -55,8 +57,8 @@
       }
 
       function addKudos(kudo){
-        kudo.id = kudo.id || _.maxBy(kudos,'id').id+1;
-        kudos.push(kudo);
+        kudosResources.create({fromUserId: kudo.fromUser, toUserId: kudo.toUser, kudosCatId: kudo.kudosCat}, {comments:kudo.comments});
+        console.log(kudo);
       }
 
       function getKudos(id) {
@@ -65,16 +67,29 @@
 
       function getKudosToUser(id) {
         var kudos = kudosResources.getAllToUser({ id: id });
+        setupAvatarsOnKudosResource(kudos);
         return kudos;
       }
 
       function getKudosFromUser(id) {
         var kudos = kudosResources.getAllFromUser({ id: id});
+        setupAvatarsOnKudosResource(kudos);
         return kudos;
       }
 
       function updateKudos(kudo){
         angular.copy(kudo,getKudos(kudo.id));
+      }
+
+      //TODO: So, this is really just a dummy placeholder. We should really put this into the backend
+      function setupAvatarsOnKudosResource(kudos){
+        kudos.$promise.then(function(data) {
+          _.each(data, function(k) {
+            k.toUser.avatar = "http://robohash.org/" + k.toUser.id + ".png?size=300x300&set=set1";
+            k.fromUser.avatar = "http://robohash.org/" + k.fromUser.id + ".png?size=300x300&set=set1";
+          });
+        });
+        return kudos;
       }
 
       return {

@@ -6,11 +6,11 @@
       vm.kudo = {};
       vm.users = users.getUsers();
       vm.kudosCategories = kudosCategories.getKudosCategories();
+      vm.kudo.fromUser =  users.getCurrentUser().id;
 
       vm.saveKudos = function () {
-        vm.kudo.fromUser = '1'; //users.getCurrentUser().id;
         kudos.addKudos(vm.kudo);
-        $state.go('home');
+        $state.go('user',{id:vm.kudo.toUser});
       };
     });
 })();
