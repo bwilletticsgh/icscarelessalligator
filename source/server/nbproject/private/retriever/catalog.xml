@@ -20,4 +20,7 @@
     <system systemId="http://www.springframework.org/schema/security" uri="www.springframework.org/schema/security/index"/>
     <system systemId="http://www.springframework.org/schema/beans/spring-beans-4.1.xsd" uri="www.springframework.org/schema/beans/spring-beans-4.1.xsd"/>
     <system systemId="http://www.springframework.org/schema/security/spring-security-4.0.xsd" uri="www.springframework.org/schema/security/spring-security-4.0.xsd"/>
+    <system systemId="http://www.springframework.org/schema/mvc" uri="www.springframework.org/schema/mvc/index"/>
+    <system systemId="http://www.springframework.org/schema/context" uri="www.springframework.org/schema/context/index"/>
+    <system systemId="http://www.springframework.org/schema/integration/spring-integration-4.0.xsd" uri="www.springframework.org/schema/integration/spring-integration-4.0.xsd"/>
 </catalog>
