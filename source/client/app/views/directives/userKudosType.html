@@ -7,11 +7,20 @@
     </div>
     <div class="panel-body">
       <div ng-switch on="association">
-        <strong ng-switch-when="to">Kudos from {{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}!</strong>
-        <strong ng-switch-when="from">Kudos from {{kudos.toUser.firstName}} {{kudos.toUser.lastName}}!</strong>
+        <strong ng-switch-when="to">
+          Kudos from {{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}!
+          <div class="pull-right">
+            <img ng-src="{{kudos.fromUser.avatar}}" class="circle-border-small" width="80">
+          </div>
+        </strong>
+        <strong ng-switch-when="from">Kudos to {{kudos.toUser.firstName}} {{kudos.toUser.lastName}}!
+          <div class="pull-right">
+            <img ng-src="{{kudos.toUser.avatar}}" class="circle-border-small" width="80">
+          </div>
+        </strong>
       </div>
       <div>
-        <em>{{kudos.comments}}</em>
+        <blockquote class="kudosComment">{{kudos.comments}}</blockquote>
       </div>
     </div>
     <div class="panel-footer">

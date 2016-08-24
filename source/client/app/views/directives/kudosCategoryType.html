@@ -1,7 +1,7 @@
 <div class="kudosCategoryType">
   <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">
+    <div class="panel-heading" >
+      <div class="panel-title">
         <div class="kudosCategoryName" ng-switch on="allowLink">
           <a ui-sref="editKudosCategory({name:category.name})" ng-switch-when="true">
             {{category.name}}
@@ -10,12 +10,11 @@
             {{category.name}}
           </span>
         </div>
-      </h3>
+      </div>
     </div>
     <div class="panel-body">
       <h5 class="text-center">
         <small>{{category.desc}}</small>
-        {{category.id}}
       </h5>
       <div class="text-center">
         <span class=" fa-stack fa-4x" ng-style="{'color': category.color}">
