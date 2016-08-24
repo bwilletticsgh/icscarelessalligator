@@ -4,6 +4,8 @@ import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.util.JwtTokenUtil;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.service.KudosService;
+import gov.dhs.kudos.rest.v1.to.UserLoginTO;
+import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -38,21 +40,21 @@ public class UserRest
     
     /**
      * Endpoint for registering users
-     * @param user The RequestBody User object - expects email, firstName, lastName and password
+     * @param userRegTO The RequestBody User object - expects email, firstName, lastName and password
      * @param response The HttpServletResponse for replying back with a valid JSON Web Token
      * @return Updated User object and JSON Web Token in the Authorization Header
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity register(@RequestBody(required = false) User user, HttpServletResponse response)
+    public ResponseEntity register(@RequestBody(required = false) UserRegisterTO userRegTO, HttpServletResponse response)
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("[/v1/user/register] user: " + (user == null ? "NO USER OBJECT" : LogUtils.objectToJson(user)));
+            LOG.debug("[/v1/user/register] user: " + (userRegTO == null ? "NO USER OBJECT" : LogUtils.objectToJson(userRegTO)));
         
         try
         {
-            kudosService.validateUserRegister(user);
+            kudosService.validateUserRegister(userRegTO);
             
-            user = kudosService.saveUser(user);
+            User user = kudosService.saveUser(userRegTO);
             JwtTokenUtil.generateToken(user, response);
             
             return new ResponseEntity(user, HttpStatus.OK);
@@ -66,21 +68,21 @@ public class UserRest
   
     /**
      * Endpoint for logging in
-     * @param user The RequestBody User object - expects email and password
+     * @param userTO The RequestBody User object - expects email and password
      * @param response The HttpServletResponse for replying back with a valid JSON Web Token
      * @return Updated User object and JSON Web Token in the Authorization Header
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity login(@RequestBody(required = false) User user, HttpServletResponse  response)
+    public ResponseEntity login(@RequestBody(required = false) UserLoginTO userTO, HttpServletResponse  response)
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("[/v1/user/login] user: " + (user == null ? "NO USER OBJECT" : LogUtils.objectToJson(user)));
+            LOG.debug("[/v1/user/login] user: " + (userTO == null ? "NO USER OBJECT" : LogUtils.objectToJson(userTO)));
         
         try
         {
-            kudosService.validateUserLogin(user);
+            kudosService.validateUserLogin(userTO);
             
-            user = kudosService.loginUser(user);
+            User user = kudosService.loginUser(userTO);
             JwtTokenUtil.generateToken(user, response);
             
             return new ResponseEntity(user, HttpStatus.OK);
