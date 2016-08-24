@@ -2,6 +2,8 @@ package gov.dhs.kudos.rest.v1.service;
 
 import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.User;
+import gov.dhs.kudos.rest.v1.to.UserLoginTO;
+import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -17,19 +19,21 @@ public class UserService extends OrganizationService
     
     /**
      * Saves the user object
-     * @param user The user object to save
+     * @param userRegTO The user object to save
      * @return The saved user object
      * @throws KudosException 
      */
-    public User saveUser(User user) throws KudosException
+    public User saveUser(UserRegisterTO userRegTO) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Saving user");
         
-        User alreadyExistUser = userRepo.findByEmail(user.getEmail());
+        User alreadyExistUser = userRepo.findByEmail(userRegTO.getEmail());
         
         if(alreadyExistUser != null)
             throw new KudosException("Email address already in use by someone", HttpStatus.INTERNAL_SERVER_ERROR);
+        
+        User user = new User(userRegTO.getEmail(), userRegTO.getFirstName(), userRegTO.getLastName(), userRegTO.getPassword(), false);
         
         return userRepo.save(user);
     }
@@ -40,7 +44,7 @@ public class UserService extends OrganizationService
      * @return The complete user object
      * @throws KudosException 
      */
-    public User loginUser(User user) throws KudosException
+    public User loginUser(UserLoginTO user) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("User login");
