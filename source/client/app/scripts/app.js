@@ -47,15 +47,14 @@ angular
         pageTitle: 'Edit Kudos Category',
         templateUrl: 'views/kudosCategory/edit.html',
         controller: 'KudosCategoryEditorCtrl as vm',
-        url:'/kudosCategory/edit/{name:string}',
+        url:'/kudosCategory/edit/{id:string}',
         resolve: {
           kudosCategory: function($stateParams, kudosCategories){
-            return kudosCategories.getKudosCategoryByName($stateParams.name);
+            return kudosCategories.getKudosCategoryById($stateParams.id);
+          },
+          kudosInCategory: function($stateParams, kudos) {
+             return kudos.getKudosByCategory($stateParams.id);
           }
-          // ,
-          // kudosInCategory: function(kudosCategory) {
-          //   return kudos.getKudosByCategory(kudosCategory.id);
-          // }
         }
       })
       .state('createKudosCategory', {
@@ -66,6 +65,9 @@ angular
         resolve: {
           kudosCategory : function(){
             return {};
+          },
+          kudosInCategory: function($stateParams) {
+            return [];
           }
         }
       })

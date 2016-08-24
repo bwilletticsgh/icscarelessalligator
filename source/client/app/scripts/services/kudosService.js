@@ -45,14 +45,13 @@
       var kudosResources = $resource(url, {}, {
         getAllFromUser: { method: 'get', isArray: true, url: url + '/fromUser/all/:id'},
         getAllToUser: { method: 'get', isArray: true, url: url + '/toUser/all/:id'},
-        getAllByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:id'},
+        getKudosByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:catId'},
         create: { method: 'post', url: url + '/create/:fromUserId/:toUserId/:kudosCatId'}
           //POST /v1/kudos/create/{fromUserId}/{toUserId}/{kudosCatId}
       });
 
       function getKudosByCategory(id) {
-        console.log(id);
-        var kudos = kudosResources.getAllByCategory({ id: id });
+        var kudos = kudosResources.getKudosByCategory({ catId: id });
         return kudos;
       }
 

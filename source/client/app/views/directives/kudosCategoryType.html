@@ -3,7 +3,7 @@
     <div class="panel-heading" >
       <div class="panel-title">
         <div class="kudosCategoryName" ng-switch on="allowLink">
-          <a ui-sref="editKudosCategory({name:category.name})" ng-switch-when="true">
+          <a ui-sref="editKudosCategory({id:category.id})" ng-switch-when="true">
             {{category.name}}
           </a>
           <span ng-switch-when="false">

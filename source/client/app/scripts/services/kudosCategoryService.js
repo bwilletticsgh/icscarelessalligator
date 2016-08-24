@@ -38,7 +38,9 @@
 
       var categoryResources = $resource(url, {}, {
         getAll: { method: 'get', isArray: true, url: url + '/all' },
-        getCategoryByName: { method: 'get', url: url + '/:name' }
+        getCategoryById: { method: 'get', url: url + '/byId/:id' },
+        create: { method: 'post', url: url + '/create' },
+        update: { method: 'post', url: url + '/update' }
       });
 
       function getKudosCategries() {
@@ -46,8 +48,7 @@
       }
 
       function addKudosCategory(kudosCategory){
-        kudosCategory.id = kudosCategory.id || _.maxBy(kudosCategories,'id').id+1;
-        kudosCategories.push(kudosCategory);
+        return categoryResources.create(kudosCategory).$promise;
       }
 
       // function getKudosCategory(id) {
@@ -63,13 +64,12 @@
       //   return category;
       // }
 
-      function getKudosCategoryByName(name) {
-        console.log('service: ' + name);
-        return categoryResources.getCategoryByName({ name: name });
+      function getKudosCategoryById(id) {
+        return categoryResources.getCategoryById({ id: id });
       }
 
       function updateKudosCategory(kudosCategory){
-        angular.copy(kudosCategory, addKudosCategory(kudosCategory.id));
+        return categoryResources.update(kudosCategory).$promise;
       }
 
       return {
@@ -77,7 +77,7 @@
         updateKudosCategory: updateKudosCategory,
         getKudosCategories: getKudosCategries,
         //getKudosCategory: getKudosCategory,
-        getKudosCategoryByName: getKudosCategoryByName
+        getKudosCategoryById: getKudosCategoryById
       };
     });
 })();

@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 angular.module('kudosApp')
-  .controller('KudosCategoryEditorCtrl', function (kudosCategory, _, $state) {
+  .controller('KudosCategoryEditorCtrl', function (kudosCategory, _, $state, kudosCategories, kudosInCategory) {
     var vm = this;
     vm.kudosCategory = kudosCategory;
-    vm.kudosInCategory = []; // = kudosInCategory;
+    vm.kudosInCategory = kudosInCategory;
 
     // if(vm.kudosCategory.id) {
     //   vm.kudosInCategory = kudos.getKudosByCategory(vm.kudosCategory.id);
@@ -16,13 +16,16 @@ angular.module('kudosApp')
     // }
 
     vm.saveKudosCategory = function () {
+      var promise;
       if (!vm.kudosCategory.id){
-        kudosCategories.addKudosCategory(vm.kudosCategory);
+        promise = kudosCategories.addKudosCategory(vm.kudosCategory);
       }
       else{
-        kudosCategories.updateKudosCategory(vm.kudosCategory);
+        promise = kudosCategories.updateKudosCategory(vm.kudosCategory);
       }
-      $state.go('kudosCategories');
+      promise.then(function(){
+        $state.go('kudosCategories');
+      });
     };
   });
 })();
