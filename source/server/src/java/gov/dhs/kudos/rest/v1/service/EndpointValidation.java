@@ -5,6 +5,8 @@ import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
+import gov.dhs.kudos.rest.v1.to.UserLoginTO;
+import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 
@@ -19,21 +21,21 @@ public class EndpointValidation extends WiredService
     
     /**
      * Validates the a user prior to registration
-     * @param user The user object to validate
+     * @param userRegTO The user object to validate
      * @throws KudosException 
      */
-    public void validateUserRegister(User user) throws KudosException
+    public void validateUserRegister(UserRegisterTO userRegTO) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Validating required fields for user registration");
         
-        if(user == null)
+        if(userRegTO == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getFirstName() == null || user.getLastName() == null || user.getPassword() == null)
+        if(userRegTO.getFirstName() == null || userRegTO.getLastName() == null || userRegTO.getPassword() == null)
             throw new KudosException("A required field for registration was null", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getEmail().length() == 0 || !user.getEmail().contains("@"))
+        if(userRegTO.getEmail() == null || userRegTO.getEmail().length() == 0 || !userRegTO.getEmail().contains("@"))
             throw new KudosException("A required field for user update was invalid - need valid email", HttpStatus.BAD_REQUEST);
-        if(user.getPassword().length() < 6)
+        if(userRegTO.getPassword().length() < 6)
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
     }
     
@@ -42,7 +44,7 @@ public class EndpointValidation extends WiredService
      * @param user The user object to validate
      * @throws KudosException 
      */
-    public void validateUserLogin(User user) throws KudosException
+    public void validateUserLogin(UserLoginTO user) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Validating required fields for user login");
