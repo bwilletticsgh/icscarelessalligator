@@ -34,9 +34,11 @@ angular
       .state('app',{
         abstract: true,
         template:'<ui-view/>',
-        // params: {
-        //   message: null
-        // }
+        resolve: {
+          currentUser: function(users, $rootScope){
+            return $rootScope.currentUser = users.getCurrentUser();
+          }
+        }
       })
       .state('app.home', {
         allowAnon: true,

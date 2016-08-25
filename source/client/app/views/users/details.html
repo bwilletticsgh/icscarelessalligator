@@ -8,8 +8,9 @@
         {{vm.user.lastName | uppercase}}, {{vm.user.firstName}}
       </div>
     </div>
-    <button class="btn-primary btn-block btn-lg" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
-      <i class="fa fa-thumbs-up"></i>Send them a Kudos</button>
+    <button ng-hide="currentUser.id == vm.user.id" class="btn-primary btn-block btn-lg" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
+      <i class="fa fa-thumbs-up"></i>Send them a Kudos
+    </button>
   </div>
   <div class="col-md-8 col-sm-6 col-xs-6">
     <h5>Kudos From Others <span class="badge">{{vm.toUser.length}}</span> </h5>
