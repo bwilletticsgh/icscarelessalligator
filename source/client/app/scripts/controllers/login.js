@@ -19,7 +19,7 @@ angular.module('kudosApp')
         vm.failed = false;
         if (success) {
           vm.message = vm.successMessage;
-          $state.go('users');
+          $state.go('app.users');
         }
         else{
           vm.message = vm.failMessage;

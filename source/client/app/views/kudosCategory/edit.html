@@ -26,7 +26,7 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary" ng-click="vm.saveKudosCategory()">Save Kudo Category</button>
-      <button type="button" ui-sref="kudosCategories" class="btn btn-default">Cancel</button>
+      <button type="button" ui-sref="app.kudosCategories" class="btn btn-default">Cancel</button>
     </div>
   </div>
 </form>
@@ -45,8 +45,8 @@
       </thead>
       <tbody>
         <tr ng-if="vm.kudosInCategory.length > 0" ng-repeat="kudos in vm.kudosInCategory">
-          <td><a ui-sref="user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a></td>
-          <td><a ui-sref="user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a></td>
+          <td><a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a></td>
+          <td><a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a></td>
           <td>{{kudos.comments}}</td>
           <td class="text-nowrap">{{kudos.dateCreated | formatTime}}</td>
         </tr>

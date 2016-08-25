@@ -8,7 +8,7 @@
 
             vm.logout = function(){
               vm.authentication.logout();
-              $state.go('home');
+              $state.go('app.home');
             };
 
             vm.UserFullName = function() {

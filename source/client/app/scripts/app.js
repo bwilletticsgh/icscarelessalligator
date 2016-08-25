@@ -19,6 +19,7 @@ angular
     'ui.bootstrap'
   ])
   .constant('_',window._)
+  .constant('swal',window.swal)
   .factory('restUrl', function($window){
     return $window.location.protocol + '//' + $window.location.hostname + ':8080/KudosREST/v1/';
   })
@@ -30,20 +31,27 @@ angular
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
-      .state('home', {
+      .state('app',{
+        abstract: true,
+        template:'<ui-view/>',
+        // params: {
+        //   message: null
+        // }
+      })
+      .state('app.home', {
         allowAnon: true,
         pageTitle: 'Home',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl as vm',
         url:'/home'
       })
-      .state('kudosCategories', {
+      .state('app.kudosCategories', {
         pageTitle: 'Kudos Category List',
         templateUrl: 'views/kudosCategory/list.html',
         controller: 'KudosCategoryCtrl as vm',
         url:'/kudosCategory/list'
       })
-      .state('editKudosCategory', {
+      .state('app.editKudosCategory', {
         pageTitle: 'Edit Kudos Category',
         templateUrl: 'views/kudosCategory/edit.html',
         controller: 'KudosCategoryEditorCtrl as vm',
@@ -57,7 +65,7 @@ angular
           }
         }
       })
-      .state('createKudosCategory', {
+      .state('app.createKudosCategory', {
         pageTitle: 'Create Kudos Category',
         templateUrl: 'views/kudosCategory/edit.html',
         controller: 'KudosCategoryEditorCtrl as vm',
@@ -71,42 +79,47 @@ angular
           }
         }
       })
-      .state('createKudos', {
+      .state('app.createKudos', {
         pageTitle: 'Create Kudos',
         templateUrl: 'views/kudos/create.html',
         controller: 'KudosCtrl as vm',
-        url: '/kudos/create/'
+        url: '/kudos/create/{userId}'
       })
-      .state('users', {
+      .state('app.users', {
         pageTitle: 'All Users',
         templateUrl: 'views/users/list.html',
         controller: 'UsersCtrl as vm',
         url:'/users'
       })
-      .state('user', {
-        pageTitle: 'User',
+      .state('app.user', {
         templateUrl: 'views/users/details.html',
         controller: 'UserDetailsCtrl as vm',
         url:'/user/{id:string}',
+        params: {
+          message: null
+        },
         resolve: {
           user: function($stateParams, users){
-            return users.getUser($stateParams.id);
+            return users.getUser($stateParams.id).$promise;
           },
           kudosToUser: function($stateParams, kudos) {
             return kudos.getKudosToUser($stateParams.id);
           },
           kudosFromUser: function($stateParams, kudos) {
             return kudos.getKudosFromUser($stateParams.id);
+          },
+          pageTitle: function(user){
+            return user.firstName + ' ' + user.lastName;
           }
         }
       })
-      .state('login', {
+      .state('app.login', {
         allowAnon: true,
         templateUrl: 'views/account/login.html',
         controller: 'Login as vm',
         url:'/account/login'
       })
-      .state('register', {
+      .state('app.register', {
         allowAnon: true,
         templateUrl: 'views/account/register.html',
         controller: 'RegisterCtrl as vm',
@@ -124,8 +137,6 @@ angular
         return config;
       },
       response: function(response){
-          //console.log(response.headers('Date'));
-          console.log(response.headers('Authorization'));
           if (response.headers('Authorization')){
             $cookieStore.put('token', response.headers('Authorization'));
           }
@@ -136,7 +147,7 @@ angular
         if(response.status === 401) {
           $injector.invoke(function($state, $timeout) {
             $timeout(function(){
-              $state.go('login');
+              $state.go('app.login');
             });
           });
 
@@ -150,9 +161,14 @@ angular
       }
     };
   })
-  .run(function ($rootScope, authentication, $state, $cookieStore) {
+  .run(function ($rootScope, authentication, $state, $cookieStore, swal) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-      $rootScope.pageTitle = toState.pageTitle;
+      if($state.params.message){
+        swal($state.params.message.title,$state.params.message.message,"success");
+        $state.$current.locals.globals.message = null;
+        $state.$current.locals.globals.message = null;
+      }
+      $rootScope.pageTitle = toState.pageTitle || $state.$current.locals.globals.pageTitle;
     });
     $rootScope.$on('$stateChangeStart', function(event, toState) {
         if (!authentication.isAuthenticated() && $cookieStore.get('token')) {
@@ -161,7 +177,7 @@ angular
 
         if (!toState.allowAnon && !authentication.isAuthenticated()){
           event.preventDefault();
-          return $state.go('login');
+          return $state.go('app.login');
         }
     });
  });

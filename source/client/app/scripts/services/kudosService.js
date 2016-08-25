@@ -56,8 +56,7 @@
       }
 
       function addKudos(kudo){
-        kudosResources.create({fromUserId: kudo.fromUser, toUserId: kudo.toUser, kudosCatId: kudo.kudosCat}, {comments:kudo.comments});
-        console.log(kudo);
+        return kudosResources.create({fromUserId: kudo.fromUser, toUserId: kudo.toUser, kudosCatId: kudo.kudosCat}, {comments:kudo.comments}).$promise;
       }
 
       function getKudos(id) {
