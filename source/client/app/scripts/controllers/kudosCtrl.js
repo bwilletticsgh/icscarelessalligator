@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('kudosApp')
-    .controller('KudosCtrl', function (kudos, users, kudosCategories, _, $state) {
+    .controller('KudosCtrl', function (kudos, users, kudosCategories, _, $state, $rootScope) {
       var vm = this;
       vm.kudo = {};
       vm.users = users.getUsers();
@@ -12,7 +12,8 @@
       vm.saveKudos = function () {
         kudos.addKudos(vm.kudo).then(function(){
           var selectedUser = _(vm.users).find(["id",vm.kudo.toUser]);
-          $state.go('app.user',{id:vm.kudo.toUser, message: {title:'Awesome',message: 'And a kudos to you for making ' + selectedUser.firstName + '\'s day!' }});
+          $rootScope.alertMessage = {title:'Awesome',message: 'And a kudos to you for making ' + selectedUser.firstName + '\'s day!' };
+          $state.go('app.user',{id:vm.kudo.toUser});
         });
       };
     });

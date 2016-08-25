@@ -163,10 +163,9 @@ angular
   })
   .run(function ($rootScope, authentication, $state, $cookieStore, swal) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-      if($state.params.message){
-        swal($state.params.message.title,$state.params.message.message,"success");
-        $state.$current.locals.globals.message = null;
-        $state.$current.locals.globals.message = null;
+      if($rootScope.alertMessage) {
+        swal($rootScope.alertMessage.title,$rootScope.alertMessage.message,"success");
+        $rootScope.alertMessage = null;
       }
       $rootScope.pageTitle = toState.pageTitle || $state.$current.locals.globals.pageTitle;
     });
