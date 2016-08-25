@@ -7,6 +7,7 @@ import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 
@@ -33,8 +34,10 @@ public class EndpointValidation extends WiredService
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
         if(userRegTO.getFirstName() == null || userRegTO.getLastName() == null || userRegTO.getPassword() == null)
             throw new KudosException("A required field for registration was null", HttpStatus.BAD_REQUEST);
+        if(userRegTO.getFirstName().length() == 0 || userRegTO.getLastName().length() == 0 || userRegTO.getPassword().length() == 0)
+            throw new KudosException("A required field for registration was empty", HttpStatus.BAD_REQUEST);
         if(userRegTO.getEmail() == null || userRegTO.getEmail().length() == 0 || !userRegTO.getEmail().contains("@"))
-            throw new KudosException("A required field for user update was invalid - need valid email", HttpStatus.BAD_REQUEST);
+            throw new KudosException("A required field for registration was invalid - need valid email", HttpStatus.BAD_REQUEST);
         if(userRegTO.getPassword().length() < 6)
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
     }
@@ -51,8 +54,8 @@ public class EndpointValidation extends WiredService
         
         if(user == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getPassword() == null)
-            throw new KudosException("A required field for login was null", HttpStatus.BAD_REQUEST);
+        if(user.getEmail() == null || user.getPassword() == null || user.getEmail().length() == 0 || user.getPassword().length() == 0)
+            throw new KudosException("A required field for login was empty or null", HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -67,7 +70,7 @@ public class EndpointValidation extends WiredService
         
         if(user == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getId() == null)
+        if(user.getId() == null || user.getId().length() == 0)
             throw new KudosException("A required field for user update was null - need id", HttpStatus.BAD_REQUEST);
         if(user.getEmail() == null || user.getEmail().length() == 0 || !user.getEmail().contains("@"))
             throw new KudosException("A required field for user update was invalid - need valid email", HttpStatus.BAD_REQUEST);
@@ -80,11 +83,13 @@ public class EndpointValidation extends WiredService
      * @param orgName The organization name to validate
      * @throws KudosException 
      */
-    public void validateOrgSave(String orgName) throws KudosException
+    public void validateOrgCreate(String orgName) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Validating if organization already exists");
         
+        if(orgName == null || orgName.length() == 0)
+            throw new KudosException("A required field for Organization was null - need orgName", HttpStatus.BAD_REQUEST);
         if(orgExists(orgName))
             throw new KudosException("Organization name already used", HttpStatus.BAD_REQUEST);
     }
@@ -101,12 +106,10 @@ public class EndpointValidation extends WiredService
         
         if(org == null)
             throw new KudosException("Organization object is null", HttpStatus.BAD_REQUEST);
-        if(org.getId() == null)
+        if(org.getId() == null || org.getId().length() == 0)
             throw new KudosException("A required field for Organization update was null - need id", HttpStatus.BAD_REQUEST);
         if(org.getOrgName() == null || org.getOrgName().length() == 0)
             throw new KudosException("A required field for Organization update was null - need orgName", HttpStatus.BAD_REQUEST);
-        if(orgExists(org.getOrgName()))
-            throw new KudosException("Organization name already exists", HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -122,7 +125,7 @@ public class EndpointValidation extends WiredService
         
         if(user == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getId() == null)
+        if(user.getId() == null || user.getId().length() == 0)
             throw new KudosException("A required field for User add was null - need user id", HttpStatus.BAD_REQUEST);
         if(orgName == null)
             throw new KudosException("A required field for User add was null - need orgName", HttpStatus.BAD_REQUEST);                
@@ -153,6 +156,8 @@ public class EndpointValidation extends WiredService
             throw new KudosException("orgName is null", HttpStatus.BAD_REQUEST);
         if(!orgExists(orgName))
             throw new KudosException("Organization doesn't exists", HttpStatus.BAD_REQUEST);
+        if(orgHasClonableCatName(catId, orgName))
+            throw new KudosException("Organization already contains cloned Kudos Category", HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -191,7 +196,7 @@ public class EndpointValidation extends WiredService
         
         if(fromUserId == null || toUserId == null || kudosCatId == null || kudos == null)
             throw new KudosException("Reuired obejct(s) was null - required fromUserId, toUserId, kudosCatId, and Kudos", HttpStatus.BAD_REQUEST);
-        if(kudos.getComments() == null)
+        if(kudos.getComments() == null || kudos.getComments().length() == 0)
             throw new KudosException("No comments in the Kudos object", HttpStatus.BAD_REQUEST);
         if(!userExists(fromUserId))
             throw new KudosException("No User exists for fromUserId", HttpStatus.BAD_REQUEST);
@@ -214,7 +219,7 @@ public class EndpointValidation extends WiredService
         if(kudosCat == null)
             throw new KudosException("KudosCategory object is null", HttpStatus.BAD_REQUEST);
         if(kudosCat.getName() == null || kudosCat.getName().length() == 0)
-            throw new KudosException("A required field for KudosCategory save was null - need name", HttpStatus.BAD_REQUEST);
+            throw new KudosException("A required field for KudosCategory save was empty - need name", HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -229,8 +234,10 @@ public class EndpointValidation extends WiredService
         
         if(kudosCat == null)
             throw new KudosException("KudosCategory object is null", HttpStatus.BAD_REQUEST);
-        if(kudosCat.getId() == null)
-            throw new KudosException("A required field for KudosCategory update was null - need id", HttpStatus.BAD_REQUEST);
+        if(kudosCat.getId() == null || kudosCat.getId().length() == 0)
+            throw new KudosException("A required field for KudosCategory update was empty - need id", HttpStatus.BAD_REQUEST);
+        if(kudosCat.getName() == null || kudosCat.getName().length() == 0)
+            throw new KudosException("A required field for KudosCategory update was empty - need name", HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -244,13 +251,35 @@ public class EndpointValidation extends WiredService
     }
     
     /**
+     * Determines if an Organization already has a KudosCategory with that name
+     * @param catId The id of the Kudos Category to clone from
+     * @param orgName the name of the Organization
+     * @return Whether or not an Organization already contains the clonable KudosCat name
+     */
+    private boolean orgHasClonableCatName(String catId, String orgName)
+    {        
+        String nameSearch = kudosCatRepo.findOne(catId).getName() + "-" + orgName;
+        List<KudosCategory> kcList = organizationRepo.findByOrgNameIgnoreCase(orgName).getKudosCategories();
+        
+        if(kcList != null && !kcList.isEmpty())
+        {
+            for(KudosCategory kc : kcList)
+            {
+                if(kc.getName().equals(nameSearch))
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
      * Determines if the organization already exists by name
      * @param orgName The name of the organization
      * @return Whether or not the organization already exists
      */
     private boolean orgExists(String orgName)
     {
-        return (organizationRepo.findByOrgName(orgName) != null);
+        return (organizationRepo.findByOrgNameIgnoreCase(orgName) != null);
     }
     
     /**
@@ -271,7 +300,7 @@ public class EndpointValidation extends WiredService
      */
     private boolean orgHasUser(User user, String orgName)
     {
-        Organization org = organizationRepo.findByOrgName(orgName);
+        Organization org = organizationRepo.findByOrgNameIgnoreCase(orgName);
         
         if(org == null || org.getUsers() == null)
             return false;

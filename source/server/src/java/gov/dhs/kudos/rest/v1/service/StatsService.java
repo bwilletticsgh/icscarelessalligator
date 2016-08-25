@@ -45,7 +45,7 @@ public class StatsService extends EndpointValidation
         if(fromDate != null)
             return usageStatisticRepo.findByUserAndDate(email, fromDate, (toDate == null ? new Date() : toDate));
         else
-            return usageStatisticRepo.findByUser(email);
+            return usageStatisticRepo.findByUserIgnoreCase(email);
     }
     
     /**

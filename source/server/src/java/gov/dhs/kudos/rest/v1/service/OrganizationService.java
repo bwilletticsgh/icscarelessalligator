@@ -41,7 +41,7 @@ public class OrganizationService extends StatsService
         if(LOG.isDebugEnabled())
             LOG.debug("Adding user to organization");
         
-        Organization org = organizationRepo.findByOrgName(orgName);
+        Organization org = organizationRepo.findByOrgNameIgnoreCase(orgName);
         org.addUser(user);
         
         return organizationRepo.save(org);
@@ -69,7 +69,7 @@ public class OrganizationService extends StatsService
         if(LOG.isDebugEnabled())
             LOG.debug("Finding organization by name");
         
-        return organizationRepo.findByOrgName(orgName);
+        return organizationRepo.findByOrgNameIgnoreCase(orgName);
     }
     
     /**
@@ -87,7 +87,7 @@ public class OrganizationService extends StatsService
         KudosCategory cloned = new KudosCategory(kudosCat.getName() + "-" + orgName, kudosCat.getDesc(), kudosCat.getIcon(), kudosCat.getColor());
         cloned = kudosCatRepo.save(cloned);        
         
-        Organization org = organizationRepo.findByOrgName(orgName);        
+        Organization org = organizationRepo.findByOrgNameIgnoreCase(orgName);        
         org.addKudosCat(cloned);
         
         return organizationRepo.save(org);
@@ -106,7 +106,7 @@ public class OrganizationService extends StatsService
         
         kudosCat = kudosCatRepo.save(kudosCat);
         
-        Organization org = organizationRepo.findByOrgName(orgName);
+        Organization org = organizationRepo.findByOrgNameIgnoreCase(orgName);
         org.addKudosCat(kudosCat);
         
         return organizationRepo.save(org);

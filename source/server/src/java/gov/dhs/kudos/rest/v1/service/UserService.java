@@ -28,7 +28,7 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("Saving user");
         
-        User alreadyExistUser = userRepo.findByEmail(userRegTO.getEmail());
+        User alreadyExistUser = userRepo.findByEmailIgnoreCase(userRegTO.getEmail());
         
         if(alreadyExistUser != null)
             throw new KudosException("Email address already in use by someone", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,7 +49,7 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("User login");
         
-        User foundUser = userRepo.findByEmail(user.getEmail());
+        User foundUser = userRepo.findByEmailIgnoreCase(user.getEmail());
         
         if(foundUser != null && foundUser.getPassword().equals(user.getPassword()))
             return foundUser;
@@ -68,7 +68,7 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("Updating user");
         
-        User alreadyExistUser = userRepo.findByEmail(user.getEmail());
+        User alreadyExistUser = userRepo.findByEmailIgnoreCase(user.getEmail());
         
         if(alreadyExistUser != null && !alreadyExistUser.getId().equals(user.getId()))
             throw new KudosException("Email address already in use by someone", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,7 +98,7 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("Finding user by email");
         
-        return userRepo.findByEmail(email);
+        return userRepo.findByEmailIgnoreCase(email);
     }
     
     /**
@@ -124,7 +124,7 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("Finding users by first name");
         
-        return userRepo.findByFirstName(firstName);
+        return userRepo.findByFirstNameIgnoreCase(firstName);
     }
     
     /**
@@ -137,6 +137,6 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("Finding users by last name");
         
-        return userRepo.findByLastName(lastName);
+        return userRepo.findByLastNameIgnoreCase(lastName);
     }
 }

@@ -23,7 +23,7 @@ public class KudosCategoryService extends UserService
         if(LOG.isDebugEnabled())
             LOG.debug("Finding kudos-category by name");
         
-        return kudosCatRepo.findByName(name);
+        return kudosCatRepo.findByNameIgnoreCase(name);
     }
     
     /**
