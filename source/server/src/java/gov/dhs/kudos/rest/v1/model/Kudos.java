@@ -25,6 +25,10 @@ public class Kudos extends BaseEntity
         this.comments = comments;
     }
 
+    public Kudos(String comments) {
+        this.comments = comments;
+    }
+
     public Kudos() {
     }
 
