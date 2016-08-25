@@ -76,7 +76,7 @@ public class OrganizationRest
         
         try
         {
-            kudosService.validateOrgSave(orgName);
+            kudosService.validateOrgCreate(orgName);
             return new ResponseEntity(kudosService.saveOrg(new Organization(orgName)), HttpStatus.OK);
         }
         catch(KudosException e)
