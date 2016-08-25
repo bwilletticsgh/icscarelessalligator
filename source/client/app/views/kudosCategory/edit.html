@@ -36,19 +36,23 @@
     <div class="panel-heading">
       <h4 class="panel-title">Kudos in Category</h4>
     </div>
-    <table class="table table-striped table-hover">
+    <table class="table table-striped">
       <thead>
         <th>From</th>
         <th>To</th>
-        <th>Comments</th>
         <th>Sent</th>
       </thead>
       <tbody>
-        <tr ng-if="vm.kudosInCategory.length > 0" ng-repeat="kudos in vm.kudosInCategory">
+        <tr ng-if="vm.kudosInCategory.length > 0" ng-repeat-start="kudos in vm.kudosInCategory">
           <td><a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a></td>
           <td><a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a></td>
-          <td>{{kudos.comments}}</td>
           <td class="text-nowrap">{{kudos.dateCreated | formatTime}}</td>
+        </tr>
+        <tr ng-repeat-end>
+          <td colspan="3">
+            <strong>Comments:</strong>
+            <blockquote class="kudosComment">{{kudos.comments}}</blockquote>
+          </td>
         </tr>
         <tr ng-if="vm.kudosInCategory.length == 0">
           <td colspan="4">No kudos for this category.</td>

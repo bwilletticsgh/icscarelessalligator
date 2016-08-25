@@ -12,7 +12,7 @@
       <i class="fa fa-thumbs-up"></i>Send them a Kudos</button>
   </div>
   <div class="col-md-8 col-sm-6 col-xs-6">
-    <h5>Kudos From Others</h5>
+    <h5>Kudos From Others <span class="badge">{{vm.toUser.length}}</span> </h5>
     <div class="row" ng-switch on="vm.toUser.length > 0">
       <div class="col-sm-12" ng-repeat="toUserKudos in vm.toUser | orderBy: '-dateCreated'" ng-switch-when="true">
         <div class="topmargin-20">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <hr />
-    <h5>Kudos to Others</h5>
+    <h5>Kudos to Others <span class="badge">{{vm.fromUser.length}}</span></h5>
     <div class="row" ng-switch on="vm.fromUser.length > 0">
       <div class="col-sm-12 " ng-repeat="fromUserKudos in vm.fromUser | orderBy: '-dateCreated'" ng-switch-when="true">
         <div class="topmargin-20">
