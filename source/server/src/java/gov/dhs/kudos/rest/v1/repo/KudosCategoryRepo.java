@@ -10,4 +10,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface KudosCategoryRepo extends MongoRepository<KudosCategory, String>
 {
     KudosCategory findByName(String name);
+    KudosCategory findByNameIgnoreCase(String name);
 }

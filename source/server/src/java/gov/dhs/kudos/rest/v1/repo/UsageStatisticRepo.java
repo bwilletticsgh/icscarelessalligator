@@ -15,6 +15,7 @@ public interface UsageStatisticRepo extends MongoRepository<UsageStatistic, Stri
 {
     List<UsageStatistic> findByDateCreatedBetween(Date from, Date to);
     List<UsageStatistic> findByUser(String user);
+    List<UsageStatistic> findByUserIgnoreCase(String user);
     List<UsageStatistic> findByUri(String uri);
     
     @Query(value = UsageStatisticQuery.FIND_BY_EMAIL_AND_DATE)
