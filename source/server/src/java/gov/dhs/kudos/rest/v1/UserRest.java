@@ -7,6 +7,7 @@ import gov.dhs.kudos.rest.v1.service.KudosService;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +132,19 @@ public class UserRest
     }
     
     /**
+     * Endpoint for retrieving all active Users
+     * @return All active Users and updated expiry time JSON Web Token in the Authorization Header
+     */
+    @RequestMapping(value = "/active", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getAllActiveUsers()
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/user/active]");
+        
+        return new ResponseEntity(kudosService.findAllActiveUsers(), HttpStatus.OK);
+    }
+    
+    /**
      * Endpoint for retrieving a User by their email address
      * @param email The PathVariable for a users email
      * @return A User object and updated expiry time JSON Web Token in the Authorization Header
@@ -184,5 +198,53 @@ public class UserRest
             LOG.debug("[/v1/user/byLastName/{lastName}] lastName: " + (lastName == null ? "NO LASTNAME SUPPLIED" : lastName));
         
         return new ResponseEntity(kudosService.findUsersByLastName(lastName), HttpStatus.OK);
+    }
+    
+    /**
+     * Endpoint for deleting / un-deleting users based on their id
+     * @param id The PathVariable for a users id
+     * @param request The request containing the User object
+     * @return The updated User object
+     */
+    @RequestMapping(value = "/toggleDelete/{id}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity toggleDelete(@PathVariable String id, HttpServletRequest request)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/user/toggleDelete/{id}] id: " + (id == null ? "NO id SUPPLIED" : id));
+        
+        try
+        {
+            kudosService.validateAdminUserMod(request, id);
+            return new ResponseEntity(kudosService.deleteUser(id), HttpStatus.OK);
+        }
+        catch(KudosException e)
+        {
+            LOG.error(e);
+            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
+        }
+    }
+    
+    /**
+     * Endpoint for toggling admin-rights for users based on their id
+     * @param id The PathVariable for a users id
+     * @param request The request containing the User object
+     * @return The updated User object
+     */
+    @RequestMapping(value = "/toggleAdmin/{id}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity toggleAdmin(@PathVariable String id, HttpServletRequest request)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/user/toggleAdmin/{id}] id: " + (id == null ? "NO id SUPPLIED" : id));
+        
+        try
+        {
+            kudosService.validateAdminUserMod(request, id);
+            return new ResponseEntity(kudosService.toggleAdminUser(id), HttpStatus.OK);
+        }
+        catch(KudosException e)
+        {
+            LOG.error(e);
+            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
+        }
     }
 }
