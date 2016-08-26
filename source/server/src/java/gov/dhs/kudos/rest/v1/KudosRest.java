@@ -3,6 +3,7 @@ package gov.dhs.kudos.rest.v1;
 import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.service.KudosService;
+import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
 import javax.annotation.PostConstruct;
 import org.apache.log4j.Logger;
@@ -107,6 +108,35 @@ public class KudosRest
         {
             kudosService.validateCreateKudos(fromUserId, toUserId, kudosCatId, kudos);
             return new ResponseEntity(kudosService.saveKudos(fromUserId, toUserId, kudosCatId, kudos), HttpStatus.OK);
+        }
+        catch(KudosException e)
+        {
+            LOG.error(e);
+            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
+        }
+    }
+    
+    /**
+     * Endpoint for giving a kudo to users
+     * @param fromUserId The PathVariable of a user id
+     * @param kudosCatId The PathVariable of a category id
+     * @param kudosOneToMany The RequestBody object for a kudosOneToMany - must contain a kudos comment and users
+     * @return The created Kudo object
+     */
+    @RequestMapping(value = "/oneToMany/create/{fromUserId}/{kudosCatId}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity createKudosOneToMany(@PathVariable String fromUserId, @PathVariable String kudosCatId, @RequestBody(required = false) KudosOneToManyTO kudosOneToMany)
+    {
+        if(LOG.isDebugEnabled())
+        {
+            LOG.debug("[/v1/kudos/oneToMany/create/{fromUserId}/{kudosCatId}] fromUserId: " + (fromUserId == null ? "NO fromUserId SUPPLIED" : fromUserId));
+            LOG.debug("[/v1/kudos/oneToMany/create/{fromUserId}/{kudosCatId}] kudosCatId: " + (kudosCatId == null ? "NO kudosCatId SUPPLIED" : kudosCatId));
+            LOG.debug("[/v1/kudos/oneToMany/create/{fromUserId}/{kudosCatId}] kudos: " + (kudosOneToMany == null ? "NO kudosOneToMany OBJECT" : LogUtils.objectToJson(kudosOneToMany)));
+        }
+        
+        try
+        {
+            kudosService.validateCreateKudosOneToMany(fromUserId, kudosCatId, kudosOneToMany);
+            return new ResponseEntity(kudosService.saveKudosOneToMany(fromUserId, kudosCatId, kudosOneToMany), HttpStatus.OK);
         }
         catch(KudosException e)
         {
