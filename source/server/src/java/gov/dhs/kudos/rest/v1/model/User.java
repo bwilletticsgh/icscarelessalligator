@@ -17,7 +17,9 @@ public class User extends BaseEntity
     private String firstName;
     private String lastName;    
     private String password;
+    private String avatarUrl;
     private boolean isAdmin;
+    private boolean isDeleted;
 
     public User(String email, String firstName, String lastName, String password, boolean isAdmin) {
         this.email = email;
@@ -90,5 +92,21 @@ public class User extends BaseEntity
     public void setIsAdmin(boolean isAdmin)
     {
         this.isAdmin = isAdmin;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
