@@ -58,6 +58,7 @@ public class JwtAuthenticationFilter implements Filter
             try
             {
                 user = JwtTokenUtil.validateToken((HttpServletRequest)request, (HttpServletResponse) response);
+                request.setAttribute("kudosUser", user);
             }
             catch(KudosException e)
             {
