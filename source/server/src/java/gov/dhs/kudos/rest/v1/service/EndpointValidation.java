@@ -5,9 +5,11 @@ import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
+import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 
@@ -34,11 +36,11 @@ public class EndpointValidation extends WiredService
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
         if(userRegTO.getFirstName() == null || userRegTO.getLastName() == null || userRegTO.getPassword() == null)
             throw new KudosException("A required field for registration was null", HttpStatus.BAD_REQUEST);
-        if(userRegTO.getFirstName().length() == 0 || userRegTO.getLastName().length() == 0 || userRegTO.getPassword().length() == 0)
+        if(userRegTO.getFirstName().trim().length() == 0 || userRegTO.getLastName().trim().length() == 0 || userRegTO.getPassword().trim().length() == 0)
             throw new KudosException("A required field for registration was empty", HttpStatus.BAD_REQUEST);
-        if(userRegTO.getEmail() == null || userRegTO.getEmail().length() == 0 || !userRegTO.getEmail().contains("@"))
+        if(userRegTO.getEmail() == null || userRegTO.getEmail().trim().length() == 0 || !userRegTO.getEmail().contains("@"))
             throw new KudosException("A required field for registration was invalid - need valid email", HttpStatus.BAD_REQUEST);
-        if(userRegTO.getPassword().length() < 6)
+        if(userRegTO.getPassword().trim().length() < 6)
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
     }
     
@@ -54,7 +56,7 @@ public class EndpointValidation extends WiredService
         
         if(user == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getPassword() == null || user.getEmail().length() == 0 || user.getPassword().length() == 0)
+        if(user.getEmail() == null || user.getPassword() == null || user.getEmail().trim().length() == 0 || user.getPassword().trim().length() == 0)
             throw new KudosException("A required field for login was empty or null", HttpStatus.BAD_REQUEST);
     }
     
@@ -70,11 +72,13 @@ public class EndpointValidation extends WiredService
         
         if(user == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getId() == null || user.getId().length() == 0)
+        if(user.getId() == null || user.getId().trim().length() == 0)
             throw new KudosException("A required field for user update was null - need id", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getEmail().length() == 0 || !user.getEmail().contains("@"))
+        if(user.getEmail() == null || user.getEmail().trim().length() == 0 || !user.getEmail().contains("@"))
             throw new KudosException("A required field for user update was invalid - need valid email", HttpStatus.BAD_REQUEST);
-        if(user.getPassword() == null || user.getPassword().length() < 6)
+        if(user.getFirstName() == null || user.getFirstName().trim() == null || user.getFirstName().trim().length() == 0 || user.getLastName().trim().length() == 0)
+            throw new KudosException("First name and last name cannot be empty", HttpStatus.BAD_REQUEST);
+        if(user.getPassword() == null || user.getPassword().trim().length() < 6)
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
     }
     
@@ -88,9 +92,9 @@ public class EndpointValidation extends WiredService
         if(LOG.isDebugEnabled())
             LOG.debug("Validating if organization already exists");
         
-        if(orgName == null || orgName.length() == 0)
+        if(orgName == null || orgName.trim().length() == 0)
             throw new KudosException("A required field for Organization was null - need orgName", HttpStatus.BAD_REQUEST);
-        if(orgExists(orgName))
+        if(orgExists(orgName.trim()))
             throw new KudosException("Organization name already used", HttpStatus.BAD_REQUEST);
     }
     
@@ -106,9 +110,9 @@ public class EndpointValidation extends WiredService
         
         if(org == null)
             throw new KudosException("Organization object is null", HttpStatus.BAD_REQUEST);
-        if(org.getId() == null || org.getId().length() == 0)
+        if(org.getId() == null || org.getId().trim().length() == 0)
             throw new KudosException("A required field for Organization update was null - need id", HttpStatus.BAD_REQUEST);
-        if(org.getOrgName() == null || org.getOrgName().length() == 0)
+        if(org.getOrgName() == null || org.getOrgName().trim().length() == 0)
             throw new KudosException("A required field for Organization update was null - need orgName", HttpStatus.BAD_REQUEST);
     }
     
@@ -125,7 +129,7 @@ public class EndpointValidation extends WiredService
         
         if(user == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getId() == null || user.getId().length() == 0)
+        if(user.getId() == null || user.getId().trim().length() == 0)
             throw new KudosException("A required field for User add was null - need user id", HttpStatus.BAD_REQUEST);
         if(orgName == null)
             throw new KudosException("A required field for User add was null - need orgName", HttpStatus.BAD_REQUEST);                
@@ -173,7 +177,7 @@ public class EndpointValidation extends WiredService
         
         if(kudosCat == null)
             throw new KudosException("kudosCat Object is null", HttpStatus.BAD_REQUEST);
-        if(kudosCat.getName() == null || kudosCat.getName().length() == 0)
+        if(kudosCat.getName() == null || kudosCat.getName().trim().length() == 0)
             throw new KudosException("A required field for KudosCategory was null - need name", HttpStatus.BAD_REQUEST);
         if(orgName == null)
             throw new KudosException("orgName is null", HttpStatus.BAD_REQUEST);
@@ -196,7 +200,7 @@ public class EndpointValidation extends WiredService
         
         if(fromUserId == null || toUserId == null || kudosCatId == null || kudos == null)
             throw new KudosException("Reuired obejct(s) was null - required fromUserId, toUserId, kudosCatId, and Kudos", HttpStatus.BAD_REQUEST);
-        if(kudos.getComments() == null || kudos.getComments().length() == 0)
+        if(kudos.getComments() == null || kudos.getComments().trim().length() == 0)
             throw new KudosException("No comments in the Kudos object", HttpStatus.BAD_REQUEST);
         if(!userExists(fromUserId))
             throw new KudosException("No User exists for fromUserId", HttpStatus.BAD_REQUEST);
@@ -204,6 +208,40 @@ public class EndpointValidation extends WiredService
             throw new KudosException("No User exists for toUserId", HttpStatus.BAD_REQUEST);
         if(!kudosCatExists(kudosCatId))
             throw new KudosException("No KudosCategory exists for kudosCatId", HttpStatus.BAD_REQUEST);
+        if(fromUserId.equals(toUserId))
+            throw new KudosException("Silly Kudoer - kudos are for others", HttpStatus.BAD_REQUEST);
+    }
+    
+    /**
+     * Validates from user, to users, kudos category, and kudosOneToMany object prior to saving a kudos
+     * @param fromUserId The from user id
+     * @param kudosCatId The kudos category id
+     * @param kudosOneToMany The transfer object containing the Kudos object and a list of user ids
+     * @throws KudosException 
+     */
+    public void validateCreateKudosOneToMany(String fromUserId, String kudosCatId, KudosOneToManyTO kudosOneToMany) throws KudosException
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Validating required fields for kudos one-to-many creation");
+        
+        if(fromUserId == null || kudosCatId == null || kudosOneToMany == null)
+            throw new KudosException("Reuired obejct(s) was null - required fromUserId, kudosCatId, and kudosOneToMany", HttpStatus.BAD_REQUEST);
+        if(!userExists(fromUserId))
+            throw new KudosException("No User exists for fromUserId", HttpStatus.BAD_REQUEST);
+        if(!kudosCatExists(kudosCatId))
+            throw new KudosException("No KudosCategory exists for kudosCatId", HttpStatus.BAD_REQUEST);
+        if(kudosOneToMany.getUserIds() == null || kudosOneToMany.getUserIds().isEmpty())
+            throw new KudosException("No Users defined to send the kudo too", HttpStatus.BAD_REQUEST);
+        if(kudosOneToMany.getComments() == null || kudosOneToMany.getComments().trim().length() == 0)
+            throw new KudosException("No comments in the Kudos object", HttpStatus.BAD_REQUEST);
+        
+        for(String toUserId : kudosOneToMany.getUserIds())
+        {                
+            if(toUserId == null || toUserId.trim().length() == 0 || !userExists(toUserId))
+                throw new KudosException("One of the Users listed doesn't exists", HttpStatus.BAD_REQUEST);
+            if(toUserId.equals(fromUserId))
+                throw new KudosException("Silly Kudoer - kudos are for others", HttpStatus.BAD_REQUEST);
+        }
     }
     
     /**
@@ -218,7 +256,7 @@ public class EndpointValidation extends WiredService
         
         if(kudosCat == null)
             throw new KudosException("KudosCategory object is null", HttpStatus.BAD_REQUEST);
-        if(kudosCat.getName() == null || kudosCat.getName().length() == 0)
+        if(kudosCat.getName() == null || kudosCat.getName().trim().length() == 0)
             throw new KudosException("A required field for KudosCategory save was empty - need name", HttpStatus.BAD_REQUEST);
     }
     
@@ -234,10 +272,33 @@ public class EndpointValidation extends WiredService
         
         if(kudosCat == null)
             throw new KudosException("KudosCategory object is null", HttpStatus.BAD_REQUEST);
-        if(kudosCat.getId() == null || kudosCat.getId().length() == 0)
+        if(kudosCat.getId() == null || kudosCat.getId().trim().length() == 0)
             throw new KudosException("A required field for KudosCategory update was empty - need id", HttpStatus.BAD_REQUEST);
-        if(kudosCat.getName() == null || kudosCat.getName().length() == 0)
+        if(kudosCat.getName() == null || kudosCat.getName().trim().length() == 0)
             throw new KudosException("A required field for KudosCategory update was empty - need name", HttpStatus.BAD_REQUEST);
+    }
+    
+    /**
+     * Validates the user permissions for modding a User and confirms the requested user id exists
+     * @param request The requestor
+     * @param id The user id validate for modding
+     * @throws KudosException 
+     */
+    public void validateAdminUserMod(HttpServletRequest request, String id) throws KudosException
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Validating required fields for delete User");
+        
+        if(request == null)
+            throw new KudosException("No HttpRequest associated", HttpStatus.BAD_REQUEST);
+        if(request.getAttribute("kudosUser") == null)
+            throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
+        if(id == null || id.trim().length() == 0 || !userExists(id))
+            throw new KudosException("Kudos user doesn't exists", HttpStatus.BAD_REQUEST);
+        if(!((User)request.getAttribute("kudosUser")).isIsAdmin())
+            throw new KudosException("Admin rights are required for this operation", HttpStatus.UNAUTHORIZED);
+        if(((User)request.getAttribute("kudosUser")).getId().equals(id))
+            throw new KudosException("Don't mod yourself!", HttpStatus.BAD_REQUEST);
     }
     
     /**

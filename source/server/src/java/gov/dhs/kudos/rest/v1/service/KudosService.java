@@ -4,6 +4,8 @@ import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
+import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -79,7 +81,30 @@ public class KudosService extends KudosCategoryService
         kudo.setFromUser(userRepo.findOne(fromUserId));
         kudo.setToUser(userRepo.findOne(toUserId));
         kudo.setKudosCat(kudosCatRepo.findOne(kudosCatId));
+        
         return kudosRepo.save(kudo);
+    }
+    
+    /**
+     * Saves a kudo to multiple users
+     * @param fromUserId The from user id
+     * @param kudosCatId The category id 
+     * @param kudosOneToMany The KudosOneToMany object
+     * @return The saved List of kudos object
+     */
+    public List<Kudos> saveKudosOneToMany(String fromUserId, String kudosCatId, KudosOneToManyTO kudosOneToMany)
+    {
+        List<Kudos> resultList = new ArrayList<>();
+        
+        KudosCategory kudosCat = kudosCatRepo.findOne(kudosCatId);
+        User fromUser = userRepo.findOne(fromUserId);
+        for(String toUserId : kudosOneToMany.getUserIds())
+        {
+            Kudos kudo = new Kudos(kudosCat, fromUser, userRepo.findOne(toUserId), kudosOneToMany.getComments());
+            resultList.add(kudosRepo.save(kudo));
+        }
+        
+        return resultList;
     }
     
     public void initAdminData() 

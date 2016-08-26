@@ -61,6 +61,8 @@ public class KudosCategoryService extends UserService
         if(LOG.isDebugEnabled())
             LOG.debug("Saving kudos-categories");
         
+        kudosCat.setName(kudosCat.getName().trim());
+        
         return kudosCatRepo.save(kudosCat);
     }
     
@@ -73,6 +75,8 @@ public class KudosCategoryService extends UserService
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Updating kudos-categories");
+        
+        kudosCat.setName(kudosCat.getName().trim());
         
         return kudosCatRepo.save(kudosCat);
     }

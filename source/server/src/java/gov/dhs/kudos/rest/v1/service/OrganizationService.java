@@ -27,6 +27,8 @@ public class OrganizationService extends StatsService
         if(LOG.isDebugEnabled())
             LOG.debug("Saving organization");
         
+        org.setOrgName(org.getOrgName().trim());
+        
         return organizationRepo.save(org);
     }
     
@@ -103,6 +105,8 @@ public class OrganizationService extends StatsService
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Creating Kudos Category for org");
+        
+        kudosCat.setName(kudosCat.getName().trim());
         
         kudosCat = kudosCatRepo.save(kudosCat);
         

@@ -28,12 +28,17 @@ public class UserService extends OrganizationService
         if(LOG.isDebugEnabled())
             LOG.debug("Saving user");
         
-        User alreadyExistUser = userRepo.findByEmailIgnoreCase(userRegTO.getEmail());
+        User alreadyExistUser = userRepo.findByEmailIgnoreCase(userRegTO.getEmail().trim());
         
         if(alreadyExistUser != null)
-            throw new KudosException("Email address already in use by someone", HttpStatus.INTERNAL_SERVER_ERROR);
+        {
+            if(!alreadyExistUser.isIsDeleted())
+                throw new KudosException("Email address already in use by someone", HttpStatus.BAD_REQUEST);
+            if(alreadyExistUser.isIsDeleted())
+                throw new KudosException("You have been previously deleted by a Site Admin.  Please contact Kudos for reactivation.", HttpStatus.UNAUTHORIZED);
+        }
         
-        User user = new User(userRegTO.getEmail(), userRegTO.getFirstName(), userRegTO.getLastName(), userRegTO.getPassword(), false);
+        User user = new User(userRegTO.getEmail().trim(), userRegTO.getFirstName().trim(), userRegTO.getLastName().trim(), userRegTO.getPassword().trim(), false);
         
         return userRepo.save(user);
     }
@@ -51,7 +56,7 @@ public class UserService extends OrganizationService
         
         User foundUser = userRepo.findByEmailIgnoreCase(user.getEmail());
         
-        if(foundUser != null && foundUser.getPassword().equals(user.getPassword()))
+        if(foundUser != null && foundUser.getPassword().equals(user.getPassword()) && !foundUser.isIsDeleted())
             return foundUser;
         else
             throw new KudosException("Bad Credentials", HttpStatus.UNAUTHORIZED);
@@ -70,8 +75,21 @@ public class UserService extends OrganizationService
         
         User alreadyExistUser = userRepo.findByEmailIgnoreCase(user.getEmail());
         
-        if(alreadyExistUser != null && !alreadyExistUser.getId().equals(user.getId()))
-            throw new KudosException("Email address already in use by someone", HttpStatus.INTERNAL_SERVER_ERROR);
+        if(alreadyExistUser != null)
+        {
+            if(!alreadyExistUser.getId().equals(user.getId()))
+                throw new KudosException("Email address already in use by someone", HttpStatus.BAD_REQUEST);
+            
+            user.setIsAdmin(alreadyExistUser.isIsAdmin());
+            user.setIsDeleted(alreadyExistUser.isIsDeleted());
+        }
+        
+        user.setEmail(user.getEmail().trim());
+        user.setFirstName(user.getFirstName().trim());
+        user.setLastName(user.getLastName().trim());
+        
+        if(user.getPassword() == null || user.getPassword().length() == 0)
+            user.setPassword(alreadyExistUser.getPassword());
         
         return userRepo.save(user);
     }
@@ -86,6 +104,18 @@ public class UserService extends OrganizationService
             LOG.debug("Finding all users");
         
         return userRepo.findAll();
+    }
+    
+    /**
+     * Finds all users
+     * @return A List of user objects
+     */
+    public List<User> findAllActiveUsers() 
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Finding all active users");
+        
+        return userRepo.findByIsDeleted(false);
     }
     
     /**
@@ -138,5 +168,37 @@ public class UserService extends OrganizationService
             LOG.debug("Finding users by last name");
         
         return userRepo.findByLastNameIgnoreCase(lastName);
+    }
+    
+    /**
+     * Deletes a User
+     * @param id The id of the user
+     * @return The updated User object saved with isDeleted true
+     */
+    public User deleteUser(String id)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Toggling deletion status for user by id");
+        
+        User user = userRepo.findOne(id);
+        user.setIsDeleted((!user.isIsDeleted()));
+        
+        return userRepo.save(user);
+    }
+    
+    /**
+     * Un-deletes a User
+     * @param id The id of the user
+     * @return The updated User object saved with isDeleted false
+     */
+    public User toggleAdminUser(String id)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Toggling admin-rights for user by id");
+        
+        User user = userRepo.findOne(id);
+        user.setIsAdmin((!user.isIsAdmin()));
+        
+        return userRepo.save(user);
     }
 }
