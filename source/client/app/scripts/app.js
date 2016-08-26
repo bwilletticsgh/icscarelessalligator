@@ -21,7 +21,7 @@ angular
   .constant('_',window._)
   .constant('swal',window.swal)
   .factory('restUrl', function($window){
-    return $window.location.protocol + '//' + $window.location.hostname + ':8080/KudosREST/v1/';
+    return $window.location.protocol + '//' + $window.location.hostname + '/KudosREST/v1/';
   })
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
