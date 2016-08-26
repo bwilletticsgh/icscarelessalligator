@@ -16,4 +16,5 @@ public interface UserRepo extends MongoRepository<User, String>
     List<User> findByFirstNameIgnoreCase(String firstName);
     List<User> findByLastName(String lastName);
     List<User> findByLastNameIgnoreCase(String lastName);
+    List<User> findByIsDeleted(boolean isDeleted);
 }
