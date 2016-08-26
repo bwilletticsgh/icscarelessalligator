@@ -43,7 +43,7 @@ RUN a2enmod proxy_html
 RUN echo "<VirtualHost *:*>" > /etc/apache2/sites-available/000-default.conf
 RUN echo "    ProxyPreserveHost On" >> /etc/apache2/sites-available/000-default.conf
 RUN echo "" >> /etc/apache2/sites-available/000-default.conf
-RUN echo "    ProxyPass /KudosREST/ http://localhost:8080/KudosREST" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "    ProxyPass /KudosREST/ http://localhost:8080/KudosREST/" >> /etc/apache2/sites-available/000-default.conf
 RUN echo "" >> /etc/apache2/sites-available/000-default.conf
 RUN echo "    ServerName localhost" >> /etc/apache2/sites-available/000-default.conf
 RUN echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
@@ -58,10 +58,12 @@ RUN \
 RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
 RUN unzip apache-tomcat-8.0.36.zip
 
+RUN sed 's/<Connector port="8080"/<Connector address="127.0.0.1" port="8080"/' /usr/src/app/apache-tomcat-8.0.36/conf/server.xml > /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml 
+RUN cp /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml /usr/src/app/apache-tomcat-8.0.36/conf/server.xml
+RUN rm -f /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml
+
 # Copy the application folder inside the container
 COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
-
-#EXPOSE 8080
 
 # Set the default command to execute when creating the new container  
 CMD service apache2 start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; /bin/bash
