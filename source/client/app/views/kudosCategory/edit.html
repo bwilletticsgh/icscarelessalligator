@@ -5,7 +5,7 @@
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" placeholder="Name" ng-model="vm.kudosCategory.name">
+      <input maxlength-helper="40" type="text" class="form-control" id="name" placeholder="Name (40 characters max)" ng-model="vm.kudosCategory.name">
     </div>
   </div>
 
@@ -19,7 +19,7 @@
   <div class="form-group">
     <label for="desc" class="col-sm-2 control-label">Description</label>
     <div class="col-sm-10">
-      <textarea type="text" class="form-control" id="desc" ng-model="vm.kudosCategory.desc"></textarea>
+      <textarea maxlength-helper="100" type="text" placeholder="Description (100 characters max)" class="form-control" id="desc" ng-model="vm.kudosCategory.desc"></textarea>
     </div>
   </div>
 

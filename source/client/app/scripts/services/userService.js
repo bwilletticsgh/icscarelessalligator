@@ -32,11 +32,6 @@
           return allUsers;
         }
 
-        function addUser(user){
-          //users.push(user);
-        }
-
-
         function getUser(id) {
           var res = userResource.getUserById({id: id});
           res.$promise.then(function(user){
@@ -47,7 +42,6 @@
         }
 
         return {
-          addUser: addUser,
           getUsers: getUsers,
           getUser : getUser,
           setCurrentUser : setCurrentUser,

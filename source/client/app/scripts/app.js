@@ -36,7 +36,8 @@ angular
         template:'<ui-view/>',
         resolve: {
           currentUser: function(users, $rootScope){
-            return $rootScope.currentUser = users.getCurrentUser();
+            $rootScope.currentUser = users.getCurrentUser();
+            return $rootScope.currentUser;
           }
         }
       })
@@ -76,7 +77,7 @@ angular
           kudosCategory : function(){
             return {};
           },
-          kudosInCategory: function($stateParams) {
+          kudosInCategory: function() {
             return [];
           }
         }

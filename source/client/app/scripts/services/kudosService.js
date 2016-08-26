@@ -59,10 +59,6 @@
         return kudosResources.create({fromUserId: kudo.fromUser, toUserId: kudo.toUser, kudosCatId: kudo.kudosCat}, {comments:kudo.comments}).$promise;
       }
 
-      function getKudos(id) {
-        return _(kudos).find({id: id});
-      }
-
       function getKudosToUser(id) {
         var kudos = kudosResources.getAllToUser({ id: id });
         setupAvatarsOnKudosResource(kudos);
@@ -73,10 +69,6 @@
         var kudos = kudosResources.getAllFromUser({ id: id});
         setupAvatarsOnKudosResource(kudos);
         return kudos;
-      }
-
-      function updateKudos(kudo){
-        angular.copy(kudo,getKudos(kudo.id));
       }
 
       //TODO: So, this is really just a dummy placeholder. We should really put this into the backend
@@ -92,9 +84,7 @@
 
       return {
         addKudos: addKudos,
-        updateKudos: updateKudos,
         getKudosByCategory: getKudosByCategory,
-        getKudos: getKudos,
         getKudosToUser: getKudosToUser,
         getKudosFromUser: getKudosFromUser
       };
