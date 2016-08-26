@@ -40,13 +40,13 @@ RUN a2enmod proxy_balancer
 RUN a2enmod proxy_connect
 RUN a2enmod proxy_html
 
-RUN cat "<VirtualHost *:*>" > /etc/apache2/sites-available/000-default.conf
-RUN cat "    ProxyPreserveHost On" >> /etc/apache2/sites-available/000-default.conf
-RUN cat "" >> /etc/apache2/sites-available/000-default.conf
-RUN cat "    ProxyPass /KudosREST/ http://localhost:8080/KudosREST" >> /etc/apache2/sites-available/000-default.conf
-RUN cat "" >> /etc/apache2/sites-available/000-default.conf
-RUN cat "    ServerName localhost" >> /etc/apache2/sites-available/000-default.conf
-RUN cat "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "<VirtualHost *:*>" > /etc/apache2/sites-available/000-default.conf
+RUN echo "    ProxyPreserveHost On" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "    ProxyPass /KudosREST/ http://localhost:8080/KudosREST" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "    ServerName localhost" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
 
