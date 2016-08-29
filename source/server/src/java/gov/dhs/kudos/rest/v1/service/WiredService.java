@@ -1,5 +1,6 @@
 package gov.dhs.kudos.rest.v1.service;
 
+import gov.dhs.kudos.rest.v1.notification.EmailNotification;
 import gov.dhs.kudos.rest.v1.repo.KudosCategoryRepo;
 import gov.dhs.kudos.rest.v1.repo.KudosRepo;
 import gov.dhs.kudos.rest.v1.repo.OrganizationRepo;
@@ -28,4 +29,7 @@ public class WiredService
     /** The usage statistics mongo repository **/
     @Autowired
     protected UsageStatisticRepo usageStatisticRepo;
+    /** The notification layer **/
+    @Autowired
+    protected EmailNotification emailNotifier;
 }
