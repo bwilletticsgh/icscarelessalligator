@@ -4,12 +4,14 @@
 
     .factory('users', function(_, $resource, restUrl) {
 
-        var url = restUrl + '/user';
+        var url = restUrl + 'user';
 
         var userResource = $resource(url, {}, {
           all: {method:"get",isArray:true, url: url + "/all"},
           getUserById: {method:"get",url: url + "/byId/:id"},
-          update: {method:"POST",url: url + "/update"}
+          update: {method:"POST",url: url + "/update"},
+          updateUserProfile: {method:"POST",url: url + "/updateProfile"}
+
         });
 
         var _currentUser;
@@ -27,7 +29,7 @@
 
           //give everyone a picture. TODO: make this happen on the backend
           allUsers.$promise.then(function(data){
-            _.each(data, function(u){u.avatar="http://robohash.org/" + u.id + ".png?size=300x300&set=set1";});
+            _.each(data, function(u){u.avatarUrl = u.avatarUrl || "http://robohash.org/" + u.id + ".png?size=300x300&set=set1";});
           });
 
           return allUsers;
@@ -35,9 +37,10 @@
 
         function getUser(id) {
           var res = userResource.getUserById({id: id});
-          // res.$promise.then(function(user){
-          //   //user.avatar="http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
-          // });
+           res.$promise.then(function(user){
+             user.avatarUrl = user.avatarUrl || "http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
+             console.log(user)
+           });
 
           return res;
         }
@@ -46,12 +49,17 @@
           return userResource.update(user).$promise;
         }
 
+      function updateUserProfile(user){
+        return userResource.updateUserProfile({userId: user.id, firstName: user.firstName, lastName: user.lastName, avatarUrl: user.avatarUrl}).$promise;
+      }
+
         return {
           getUsers: getUsers,
           getUser : getUser,
           setCurrentUser : setCurrentUser,
           getCurrentUser : getCurrentUser,
-          updateUser : updateUser
+          updateUser : updateUser,
+          updateUserProfile: updateUserProfile
         };
     });
 })();

@@ -10,12 +10,12 @@
         <strong ng-switch-when="to">
           Kudos from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!
           <div class="pull-right">
-            <img ng-src="{{kudos.fromUser.avatar}}" class="circle-border-small" width="80">
+            <img ng-src="{{kudos.fromUser.avatarUrl}}" class="circle-border-small" width="80">
           </div>
         </strong>
         <strong ng-switch-when="from">Kudos to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!
           <div class="pull-right">
-            <img ng-src="{{kudos.toUser.avatar}}" class="circle-border-small" width="80">
+            <img ng-src="{{kudos.toUser.avatarUrl}}" class="circle-border-small" width="80">
           </div>
         </strong>
       </div>

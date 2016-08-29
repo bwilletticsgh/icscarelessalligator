@@ -8,8 +8,9 @@
  * Controller of the kudosApp
  */
 angular.module('kudosApp')
-  .controller('MainCtrl', function ($uibModal) {
+  .controller('MainCtrl', function ($uibModal, users) {
     var vm = this;
+    console.log(users.getCurrentUser());
     vm.showInfo = function(){
       var modalInstance = $uibModal.open({
         templateUrl: 'myModalContent.html',
