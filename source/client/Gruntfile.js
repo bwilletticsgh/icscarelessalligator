@@ -16,8 +16,10 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
-  });
+    cdnify: 'grunt-google-cdn',
+    ngconstant: 'grunt-ng-constant'
+
+});
 
   // Configurable paths for the application
   var appConfig = {
@@ -53,7 +55,8 @@ module.exports = function (grunt) {
         tasks: ['compass:server', 'postcss:server']
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+        tasks: ['ngconstant:development']
       },
       livereload: {
         options: {
@@ -368,7 +371,31 @@ module.exports = function (grunt) {
         }]
       }
     },
-
+    ngconstant: {
+      options: {
+        name: 'kudosAppConfig'
+      },
+      dist: {
+        options:{
+          dest: '<%= yeoman.dist %>/scripts/config.js'
+        },
+        constants: {
+          'apiInfo': {
+            'port': '80'
+          }
+        }
+      },
+      development: {
+        options:{
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          'apiInfo': {
+            'port': '8080'
+          }
+        }
+      }
+    },
     ngtemplates: {
       dist: {
         options: {
@@ -498,6 +525,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

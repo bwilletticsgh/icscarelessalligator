@@ -13,9 +13,13 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 
 @import "theme/bootswatch";
 
+.fa-2x {
+  vertical-align: middle;
+}
+
+
 .form-signin{
   width:350px;
-
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

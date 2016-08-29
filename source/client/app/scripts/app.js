@@ -16,12 +16,17 @@ angular
     'ui.router',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'kudosAppConfig'
   ])
   .constant('_',window._)
   .constant('swal',window.swal)
-  .factory('restUrl', function($window){
-    return $window.location.protocol + '//' + $window.location.hostname + ':8080/KudosREST/v1/';
+  .factory('restUrl', function($window,apiInfo){
+
+    console.log('port number is: ' + apiInfo.port);
+    var KudosRESTAPIPortNumber=':8080';
+
+    return $window.location.protocol + '//' + $window.location.hostname + KudosRESTAPIPortNumber + '/KudosREST/v1/';
   })
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
@@ -30,16 +35,22 @@ angular
 
     $urlRouterProvider.otherwise('/home');
 
+    function addRequiredResolve() {
+      //we're doing this because we want to resolve the currentUser during each state, but in order for that to work, the state needs to have other resolves, otherwise we can't add new
+      var oldStateFunc = $stateProvider.state;
+      $stateProvider.state = function (name, def) {
+        def.resolve = def.resolve || {};
+        oldStateFunc(name, def);
+        return $stateProvider;
+      };
+    }
+
+    addRequiredResolve();
+
     $stateProvider
       .state('app',{
         abstract: true,
-        template:'<ui-view/>',
-        resolve: {
-          currentUser: function(users, $rootScope){
-            $rootScope.currentUser = users.getCurrentUser();
-            return $rootScope.currentUser;
-          }
-        }
+        template:'<ui-view/>'
       })
       .state('app.home', {
         allowAnon: true,
@@ -53,6 +64,12 @@ angular
         templateUrl: 'views/kudosCategory/list.html',
         controller: 'KudosCategoryCtrl as vm',
         url:'/kudosCategory/list'
+      })
+      .state('app.profile', {
+        pageTitle: 'Your Profile',
+        templateUrl: 'views/account/profile.html',
+        controller: 'ProfileCtrl as vm',
+        url:'/account/profile'
       })
       .state('app.editKudosCategory', {
         pageTitle: 'Edit Kudos Category',
@@ -89,6 +106,11 @@ angular
         url: '/kudos/create/{userId}'
       })
       .state('app.users', {
+        resolve:{
+          doStuff : function(){
+            return 'abc'
+          }
+        },
         pageTitle: 'All Users',
         templateUrl: 'views/users/list.html',
         controller: 'UsersCtrl as vm',
@@ -164,7 +186,12 @@ angular
       }
     };
   })
-  .run(function ($rootScope, authentication, $state, $cookieStore, swal) {
+  .run(function ($rootScope, authentication, $state, $cookieStore, swal, _) {
+
+    _.each($state.get(), function(state){
+      state.resolve = state.resolve || {};
+    });
+
     $rootScope.$on('$stateChangeSuccess', function (event, toState) {
       if($rootScope.alertMessage) {
         swal($rootScope.alertMessage.title,$rootScope.alertMessage.message,"success");
@@ -173,11 +200,24 @@ angular
       $rootScope.pageTitle = toState.pageTitle || $state.$current.locals.globals.pageTitle;
     });
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-        if (!authentication.isAuthenticated() && $cookieStore.get('token')) {
-          authentication.setAuthenticationFromToken($cookieStore.get('token'));
-        }
 
-        if (!toState.allowAnon && !authentication.isAuthenticated()){
+        toState.resolve.pauseStateChange = [ //see: http://stackoverflow.com/questions/20094273/stop-angular-ui-router-navigation-until-promise-is-resolved
+          '$q',
+          function($q) {
+            var defer = $q.defer();
+            if ($cookieStore.get('token')) {
+                authentication.setAuthenticationFromToken($cookieStore.get('token')).then(function(){
+                defer.resolve();
+              });
+            }
+            else{
+              defer.resolve();
+            }
+            return defer.promise;
+          }
+        ];
+
+        if (!toState.allowAnon && !$cookieStore.get('token')) {
           event.preventDefault();
           return $state.go('app.login');
         }

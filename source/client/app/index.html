@@ -44,13 +44,14 @@
           <li ui-sref-active="active"><a ui-sref="app.home">Home</a></li>
           <li ui-sref-active="active"><a ui-sref="app.kudosCategories">Manage Kudos</a></li>
           <li ui-sref-active="active"><a ui-sref="app.users">Users</a></li>
+          <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="app.profile">My Profile</a></li>
           <li ng-hide="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="app.login">Log In</a></li>
           <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active"><a
             ng-click="vm.logout()">Log Out</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right ">
           <li class="navbar-text" ng-show="vm.authentication.isAuthenticated()">
-            Welcome, {{vm.UserFullName()}}
+            Welcome,  {{vm.UserFullName()}}
           </li>
         </ul>
       </div>
@@ -116,6 +117,10 @@
 <script src="scripts/directives/userKudosType.js"></script>
 <script src="scripts/controllers/kudosCategoryEditorCtrl.js"></script>
 <script src="scripts/controllers/RegisterCtrl.js"></script>
+<script src="scripts/controllers/ProfileCtrl.js"></script>
 <!-- endbuild -->
+
+<script src="scripts/config.js"></script>
+
 </body>
 </html>

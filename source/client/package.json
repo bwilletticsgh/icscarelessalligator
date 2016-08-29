@@ -50,6 +50,7 @@
     "start": "node server.js"
   },
   "devDependencies": {
+    "grunt-ng-constant": "^2.0.1",
     "karma-sinon-as-promised": "^0.1.6",
     "karma-sinon-stub-promise": "^1.0.0",
     "sinon-as-promised": "^4.0.2",

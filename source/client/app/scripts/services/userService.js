@@ -8,7 +8,8 @@
 
         var userResource = $resource(url, {}, {
           all: {method:"get",isArray:true, url: url + "/all"},
-          getUserById: {method:"get",url: url + "/byId/:id"}
+          getUserById: {method:"get",url: url + "/byId/:id"},
+          update: {method:"POST",url: url + "/update"}
         });
 
         var _currentUser;
@@ -35,17 +36,22 @@
         function getUser(id) {
           var res = userResource.getUserById({id: id});
           res.$promise.then(function(user){
-            user.avatar="http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
+            //user.avatar="http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
           });
 
           return res;
+        }
+
+        function updateUser(user){
+          return userResource.update(user).$promise;
         }
 
         return {
           getUsers: getUsers,
           getUser : getUser,
           setCurrentUser : setCurrentUser,
-          getCurrentUser : getCurrentUser
+          getCurrentUser : getCurrentUser,
+          updateUser : updateUser
         };
     });
 })();
