@@ -4,6 +4,8 @@ import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
+import gov.dhs.kudos.rest.v1.to.UserUpdateAccountTO;
+import gov.dhs.kudos.rest.v1.to.UserUpdateProfileTO;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -64,34 +66,46 @@ public class UserService extends OrganizationService
     
     /**
      * Updates a user object
-     * @param user The user object to update - must already exists and email must be unique
+     * @param userAcctTO The user object to update - must already exists and email must be unique
      * @return The updated user object
      * @throws KudosException 
      */
-    public User updateUser(User user) throws KudosException
+    public User updateUserAccount(UserUpdateAccountTO userAcctTO) throws KudosException
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("Updating user");
+            LOG.debug("Updating user account");
         
-        User alreadyExistUser = userRepo.findByEmailIgnoreCase(user.getEmail());
+        User currentUser = userRepo.findOne(userAcctTO.getUserId());
         
-        if(alreadyExistUser != null)
-        {
-            if(!alreadyExistUser.getId().equals(user.getId()))
-                throw new KudosException("Email address already in use by someone", HttpStatus.BAD_REQUEST);
-            
-            user.setIsAdmin(alreadyExistUser.isIsAdmin());
-            user.setIsDeleted(alreadyExistUser.isIsDeleted());
-        }
+        if(userAcctTO.getPassword() != null && userAcctTO.getPassword().trim().length() >= 6)
+            currentUser.setPassword(userAcctTO.getPassword().trim());
+        if(userAcctTO.getEmail() != null && userAcctTO.getEmail().trim().length() > 0)
+            currentUser.setEmail(userAcctTO.getEmail().trim());
         
-        user.setEmail(user.getEmail().trim());
-        user.setFirstName(user.getFirstName().trim());
-        user.setLastName(user.getLastName().trim());
+        return userRepo.save(currentUser);
+    }
+    
+    /**
+     * Updates a user object
+     * @param userProfTO The user object to update - must already exists and email must be unique
+     * @return The updated user object
+     * @throws KudosException 
+     */
+    public User updateUserProf(UserUpdateProfileTO userProfTO) throws KudosException
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Updating user profile");
         
-        if(user.getPassword() == null || user.getPassword().length() == 0)
-            user.setPassword(alreadyExistUser.getPassword());
+        User currentUser = userRepo.findOne(userProfTO.getUserId());
         
-        return userRepo.save(user);
+        if(userProfTO.getFirstName() != null && userProfTO.getFirstName().trim().length() > 0)
+            currentUser.setFirstName(userProfTO.getFirstName().trim());
+        if(userProfTO.getLastName() != null && userProfTO.getLastName().trim().length() > 0)
+            currentUser.setLastName(userProfTO.getLastName().trim());
+        if(userProfTO.getAvatarUrl() != null && userProfTO.getAvatarUrl().trim().length() > 0)
+            currentUser.setAvatarUrl(userProfTO.getAvatarUrl());
+        
+        return userRepo.save(currentUser);
     }
     
     /**
