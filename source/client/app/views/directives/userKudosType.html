@@ -9,13 +9,13 @@
       <div ng-switch on="association">
         <strong ng-switch-when="to">
           Kudos from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!
-          <div class="pull-right">
-            <img ng-src="{{kudos.fromUser.avatarUrl}}" class="circle-border-small" width="80">
+          <div class="pull-right"  style="width:80px">
+            <div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.fromUser.avatarUrl}})"></div>
           </div>
         </strong>
         <strong ng-switch-when="from">Kudos to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!
-          <div class="pull-right">
-            <img ng-src="{{kudos.toUser.avatarUrl}}" class="circle-border-small" width="80">
+          <div class="pull-right"  style="width:80px">
+            <div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.toUser.avatarUrl}})"></div>
           </div>
         </strong>
       </div>

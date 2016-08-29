@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-4 col-sm-6 col-xs-6">
     <div class="userHolder" >
-      <img ng-src="{{vm.user.avatarUrl}}" class="circle-border img-responsive center-block" />
+      <div class=" circle-border circle-avatar" style="background-image:url({{vm.user.avatarUrl}})"></div>
       <div class="well text-center">
         {{vm.user.lastName | uppercase}}, {{vm.user.firstName}}
       </div>
