@@ -35,9 +35,9 @@
 
         function getUser(id) {
           var res = userResource.getUserById({id: id});
-          res.$promise.then(function(user){
-            //user.avatar="http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
-          });
+          // res.$promise.then(function(user){
+          //   //user.avatar="http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
+          // });
 
           return res;
         }

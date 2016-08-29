@@ -7,7 +7,7 @@ MAINTAINER Ben Willett
 
 RUN \
   apt-get update && \
-  apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev
+  apt-get install -y net-tools git nodejs-legacy npm ruby ruby-dev apache2
 
 RUN gem install compass
 
@@ -26,8 +26,27 @@ RUN npm install -g bower grunt-cli grunt
 RUN npm install
 RUN bower --allow-root install
 RUN grunt build
-
 ENV NODE_ENV test
+
+RUN cp -R /usr/src/app/dist/* /var/www/html/
+
+RUN a2enmod proxy
+RUN a2enmod proxy_http
+RUN a2enmod proxy_ajp
+RUN a2enmod rewrite
+RUN a2enmod deflate
+RUN a2enmod headers
+RUN a2enmod proxy_balancer
+RUN a2enmod proxy_connect
+RUN a2enmod proxy_html
+
+RUN echo "<VirtualHost *:*>" > /etc/apache2/sites-available/000-default.conf
+RUN echo "    ProxyPreserveHost On" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "    ProxyPass /KudosREST/ http://localhost:8080/KudosREST/" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "    ServerName localhost" >> /etc/apache2/sites-available/000-default.conf
+RUN echo "</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
 
@@ -39,10 +58,12 @@ RUN \
 RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
 RUN unzip apache-tomcat-8.0.36.zip
 
+RUN sed 's/<Connector port="8080"/<Connector address="127.0.0.1" port="8080"/' /usr/src/app/apache-tomcat-8.0.36/conf/server.xml > /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml 
+RUN cp /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml /usr/src/app/apache-tomcat-8.0.36/conf/server.xml
+RUN rm -f /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml
+
 # Copy the application folder inside the container
 COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
-EXPOSE 8080
-
 # Set the default command to execute when creating the new container  
-CMD sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; npm start
+CMD service apache2 start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; /bin/bash

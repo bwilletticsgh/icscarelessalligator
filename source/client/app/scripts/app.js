@@ -24,9 +24,10 @@ angular
   .factory('restUrl', function($window,apiInfo){
 
     console.log('port number is: ' + apiInfo.port);
-    var KudosRESTAPIPortNumber=':8080';
+    var KudosRESTAPIPortNumber=':' + apiInfo.port;
 
     return $window.location.protocol + '//' + $window.location.hostname + KudosRESTAPIPortNumber + '/KudosREST/v1/';
+
   })
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
