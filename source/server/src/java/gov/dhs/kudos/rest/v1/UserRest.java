@@ -6,6 +6,8 @@ import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.service.KudosService;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
+import gov.dhs.kudos.rest.v1.to.UserUpdateAccountTO;
+import gov.dhs.kudos.rest.v1.to.UserUpdateProfileTO;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,20 +98,45 @@ public class UserRest
     }
     
     /**
-     * Endpoint for updating a User
-     * @param user The RequestBody User object - expects id
+     * Endpoint for updating a User account
+     * @param userAcctTO The RequestBody UserUpdateAccountTO object - expects id
+     * @param request The request containing the actual user
      * @return Updated User object and updated expiry time JSON Web Token in the Authorization Header
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity updateUser(@RequestBody(required = false) User user)
+    @RequestMapping(value = "/updateAccount", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity updateUserAccount(@RequestBody(required = false) UserUpdateAccountTO userAcctTO, HttpServletRequest request)
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("[/v1/user/update] user: " + (user == null ? "NO USER OBJECT" : LogUtils.objectToJson(user)));
+            LOG.debug("[/v1/user/updateAccount] user: " + (userAcctTO == null ? "NO userAcctTO OBJECT" : LogUtils.objectToJson(userAcctTO)));
         
         try
         {
-            kudosService.validateUserUpdate(user);
-            return new ResponseEntity(kudosService.updateUser(user), HttpStatus.OK);
+            kudosService.validateUserUpdateAccount(userAcctTO, request);
+            return new ResponseEntity(kudosService.updateUserAccount(userAcctTO), HttpStatus.OK);
+        }
+        catch(KudosException e)
+        {
+            LOG.error(e);
+            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
+        }
+    }
+    
+    /**
+     * Endpoint for updating a User profile
+     * @param userProfTO The RequestBody UserUpdateProfileTO object - expects id
+     * @param request The request containing the actual user
+     * @return Updated User object and updated expiry time JSON Web Token in the Authorization Header
+     */
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity updateUserProfile(@RequestBody(required = false) UserUpdateProfileTO userProfTO, HttpServletRequest request)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/user/updateProfile] user: " + (userProfTO == null ? "NO userProfTO OBJECT" : LogUtils.objectToJson(userProfTO)));
+        
+        try
+        {
+            kudosService.validateUserUpdateProf(userProfTO, request);
+            return new ResponseEntity(kudosService.updateUserProf(userProfTO), HttpStatus.OK);
         }
         catch(KudosException e)
         {

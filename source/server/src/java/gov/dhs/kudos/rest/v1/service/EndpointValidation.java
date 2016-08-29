@@ -8,6 +8,8 @@ import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
+import gov.dhs.kudos.rest.v1.to.UserUpdateAccountTO;
+import gov.dhs.kudos.rest.v1.to.UserUpdateProfileTO;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
@@ -62,24 +64,68 @@ public class EndpointValidation extends WiredService
     
     /**
      * Validates a user prior to an update
-     * @param user The user to validate
+     * @param userAcctTO The user to validate
+     * @param request The request containing the actual user
      * @throws KudosException 
      */
-    public void validateUserUpdate(User user) throws KudosException
+    public void validateUserUpdateAccount(UserUpdateAccountTO userAcctTO, HttpServletRequest request) throws KudosException
     {
         if(LOG.isDebugEnabled())
-            LOG.debug("Validating required fields for user update");
+            LOG.debug("Validating required fields for user account update");
         
-        if(user == null)
+        if(userAcctTO == null)
             throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
-        if(user.getId() == null || user.getId().trim().length() == 0)
+        if(userAcctTO.getUserId() == null || userAcctTO.getUserId().trim().length() == 0)
             throw new KudosException("A required field for user update was null - need id", HttpStatus.BAD_REQUEST);
-        if(user.getEmail() == null || user.getEmail().trim().length() == 0 || !user.getEmail().contains("@"))
+        if(!userExists(userAcctTO.getUserId()))
+            throw new KudosException("User doesn't exists", HttpStatus.BAD_REQUEST);
+        if(userAcctTO.getEmail() != null && (userAcctTO.getEmail().trim().length() == 0 || !userAcctTO.getEmail().contains("@")))
             throw new KudosException("A required field for user update was invalid - need valid email", HttpStatus.BAD_REQUEST);
-        if(user.getFirstName() == null || user.getFirstName().trim() == null || user.getFirstName().trim().length() == 0 || user.getLastName().trim().length() == 0)
-            throw new KudosException("First name and last name cannot be empty", HttpStatus.BAD_REQUEST);
-        if(user.getPassword() == null || user.getPassword().trim().length() < 6)
+        if(userAcctTO.getPassword() != null && userAcctTO.getPassword().trim().length() < 6)
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
+        
+        if(request == null)
+            throw new KudosException("No HttpRequest associated", HttpStatus.BAD_REQUEST);
+        if(request.getAttribute("kudosUser") == null)
+            throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
+        
+        User reqUser = (User)request.getAttribute("kudosUser");
+        if(!reqUser.isIsAdmin() && !reqUser.getId().equals(userAcctTO.getUserId()))
+            throw new KudosException("Only site Admins can mod other users", HttpStatus.UNAUTHORIZED);
+    }
+    
+    /**
+     * Validates a user prior to an update
+     * @param userProfTO The user to validate
+     * @param request The request containing the actual user
+     * @throws KudosException 
+     */
+    public void validateUserUpdateProf(UserUpdateProfileTO userProfTO, HttpServletRequest request) throws KudosException
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Validating required fields for user profile update");
+        
+        if(userProfTO == null)
+            throw new KudosException("User object is null", HttpStatus.BAD_REQUEST);
+        if(userProfTO.getUserId() == null || userProfTO.getUserId().trim().length() == 0)
+            throw new KudosException("A required field for user update was null - need id", HttpStatus.BAD_REQUEST);
+        if(!userExists(userProfTO.getUserId()))
+            throw new KudosException("User doesn't exists", HttpStatus.BAD_REQUEST);
+        if(userProfTO.getLastName() != null && userProfTO.getLastName().trim().length() == 0)
+            throw new KudosException("Can't have a blank name", HttpStatus.BAD_REQUEST);
+        if(userProfTO.getFirstName() != null && userProfTO.getFirstName().trim().length() == 0)
+            throw new KudosException("Can't have a blank name", HttpStatus.BAD_REQUEST);
+        if(userProfTO.getAvatarUrl() != null && userProfTO.getAvatarUrl().trim().length() == 0)
+            throw new KudosException("Can't have a blank avatar url", HttpStatus.BAD_REQUEST);
+        
+        if(request == null)
+            throw new KudosException("No HttpRequest associated", HttpStatus.BAD_REQUEST);
+        if(request.getAttribute("kudosUser") == null)
+            throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
+        
+        User reqUser = (User)request.getAttribute("kudosUser");
+        if(!reqUser.isIsAdmin() && !reqUser.getId().equals(userProfTO.getUserId()))
+            throw new KudosException("Only site Admins can mod other users", HttpStatus.UNAUTHORIZED);      
     }
     
     /**

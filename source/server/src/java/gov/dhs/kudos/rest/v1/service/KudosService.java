@@ -4,6 +4,7 @@ import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
+import gov.dhs.kudos.rest.v1.to.EmailNotificationTO;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +83,11 @@ public class KudosService extends KudosCategoryService
         kudo.setToUser(userRepo.findOne(toUserId));
         kudo.setKudosCat(kudosCatRepo.findOne(kudosCatId));
         
+        emailNotifier.queueEmail(new EmailNotificationTO(kudo.getFromUser().getEmail(), 
+                                                         "You have recieved a KUDOS from " + kudo.getFromUser().getEmail() + ". '" + kudo.getComments() + "'", 
+                                                         "KUDOS TO YOU!", 
+                                                         Arrays.<String>asList(new String[]{kudo.getToUser().getEmail()})));
+        
         return kudosRepo.save(kudo);
     }
     
@@ -94,15 +100,25 @@ public class KudosService extends KudosCategoryService
      */
     public List<Kudos> saveKudosOneToMany(String fromUserId, String kudosCatId, KudosOneToManyTO kudosOneToMany)
     {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Saving kudos one-to-many");
+                
         List<Kudos> resultList = new ArrayList<>();
         
         KudosCategory kudosCat = kudosCatRepo.findOne(kudosCatId);
         User fromUser = userRepo.findOne(fromUserId);
+        
+        EmailNotificationTO emailNotTO = new EmailNotificationTO(fromUser.getEmail(), kudosOneToMany.getComments(), "You have recieved a KUDOS from " + fromUser.getEmail());
+        
         for(String toUserId : kudosOneToMany.getUserIds())
         {
             Kudos kudo = new Kudos(kudosCat, fromUser, userRepo.findOne(toUserId), kudosOneToMany.getComments());
             resultList.add(kudosRepo.save(kudo));
+            
+            emailNotTO.addTo(kudo.getToUser().getEmail());
         }
+        
+        emailNotifier.queueEmail(emailNotTO);
         
         return resultList;
     }
