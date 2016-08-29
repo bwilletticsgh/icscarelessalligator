@@ -46,10 +46,10 @@
 
     <target name="compile_jenkins">
         <echo>Compiling...</echo>
-        <javac debug="on" target="1.7" source="1.7" srcdir="${src.dir}" destdir="${build.web.classes.dir}" includes="java/**,java/gov/dhs/kudos/rest/spring/kudos.properties" includeantruntime="false" >
+        <javac debug="on" target="1.7" source="1.7" srcdir="${src.dir}" destdir="${build.web.classes.dir}" includes="java/**" includeantruntime="false" >
             <classpath refid="build.class.path" />
         </javac>
-        
+        <copy file="${src.dir}/java/gov/dhs/kudos/rest/spring/kudos.properties" tofile="${build.web.classes.dir}/gov/dhs/kudos/rest/spring/kudos.properties" overwrite="true"/>
     </target>
 
     <target name="package_jenkins">
