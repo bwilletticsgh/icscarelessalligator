@@ -25,10 +25,11 @@
     <span ng-show="registerForm.Username.$error.email && registerForm.Username.$touched" class="help-block">This is not a valid email</span>
   </div>
 
-  <div class="form-group" ng-class="{'has-error': registerForm.password.$error.required && !registerForm.password.$pristine}">
+  <div class="form-group" ng-class="{'has-error': registerForm.password.$error && registerForm.password.$touched}">
     <label class="sr-only" for="password">Password</label>
-    <input type="password" name="password" class="form-control" id="password" ng-model="vm.Password" placeholder="Password" required>
+    <input type="password" name="password" class="form-control" ng-minlength="6" id="password" ng-model="vm.Password" placeholder="Password (at least 6 chars)" required>
     <span ng-show="registerForm.password.$error.required && !registerForm.password.$pristine" class="help-block">Required</span>
+    <span ng-show="registerForm.password.$error.minlength && registerForm.password.$touched" class="help-block">Please enter at least 6 chars</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': registerForm.password2.$invalid && registerForm.password2.$touched}">
