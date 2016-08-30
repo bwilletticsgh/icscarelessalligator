@@ -1,8 +1,6 @@
 'use strict';
 
 describe('Controller: Login', function () {
-
-
   var Login,
     authentication,
     $httpBackend,
@@ -14,11 +12,11 @@ describe('Controller: Login', function () {
     scope;
 
   function resolve(val){
-    return $q(function(resolve){ resolve(val); })
+    return $q(function(resolve){ resolve(val); });
   }
 
   function reject(val){
-    return $q(function(resolve, reject){ reject(val); })
+    return $q(function(resolve, reject){ reject(val); });
   }
 
   beforeEach(module('kudosApp'));
@@ -72,5 +70,4 @@ describe('Controller: Login', function () {
     expect(stub.calledOnce).toBe(true);
     expect(stub.calledWith(Login.Username, Login.Password)).toBe(true);
   });
-
 });

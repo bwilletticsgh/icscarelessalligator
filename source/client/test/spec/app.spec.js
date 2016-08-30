@@ -23,15 +23,16 @@ describe('Unit: App', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.when('GET', 'views/main.html').respond(200);
       $httpBackend.when('GET', 'views/users/list.html').respond(200);
+      $httpBackend.when('GET', 'views/account/login.html').respond(200);
     }));
 
-    it('verifies state configuration', function () {
+    it('redirects a user that is not logged in', function () {
       $rootScope.$apply();
       expect($state.current.name).toBe('');
-      $state.transitionTo('users');
+      $state.transitionTo('app.users');
       $httpBackend.flush();
       $rootScope.$apply();
-      expect($state.current.name).toBe('users');
+      expect($state.current.name).toBe('app.login');
     });
   });
 });
