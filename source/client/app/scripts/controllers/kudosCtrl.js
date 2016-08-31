@@ -10,7 +10,7 @@
 
       //we want to hide the person from the list so they can't give a kudos to themselves
       users.getUsers().$promise.then(function(data){
-        vm.users = _.filter(data, function(x){return x.id !== vm.kudo.fromUser});
+        vm.users = _.filter(data, function(x){return x.id !== vm.kudo.fromUser;});
       });
 
       vm.saveKudos = function () {

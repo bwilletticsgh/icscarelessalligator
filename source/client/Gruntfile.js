@@ -284,7 +284,24 @@ module.exports = function (grunt) {
               js: ['concat', 'uglifyjs'],
               css: ['cssmin']
             },
-            post: {}
+            post: {
+              js: [{
+                name: 'concat',
+                createConfig: function (context) {
+                  context.options.generated.options = {
+                    sourceMap: true
+                  };
+                }
+              }, {
+                name: 'uglify',
+                createConfig: function (context, block) {
+                  context.options.generated.options = {
+                    sourceMap : true,
+                    sourceMapIn: '.tmp/concat/' + block.dest.replace('.js', '.js.map')
+                  };
+                }
+              }]
+            }
           }
         }
       }

@@ -47,8 +47,7 @@ angular
                 authentication.setAuthenticationFromToken($cookieStore.get('token')).then(
                   function(){
                     defer.resolve();
-              }, function(){
-                  alert('Something went horribly wrong!');
+              }, function(e){
                   console.log(e);
                   defer.reject();
                 });

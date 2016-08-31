@@ -1,5 +1,8 @@
 'use strict';
 
+(function(){
+
+
 /**
  * @ngdoc function
  * @name kudosApp.controller:UsersCtrl
@@ -12,3 +15,4 @@ angular.module('kudosApp')
     var vm = this;
     vm.users = users.getUsers();
   });
+})();

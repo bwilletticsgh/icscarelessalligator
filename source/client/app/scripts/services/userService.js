@@ -39,7 +39,7 @@
           var res = userResource.getUserById({id: id});
            res.$promise.then(function(user){
              user.avatarUrl = user.avatarUrl || "http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
-             console.log(user)
+             console.log(user);
            });
 
           return res;

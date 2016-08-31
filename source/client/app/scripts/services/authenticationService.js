@@ -68,8 +68,8 @@
               users.getUser(JSON.parse(claims.kudosUser).id).$promise.then(function (u) {
                 users.setCurrentUser(u);
                 deferred.resolve();
-              }).catch(function () {
-                deferred.reject()
+              }).catch(function (e) {
+                deferred.reject(e);
               });
             }
             else {

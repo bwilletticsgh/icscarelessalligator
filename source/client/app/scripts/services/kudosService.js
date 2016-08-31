@@ -75,8 +75,8 @@
       function setupAvatarsOnKudosResource(kudos){
         kudos.$promise.then(function(data) {
           _.each(data, function(k) {
-            k.toUser.avatarUrl = k.toUser.avatarUrl || "http://robohash.org/" + k.toUser.id + ".png?size=300x300&set=set1";
-            k.fromUser.avatarUrl = k.fromUser.avatarUrl || "http://robohash.org/" + k.fromUser.id + ".png?size=300x300&set=set1";
+            k.toUser.avatarUrl = k.toUser.avatarUrl || 'http://robohash.org/' + k.toUser.id + '.png?size=300x300&set=set1';
+            k.fromUser.avatarUrl = k.fromUser.avatarUrl || 'http://robohash.org/' + k.fromUser.id + '.png?size=300x300&set=set1';
           });
         });
         return kudos;
