@@ -14,14 +14,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
  * Notification service responsible for handling / transporting a queued concurrent list of email
  * @author bsuneson
  */
-@Service
 public class EmailNotification
 {
     /** The logger for this class **/
@@ -32,20 +29,18 @@ public class EmailNotification
     /** The thread scheduler for probing the queue **/
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     
-    @Value("${kudos.admin.email}")
-    private String kudosFrom;
-    @Value("${smtp.host}")
-    private String smtpHost;
-    @Value("${smtp.port}")
-    private String smtpPort;
-    @Value("${smtp.user}")
-    private String smtpUser;
-    @Value("${smtp.auth}")
-    private String smtpAuth;
+    private final String kudosFrom;
+    private final String smtpHost;
+    private final String smtpPort;
+    private final String smtpUser;
+    private final String smtpAuth;
 
-    public EmailNotification() 
-    {
-        
+    public EmailNotification(String kudosFrom, String smtpHost, String smtpPort, String smtpUser, String smtpAuth) {
+        this.kudosFrom = kudosFrom;
+        this.smtpHost = smtpHost;
+        this.smtpPort = smtpPort;
+        this.smtpUser = smtpUser;
+        this.smtpAuth = smtpAuth;
     }
     
     @PostConstruct
