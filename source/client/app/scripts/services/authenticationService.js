@@ -62,6 +62,7 @@
         function setAuthenticationFromToken(token) {
           var deferred = $q.defer();
           try {
+            console.log(token);
             var claims = JSON.parse(atob(token.split('.')[1]));
             _isAuthenticated = true;
             if (!users.getCurrentUser()) {
