@@ -60,17 +60,24 @@
         }
 
         function setAuthenticationFromToken(token) {
-          var claims = JSON.parse(atob(token.split('.')[1]));
-          _isAuthenticated=true;
           var deferred = $q.defer();
-          if (!users.getCurrentUser()) {
-            users.getUser(JSON.parse(claims.kudosUser).id).$promise.then(function(u){
-              users.setCurrentUser(u);
+          try {
+            var claims = JSON.parse(atob(token.split('.')[1]));
+            _isAuthenticated = true;
+            if (!users.getCurrentUser()) {
+              users.getUser(JSON.parse(claims.kudosUser).id).$promise.then(function (u) {
+                users.setCurrentUser(u);
+                deferred.resolve();
+              }).catch(function () {
+                deferred.reject()
+              });
+            }
+            else {
               deferred.resolve();
-            }).catch(function(){deferred.reject()});
+            }
           }
-          else{
-            deferred.resolve();
+          catch (err) {
+            deferred.reject(err);
           }
           return deferred.promise;
         }

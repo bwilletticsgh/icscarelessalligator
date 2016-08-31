@@ -44,9 +44,14 @@ angular
           function($q) {
             var defer = $q.defer();
             if ($cookieStore.get('token')) {
-                authentication.setAuthenticationFromToken($cookieStore.get('token')).then(function(){
-                defer.resolve();
-              });
+                authentication.setAuthenticationFromToken($cookieStore.get('token')).then(
+                  function(){
+                    defer.resolve();
+              }, function(){
+                  alert('Something went horribly wrong!');
+                  console.log(e);
+                  defer.reject();
+                });
             }
             else{
               defer.resolve();
