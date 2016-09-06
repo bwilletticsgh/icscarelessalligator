@@ -17,7 +17,6 @@ MAINTAINER Ben Willett
 
 # Bundle app source
 COPY source/client/. /usr/src/app
-
 COPY source/client/package.json /usr/src/app/
 COPY source/client/bower.json /usr/src/app/
 COPY source/client/Gruntfile.js /usr/src/app/
