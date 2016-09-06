@@ -60,8 +60,9 @@ public class LogUtils
             "/v1/user/byEmail","/v1/user/byId","/v1/user/byFirstName","/v1/user/byLastName",
             "/v1/org/byName","/v1/org/create","/v1/org/addUser","/v1/org/cloneCat","/v1/org/createCat",
             "/v1/cat/byName",
-            "/v1/kudos/fromUser/all","/v1/kudos/toUser/all","/v1/kudos/cat/all","/v1/kudos/create",
-            "/v1/usage/all","/v1/usage/byEmail","/v1/usage/byUri"
+            "/v1/kudos/fromUser/all","/v1/kudos/toUser/all","/v1/kudos/cat/all","/v1/kudos/create","/v1/kudos/oneToMany/create",
+            "/v1/usage/all","/v1/usage/byEmail","/v1/usage/byUri",
+            "/v1/user/toggleDelete","/v1/user/toggleAdmin"
         });
     }
 }
