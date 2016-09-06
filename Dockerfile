@@ -16,11 +16,11 @@ MAINTAINER Ben Willett
 #WORKDIR /usr/src/app
 
 # Bundle app source
-COPY source/client/. /usr/src/app
+#COPY source/client/. /usr/src/app
 
-COPY source/client/package.json /usr/src/app/
-COPY source/client/bower.json /usr/src/app/
-COPY source/client/Gruntfile.js /usr/src/app/
+#COPY source/client/package.json /usr/src/app/
+#COPY source/client/bower.json /usr/src/app/
+#COPY source/client/Gruntfile.js /usr/src/app/
 #RUN npm config set registry http://registry.npmjs.org/
 #RUN npm install -g bower grunt-cli grunt
 #RUN npm install
@@ -28,7 +28,7 @@ COPY source/client/Gruntfile.js /usr/src/app/
 RUN grunt build
 #ENV NODE_ENV test
 
-RUN cp -R /usr/src/app/dist/* /var/www/html/
+COPY source/client/dist/. /var/www/html/
 
 #RUN a2enmod proxy
 #RUN a2enmod proxy_http
