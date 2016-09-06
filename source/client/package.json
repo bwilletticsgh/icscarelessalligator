@@ -51,8 +51,10 @@
   },
   "devDependencies": {
     "grunt-ng-constant": "^2.0.1",
+    "grunt-protractor-runner": "^3.2.0",
     "karma-sinon-as-promised": "^0.1.6",
     "karma-sinon-stub-promise": "^1.0.0",
+    "protractor": "^4.0.4",
     "sinon-as-promised": "^4.0.2",
     "sinon-stub-promise": "^3.0.1"
   }
