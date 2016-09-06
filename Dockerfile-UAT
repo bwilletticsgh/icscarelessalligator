@@ -6,16 +6,15 @@ MAINTAINER Ben Willett
 # CLIENT PART
 
 # Bundle app source
-COPY source/client/. /usr/src/app
+COPY \
+	source/client/. /usr/src/app && \
+	source/client/package.json /usr/src/app/ && \
+	source/client/bower.json /usr/src/app/ && \
+	source/client/Gruntfile.js /usr/src/app/
 
-COPY source/client/package.json /usr/src/app/
-COPY source/client/bower.json /usr/src/app/
-COPY source/client/Gruntfile.js /usr/src/app/
-
-RUN grunt build
-
-
-RUN cp -R /usr/src/app/dist/* /var/www/html/
+RUN \
+	grunt build && \
+	cp -R /usr/src/app/dist/* /var/www/html/
 
 # SERVER PART
 
