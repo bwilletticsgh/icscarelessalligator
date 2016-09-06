@@ -1,0 +1,26 @@
+FROM 172.31.28.38:5000/dhsflashuat:latest
+
+# File Author / Maintainer
+MAINTAINER Ben Willett
+
+# CLIENT PART
+
+# Bundle app source
+COPY source/client/. /usr/src/app
+
+COPY source/client/package.json /usr/src/app/
+COPY source/client/bower.json /usr/src/app/
+COPY source/client/Gruntfile.js /usr/src/app/
+
+RUN grunt build
+
+
+RUN cp -R /usr/src/app/dist/* /var/www/html/
+
+# SERVER PART
+
+# Copy the application folder inside the container
+COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
+
+# Set the default command to execute when creating the new container  
+CMD service apache2 start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; /bin/bash
