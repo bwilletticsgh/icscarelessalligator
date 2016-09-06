@@ -16,19 +16,19 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Bundle app source
-COPY source/client/. /usr/src/app
+#COPY source/client/. /usr/src/app
 
-COPY source/client/package.json /usr/src/app/
-COPY source/client/bower.json /usr/src/app/
-COPY source/client/Gruntfile.js /usr/src/app/
+#COPY source/client/package.json /usr/src/app/
+#COPY source/client/bower.json /usr/src/app/
+#COPY source/client/Gruntfile.js /usr/src/app/
 RUN npm config set registry http://registry.npmjs.org/
 RUN npm install -g bower grunt-cli grunt
-RUN npm install
-RUN bower --allow-root install
-RUN grunt build
+#RUN npm install
+#RUN bower --allow-root install
+#RUN grunt build
 ENV NODE_ENV test
 
-RUN cp -R /usr/src/app/dist/* /var/www/html/
+#RUN cp -R /usr/src/app/dist/* /var/www/html/
 
 RUN a2enmod proxy
 RUN a2enmod proxy_http
@@ -63,7 +63,8 @@ RUN cp /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml /usr/src/app/apache-to
 RUN rm -f /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml
 
 # Copy the application folder inside the container
-COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
+#COPY source/server/dist/KudosREST.war /usr/src/app/apache-tomcat-8.0.36/webapps/
 
 # Set the default command to execute when creating the new container  
-CMD service apache2 start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; /bin/bash
+#CMD service apache2 start; sh /usr/src/app/apache-tomcat-8.0.36/bin/catalina.sh start ; /bin/bash
+CMD /bin/bash
