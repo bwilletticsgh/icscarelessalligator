@@ -1,4 +1,4 @@
-FROM dhsflash:latest
+FROM 172.31.28.38:5000/dhsflash:latest
 
 # File Author / Maintainer
 MAINTAINER Ben Willett
