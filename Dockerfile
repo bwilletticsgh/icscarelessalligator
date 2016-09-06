@@ -56,7 +56,7 @@ RUN \
   apt-get update && \
   apt-get install -y net-tools links openjdk-8-jre-headless wget unzip
 RUN wget http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.zip
-RUN unzip apache-tomcat-8.0.36.zip
+RUN unzip -o apache-tomcat-8.0.36.zip
 
 RUN sed 's/<Connector port="8080"/<Connector address="127.0.0.1" port="8080"/' /usr/src/app/apache-tomcat-8.0.36/conf/server.xml > /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml 
 RUN cp /usr/src/app/apache-tomcat-8.0.36/conf/server2.xml /usr/src/app/apache-tomcat-8.0.36/conf/server.xml
