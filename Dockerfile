@@ -25,7 +25,7 @@ MAINTAINER Ben Willett
 #RUN npm install -g bower grunt-cli grunt
 #RUN npm install
 #RUN bower --allow-root install
-RUN grunt build
+#RUN grunt build
 #ENV NODE_ENV test
 
 COPY source/client/dist/. /var/www/html/
