@@ -17,6 +17,7 @@ module.exports = function (grunt) {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
+    protractor: 'grunt-protractor-runner',
     ngconstant: 'grunt-ng-constant'
 
 });
@@ -183,7 +184,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          map: true
+          map: false
         },
         files: [{
           expand: true,
@@ -254,7 +255,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          sourcemap: true
+          sourcemap: false
         }
       }
     },
@@ -289,14 +290,14 @@ module.exports = function (grunt) {
                 name: 'concat',
                 createConfig: function (context) {
                   context.options.generated.options = {
-                    sourceMap: true
+                    sourceMap: false
                   };
                 }
               }, {
                 name: 'uglify',
                 createConfig: function (context, block) {
                   context.options.generated.options = {
-                    sourceMap : true,
+                    sourceMap : false,
                     sourceMapIn: '.tmp/concat/' + block.dest.replace('.js', '.js.map')
                   };
                 }
@@ -500,12 +501,23 @@ module.exports = function (grunt) {
         'svgmin'
       ]
     },
-
     // Test settings
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: true
+      }
+    },
+    protractor: {
+      options: {
+        configFile: 'test/web/protractor.conf.js'
+      },
+      chrome: {
+        options: {
+          args: {
+            browser: 'chrome'
+          }
+        }
       }
     }
   });
@@ -538,6 +550,15 @@ module.exports = function (grunt) {
     'postcss',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('e2e', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'postcss',
+    'connect:test',
+    'protractor'
   ]);
 
   grunt.registerTask('build', [

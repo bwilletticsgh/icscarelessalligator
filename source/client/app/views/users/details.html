@@ -8,7 +8,7 @@
         {{vm.user.lastName | uppercase}}, {{vm.user.firstName}}
       </div>
     </div>
-    <button ng-hide="currentUser.id == vm.user.id" class="btn-primary btn-block btn-lg" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
+    <button ng-hide="vm.currentUser.id == vm.user.id" class="btn-primary btn-block btn-lg" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
       <i class="fa fa-thumbs-up"></i>Send them a Kudos
     </button>
   </div>
