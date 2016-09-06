@@ -24,6 +24,7 @@ COPY source/client/Gruntfile.js /usr/src/app/
 #RUN npm install -g bower grunt-cli grunt
 #RUN npm install
 #RUN bower --allow-root install
+RUN npm set progress=false
 RUN grunt build
 #ENV NODE_ENV test
 
