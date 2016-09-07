@@ -14,15 +14,11 @@ describe('KudosCtrl', function () {
     scope;
 
   function resolve(val){
-    return $q(function(resolve){ resolve(val); })
+    return $q(function(resolve){ resolve(val); });
   }
 
   function resolveResource(val){
     return {$promise : resolve(val) };
-  }
-
-  function reject(val){
-    return $q(function(resolve, reject){ reject(val); })
   }
 
   beforeEach(module('kudosApp'));

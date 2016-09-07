@@ -57,6 +57,7 @@ body { padding-top: 70px; }
   transform: scale(1,1);
   transition: all 0.1s ease-in;
   position: relative;
+  display: block;
 }
 
 .userHolder:hover {

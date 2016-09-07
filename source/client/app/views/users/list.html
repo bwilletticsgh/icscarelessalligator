@@ -7,13 +7,14 @@
   </div>
 </div>
 
+
 <div class="row topmargin-20 ">
   <div class="col-md-4 col-sm-6 col-xs-6" ng-repeat="item in vm.users | orderBy: 'firstName' | filter: FirstNameFilter">
-    <div class="userHolder" ui-sref="app.user({ id: '{{item.id}}' })" >
+    <a class="userHolder" ui-sref="app.user({ id: '{{item.id}}' })" >
       <div class=" circle-border circle-avatar" style="background-image:url({{item.avatarUrl}})"></div>
       <div class="well text-center" style="z-index: 1000">
         {{item.lastName | uppercase}}, {{item.firstName}}
       </div>
-    </div>
+    </a>
   </div>
 </div>
