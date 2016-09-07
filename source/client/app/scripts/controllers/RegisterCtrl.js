@@ -25,8 +25,8 @@ angular.module('kudosApp')
           vm.message = result.message;
           vm.failed = true;
         }
-      }).catch(function() {
-          vm.message='This was an error registering';
+      }).catch(function(e) {
+          vm.message=e;
       });
 
       return promise;

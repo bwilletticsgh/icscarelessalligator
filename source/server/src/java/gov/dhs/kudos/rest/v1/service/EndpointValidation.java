@@ -6,6 +6,7 @@ import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
+import gov.dhs.kudos.rest.v1.to.SubKudoCommentTO;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
 import gov.dhs.kudos.rest.v1.to.UserUpdateAccountTO;
@@ -258,6 +259,23 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Silly Kudoer - kudos are for others", HttpStatus.BAD_REQUEST);
     }
     
+    public void validateUpdateKudosAppendSubComment(String kudosId, SubKudoCommentTO subComment, HttpServletRequest request) throws KudosException
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Validating required fields for appending a comment to a kudo");
+        
+        if(request == null)
+            throw new KudosException("No HttpRequest associated", HttpStatus.BAD_REQUEST);
+        if(request.getAttribute("kudosUser") == null)
+            throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
+        if(kudosId == null || subComment == null)
+            throw new KudosException("Reuired obejct(s) was null - required kudosId and KudosSubComment", HttpStatus.BAD_REQUEST);
+        if(subComment.getComment() == null || subComment.getComment().trim().length() == 0)
+            throw new KudosException("No comments in the SubKudoCommentTO object", HttpStatus.BAD_REQUEST);
+        if(!kudosExists(kudosId))
+            throw new KudosException("No Kudos exists for kudosId", HttpStatus.BAD_REQUEST);
+    }
+    
     /**
      * Validates from user, to users, kudos category, and kudosOneToMany object prior to saving a kudos
      * @param fromUserId The from user id
@@ -355,6 +373,11 @@ public class EndpointValidation extends WiredService
     private boolean kudosCatExists(String id)
     {
         return (kudosCatRepo.findOne(id) != null);
+    }
+    
+    private boolean kudosExists(String id)
+    {
+        return (kudosRepo.findOne(id) != null);
     }
     
     /**

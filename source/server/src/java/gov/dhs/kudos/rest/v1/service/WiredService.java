@@ -3,6 +3,7 @@ package gov.dhs.kudos.rest.v1.service;
 import gov.dhs.kudos.rest.v1.notification.EmailNotification;
 import gov.dhs.kudos.rest.v1.repo.KudosCategoryRepo;
 import gov.dhs.kudos.rest.v1.repo.KudosRepo;
+import gov.dhs.kudos.rest.v1.repo.KudosSubCommentRepo;
 import gov.dhs.kudos.rest.v1.repo.OrganizationRepo;
 import gov.dhs.kudos.rest.v1.repo.UsageStatisticRepo;
 import gov.dhs.kudos.rest.v1.repo.UserRepo;
@@ -26,6 +27,9 @@ public class WiredService
     /** The kudos mongo repository **/
     @Autowired    
     protected KudosRepo kudosRepo;
+    /** The kudos sub comment repo **/
+    @Autowired 
+    protected KudosSubCommentRepo kudosCommentRepo;
     /** The usage statistics mongo repository **/
     @Autowired
     protected UsageStatisticRepo usageStatisticRepo;

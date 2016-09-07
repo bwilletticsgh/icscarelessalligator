@@ -2,10 +2,12 @@ package gov.dhs.kudos.rest.v1.service;
 
 import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
+import gov.dhs.kudos.rest.v1.model.KudosSubComment;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.EmailNotificationTO;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
+import gov.dhs.kudos.rest.v1.to.SubKudoCommentTO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -123,6 +125,17 @@ public class KudosService extends KudosCategoryService
         return resultList;
     }
     
+    public Kudos saveKudosAppendComment(String kudosId, SubKudoCommentTO subComment, User fromUser)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Saving kudos appending comment");
+        
+        Kudos kudo = kudosRepo.findOne(kudosId);
+        kudo.addSubComment(kudosCommentRepo.save(new KudosSubComment(fromUser, subComment.getComment())));
+        
+        return kudosRepo.save(kudo);
+    }
+    
     public void initAdminData() 
     {
         Organization dhs = organizationRepo.findByOrgName("DHS");
@@ -130,6 +143,7 @@ public class KudosService extends KudosCategoryService
         {
             usageStatisticRepo.deleteAll();
             userRepo.deleteAll();
+            kudosCommentRepo.deleteAll();
             kudosRepo.deleteAll();
             kudosCatRepo.deleteAll();
             organizationRepo.deleteAll();

@@ -2,10 +2,13 @@ package gov.dhs.kudos.rest.v1;
 
 import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.Kudos;
+import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.service.KudosService;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
+import gov.dhs.kudos.rest.v1.to.SubKudoCommentTO;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +33,6 @@ public class KudosRest
     /** The service layer for logic **/
     @Autowired 
     private KudosService kudosService;
-    
     
     public KudosRest()
     {
@@ -137,6 +139,34 @@ public class KudosRest
         {
             kudosService.validateCreateKudosOneToMany(fromUserId, kudosCatId, kudosOneToMany);
             return new ResponseEntity(kudosService.saveKudosOneToMany(fromUserId, kudosCatId, kudosOneToMany), HttpStatus.OK);
+        }
+        catch(KudosException e)
+        {
+            LOG.error(e);
+            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
+        }
+    }
+    
+    /**
+     * Endpoint for giving a kudo to users
+     * @param kudosId The id of the Kudos object
+     * @param subComment The sub-comment to append to the kudos object
+     * @param request
+     * @return The created Kudo object
+     */
+    @RequestMapping(value = "/subComment/{kudosId}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity subComment(@PathVariable String kudosId, @RequestBody(required = false) SubKudoCommentTO subComment, HttpServletRequest request)
+    {
+        if(LOG.isDebugEnabled())
+        {
+            LOG.debug("[/v1/kudos/subComment/{kudosId}] kudosId: " + (kudosId == null ? "NO kudosId SUPPLIED" : kudosId));
+            LOG.debug("[/v1/kudos/subComment/{kudosId}] subComment: " + (subComment == null ? "NO subComment OBJECT" : LogUtils.objectToJson(subComment)));
+        }
+        
+        try
+        {
+            kudosService.validateUpdateKudosAppendSubComment(kudosId, subComment, request);
+            return new ResponseEntity(kudosService.saveKudosAppendComment(kudosId, subComment, (User) request.getAttribute("kudosUser")), HttpStatus.OK);
         }
         catch(KudosException e)
         {
