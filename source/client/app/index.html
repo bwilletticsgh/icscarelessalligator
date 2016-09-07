@@ -46,9 +46,9 @@
         </ul>
         <form ng-show="vm.authentication.isAuthenticated()" class="navbar-form navbar-left" role="search">
           <div class="input-group">
-            <input type="text" class="form-control input-sm" placeholder="Search for...">
+            <input type="text" class="form-control input-sm" maxlength="30" placeholder="Search for..." ng-model="vm.SearchString">
             <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary btn-sm">Search</button>
+              <button type="submit" class="btn btn-primary btn-sm" ng-click="vm.Search()">Search</button>
             </span>
           </div>
         </form>
@@ -127,6 +127,7 @@
 <script src="scripts/controllers/kudosCategoryEditorCtrl.js"></script>
 <script src="scripts/controllers/RegisterCtrl.js"></script>
 <script src="scripts/controllers/ProfileCtrl.js"></script>
+<script src="scripts/controllers/searchCtrl.js"></script>
 <script src="scripts/navFixes.js"></script>
 <script src="scripts/stateConfig.js"></script>
 <script src="scripts/authInterceptor.js"></script>

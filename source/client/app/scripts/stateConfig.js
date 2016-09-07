@@ -33,6 +33,12 @@
         controller: 'KudosCategoryCtrl as vm',
         url:'/kudosCategory/list'
       })
+      .state('app.search', {
+        pageTitle: 'Search Results',
+        templateUrl: 'views/searchResults.html',
+        controller: 'SearchCtrl as vm',
+        url:'/search?q'
+      })
       .state('app.profile', {
         pageTitle: 'Your Profile',
         templateUrl: 'views/account/profile.html',

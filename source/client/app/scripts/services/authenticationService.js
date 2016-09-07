@@ -6,8 +6,8 @@
         var url = restUrl + '/user';
 
         var UserResource = $resource(url, {}, {
-          register: {method:"POST", url: url + "/register"},
-          login: {method:"POST", url: url + "/login"}
+          register: {method:'POST', url: url + '/register'},
+          login: {method:'POST', url: url + '/login'}
         });
 
         var _isAuthenticated=false;

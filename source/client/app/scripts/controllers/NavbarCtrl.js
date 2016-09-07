@@ -33,6 +33,10 @@
                 return user;
               }
               return '';
-            }
+            };
+
+            vm.Search = function() {
+              $state.go('app.search',{q: vm.SearchString});
+            };
     });
 })();
