@@ -1,53 +1,72 @@
 <div class="userKudosType">
 
-  <!--<div class="row">-->
-    <!--<div class="col-md-2">-->
+  <div class="row">
+    <div class="col-md-2">
+      <div ng-switch on="association">
+        <div ng-switch-when="to" class="circle-border-micro circle-avatar" style="background-image:url({{kudos.fromUser.avatarUrl}})"></div>
+        <div ng-switch-when="from" class="circle-border-micro circle-avatar" style="background-image:url({{kudos.toUser.avatarUrl}})"></div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <h5>{{kudos.kudosCat.name}}</h5>
+      <div ng-switch on="association">
+        <strong ng-switch-when="to">
+          Kudos received from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!
+        </strong>
+        <strong ng-switch-when="from">
+          Kudos given to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!
+        </strong>
+      </div>
+      <p>{{kudos.comments}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+      </span>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-google-plus fa-stack-1x"></i>
+      </span>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+      </span>
+      <span class="fa-stack">
+        <i class="fa fa-circle-thin fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+      </span>
+    </div>
+  </div>
 
+  <!--<div class="panel panel-primary">-->
+    <!--<div class="panel-heading">-->
+      <!--<h3 class="panel-title">-->
+        <!--<a ui-sref="app.editKudosCategory({id:kudos.kudosCat.id})">{{kudos.kudosCat.name}}</a>-->
+      <!--</h3>-->
     <!--</div>-->
-    <!--<div class="col-md-10">-->
-      <!--<h4>{{kudos.kudosCat.name}}</h4>-->
+    <!--<div class="panel-body">-->
       <!--<div ng-switch on="association">-->
         <!--<strong ng-switch-when="to">-->
-          <!--Kudos received from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!-->
+          <!--Kudos from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!-->
+          <!--<div class="pull-right"  style="width:80px">-->
+            <!--<div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.fromUser.avatarUrl}})"></div>-->
+          <!--</div>-->
         <!--</strong>-->
-        <!--<strong ng-switch-when="from">Kudos give to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!-->
+        <!--<strong ng-switch-when="from">Kudos to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!-->
           <!--<div class="pull-right"  style="width:80px">-->
             <!--<div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.toUser.avatarUrl}})"></div>-->
           <!--</div>-->
         <!--</strong>-->
       <!--</div>-->
+      <!--<div>-->
+        <!--<blockquote class="kudosComment">{{kudos.comments}}</blockquote>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="panel-footer">-->
+      <!--{{kudos.dateCreated | formatTime}}-->
     <!--</div>-->
   <!--</div>-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-12"></div>-->
-  <!--</div>-->
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        <a ui-sref="app.editKudosCategory({id:kudos.kudosCat.id})">{{kudos.kudosCat.name}}</a>
-      </h3>
-    </div>
-    <div class="panel-body">
-      <div ng-switch on="association">
-        <strong ng-switch-when="to">
-          Kudos from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!
-          <div class="pull-right"  style="width:80px">
-            <div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.fromUser.avatarUrl}})"></div>
-          </div>
-        </strong>
-        <strong ng-switch-when="from">Kudos to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!
-          <div class="pull-right"  style="width:80px">
-            <div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.toUser.avatarUrl}})"></div>
-          </div>
-        </strong>
-      </div>
-      <div>
-        <blockquote class="kudosComment">{{kudos.comments}}</blockquote>
-      </div>
-    </div>
-    <div class="panel-footer">
-      {{kudos.dateCreated | formatTime}}
-    </div>
-  </div>
 </div>
