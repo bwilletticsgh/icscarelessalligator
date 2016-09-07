@@ -10,8 +10,11 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 @import "font-awesome/scss/font-awesome.scss";
 // endbower
 
+//@import "theme/bootswatch";
 
-@import "theme/bootswatch";
+.btn {
+  text-transform: none;
+}
 
 .fa-2x {
   vertical-align: middle;
@@ -168,6 +171,12 @@ body { padding-top: 70px; }
     @extend .circle-border;
     border-width:2px !important;
   }
+
+  .circle-border-micro {
+    @extend .circle-border;
+    border-width:1px !important;
+  }
+
   /* Responsive: Portrait tablets and up */
   @media screen and (min-width: 768px) {
     .container {
@@ -193,7 +202,6 @@ body { padding-top: 70px; }
   @for $i from 1 through 6 {
     .topmargin-#{$i*5} { margin-top: 5px * $i; }
   }
-
 
 div.circle-avatar{
 
@@ -225,4 +233,24 @@ div.circle-avatar{
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.navbar .circle-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  //padding: 0px !important;
+  //margin-top: 15px !important;
+}
+
+.navbar-brand {
+  color: #fff !important;
+  text-transform: capitalize;
+}
+
+.navbar-brand .highlight-letters {
+  color: $brand-primary !important;
+}
+
+.navbar input {
+  background-color: #ffffff;
 }

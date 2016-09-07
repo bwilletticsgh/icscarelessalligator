@@ -18,5 +18,21 @@
                 }
                 return '';
             };
+
+            vm.UserAvatarUrl = function () {
+              var user = users.getCurrentUser();
+              if (user) {
+                return user.avatarUrl;
+              }
+              return '';
+            };
+
+            vm.CurrentUser = function() {
+              var user = users.getCurrentUser();
+              if(user) {
+                return user;
+              }
+              return '';
+            }
     });
 })();

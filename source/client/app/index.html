@@ -36,22 +36,31 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="/">Kudos</a>
+        <a class="navbar-brand" ui-sref="app.home">KU<span class="highlight-letters">DO</span>S</a>
       </div>
 
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
         <ul class="nav navbar-nav">
-          <li ui-sref-active="active"><a ui-sref="app.home">Home</a></li>
-          <li ui-sref-active="active"><a ui-sref="app.kudosCategories">Manage Kudos</a></li>
+          <li ui-sref-active="active" ng-show="vm.CurrentUser().isAdmin"><a ui-sref="app.kudosCategories">Manage Kudos</a></li>
           <li ui-sref-active="active"><a ui-sref="app.users">Users</a></li>
-          <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="app.profile">My Profile</a></li>
-          <li ng-hide="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="app.login">Log In</a></li>
-          <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active"><a
-            ng-click="vm.logout()">Log Out</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right ">
-          <li class="navbar-text" ng-show="vm.authentication.isAuthenticated()">
-            Welcome,  {{vm.UserFullName()}}
+        <form ng-show="vm.authentication.isAuthenticated()" class="navbar-form navbar-left" role="search">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </span>
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-hide="vm.authentication.isAuthenticated()" ui-sref-active="active"><a ui-sref="app.login">Log In</a></li>
+          <li ng-show="vm.authentication.isAuthenticated()" ui-sref-active="active">
+            <a ng-click="vm.logout()">Log Out</a>
+          </li>
+          <li class="hidden-sm hidden-xs" ng-show="vm.authentication.isAuthenticated()">
+            <a style="margin:0px;padding:14px 0px 0px 0px;" ui-sref="app.profile">
+              <div class="circle-border-micro circle-avatar" style="background-image:url({{vm.UserAvatarUrl()}})"></div>
+            </a>
           </li>
         </ul>
       </div>
