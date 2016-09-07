@@ -1,5 +1,6 @@
 package gov.dhs.kudos.rest.v1.service;
 
+import com.mongodb.util.JSON;
 import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.KudosSubComment;
@@ -8,6 +9,8 @@ import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.EmailNotificationTO;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
 import gov.dhs.kudos.rest.v1.to.SubKudoCommentTO;
+import gov.dhs.kudos.rest.v1.to.SearchResultTO;
+import gov.dhs.kudos.rest.v1.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -134,6 +137,25 @@ public class KudosService extends KudosCategoryService
         kudo.addSubComment(kudosCommentRepo.save(new KudosSubComment(fromUser, subComment.getComment())));
         
         return kudosRepo.save(kudo);
+    }
+
+	public List<SearchResultTO> findUserAndKudosCatBySearch(String search)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Searching users and Kudos Categories");
+        
+        List<SearchResultTO> resultList = new ArrayList<>();
+        
+        String regSearch = StringUtil.regexify(search);
+        List<User> userList = userRepo.findBySearch(regSearch);
+        List<KudosCategory> kudosCatList = kudosCatRepo.findBySearch(regSearch);
+        
+        for(User u : userList)
+            resultList.add(new SearchResultTO(u.getEmail(), null, "PERSON", u.getId()));
+        for(KudosCategory kc : kudosCatList)
+            resultList.add(new SearchResultTO(kc.getName(), kc.getDesc(), "KUDOS_CATEGORY", kc.getId()));
+        
+        return resultList;
     }
     
     public void initAdminData() 

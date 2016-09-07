@@ -174,4 +174,13 @@ public class KudosRest
             return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
         }
     }
+
+	@RequestMapping(value = "/search/{searchString}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity searchUsersAndKudosCats(@PathVariable String searchString)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/kudos/search/{searchString}] searchString: " + (searchString == null ? "NO searchString SUPPLIED" : searchString));
+        
+        return new ResponseEntity(kudosService.findUserAndKudosCatBySearch(searchString), HttpStatus.OK);
+    }
 }
