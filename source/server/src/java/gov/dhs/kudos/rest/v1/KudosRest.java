@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -175,12 +176,31 @@ public class KudosRest
         }
     }
 
-	@RequestMapping(value = "/search/{searchString}", method = RequestMethod.GET, produces = "application/json")
+    /**
+     * Endpoint for search query
+     * @param searchString
+     * @return The result
+     */
+    @RequestMapping(value = "/search/{searchString}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity searchUsersAndKudosCats(@PathVariable String searchString)
     {
         if(LOG.isDebugEnabled())
             LOG.debug("[/v1/kudos/search/{searchString}] searchString: " + (searchString == null ? "NO searchString SUPPLIED" : searchString));
         
         return new ResponseEntity(kudosService.findUserAndKudosCatBySearch(searchString), HttpStatus.OK);
+    }
+    
+    /**
+     * Endpoint for counting how many kudos a user has received
+     * @param userId The optional id of one user
+     * @return A list of KudosCountResultTO objects
+     */
+    @RequestMapping(value = "/count", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity countKudos(@RequestParam(required = false, value = "userId") String userId)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/kudos/count] userId: " + (userId == null ? "NO userId SUPPLIED, getting all" : userId));
+        
+        return new ResponseEntity(kudosService.count(userId), HttpStatus.OK);
     }
 }
