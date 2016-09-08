@@ -48,8 +48,9 @@ body { padding-top: 70px; }
 }
 
 .circle-border {
-  border: 6px solid #2f6fad !important;
+  //border: 6px solid $nav-primary !important;
   border-radius: 50%;
+  background-color: $gray-lightest;
 }
 
 
@@ -133,6 +134,9 @@ body { padding-top: 70px; }
   padding-right: 15px;
 }
 
+.footer {
+  margin-top: 20px;
+}
 
 /* Custom page header */
 .header {
@@ -268,4 +272,26 @@ div.circle-avatar{
 
 .navbar input {
   background-color: #ffffff;
+}
+
+.tab-holder {
+  background-color: $gray-warm-light;
+  padding: 0px 3px 1px 3px;
+}
+
+.tab-holder .tab-content {
+  background-color: #ffffff;
+}
+
+.tab-holder .tab-pane {
+  padding: 20px 5px 10px 5px;
+}
+
+.tab-holder .kudos-footer {
+  background-color: $gray-warm-light;
+  padding: 2px;
+}
+
+.kudos-text {
+  padding-bottom: 10px;
 }

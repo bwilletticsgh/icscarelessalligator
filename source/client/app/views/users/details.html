@@ -4,45 +4,49 @@
   <div class="col-md-4 col-sm-6 col-xs-6">
     <div class="userHolder" >
       <div class=" circle-border circle-avatar" style="background-image:url({{vm.user.avatarUrl}})"></div>
-      <div class="well text-center">
-        {{vm.user.lastName | uppercase}}, {{vm.user.firstName}}
-      </div>
     </div>
     <button ng-hide="vm.currentUser.id == vm.user.id" class="btn-primary btn-block btn-lg" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
-      <i class="fa fa-thumbs-up"></i>Send them a Kudos
+      <i class="fa fa-thumbs-up"></i>Send a Kudos
     </button>
   </div>
   <div class="col-md-8 col-sm-6 col-xs-6">
 
-    <ul class="nav nav-tabs" id="userKudosTabs">
-      <li role="presentation" class="active"><a aria-controls="fromOthersTab" href="#fromOthersTab">Kudos from Others <span class="badge">{{vm.toUser.length}}</span></a></li>
-      <li role="presentation"><a aria-controls="toOthersTab" href="#toOthersTab">Kudos to Others <span class="badge">{{vm.fromUser.length}}</span></a></li>
-    </ul>
+    <div class="tab-holder">
+      <ul class="nav nav-tabs" id="userKudosTabs">
+        <li role="presentation" class="active"><a aria-controls="fromOthersTab" href="#fromOthersTab">Kudos from Others <span class="badge">{{vm.toUser.length}}</span></a></li>
+        <li role="presentation"><a aria-controls="toOthersTab" href="#toOthersTab">Kudos to Others <span class="badge">{{vm.fromUser.length}}</span></a></li>
+      </ul>
 
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="fromOthersTab">
-        <div class="row" ng-switch on="vm.toUser.length > 0">
-          <div class="col-sm-12" ng-repeat="toUserKudos in vm.toUser | orderBy: '-dateCreated'" ng-switch-when="true">
-            <div class="topmargin-20">
-              <user-kudos-type association="'to'" kudos="toUserKudos"></user-kudos-type>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="fromOthersTab">
+          <div ng-switch on="vm.toUser.length > 0">
+            <div ng-repeat="toUserKudos in vm.toUser | orderBy: '-dateCreated'" ng-switch-when="true">
+                <user-kudos-type association="'to'" kudos="toUserKudos"></user-kudos-type>
+            </div>
+            <div class="col-sm-12" ng-switch-when="false">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="kudos-text">No kudos for {{vm.user.firstName}} yet!</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-sm-12" ng-switch-when="false">
-            No kudos for {{vm.user.firstName}} yet!
-          </div>
         </div>
-      </div>
-      <div role="tabpanel" class="tab-pane" id="toOthersTab">
-        <div class="row" ng-switch on="vm.fromUser.length > 0">
-          <div class="col-sm-12 " ng-repeat="fromUserKudos in vm.fromUser | orderBy: '-dateCreated'" ng-switch-when="true">
-            <div class="topmargin-20">
+        <div role="tabpanel" class="tab-pane" id="toOthersTab">
+          <div ng-switch on="vm.fromUser.length > 0">
+            <div ng-repeat="fromUserKudos in vm.fromUser | orderBy: '-dateCreated'" ng-switch-when="true">
               <user-kudos-type association="'from'" kudos="fromUserKudos"></user-kudos-type>
             </div>
-          </div>
-          <div class="col-sm-12" ng-switch-when="false">
-            No kudos from {{vm.user.firstName}} yet!
+            <div class="col-sm-12" ng-switch-when="false">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="kudos-text">No kudos from {{vm.user.firstName}} yet!</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
