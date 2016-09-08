@@ -170,6 +170,11 @@ public class KudosService extends KudosCategoryService
         return resultList;
     }
     
+    /**
+     * Counts how many kudos a user has received
+     * @param userId The optional id of a User
+     * @return A list of KudosCountResultTO objects
+     */
     public List<KudosCountResultTO> count(String userId)
     {
         List<KudosCountResultTO> resultList = new ArrayList<>();

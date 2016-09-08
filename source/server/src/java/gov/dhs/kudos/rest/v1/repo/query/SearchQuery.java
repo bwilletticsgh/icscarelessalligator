@@ -1,7 +1,7 @@
 package gov.dhs.kudos.rest.v1.repo.query;
 
 /**
- *
+ * Commons holder for Search queries
  * @author tdickerson
  */
 public class SearchQuery

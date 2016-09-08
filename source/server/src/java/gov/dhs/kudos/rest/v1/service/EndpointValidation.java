@@ -318,13 +318,20 @@ public class EndpointValidation extends WiredService
     /**
      * Validates a kudos category prior to creating
      * @param kudosCat The kudos category to save
+     * @param request The request containing the User
      * @throws KudosException 
      */
-    public void validateCreateKudosCat(KudosCategory kudosCat) throws KudosException
+    public void validateCreateKudosCat(KudosCategory kudosCat, HttpServletRequest request) throws KudosException
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Validating required fields for kudos-category creation");
         
+        if(request == null)
+            throw new KudosException("No HttpRequest associated", HttpStatus.BAD_REQUEST);
+        if(request.getAttribute("kudosUser") == null)
+            throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
+        if(!((User)request.getAttribute("kudosUser")).isIsAdmin())
+            throw new KudosException("Admin rights are required for this operation", HttpStatus.UNAUTHORIZED);
         if(kudosCat == null)
             throw new KudosException("KudosCategory object is null", HttpStatus.BAD_REQUEST);
         if(kudosCat.getName() == null || kudosCat.getName().trim().length() == 0)
@@ -382,6 +389,11 @@ public class EndpointValidation extends WiredService
         return (kudosCatRepo.findOne(id) != null);
     }
     
+    /**
+     * Determines if a kudos already exists by id
+     * @param id The id of the kudos
+     * @return Whether or not the kudos already exists
+     */
     private boolean kudosExists(String id)
     {
         return (kudosRepo.findOne(id) != null);

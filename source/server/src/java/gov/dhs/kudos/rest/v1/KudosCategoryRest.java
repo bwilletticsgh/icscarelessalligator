@@ -4,6 +4,7 @@ import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.service.KudosService;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,17 +79,18 @@ public class KudosCategoryRest
     /**
      * Endpoint for creating a new kudos category
      * @param kudosCat The RequestBody object of a new kudos category
+     * @param request The request containing the User
      * @return The saved kudos category object
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity createKudosCat(@RequestBody(required = false) KudosCategory kudosCat)
+    public ResponseEntity createKudosCat(@RequestBody(required = false) KudosCategory kudosCat, HttpServletRequest request)
     {
         if(LOG.isDebugEnabled())
             LOG.debug("[/v1/cat/create] kudosCat: " + (kudosCat == null ? "NO kudosCat OBJECT" : LogUtils.objectToJson(kudosCat)));
         
         try
         {
-            kudosService.validateCreateKudosCat(kudosCat);
+            kudosService.validateCreateKudosCat(kudosCat, request);
             return new ResponseEntity(kudosService.saveKudosCat(kudosCat), HttpStatus.OK);
         }
         catch(KudosException e)
