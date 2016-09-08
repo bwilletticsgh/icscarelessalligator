@@ -184,7 +184,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          map: false
+          map: true
         },
         files: [{
           expand: true,
@@ -255,7 +255,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          sourcemap: false
+          sourcemap: true
         }
       }
     },
@@ -290,14 +290,14 @@ module.exports = function (grunt) {
                 name: 'concat',
                 createConfig: function (context) {
                   context.options.generated.options = {
-                    sourceMap: false
+                    sourceMap: true
                   };
                 }
               }, {
                 name: 'uglify',
                 createConfig: function (context, block) {
                   context.options.generated.options = {
-                    sourceMap : false,
+                    sourceMap : true,
                     sourceMapIn: '.tmp/concat/' + block.dest.replace('.js', '.js.map')
                   };
                 }

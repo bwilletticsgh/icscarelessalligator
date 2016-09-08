@@ -1,1 +1,61 @@
-Stuff
+<ul class="nav nav-tabs nav-justified" role="tablist">
+  <li ng-class="{active: vm.ShowUserPanel}">
+    <a ng-click="vm.ToggleUserPanel(true)">
+      <span class="badge">{{ (vm.results | filter:{type: 'PERSON'}).length }}</span>Users</a></li>
+  <li ng-class="{active: !vm.ShowUserPanel}">
+    <a ng-click="vm.ToggleUserPanel(false)">
+      <span class="badge">{{ (vm.results | filter:{type: 'KUDOS_CATEGORY'}).length }}</span>Kudos</a></li>
+  </a></li>
+</ul>
+
+<div class="panel panel-primary" ng-init="vm.ShowUserPanel=true" ng-show="vm.ShowUserPanel">
+  <div class="panel-heading">
+    <h3 class="panel-title">Users matching your search</h3>
+  </div>
+  <div class="list-group">
+    <div class="list-group-item" ng-repeat="user in vm.results | filter:{type: 'PERSON'} | orderBy:'description'">
+
+      <div class="pull-right">
+        <button ng-hide="vm.currentUser.id == user.id" class="btn-primary" ui-sref="app.createKudos({userId: user.id})">
+          <i class="fa fa-thumbs-up"></i>Send them a Kudos
+        </button>
+      </div>
+
+      <a ui-sref="app.user({id:user.id})">
+        <img class="pull-left" style="padding-right: 20px" height="60" ng-src="{{user.iconOrImage}}"/>
+        <h4 class="list-group-item-heading">{{user.description}}</h4>
+      </a>
+      <p class="list-group-item-text">{{user.title}}</p>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary" ng-hide="vm.ShowUserPanel">
+  <div class="panel-heading">
+    <h3 class="panel-title">Kudos matching your search</h3>
+  </div>
+  <div class="list-group" >
+    <div class="list-group-item" ng-repeat="category in vm.results | filter:{type: 'KUDOS_CATEGORY'} | orderBy:'title'" style="display: flex; align-items: center; ">
+        <div class="pull-left">
+              <span class=" fa-stack fa-4x" ng-style="{'color': category.color}">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa {{category.iconOrImage}} fa-stack-1x"></i>
+              </span>
+        </div>
+        <div class="pull-left">
+          <h4 class="list-group-item-heading" style="vertical-align: middle">{{category.title}}</h4>
+          <p class="list-group-item-text">{{category.description}}</p>
+        </div>
+
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</div>
+
+
+
+

@@ -151,9 +151,9 @@ public class KudosService extends KudosCategoryService
         List<KudosCategory> kudosCatList = kudosCatRepo.findBySearch(regSearch);
         
         for(User u : userList)
-            resultList.add(new SearchResultTO(u.getEmail(), null, "PERSON", u.getId()));
+            resultList.add(new SearchResultTO(u.getEmail(), u.getFirstName() + " " + u.getLastName(), "PERSON", u.getId(), u.getAvatarUrl(), null));
         for(KudosCategory kc : kudosCatList)
-            resultList.add(new SearchResultTO(kc.getName(), kc.getDesc(), "KUDOS_CATEGORY", kc.getId()));
+            resultList.add(new SearchResultTO(kc.getName(), kc.getDesc(), "KUDOS_CATEGORY", kc.getId(), kc.getIcon(), kc.getColor()));
         
         return resultList;
     }

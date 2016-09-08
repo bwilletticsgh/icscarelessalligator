@@ -1,5 +1,20 @@
 $gray-lighter : #eee;
+$body-bg:               #fff !default;
 $navbar-inverse-color: white;
+$gray:                   #666 !default;
+
+//Tabs
+$nav-tabs-border-color:                     #ddd !default;
+
+$nav-tabs-link-hover-border-color:          $gray-lighter !default;
+
+$nav-tabs-active-link-hover-bg:             $body-bg !default;
+$nav-tabs-active-link-hover-color:          $gray !default;
+$nav-tabs-active-link-hover-border-color:   #ddd !default;
+
+$nav-tabs-justified-link-border-color:            #ddd !default;
+$nav-tabs-justified-active-link-border-color:     $body-bg !default;
+
 @import "theme/variables";
 
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";

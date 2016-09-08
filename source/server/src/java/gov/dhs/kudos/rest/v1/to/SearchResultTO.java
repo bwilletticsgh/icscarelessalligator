@@ -15,13 +15,18 @@ public class SearchResultTO
     private String description;
     private String type;
     private String id;
+    private String iconOrImage;
+    private String color;
 
-    public SearchResultTO(String title, String description, String type, String id)
+
+    public SearchResultTO(String title, String description, String type, String id, String iconOrImage, String color)
     {
         this.title = title;
         this.description = description;
         this.type = type;
         this.id = id;
+        this.iconOrImage = iconOrImage;
+        this.color = color;
     }
     
     public String getTitle()
@@ -62,6 +67,23 @@ public class SearchResultTO
     public void setId(String id)
     {
         this.id = id;
+    }
+
+    public String getIconOrImage() {
+        return iconOrImage;
+    }
+
+    public void setIconOrImage(String iconOrImage) {
+        this.iconOrImage = iconOrImage;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+
+    public void setColor(String color) {
+        this.color = color;
     }
     
     

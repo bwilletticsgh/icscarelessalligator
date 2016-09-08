@@ -46,6 +46,7 @@
         getAllFromUser: { method: 'get', isArray: true, url: url + '/fromUser/all/:id'},
         getAllToUser: { method: 'get', isArray: true, url: url + '/toUser/all/:id'},
         getKudosByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:catId'},
+        search: { method: 'get', isArray: true, url: url + '/search/:searchString'},
         create: { method: 'post', url: url + '/create/:fromUserId/:toUserId/:kudosCatId'}
           //POST /v1/kudos/create/{fromUserId}/{toUserId}/{kudosCatId}
       });
@@ -53,6 +54,10 @@
       function getKudosByCategory(id) {
         var kudos = kudosResources.getKudosByCategory({ catId: id });
         return kudos;
+      }
+
+      function searchUsersAndKudosCats(searchString) {
+        return kudosResources.search({ searchString: searchString });
       }
 
       function addKudos(kudo){
@@ -86,7 +91,8 @@
         addKudos: addKudos,
         getKudosByCategory: getKudosByCategory,
         getKudosToUser: getKudosToUser,
-        getKudosFromUser: getKudosFromUser
+        getKudosFromUser: getKudosFromUser,
+        searchUsersAndKudosCats: searchUsersAndKudosCats
       };
     });
 })();
