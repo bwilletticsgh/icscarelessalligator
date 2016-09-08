@@ -1,12 +1,12 @@
 package gov.dhs.kudos.rest.v1.service;
 
-import com.mongodb.util.JSON;
 import gov.dhs.kudos.rest.v1.model.Kudos;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.KudosSubComment;
 import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.EmailNotificationTO;
+import gov.dhs.kudos.rest.v1.to.KudosCountResultTO;
 import gov.dhs.kudos.rest.v1.to.KudosOneToManyTO;
 import gov.dhs.kudos.rest.v1.to.SubKudoCommentTO;
 import gov.dhs.kudos.rest.v1.to.SearchResultTO;
@@ -128,6 +128,13 @@ public class KudosService extends KudosCategoryService
         return resultList;
     }
     
+    /**
+     * Saves a sub comment for a kudos
+     * @param kudosId The id of the kudos
+     * @param subComment The subcomment
+     * @param fromUser The user that submitted the sub comment
+     * @return The updated kudos object
+     */
     public Kudos saveKudosAppendComment(String kudosId, SubKudoCommentTO subComment, User fromUser)
     {
         if(LOG.isDebugEnabled())
@@ -139,7 +146,12 @@ public class KudosService extends KudosCategoryService
         return kudosRepo.save(kudo);
     }
 
-	public List<SearchResultTO> findUserAndKudosCatBySearch(String search)
+    /**
+     * Executes a search query
+     * @param search The search criteria
+     * @return The result
+     */
+    public List<SearchResultTO> findUserAndKudosCatBySearch(String search)
     {
         if(LOG.isDebugEnabled())
             LOG.debug("Searching users and Kudos Categories");
@@ -154,6 +166,27 @@ public class KudosService extends KudosCategoryService
             resultList.add(new SearchResultTO(u.getEmail(), u.getFirstName() + " " + u.getLastName(), "PERSON", u.getId(), u.getAvatarUrl(), null));
         for(KudosCategory kc : kudosCatList)
             resultList.add(new SearchResultTO(kc.getName(), kc.getDesc(), "KUDOS_CATEGORY", kc.getId(), kc.getIcon(), kc.getColor()));
+        
+        return resultList;
+    }
+    
+    public List<KudosCountResultTO> count(String userId)
+    {
+        List<KudosCountResultTO> resultList = new ArrayList<>();
+        
+        if(userId != null && userId.length() > 0)
+        {
+            User toUser = userRepo.findOne(userId);
+            Long count = kudosRepo.countByToUser(toUser);
+            
+            resultList.add(new KudosCountResultTO(toUser, count));
+        }
+        else
+        {
+            List<User> users = userRepo.findByIsDeleted(false);
+            for(User toUser : users)
+                resultList.add(new KudosCountResultTO(toUser, kudosRepo.countByToUser(toUser)));
+        }
         
         return resultList;
     }
