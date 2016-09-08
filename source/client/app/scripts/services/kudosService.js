@@ -38,7 +38,7 @@
 (function(){
   'use strict';
   angular.module('kudosApp')
-    .factory('kudos', function(_, $resource, restUrl) {
+    .factory('kudos', function(_, $resource, restUrl, $q) {
 
       var url = restUrl + 'kudos';
 
@@ -58,6 +58,16 @@
 
       function searchUsersAndKudosCats(searchString) {
         return kudosResources.search({ searchString: searchString });
+      }
+
+      function getLastKudosForUser(userId) {
+        var deferred = $q.defer();
+
+        getKudosFromUser(userId).$promise.then(function(data){
+          deferred.resolve(_.maxBy(data,"dateCreated"));
+        });
+
+        return deferred.promise;
       }
 
       function addKudos(kudo){
@@ -88,7 +98,9 @@
       }
 
       return {
+
         addKudos: addKudos,
+        getLastKudosForUser: getLastKudosForUser,
         getKudosByCategory: getKudosByCategory,
         getKudosToUser: getKudosToUser,
         getKudosFromUser: getKudosFromUser,

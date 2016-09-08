@@ -50,6 +50,7 @@
           users.setCurrentUser(null);
           _isAuthenticated=false;
           $cookieStore.remove('token');
+          $cookieStore.remove('lastSentNotificationDismissed');
         }
 
         function login(username, password) {

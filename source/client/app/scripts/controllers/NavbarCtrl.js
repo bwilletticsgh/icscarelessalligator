@@ -2,7 +2,12 @@
 'use strict';
     angular
         .module('kudosApp')
-        .controller('NavbarCtrl', function(authentication, users, $state) {
+        .controller('NavbarCtrl', function(authentication, users, $state, $scope) {
+
+          // $scope.$watch(users.getCurrentUser, function(){
+          //   console.log("OK!", users.getCurrentUser());
+          // });
+
             var vm = this;
             vm.authentication = authentication;
 

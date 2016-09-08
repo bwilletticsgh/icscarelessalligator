@@ -8,9 +8,23 @@
  * Controller of the kudosApp
  */
 angular.module('kudosApp')
-  .controller('MainCtrl', function ($uibModal, users) {
+  .controller('MainCtrl', function ($uibModal, users, kudos, $cookieStore) {
     var vm = this;
-    console.log(users.getCurrentUser());
+    vm.lastKudosForUser = null;
+    vm.currentUser = users.getCurrentUser();
+
+    vm.notificationDismissed = $cookieStore.get('lastSentNotificationDismissed') === 'true';
+
+    if (vm.currentUser) {
+      kudos.getLastKudosForUser(vm.currentUser.id).then(function (data) {
+        vm.lastKudosForUser = data;
+      });
+    }
+
+    vm.hideNotification = function(){
+      $cookieStore.put('lastSentNotificationDismissed','true');
+    };
+
     vm.showInfo = function(){
       var modalInstance = $uibModal.open({
         templateUrl: 'myModalContent.html',

@@ -1,3 +1,18 @@
+
+<div class="alert alert-success" ng-show="vm.currentUser && !vm.notificationDismissed">
+	<button type="button" ng-click="vm.hideNotification()" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{vm.currentUser.firstName}},</strong>
+  <span ng-show="vm.lastKudosForUser">
+    The last kudos you sent was {{vm.lastKudosForUser.dateCreated | formatTime}}
+  </span>
+
+  <span ng-hide="vm.lastKudosForUser">
+    You haven't sent a kudos yet. Want to <a ui-sref="app.createKudos">send one now?</a>
+  </span>
+
+</div>
+
+
 <div class="jumbotron">
 
   <!--<span class=" fa-stack fa-5x text-warning">
@@ -17,6 +32,7 @@
   <p><a id="sendKudos" class="btn btn-lg btn-success" ui-sref="app.createKudos">Send a kudos!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 
+  <div></div>
   <!--<button class="btn btt primary" ng-click="vm.showInfo()">Click me</button>-->
 
   <script type="text/ng-template" id="myModalContent.html">
