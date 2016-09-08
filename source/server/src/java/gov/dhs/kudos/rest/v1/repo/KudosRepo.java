@@ -15,4 +15,5 @@ public interface KudosRepo extends MongoRepository<Kudos, String>
     List<Kudos> findByFromUser(User fromUser);
     List<Kudos> findByToUser(User toUser);
     List<Kudos> findByKudosCat(KudosCategory kudosCat);
+    Long countByToUser(User toUser);
 }
