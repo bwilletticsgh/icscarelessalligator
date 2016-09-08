@@ -259,6 +259,13 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Silly Kudoer - kudos are for others", HttpStatus.BAD_REQUEST);
     }
     
+    /**
+     * Validates the criteria for appending a comment to a kudos
+     * @param kudosId The id of the kudos
+     * @param subComment The sub comment
+     * @param request The request containing the User
+     * @throws KudosException 
+     */
     public void validateUpdateKudosAppendSubComment(String kudosId, SubKudoCommentTO subComment, HttpServletRequest request) throws KudosException
     {
         if(LOG.isDebugEnabled())
