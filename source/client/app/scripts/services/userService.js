@@ -23,6 +23,7 @@
 
         function toggleAdmin(userId){
           return userResource.toggleAdminUser({id:userId}).$promise;
+          //test
         }
 
         function getCurrentUser() {
