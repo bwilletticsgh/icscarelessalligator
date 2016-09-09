@@ -64,10 +64,18 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
-      'karma-sinon'
+      'karma-sinon',
+      'karma-junit-reporter'
     ],
 
-    // Continuous Integration mode
+    reporters : ['dots', 'junit'],
+    junitReporter: {
+      outputDir: 'testResults',
+      useBrowserName: false,
+      outputFile: 'karmatests.xml' // if included, results will be saved as $outputDir/$browserName/$outputFile
+    },
+
+  // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true,
 

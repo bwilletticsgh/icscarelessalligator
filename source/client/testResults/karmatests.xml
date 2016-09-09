@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<testsuite name="PhantomJS 2.1.1 (Windows 8 0.0.0)" package="" timestamp="2016-09-09T17:59:28" id="0" hostname="irpw-tclark3" tests="14" errors="0" failures="0" time="0.263">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1"/>
+  </properties>
+  <testcase name="Unit: App App Abstract Route redirects a user that is not logged in" time="0.114" classname="Unit: App"/>
+  <testcase name="KudosCtrl should not let a user give a kudos to themselves" time="0.022" classname="KudosCtrl"/>
+  <testcase name="KudosCtrl gets all kudos categories" time="0.012" classname="KudosCtrl"/>
+  <testcase name="KudosCtrl calls add kudos when saveKudos is called" time="0.012" classname="KudosCtrl"/>
+  <testcase name="Controller: Login should display an error message on bad login" time="0.01" classname="Controller: Login"/>
+  <testcase name="Controller: Login should display success message on good login" time="0.01" classname="Controller: Login"/>
+  <testcase name="Controller: Login should call the authentication service with the right parameters" time="0.009" classname="Controller: Login"/>
+  <testcase name="Controller: MainCtrl should set the last kudos for the user if they are logged in" time="0.015" classname="Controller: MainCtrl"/>
+  <testcase name="Controller: MainCtrl should not set the last kudos for the user if they are not logged in" time="0.01" classname="Controller: MainCtrl"/>
+  <testcase name="Controller: MainCtrl should set lastSentNotificationDismissed cookie when clicking hide notification" time="0.013" classname="Controller: MainCtrl"/>
+  <testcase name="Controller: MainCtrl should set notificationDismissed when the cookie is present" time="0.01" classname="Controller: MainCtrl"/>
+  <testcase name="Controller: RegisterCtrl should allow a user to register" time="0.01" classname="Controller: RegisterCtrl"/>
+  <testcase name="Controller: RegisterCtrl should set the failure message to the message returned by the authentication service" time="0.006" classname="Controller: RegisterCtrl"/>
+  <testcase name="Controller: UsersCtrl should have a list of users on the scope" time="0.01" classname="Controller: UsersCtrl"/>
+  <system-out>
+    <![CDATA[PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+,PhantomJS 2.1.1 (Windows 8 0.0.0) LOG: 'port number is: 8080'
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
