@@ -68,4 +68,39 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <path id="test.class.path">
+        <fileset dir="test/lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+    <path id="test.classes">
+        <fileset dir="build/test/classes">
+            <include name="**/*.class" />
+        </fileset>
+    </path>
+    
+    <target name="junit">
+        <echo>Compiling...</echo>
+        <delete file="build/test/test.jar" />
+        <delete dir="build/test/classes" />
+        <mkdir dir="build/test/classes" />
+        
+        <javac debug="on" target="1.7" source="1.7" srcdir="test" destdir="build/test/classes" includeantruntime="false" >
+            <classpath refid="test.class.path" />
+        </javac>
+        <jar destfile="build/test/test.jar" basedir="build/test/classes"></jar>
+        
+        <junit printsummary="yes" haltonfailure="no" showoutput="true">
+            <classpath>
+                <path refid="test.class.path"/>
+                <path location="build/test/test.jar"/>
+            </classpath>
+            <formatter type="xml" />
+            <batchtest fork="yes" todir="test">
+                <fileset dir="test">
+                    <include name="**/KudosTest.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
 </project>
