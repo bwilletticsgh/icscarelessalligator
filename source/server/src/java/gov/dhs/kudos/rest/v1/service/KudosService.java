@@ -88,9 +88,8 @@ public class KudosService extends KudosCategoryService
         kudo.setToUser(userRepo.findOne(toUserId));
         kudo.setKudosCat(kudosCatRepo.findOne(kudosCatId));
         
-        emailNotifier.queueEmail(new EmailNotificationTO(kudo.getFromUser().getEmail(), 
-                                                         "You have recieved a KUDOS from " + kudo.getFromUser().getEmail() + ". '" + kudo.getComments() + "'", 
-                                                         "KUDOS TO YOU!", 
+        emailNotifier.queueEmail(new EmailNotificationTO(kudo.getFromUser().getEmail(), kudo.getComments(),
+                                                         "You have recieved a KUDOS from " + kudo.getFromUser().getEmail() + " [" + kudo.getFromUser().getFirstName() + " " + kudo.getFromUser().getLastName() + "]", 
                                                          Arrays.<String>asList(new String[]{kudo.getToUser().getEmail()})));
         
         return kudosRepo.save(kudo);
@@ -113,7 +112,8 @@ public class KudosService extends KudosCategoryService
         KudosCategory kudosCat = kudosCatRepo.findOne(kudosCatId);
         User fromUser = userRepo.findOne(fromUserId);
         
-        EmailNotificationTO emailNotTO = new EmailNotificationTO(fromUser.getEmail(), kudosOneToMany.getComments(), "You have recieved a KUDOS from " + fromUser.getEmail());
+        EmailNotificationTO emailNotTO = new EmailNotificationTO(fromUser.getEmail(), kudosOneToMany.getComments(), 
+                "You have recieved a KUDOS from " + fromUser.getEmail() + " [" + fromUser.getFirstName() + " " + fromUser.getLastName() + "]");
         
         for(String toUserId : kudosOneToMany.getUserIds())
         {
