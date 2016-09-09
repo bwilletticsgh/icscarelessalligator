@@ -41,12 +41,12 @@
           <i class="fa fa-circle-thin fa-stack-2x"></i>
           <i class="fa fa-linkedin fa-stack-1x"></i>
         </span>
-        <span class="pull-right" ng-click="kudos.toggleComments()">COMMENTS <strong>{{kudos.subComments.length}}</strong>&nbsp;</span>
+        <a href="javascript:;" class="pull-right" ng-click="toggleComments()">COMMENTS <strong>{{kudos.subComments.length}}</strong>&nbsp;</a>
       </div>
     </div>
   </div>
   <!--<div ng-show="kudos.showComments">-->
-  <div>
+  <div class="subCommentHolder" style="display: none">
     <div class="kudos-comments" ng-repeat="kudosComment in kudos.subComments | orderBy: 'dateCreated'">
       <kudos-comment-type comment="kudosComment"></kudos-comment-type>
     </div>

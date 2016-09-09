@@ -10,15 +10,12 @@
           kudos: '=',
           association: '='
         },
-        link: function(scope) {
-
-          scope.showComments = false;
-
+        link: function(scope,element) {
           scope.currentUser = users.getCurrentUser();
 
           scope.toggleComments = function() {
-            console.log('toggle', scope.showComments);
             scope.showComments = !scope.showComments;
+            element.find('.subCommentHolder').slideToggle();
           }
 
           scope.newCommentKeydown = function(evt) {
