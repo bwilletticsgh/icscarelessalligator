@@ -10,20 +10,24 @@
 angular.module('kudosApp')
   .controller('MainCtrl', function ($uibModal, users, kudos, $cookieStore) {
     var vm = this;
-    vm.lastKudosForUser = null;
-    vm.currentUser = users.getCurrentUser();
 
-    vm.notificationDismissed = $cookieStore.get('lastSentNotificationDismissed') === 'true';
+    vm.setup = function() {
+      vm.lastKudosForUser = null;
+      vm.currentUser = users.getCurrentUser();
+      vm.notificationDismissed = $cookieStore.get('lastSentNotificationDismissed') === 'true';
 
-    if (vm.currentUser) {
-      kudos.getLastKudosForUser(vm.currentUser.id).then(function (data) {
-        vm.lastKudosForUser = data;
-      });
-    }
+      if (vm.currentUser) {
+        kudos.getLastKudosForUser(vm.currentUser.id).then(function (data) {
+          vm.lastKudosForUser = data;
+        });
+      }
 
-    vm.hideNotification = function(){
-      $cookieStore.put('lastSentNotificationDismissed','true');
+      vm.hideNotification = function(){
+        $cookieStore.put('lastSentNotificationDismissed','true');
+      };
     };
+
+    vm.setup();
 
     vm.showInfo = function(){
       var modalInstance = $uibModal.open({

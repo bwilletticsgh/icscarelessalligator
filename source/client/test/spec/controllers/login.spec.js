@@ -60,7 +60,6 @@ describe('Controller: Login', function () {
     expect(Login.message).toBe(Login.successMessage);
   });
 
-
   it('should call the authentication service with the right parameters', function () {
     $rootScope.$apply();
     Login.Username='person';

@@ -1,5 +1,5 @@
 angular.module('kudosAppConfig', [])
 
-.constant('apiInfo', {port:'8080', env:'dev'})
+.constant('apiInfo', {port:'8080'})
 
 ;
