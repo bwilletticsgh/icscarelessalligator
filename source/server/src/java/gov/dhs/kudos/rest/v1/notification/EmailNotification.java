@@ -82,6 +82,9 @@ public class EmailNotification
             {                
                 for(String recipient : emailTO.getToList())
                 {
+                    if(recipient.startsWith("TestUser"))
+                        continue;
+                    
                     if(LOG.isDebugEnabled())
                         LOG.debug("Sending email notification to: " + recipient);
                     
