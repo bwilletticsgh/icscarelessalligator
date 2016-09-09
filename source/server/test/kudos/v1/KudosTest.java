@@ -169,7 +169,6 @@ public class KudosTest
         
         for(int i = 30; i >= 0; --i)
         {
-            System.out.print("\r" + message + i + "sec");
             rest();
         }
     }
