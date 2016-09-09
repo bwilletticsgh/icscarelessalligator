@@ -1,15 +1,20 @@
 
 
 <div class="row">
-  <div class="col-md-4 col-sm-6 col-xs-6">
+
+  <div class="col-md-3 col-xs-6 bottommargin-10">
     <div class="userHolder" >
       <div class=" circle-border circle-avatar" style="background-image:url({{vm.user.avatarUrl}})"></div>
     </div>
-    <button ng-hide="vm.currentUser.id == vm.user.id" class="btn-primary btn-block btn-lg" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
-      <i class="fa fa-thumbs-up"></i>Send a Kudos
+    <button ng-hide="vm.currentUser.id == vm.user.id" class="btn-primary btn-block btn-sm" ui-sref="app.createKudos({userId: vm.user.id, moreStuff:'awesome'})">
+      <i class="fa fa-2x fa-thumbs-up"></i>Send a Kudos
+    </button>
+
+    <button ng-show="vm.currentUser.isAdmin" class="btn-primary btn-block btn-sm" ui-sref="app.userAccount({id: vm.user.id})">
+      <i class="fa fa-2x fa-edit"></i>Edit User Account
     </button>
   </div>
-  <div class="col-md-8 col-sm-6 col-xs-6">
+  <div class="col-md-9 col-xs-12 padd">
 
     <div class="tab-holder">
       <ul class="nav nav-tabs" id="userKudosTabs">

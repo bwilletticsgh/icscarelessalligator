@@ -45,6 +45,18 @@
         controller: 'ProfileCtrl as vm',
         url:'/account/profile'
       })
+      .state('app.userAccount', {
+        adminOnly: true,
+        pageTitle: 'User Account',
+        templateUrl: 'views/account/userAccount.html',
+        controller: 'UserAccountCtrl as vm',
+        url:'/account/user/{id:string}',
+        resolve: {
+          user: function($stateParams, users){
+            return users.getUser($stateParams.id).$promise;
+          }
+        }
+      })
       .state('app.editKudosCategory', {
         pageTitle: 'Edit Kudos Category',
         templateUrl: 'views/kudosCategory/edit.html',
@@ -78,6 +90,11 @@
         templateUrl: 'views/kudos/create.html',
         controller: 'KudosCtrl as vm',
         url: '/kudos/create/{userId}'
+      })
+      .state('app.accessDenied', {
+        pageTitle: 'Access Denied',
+        templateUrl:'views/accessDenied.html',
+        url: '/accessDenied'
       })
       .state('app.users', {
         pageTitle: 'All Users',

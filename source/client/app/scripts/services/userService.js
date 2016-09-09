@@ -10,14 +10,18 @@
           all: {method:"get",isArray:true, url: url + "/all"},
           getUserById: {method:"get",url: url + "/byId/:id"},
           update: {method:"POST",url: url + "/update"},
-          updateUserProfile: {method:"POST",url: url + "/updateProfile"}
-
+          updateUserProfile: {method:"POST",url: url + "/updateProfile"},
+          toggleAdminUser: {method:"POST",url: url + "/toggleAdmin/:id", params: {id:"@id"}}
         });
 
         var _currentUser;
 
         function setCurrentUser(user){
           _currentUser=user;
+        }
+
+        function toggleAdmin(userId){
+          return userResource.toggleAdminUser({id:userId}).$promise;
         }
 
         function getCurrentUser() {
@@ -39,7 +43,6 @@
           var res = userResource.getUserById({id: id});
            res.$promise.then(function(user){
              user.avatarUrl = user.avatarUrl || "http://robohash.org/" + user.id + ".png?size=300x300&set=set1";
-             console.log(user);
            });
 
           return res;
@@ -55,6 +58,7 @@
 
         return {
           getUsers: getUsers,
+          toggleAdmin: toggleAdmin,
           getUser : getUser,
           setCurrentUser : setCurrentUser,
           getCurrentUser : getCurrentUser,

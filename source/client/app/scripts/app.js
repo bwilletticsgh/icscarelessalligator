@@ -26,7 +26,7 @@ angular
     var KudosRESTAPIPortNumber=':' + apiInfo.port;
     return $window.location.protocol + '//' + $window.location.hostname + KudosRESTAPIPortNumber + '/KudosREST/v1/';
   })
-  .run(function ($rootScope, authentication, $state, $cookieStore, swal, _) {
+  .run(function ($rootScope, authentication, $state, $cookieStore, swal, _, users) {
     _.each($state.get(), function(state){
       state.resolve = state.resolve || {};
     });
@@ -45,9 +45,13 @@ angular
             var defer = $q.defer();
             if ($cookieStore.get('token')) {
                 authentication.setAuthenticationFromToken($cookieStore.get('token')).then(
-                  function(){
+                  function() {
                     defer.resolve();
-              }, function(e){
+                    if (toState.adminOnly && !users.getCurrentUser().isAdmin) {
+                      event.preventDefault();
+                      $state.go('app.accessDenied');
+                    }
+              }, function(e) {
                   console.log(e);
                   defer.reject();
                 });
