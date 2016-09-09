@@ -22,7 +22,7 @@
       })
       .state('app.home', {
         allowAnon: true,
-        pageTitle: 'Home',
+        pageTitle: '',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl as vm',
         url:'/home'

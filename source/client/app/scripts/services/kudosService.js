@@ -46,9 +46,9 @@
         getAllFromUser: { method: 'get', isArray: true, url: url + '/fromUser/all/:id'},
         getAllToUser: { method: 'get', isArray: true, url: url + '/toUser/all/:id'},
         getKudosByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:catId'},
+        addComment: { method: 'post', url: url + '/subComment/:id', params: {id:"@id"} },
         search: { method: 'get', isArray: true, url: url + '/search/:searchString'},
         create: { method: 'post', url: url + '/create/:fromUserId/:toUserId/:kudosCatId'}
-          //POST /v1/kudos/create/{fromUserId}/{toUserId}/{kudosCatId}
       });
 
       function getKudosByCategory(id) {
@@ -86,6 +86,10 @@
         return kudos;
       }
 
+      function addComment(id, comment) {
+        return kudosResources.addComment({ id: id }, { comment: comment });
+      }
+
       //TODO: So, this is really just a dummy placeholder. We should really put this into the backend
       function setupAvatarsOnKudosResource(kudos){
         kudos.$promise.then(function(data) {
@@ -98,12 +102,12 @@
       }
 
       return {
-
+        addComment: addComment,
         addKudos: addKudos,
-        getLastKudosForUser: getLastKudosForUser,
         getKudosByCategory: getKudosByCategory,
-        getKudosToUser: getKudosToUser,
         getKudosFromUser: getKudosFromUser,
+        getKudosToUser: getKudosToUser,
+        getLastKudosForUser: getLastKudosForUser,
         searchUsersAndKudosCats: searchUsersAndKudosCats
       };
     });

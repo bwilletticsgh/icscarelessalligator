@@ -309,6 +309,14 @@ div.circle-avatar.small-circle-avatar {
   padding-bottom: 10px;
 }
 
+.kudos-comment-add {
+  margin-top:5px;
+}
+
+.kudos-footer-info {
+  margin-left: 10px;
+}
+
 @mixin fancy-spinner-gradient($gradient) {
   background: linear-gradient($gradient);
   background: -o-linear-gradient($gradient);

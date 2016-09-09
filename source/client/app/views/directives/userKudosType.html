@@ -11,13 +11,12 @@
       <h5>{{kudos.kudosCat.name}}</h5>
       <div ng-switch on="association" class="">
         <strong ng-switch-when="to">
-          Kudos received from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!
+          Kudos received from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser | fullUserName}}</a>!
         </strong>
         <strong ng-switch-when="from">
-          Kudos given to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!
+          Kudos given to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser | fullUserName}}</a>!
         </strong>
       </div>
-      <p class="lead">{{kudos.comments}}</p>
     </div>
   </div>
   <div class="row">
@@ -27,48 +26,38 @@
           <i class="fa fa-circle-thin fa-stack-2x"></i>
           <i class="fa fa-facebook fa-stack-1x"></i>
         </span>
-          <span class="fa-stack">
+        <span class="fa-stack">
           <i class="fa fa-circle-thin fa-stack-2x"></i>
           <i class="fa fa-google-plus fa-stack-1x"></i>
         </span>
-          <span class="fa-stack">
+        <span class="fa-stack">
           <i class="fa fa-circle-thin fa-stack-2x"></i>
           <i class="fa fa-twitter fa-stack-1x"></i>
         </span>
-          <span class="fa-stack">
+        <span class="fa-stack">
           <i class="fa fa-circle-thin fa-stack-2x"></i>
           <i class="fa fa-linkedin fa-stack-1x"></i>
         </span>
+        <span class="pull-right" ng-click="kudos.toggleComments()">COMMENTS <strong>{{kudos.subComments.length}}</strong>&nbsp;</span>
       </div>
     </div>
   </div>
-
-  <!--<div class="panel panel-primary">-->
-    <!--<div class="panel-heading">-->
-      <!--<h3 class="panel-title">-->
-        <!--<a ui-sref="app.editKudosCategory({id:kudos.kudosCat.id})">{{kudos.kudosCat.name}}</a>-->
-      <!--</h3>-->
-    <!--</div>-->
-    <!--<div class="panel-body">-->
-      <!--<div ng-switch on="association">-->
-        <!--<strong ng-switch-when="to">-->
-          <!--Kudos from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a>!-->
-          <!--<div class="pull-right"  style="width:80px">-->
-            <!--<div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.fromUser.avatarUrl}})"></div>-->
-          <!--</div>-->
-        <!--</strong>-->
-        <!--<strong ng-switch-when="from">Kudos to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a>!-->
-          <!--<div class="pull-right"  style="width:80px">-->
-            <!--<div class=" circle-border-small circle-avatar" style="background-image:url({{kudos.toUser.avatarUrl}})"></div>-->
-          <!--</div>-->
-        <!--</strong>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<blockquote class="kudosComment">{{kudos.comments}}</blockquote>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="panel-footer">-->
-      <!--{{kudos.dateCreated | formatTime}}-->
-    <!--</div>-->
-  <!--</div>-->
+  <!--<div ng-show="kudos.showComments">-->
+  <div>
+    <div class="kudos-comments" ng-repeat="kudosComment in kudos.subComments | orderBy: 'dateCreated'">
+      <kudos-comment-type comment="kudosComment"></kudos-comment-type>
+    </div>
+    <div class="kudos-comment-add">
+      <div class="row">
+        <div class="col-md-1">
+          <a ui-sref="app.user({ id: '{{currentUser.id}}' })">
+            <div class="circle-border-micro circle-avatar small-circle-avatar" style="margin-top:5px;background-image:url({{currentUser.avatarUrl}})"></div>
+          </a>
+        </div>
+        <div class="col-md-11">
+          <input style="margin-top:5px;" type="text" name="newComment" ng-model="newComment" id="newComment" class="form-control input-sm" ng-keydown="newCommentKeydown($event)" placeholder="Add a comment..." maxlength="200" />
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

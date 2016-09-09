@@ -3,13 +3,12 @@
 	<button type="button" ng-click="vm.hideNotification()" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	<strong>{{vm.currentUser.firstName}},</strong>
   <span ng-show="vm.lastKudosForUser">
-    The last kudos you sent was {{vm.lastKudosForUser.dateCreated | formatTime}}
+    the last kudos you sent was {{vm.lastKudosForUser.dateCreated | formatTime}}.
   </span>
 
   <span ng-hide="vm.lastKudosForUser">
     You haven't sent a kudos yet. Want to <a ui-sref="app.createKudos">send one now?</a>
   </span>
-
 </div>
 
 
