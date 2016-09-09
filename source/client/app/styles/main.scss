@@ -141,7 +141,9 @@ body { padding-top: 70px; }
 /* Custom page header */
 .header {
   margin-bottom: 10px;
-
+  .navbar-form{
+    padding-top:4px;
+  }
   /* Make the masthead heading the same height as the navigation */
   h3 {
     margin-top: 0;
@@ -264,10 +266,12 @@ div.circle-avatar{
 .navbar-brand {
   color: #fff !important;
   text-transform: capitalize;
-}
+  font-weight: bolder;
+  font-size:24px;
 
-.navbar-brand .highlight-letters {
-  color: $brand-primary !important;
+  .highlight-letters {
+    color: $brand-primary !important;
+  }
 }
 
 .navbar input {
