@@ -15,7 +15,7 @@ angular.module('kudosApp')
         swal("Account Updated", "The account has been updated", "success");
       }
 
-      users.updateUserProfile(vm.editUser).then(function(updatedUser) {
+      users.updateUserProfile(vm.editUser).then(function() {
         if (originalUser.isAdmin !== vm.editUser.isAdmin) {
           users.toggleAdmin(vm.editUser.id).then(showSuccess);
           originalUser.isAdmin = vm.editUser.isAdmin;

@@ -6,9 +6,6 @@ describe('Controller: RegisterCtrl', function () {
     return $q(function(resolve){ resolve(val); });
   }
 
-  function reject(val){
-    return $q(function(resolve, reject){ reject(val); });
-  }
   // load the controller's module
   beforeEach(module('kudosApp'));
 

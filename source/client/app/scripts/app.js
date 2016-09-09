@@ -22,7 +22,7 @@ angular
   .constant('_',window._)
   .constant('swal',window.swal)
   .factory('restUrl', function($window,apiInfo) {
-    console.log('port number is: ' + apiInfo.port);
+    //console.log('port number is: ' + apiInfo.port);
     var KudosRESTAPIPortNumber=':' + apiInfo.port;
     return $window.location.protocol + '//' + $window.location.hostname + KudosRESTAPIPortNumber + '/KudosREST/v1/';
   })
@@ -63,7 +63,7 @@ angular
                       $state.go('app.accessDenied');
                     }
               }, function(e) {
-                  console.log(e);
+                  //console.log(e);
                   defer.reject();
                 });
             }

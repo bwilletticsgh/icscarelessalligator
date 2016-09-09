@@ -2,7 +2,7 @@
 'use strict';
     angular
         .module('kudosApp')
-        .controller('NavbarCtrl', function(authentication, users, $state, $scope) {
+        .controller('NavbarCtrl', function(authentication, users, $state) {
 
           // $scope.$watch(users.getCurrentUser, function(){
           //   console.log("OK!", users.getCurrentUser());
