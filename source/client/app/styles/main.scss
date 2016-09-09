@@ -308,3 +308,68 @@ div.circle-avatar.small-circle-avatar {
 .kudos-text {
   padding-bottom: 10px;
 }
+
+@mixin fancy-spinner-gradient($gradient) {
+  background: linear-gradient($gradient);
+  background: -o-linear-gradient($gradient);
+  background: -ms-linear-gradient($gradient);
+  background: -webkit-linear-gradient($gradient);
+  background: -moz-linear-gradient($gradient);
+}
+
+.cssload-loader{
+  @include fancy-spinner-gradient((-45deg, $nav-primary, $nav-primary 50%, $brand-primary 50%, $brand-primary));
+  display:block;
+  position:absolute;
+  height:6em;width:6em;
+  left:50%;
+  margin-top:-3em;
+  margin-left:-3em;
+  background-color:rgb(51,136,153);
+  border-radius:3.5em 3.5em 3.5em 3.5em;
+  -o-border-radius:3.5em 3.5em 3.5em 3.5em;
+  -ms-border-radius:3.5em 3.5em 3.5em 3.5em;
+  -webkit-border-radius:3.5em 3.5em 3.5em 3.5em;
+  -moz-border-radius:3.5em 3.5em 3.5em 3.5em;
+  box-shadow:inset 0 0 0 0.5em rgb(236,234,224);
+  -o-box-shadow:inset 0 0 0 0.5em rgb(236,234,224);
+  -ms-box-shadow:inset 0 0 0 0.5em rgb(236,234,224);
+  -webkit-box-shadow:inset 0 0 0 0.5em rgb(236,234,224);
+  -moz-box-shadow:inset 0 0 0 0.5em rgb(236,234,224);
+  background-blend-mode: multiply;
+  border-top:8px solid $brand-primary;
+  border-left:8px solid $brand-primary;
+  border-bottom:8px solid $nav-primary;
+  border-right:8px solid $nav-primary;
+  animation:cssload-roto 1.15s infinite linear;
+  -o-animation:cssload-roto 1.15s infinite linear;
+  -ms-animation:cssload-roto 1.15s infinite linear;
+  -webkit-animation:cssload-roto 1.15s infinite linear;
+  -moz-animation:cssload-roto 1.15s infinite linear;
+}
+
+
+@keyframes cssload-roto {
+  0%{transform:rotateZ(0deg);}
+  100%{transform:rotateZ(360deg);}
+}
+
+@-o-keyframes cssload-roto {
+  0%{-o-transform:rotateZ(0deg);}
+  100%{-o-transform:rotateZ(360deg);}
+}
+
+@-ms-keyframes cssload-roto {
+  0%{-ms-transform:rotateZ(0deg);}
+  100%{-ms-transform:rotateZ(360deg);}
+}
+
+@-webkit-keyframes cssload-roto {
+  0%{-webkit-transform:rotateZ(0deg);}
+  100%{-webkit-transform:rotateZ(360deg);}
+}
+
+@-moz-keyframes cssload-roto {
+  0%{-moz-transform:rotateZ(0deg);}
+  100%{-moz-transform:rotateZ(360deg);}
+}

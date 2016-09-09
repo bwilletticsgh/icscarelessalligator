@@ -76,16 +76,23 @@
     <h3>{{pageTitle}}</h3>
   </div>
 
-  <div ui-view=""></div>
+  <section ng-if="!stateIsLoading" ui-view=""></section>
+  <section ng-if="stateIsLoading">
+    <div style="position:fixed; top:50%; left:50%">
+      <div class="cssload-loader">
+      </div>
+      <div style="position:absolute; top:50px; left:-30px; height:800px;">Loading....</div>
+    </div>
+  </section>
 </div>
 
-<div class="footer">
+<section class="footer ng-cloak" >
   <div class="container">
     <p>
       Kudos to you!
     </p>
   </div>
-</div>
+</section>
 
 
 <!-- build:js(.) scripts/vendor.js -->
