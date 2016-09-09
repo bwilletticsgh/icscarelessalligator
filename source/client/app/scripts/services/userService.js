@@ -8,6 +8,7 @@
 
         var userResource = $resource(url, {}, {
           all: {method:"get",isArray:true, url: url + "/all"},
+          active: {method:"get",isArray:true, url: url + "/active"},
           getUserById: {method:"get",url: url + "/byId/:id"},
           update: {method:"POST",url: url + "/update"},
           updateUserProfile: {method:"POST",url: url + "/updateProfile"},
@@ -29,7 +30,7 @@
         }
 
         function getUsers() {
-          var allUsers = userResource.all();
+          var allUsers = userResource.active();
 
           //give everyone a picture. TODO: make this happen on the backend
           allUsers.$promise.then(function(data){
