@@ -165,7 +165,7 @@ public class KudosTest
     private void waitForIt()
     {
         String message = "Waiting for kudos to standup within docker image's tomcat container...";
-        System.out.print(message);
+        System.out.println(message);
         
         for(int i = 30; i >= 0; --i)
         {
