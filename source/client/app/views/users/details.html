@@ -27,6 +27,7 @@
           <div ng-switch on="vm.toUser.length > 0">
             <div ng-repeat="toUserKudos in vm.toUser | orderBy: '-dateCreated'" ng-switch-when="true">
                 <user-kudos-type association="'to'" kudos="toUserKudos"></user-kudos-type>
+                <hr/>
             </div>
             <div class="col-sm-12" ng-switch-when="false">
               <div class="row">
@@ -41,6 +42,7 @@
           <div ng-switch on="vm.fromUser.length > 0">
             <div ng-repeat="fromUserKudos in vm.fromUser | orderBy: '-dateCreated'" ng-switch-when="true">
               <user-kudos-type association="'from'" kudos="fromUserKudos"></user-kudos-type>
+              <hr/>
             </div>
             <div class="col-sm-12" ng-switch-when="false">
               <div class="row">
