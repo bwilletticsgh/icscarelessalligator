@@ -1,0 +1,15 @@
+<div class="kudosCommentType">
+  <div class="kudos-comment">
+    <div class="row">
+      <div class="col-md-1">
+        <a ui-sref="app.user({ id: '{{comment.fromUser.id}}' })">
+          <div class="circle-border-micro circle-avatar small-circle-avatar" style="margin-top:5px;background-image:url({{comment.fromUser.avatarUrl}})"></div>
+        </a>
+      </div>
+      <div class="col-md-11">
+        <a ui-sref="app.user({ id: '{{comment.fromUser.id}}' })">{{comment.fromUser | fullUserName}}</a>: {{comment.comments}}<br />
+        <small>{{comment.dateCreated | formatTime}}</small>
+      </div>
+    </div>
+  </div>
+</div>
