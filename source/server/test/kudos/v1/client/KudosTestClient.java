@@ -18,7 +18,7 @@ import org.apache.http.util.EntityUtils;
  */
 public class KudosTestClient 
 {
-    private final String BASE_URL = "http://localhost:8084/KudosREST";
+    private final String BASE_URL = "http://52.40.27.250/KudosREST";//"http://localhost:8084/KudosREST";
     private static KudosTestClient kudos;
     private HttpClient client;
     
