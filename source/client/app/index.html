@@ -17,7 +17,7 @@
 
   <!-- endbuild -->
 </head>
-<body>
+<body class="{{backgroundImage ? 'body-background-image' : ''}}">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
@@ -70,12 +70,10 @@
   </div>
 </div>
 
-<div class="container">
-
+<div class="container ng-cloak">
   <div class="page-header" ng-cloak ng-if="pageTitle">
     <h3>{{pageTitle}}</h3>
   </div>
-
   <section ng-if="!stateIsLoading" ui-view=""></section>
   <section ng-if="stateIsLoading">
     <div style="position:fixed; top:50%; left:50%">
@@ -84,14 +82,10 @@
   </section>
 </div>
 
-<section class="footer ng-cloak" >
+<section class="footer ng-cloak" ng-hide="hideFooter">
   <div class="container">
-    <p>
-      Kudos to you!
-    </p>
   </div>
 </section>
-
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->

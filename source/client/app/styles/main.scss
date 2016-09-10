@@ -36,7 +36,14 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
   vertical-align: middle;
 }
 
-body { padding-top: 70px; }
+body {
+  padding-top: 70px;
+}
+
+body.body-background-image {
+  background-image: url('../images/kudos_background.png');
+  background-size: cover;
+}
 
 .form-signin{
   width:350px;
@@ -53,7 +60,6 @@ body { padding-top: 70px; }
   border-radius: 50%;
   background-color: $gray-lightest;
 }
-
 
 @keyframes fadeyFade {
   from { opacity: 0; }
@@ -362,5 +368,5 @@ a.fa{
 .userKudosType {
   padding-top: 10px;
   padding-bottom: 5px;
-  border-bottom: $gray-warm-light solid 2px;
+  border-bottom: $gray-warm-light solid 20px;
 }

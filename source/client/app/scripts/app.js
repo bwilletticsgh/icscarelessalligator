@@ -48,6 +48,8 @@ angular
         $rootScope.alertMessage = null;
       }
       $rootScope.pageTitle = toState.pageTitle || $state.$current.locals.globals.pageTitle;
+      $rootScope.backgroundImage = toState.backgroundImage || $state.$current.locals.globals.backgroundImage;
+      $rootScope.hideFooter = toState.hideFooter || $state.$current.locals.globals.hideFooter;
     });
     $rootScope.$on('$stateChangeStart', function(event, toState) {
         toState.resolve.pauseStateChange = [ //see: http://stackoverflow.com/questions/20094273/stop-angular-ui-router-navigation-until-promise-is-resolved
