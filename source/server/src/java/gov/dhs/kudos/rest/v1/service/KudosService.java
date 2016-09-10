@@ -146,6 +146,11 @@ public class KudosService extends KudosCategoryService
         
         return kudosRepo.save(kudo);
     }
+    
+    public Kudos findKudosById(String id)
+    {
+        return kudosRepo.findOne(id);
+    }
 
     /**
      * Executes a search query
