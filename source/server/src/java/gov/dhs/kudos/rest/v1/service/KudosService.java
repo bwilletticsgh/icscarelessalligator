@@ -141,7 +141,8 @@ public class KudosService extends KudosCategoryService
             LOG.debug("Saving kudos appending comment");
         
         Kudos kudo = kudosRepo.findOne(kudosId);
-        kudo.addSubComment(kudosCommentRepo.save(new KudosSubComment(fromUser, subComment.getComment())));
+        KudosSubComment ksc = kudosCommentRepo.save(new KudosSubComment(fromUser, subComment.getComment()));
+        kudo.addSubComment(ksc);
         
         return kudosRepo.save(kudo);
     }
