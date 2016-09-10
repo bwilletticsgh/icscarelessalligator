@@ -1,5 +1,4 @@
 <div class="userKudosType">
-
   <div class="row">
     <div class="col-xs-2">
       <div ng-switch on="association">
@@ -8,8 +7,7 @@
       </div>
     </div>
     <div class="col-xs-10">
-      <h5>{{kudos.kudosCat.name}}</h5>
-      <div ng-switch on="association" class="">
+      <div ng-switch on="association" class="text-default">
         <strong ng-switch-when="to">
           Kudos received from <a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser | fullUserName}}</a>!
         </strong>
@@ -17,9 +15,7 @@
           Kudos given to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser | fullUserName}}</a>!
         </strong>
       </div>
-      <div>
-        <blockquote class="kudosComment">{{kudos.comments}}</blockquote>
-      </div>
+      <p class="lead">{{kudos.comments}}</p>
     </div>
   </div>
   <div class="row">
@@ -41,11 +37,13 @@
           <i class="fa fa-circle-thin fa-stack-2x"></i>
           <i class="fa fa-linkedin fa-stack-1x"></i>
         </span>
-        <a href="javascript:;" class="pull-right" ng-click="toggleComments()">COMMENTS <strong>{{kudos.subComments.length}}</strong>&nbsp;</a>
+        TYPE <strong>{{kudos.kudosCat.name}}</strong>
+        <span class="pull-right">
+          <a href="javascript:;" ng-click="toggleComments()" title="View comments">COMMENTS <strong>{{kudos.subComments ? kudos.subComments.length : "0"}}</strong>&nbsp;</a>
+        </span>
       </div>
     </div>
   </div>
-  <!--<div ng-show="kudos.showComments">-->
   <div class="subCommentHolder" style="display: none">
     <div class="kudos-comments" ng-repeat="kudosComment in kudos.subComments | orderBy: 'dateCreated'">
       <kudos-comment-type comment="kudosComment"></kudos-comment-type>

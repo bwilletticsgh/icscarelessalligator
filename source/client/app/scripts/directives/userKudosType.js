@@ -10,7 +10,7 @@
           kudos: '=',
           association: '='
         },
-        link: function(scope,element) {
+        link: function(scope, element) {
           scope.currentUser = users.getCurrentUser();
 
           scope.toggleComments = function() {
