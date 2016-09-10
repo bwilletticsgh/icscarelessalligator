@@ -62,8 +62,7 @@ angular
                       event.preventDefault();
                       $state.go('app.accessDenied');
                     }
-              }, function(e) {
-                  //console.log(e);
+              }, function() {
                   defer.reject();
                 });
             }

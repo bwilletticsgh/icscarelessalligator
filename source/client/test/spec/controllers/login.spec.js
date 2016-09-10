@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: Login', function () {
+describe('The login controller', function () {
   var Login,
     authentication,
     $httpBackend,

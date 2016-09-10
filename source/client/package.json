@@ -33,7 +33,7 @@
     "jasmine-core": "^2.4.1",
     "jit-grunt": "^0.9.1",
     "jshint-stylish": "^1.0.0",
-    "karma": "^1.1.2",
+    "karma": "^1.3.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-sinon": "^1.0.5",
@@ -52,6 +52,7 @@
   "devDependencies": {
     "grunt-ng-constant": "^2.0.1",
     "grunt-protractor-runner": "^3.2.0",
+    "karma-coverage": "^1.1.1",
     "karma-junit-reporter": "^1.1.0",
     "karma-sinon-as-promised": "^0.1.6",
     "karma-sinon-stub-promise": "^1.0.0",

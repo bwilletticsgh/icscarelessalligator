@@ -65,14 +65,23 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
       'karma-jasmine',
       'karma-sinon',
-      'karma-junit-reporter'
+      'karma-junit-reporter',
+      'karma-coverage'
     ],
 
-    reporters : ['dots', 'junit'],
+    reporters : ['dots', 'junit','coverage'],
     junitReporter: {
       outputDir: 'testResults',
       useBrowserName: false,
       outputFile: 'karmatests.xml' // if included, results will be saved as $outputDir/$browserName/$outputFile
+    },
+    preprocessors: {
+      'app/**/*.js': ['coverage']
+    },
+
+    coverageReporter: {
+      type : 'html',
+      dir : 'testcoverage/'
     },
 
   // Continuous Integration mode

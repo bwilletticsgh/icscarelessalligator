@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('The MainCtrl', function () {
 
   function resolve(val){
     return $q(function(resolve){ resolve(val); });

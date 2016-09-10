@@ -16,10 +16,10 @@
           scope.toggleComments = function() {
             scope.showComments = !scope.showComments;
             element.find('.subCommentHolder').slideToggle();
-          }
+          };
 
           scope.newCommentKeydown = function(evt) {
-            if(evt.keyCode == 13) {
+            if(evt.keyCode === 13) {
               var commentText = (scope.newComment).trim();
               if(commentText.length > 0) {
                 var updatedKudos = kudos.addComment(scope.kudos.id, commentText);
@@ -28,7 +28,7 @@
                 console.log(scope.kudos);
               }
             }
-          }
+          };
         }
       };
     });

@@ -9,6 +9,8 @@
           // });
 
             var vm = this;
+
+            vm.SearchString = "";
             vm.authentication = authentication;
 
             vm.logout = function(){

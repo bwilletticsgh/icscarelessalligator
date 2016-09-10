@@ -1,6 +1,6 @@
 'use strict';
 
-describe('KudosCtrl', function () {
+describe('The KudosCtrl', function () {
   var Login,
     authentication,
     $httpBackend,
