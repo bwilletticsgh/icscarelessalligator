@@ -25,7 +25,6 @@
                 var updatedKudos = kudos.addComment(scope.kudos.id, commentText);
                 scope.newComment = '';
                 scope.kudos = updatedKudos;
-                console.log(scope.kudos);
               }
             }
           };
