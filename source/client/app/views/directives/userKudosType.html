@@ -14,8 +14,9 @@
         <strong ng-switch-when="from">
           Kudos given to <a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser | fullUserName}}</a>!
         </strong>
+        <br /><small>{{kudos.dateCreated | formatTime}}</small>
       </div>
-      <p class="lead">{{kudos.comments}}</p>
+      <p class="lead" style="padding-top:10px;">{{kudos.comments}}</p>
     </div>
   </div>
   <div class="row">
