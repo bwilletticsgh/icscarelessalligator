@@ -167,7 +167,8 @@ public class KudosRest
         try
         {
             kudosService.validateUpdateKudosAppendSubComment(kudosId, subComment, request);
-            return new ResponseEntity(kudosService.saveKudosAppendComment(kudosId, subComment, (User) request.getAttribute("kudosUser")), HttpStatus.OK);
+            kudosService.saveKudosAppendComment(kudosId, subComment, (User) request.getAttribute("kudosUser"));
+            return new ResponseEntity(kudosService.findKudosById(kudosId), HttpStatus.OK);
         }
         catch(KudosException e)
         {
