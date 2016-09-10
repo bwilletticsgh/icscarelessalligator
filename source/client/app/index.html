@@ -43,7 +43,7 @@
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
         <ul class="nav navbar-nav">
           <li ui-sref-active="active" ng-show="vm.CurrentUser().isAdmin"><a ui-sref="app.kudosCategories">Manage Kudos</a></li>
-          <li ui-sref-active="active"><a ui-sref="app.users">Users</a></li>
+          <li ui-sref-active="active" ng-show="vm.authentication.isAuthenticated()"><a ui-sref="app.users">Users</a></li>
           <li><a href="/KudosREST/swagger-ui.html">API</a></li>
         </ul>
         <form ng-show="vm.authentication.isAuthenticated()" class="navbar-form navbar-left" role="search">
