@@ -4,7 +4,7 @@
     <label for="toUser" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
       <select class="form-control" name="toUser" required id="toUser" ng-model="vm.kudo.toUser">
-        <option ng-repeat="user in vm.users" value="{{user.id}}">{{user.lastName}}, {{user.firstName}}</option>
+        <option ng-repeat="user in vm.users | orderBy: 'lastName'" value="{{user.id}}">{{user.lastName}}, {{user.firstName}}</option>
       </select>
     </div>
   </div>
@@ -13,7 +13,7 @@
     <label for="kudosCat" class="col-sm-2 control-label">Category</label>
     <div class="col-sm-10">
       <select class="form-control" required name="kudosCat" id="kudosCat" ng-model="vm.kudo.kudosCat">
-        <option ng-repeat="cat in vm.kudosCategories" value="{{cat.id}}">{{cat.name}}</option>
+        <option ng-repeat="cat in vm.kudosCategories | orderBy:'name'" value="{{cat.id}}">{{cat.name}}</option>
       </select>
     </div>
   </div>
