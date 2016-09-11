@@ -228,7 +228,7 @@ public class KudosService extends KudosCategoryService
             KudosCategory dhsKudosCat10 = kudosCatRepo.save(new KudosCategory("Enhanced Quality", "Enhanced the output of people or processes","fa-check",getRandomColor()));
             KudosCategory dhsKudosCat11 = kudosCatRepo.save(new KudosCategory("Holy Grail of Efficiency", "Saved Money, Increased Throughput and Enhanced Quality all at once","fa-thumbs-up",getRandomColor()));
             
-            admin.setOrgName(dhs);
+            admin.setOrgName(dhs.getOrgName());
 			userRepo.save(admin);
             kudosCatRepo.save(new KudosCategory("GLOBAL 1", "BANG"));
         }
