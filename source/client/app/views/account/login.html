@@ -7,14 +7,14 @@
 
         <h3 class="form-signin-heading">Sign in</h3>
         <div class="form-group" ng-class="{'has-error': loginForm.Username.$invalid && loginForm.Username.$touched}">
-          <label class="sr-only" for="userName">Email address</label>
+          <label for="userName">Email</label>
           <input type="email" required autofocus class="form-control" name="Username" id="userName" ng-model="vm.Username" placeholder="Email address" >
           <span ng-show="loginForm.Username.$error.required && !loginForm.Username.$pristine" class="help-block">Required</span>
           <span ng-show="loginForm.Username.$error.email && loginForm.Username.$touched" class="help-block">This is not a valid email</span>
         </div>
 
         <div class="form-group" ng-class="{'has-error': loginForm.password.$error.required && !loginForm.password.$pristine}">
-          <label class="sr-only" for="password">Password</label>
+          <label for="password">Password</label>
           <input type="password" name="password" class="form-control" id="password" ng-model="vm.Password" placeholder="Password">
           <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="help-block">Required</span>
         </div>

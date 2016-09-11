@@ -7,52 +7,53 @@
   <h3 class="form-signin-heading">Ready to register?</h3>
 
   <div class="form-group" ng-class="{'has-error': registerForm.firstName.$error.required && !registerForm.firstName.$pristine}">
-    <label class="sr-only" for="firstName">Re-enter Password</label>
+    <label for="firstName">First Name</label>
     <input type="text" autofocus name="firstName" id="firstName" class="form-control" ng-model="vm.firstName" placeholder="First Name">
     <span ng-show="registerForm.firstName.$error.required && !registerForm.firstName.$pristine" class="help-block">Required</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': registerForm.lastName.$error.required && !registerForm.lastName.$pristine}">
-    <label class="sr-only" for="lastName">Re-enter Password</label>
+    <label for="lastName">Last Name</label>
     <input type="text" name="lastName" id="lastName" class="form-control" ng-model="vm.lastName" placeholder="Last Name">
     <span ng-show="registerForm.lastName.$error.required && !registerForm.lastName.$pristine" class="help-block">Required</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': registerForm.Username.$invalid && registerForm.Username.$touched}">
-    <label class="sr-only" for="userName">Email address</label>
+    <label for="userName">Email</label>
     <input type="email" required class="form-control" name="Username" id="userName" ng-model="vm.Username" placeholder="Email address" >
     <span ng-show="registerForm.Username.$error.required && !registerForm.Username.$pristine" class="help-block">Required</span>
     <span ng-show="registerForm.Username.$error.email && registerForm.Username.$touched" class="help-block">This is not a valid email</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': registerForm.password.$error && registerForm.password.$touched}">
-    <label class="sr-only" for="password">Password</label>
+    <label for="password">Password</label>
     <input type="password" name="password" class="form-control" ng-minlength="6" id="password" ng-model="vm.Password" placeholder="Password (at least 6 chars)" required>
     <span ng-show="registerForm.password.$error.required && !registerForm.password.$pristine" class="help-block">Required</span>
     <span ng-show="registerForm.password.$error.minlength && registerForm.password.$touched" class="help-block">Please enter at least 6 chars</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': registerForm.password2.$invalid && registerForm.password2.$touched}">
-    <label class="sr-only" for="password2">Re-enter Password</label>
+    <label for="password2">Re-enter Password</label>
     <input type="password" name="password2" id="password2" class="form-control" ng-model="vm.Password2" placeholder="Re-enter Password" equals-element="{{vm.Password}}">
     <span ng-show="registerForm.password2.$error.equalsElement && registerForm.password2.$touched" class="help-block">Passwords don't match</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': createForm.toUser.$invalid && !createForm.toUser.$pristine}">
-    <label class="sr-only" for="orgId">Organization</label>
+    <label for="orgId">Organization</label>
     <select class="form-control" required name="orgId" id="orgId" ng-model="vm.orgId">
+      <option value="" disabled selected hidden>Organization</option>
       <option ng-repeat="org in vm.organizations | orderBy:'orgName'" value="{{org.id}}">{{org.orgName}}</option>
     </select>
   </div>
 
   <div class="form-group" ng-class="{'has-error': createForm.toUser.$invalid && !createForm.toUser.$pristine}">
-    <label class="sr-only" for="orgId">Start Date</label>
+    <label for="orgId">Start Date</label>
     <input type="date" name="startDate" id="startDate" class="form-control" ng-model="vm.startDate" placeholder="Start Date">
     <span ng-show="registerForm.startDate.$error.required && !registerForm.startDate.$pristine" class="help-block">Required</span>
   </div>
 
   <div class="form-group">
-    <label class="sr-only" for="password2">Profile Picture (URL)</label>
+    <label for="password2">Profile Picture (URL)</label>
     <input type="text" name="avatarUrl" id="avatarUrl" class="form-control" ng-model="vm.avatarUrl" placeholder="Profile Picture (URL)">
     <img ng-src="{{vm.avatarUrl}}" class="img-responsive" />
   </div>

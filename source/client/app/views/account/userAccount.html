@@ -1,48 +1,46 @@
 <form class="form-signin" role="form" ng-submit="vm.updateUserAccount()" novalidate name="profileForm">
 
-  <div class="checkbox">
-  	<label>
-  		<input type="checkbox" ng-model="vm.editUser.isAdmin" ng-disabled="!vm.allowMakeAdmin">
-  		Admin
-  	</label>
-  </div>
+  <div class="form-group">
+    <label>Roles</label>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="vm.editUser.isAdmin" ng-disabled="!vm.allowMakeAdmin">
+        Admin
+      </label>
+    </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" ng-model="vm.editUser.isHr">
-      HR Director
-    </label>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="vm.editUser.isHr">
+        HR Director
+      </label>
+    </div>
   </div>
 
   <div class="form-group" ng-class="{'has-error': profileForm.firstName.$error.required && !profileForm.firstName.$pristine}">
-    <label class="sr-only" for="firstName">First Name</label>
+    <label for="firstName">First Name</label>
     <input type="text" autofocus name="firstName" id="firstName" class="form-control" ng-model="vm.editUser.firstName" placeholder="First Name">
     <span ng-show="profileForm.firstName.$error.required && !profileForm.firstName.$pristine" class="help-block">Required</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': profileForm.lastName.$error.required && !profileForm.lastName.$pristine}">
-    <label class="sr-only" for="lastName">Last Name</label>
+    <label for="lastName">Last Name</label>
     <input type="text" name="lastName" id="lastName" class="form-control" ng-model="vm.editUser.lastName" placeholder="Last Name">
     <span ng-show="profileForm.lastName.$error.required && !profileForm.lastName.$pristine" class="help-block">Required</span>
   </div>
 
   <div class="form-group" ng-class="{'has-error': profileForm.Username.$invalid && profileForm.Username.$touched}">
-    <label class="sr-only" for="userName">Email address</label>
+    <label for="userName">Email</label>
     <input type="email" required class="form-control" name="Username" id="userName" ng-model="vm.editUser.email" placeholder="Email address" >
     <span ng-show="profileForm.Username.$error.required && !profileForm.Username.$pristine" class="help-block">Required</span>
     <span ng-show="profileForm.Username.$error.email && profileForm.Username.$touched" class="help-block">This is not a valid email</span>
   </div>
 
-
-
-
   <div class="form-group">
-    <label class="sr-only" for="avatarUrl">Profile Picture (URL)</label>
+    <label for="avatarUrl">Profile Picture (URL)</label>
     <input type="text" name="avatarUrl" id="avatarUrl" class="form-control" ng-model="vm.editUser.avatarUrl" placeholder="Profile Picture (URL)">
     <img ng-src="{{vm.editUser.avatarUrl}}" class="img-responsive" />
   </div>
-
-
 
   <button type="submit" ng-disabled="profileForm.$invalid" class="btn btn-primary btn-lg btn-block">
     <i class="fa fa-user fa-2x"></i>

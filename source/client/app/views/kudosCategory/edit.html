@@ -1,30 +1,24 @@
 
 
-<form class="form-horizontal">
+<form>
 
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-10">
-      <input maxlength-helper="40" type="text" class="form-control" id="name" placeholder="Name (40 characters max)" ng-model="vm.kudosCategory.name">
-    </div>
+    <label for="name" class="control-label">Name</label>
+    <input maxlength-helper="40" type="text" class="form-control" id="name" placeholder="Name (40 characters max)" ng-model="vm.kudosCategory.name">
   </div>
 
   <div class="form-group">
-    <label for="icon" class="col-sm-2 control-label">Icon</label>
-    <div class="col-sm-10">
-      <i style="color:{{vm.kudosCategory.color}}" class="fa fa-5x {{vm.kudosCategory.icon}}"></i>
-    </div>
+    <label for="icon" class="control-label">Icon</label>
+    <i style="color:{{vm.kudosCategory.color}}" class="fa fa-5x {{vm.kudosCategory.icon}}"></i>
   </div>
 
   <div class="form-group">
-    <label for="desc" class="col-sm-2 control-label">Description</label>
-    <div class="col-sm-10">
-      <textarea maxlength-helper="100" type="text" placeholder="Description (100 characters max)" class="form-control" id="desc" ng-model="vm.kudosCategory.desc"></textarea>
-    </div>
+    <label for="desc" class="control-label">Description</label>
+    <textarea maxlength-helper="100" type="text" placeholder="Description (100 characters max)" class="form-control" id="desc" ng-model="vm.kudosCategory.desc"></textarea>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div>
       <button type="submit" class="btn btn-primary" ng-click="vm.saveKudosCategory()">Save Kudo Category</button>
       <button type="button" ui-sref="app.kudosCategories" class="btn btn-default">Cancel</button>
     </div>

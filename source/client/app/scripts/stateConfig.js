@@ -127,6 +127,7 @@
       })
       .state('app.login', {
         allowAnon: true,
+        backgroundImage: true,
         templateUrl: 'views/account/login.html',
         controller: 'Login as vm',
         url:'/account/login'
