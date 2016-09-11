@@ -13,7 +13,7 @@
           update: {method:"POST",url: url + "/update"},
           updateUserProfile: {method:"POST",url: url + "/updateProfile"},
           toggleAdminUser: {method:"POST",url: url + "/toggleAdmin/:id", params: {id:"@id"}},
-          toggleHrUser: {method:"POST",url: url + "/toggleHrUser/:id", params: {id:"@id"}}
+          toggleHrUser: {method:"POST",url: url + "/toggleHr/:id", params: {id:"@id"}}
         });
 
         var _currentUser;

@@ -26,7 +26,7 @@ angular.module('kudosApp')
             originalUser.isAdmin = vm.editUser.isAdmin;
         }
 
-        if (originalUser.isHrUser !== vm.editUser.isHrUser ) {
+        if (originalUser.isHr !== vm.editUser.isHr ) {
           promises.push(users.toggleHrUser(vm.editUser.id));
           originalUser.isAdmin = vm.editUser.isAdmin;
         }

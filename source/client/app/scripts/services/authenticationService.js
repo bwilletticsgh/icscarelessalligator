@@ -72,6 +72,7 @@
           var deferred = $q.defer();
           try {
             console.log(token);
+
             token = base64DecodeUrl(token); //The backend base64URL encodes the token, not just straight base 64
             var claims = JSON.parse(atob(token.split('.')[1]));
             _isAuthenticated = true;

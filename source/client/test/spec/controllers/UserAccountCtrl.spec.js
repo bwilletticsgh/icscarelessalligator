@@ -53,7 +53,7 @@ describe('The UserAccountCtrl', function () {
   });
 
   it('should allow a hr user to update hr users', function () {
-    UserAccountCtrl.isHrUser = true;
+    UserAccountCtrl.isHr = true;
     expect(UserAccountCtrl.allowMakeAdmin).toBeFalsy();
   });
 });
