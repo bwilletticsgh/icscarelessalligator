@@ -218,9 +218,6 @@ html.body-background-image {
 
   /* Responsive: Portrait tablets and up */
   @media screen and (min-width: 768px) {
-    .container {
-      max-width: 730px;
-    }
 
     /* Remove the padding we set earlier */
     .header,
@@ -238,12 +235,13 @@ html.body-background-image {
       border-bottom: 0;
     }
   }
-  @for $i from 1 through 6 {
-    .topmargin-#{$i*5} { margin-top: 5px * $i; }
-    .bottommargin-#{$i*5} { margin-bottom: 5px * $i; }
-    .leftmargin-#{$i*5} { margin-left: 5px * $i; }
-    .rightmargin-#{$i*5} { margin-right: 5px * $i; }
-  }
+
+@for $i from 1 through 6 {
+  .topmargin-#{$i*5} { margin-top: 5px * $i; }
+  .bottommargin-#{$i*5} { margin-bottom: 5px * $i; }
+  .leftmargin-#{$i*5} { margin-left: 5px * $i; }
+  .rightmargin-#{$i*5} { margin-right: 5px * $i; }
+}
 
 div.circle-avatar{
 
