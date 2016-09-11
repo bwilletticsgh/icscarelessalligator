@@ -7,7 +7,7 @@ package kudos.v1.to;
  * @author bsuneson
  */
 public class User extends BaseEntity
-{ 
+{    
     private String email;
     private String firstName;
     private String lastName;    
@@ -16,9 +16,10 @@ public class User extends BaseEntity
     private boolean isAdmin;
     private boolean isHr;
     private boolean isDeleted;
-    private Organization organization;
+    private String orgName;
+    private String startDate;
 
-    public User(String email, String firstName, String lastName, String password, String avatarUrl, boolean isAdmin, boolean isDeleted, Organization organization) {
+    public User(String email, String firstName, String lastName, String password, String avatarUrl, boolean isAdmin, boolean isDeleted, String orgName) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,7 +27,7 @@ public class User extends BaseEntity
         this.avatarUrl = avatarUrl;
         this.isAdmin = isAdmin;
         this.isDeleted = isDeleted;
-        this.organization = organization;
+        this.orgName = orgName;
     }
 
     public User(String email, String firstName, String lastName, String password, boolean isAdmin) {
@@ -58,12 +59,20 @@ public class User extends BaseEntity
     public User() {
     }
 
-    public Organization getOrganization() {
-        return organization;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 
     public String getFirstName() {
