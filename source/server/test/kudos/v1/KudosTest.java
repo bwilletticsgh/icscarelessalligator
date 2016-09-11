@@ -374,8 +374,9 @@ public class KudosTest
     } */
     
     @Test
-    public void test55_USER_searchCatUsers()
+    public void test56_USER_makeUserHr()
     {
+        USER_ENDPOINTS.adminLogin();
         assertTrue(USER_ENDPOINTS.makeUserHr());
     }
     
