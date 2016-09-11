@@ -129,7 +129,7 @@ public class EndpointValidation extends WiredService
             throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
         
         User reqUser = (User)request.getAttribute("kudosUser");
-        if(!reqUser.isIsAdmin() && !reqUser.getId().equals(userProfTO.getUserId()))
+        if(!reqUser.isIsAdmin() && !reqUser.isIsHr() && !reqUser.getId().equals(userProfTO.getUserId()))
             throw new KudosException("Only site Admins can mod other users", HttpStatus.UNAUTHORIZED);      
     }
     
