@@ -1,5 +1,5 @@
 $gray-lighter : #eee;
-$body-bg:               transparent !default;
+$body-bg:               white !default;
 $navbar-inverse-color: white;
 $gray:                   #666 !default;
 $input-border: $gray !default;
@@ -46,6 +46,13 @@ html.body-background-image {
   background: url('../images/kudos_background.png') no-repeat center center fixed;
   background-size: cover;
   background-color: #55D8CE;
+  body{
+    background-color: transparent;
+  }
+}
+
+html body {
+  background-color: $body-bg;
 }
 
 @media screen and (max-width: $screen-xs-max) {
@@ -53,6 +60,9 @@ html.body-background-image {
     background: url('../images/kudos_background_mobile.png') no-repeat center center fixed;
     background-position-y:300px;
     background-color: #55D8CE;
+    body{
+      background-color: transparent;
+    }
   }
 }
 
@@ -103,13 +113,13 @@ html.body-background-image {
 }
 
 @media screen and (max-width: $screen-xs-max) {
-  .kudosCategoryTitle {
+  .kudosTitle {
     font-size: 12vw !important;
   }
 }
 
 @media screen and (min-width: $screen-xs-max)  {
-  .kudosCategoryTitle {
+  .kudosTitle {
     font-size: 8em !important;
   }
 }
@@ -218,7 +228,6 @@ html.body-background-image {
 
   /* Responsive: Portrait tablets and up */
   @media screen and (min-width: 768px) {
-
     /* Remove the padding we set earlier */
     .header,
     .marketing,
