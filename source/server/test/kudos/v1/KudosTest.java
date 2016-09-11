@@ -91,7 +91,7 @@ public class KudosTest
         assertTrue(USER_ENDPOINTS.loginValid());
     }
     
-    @Test
+/*     @Test
     public void test10_USER_userAll()
     {
         assertTrue(USER_ENDPOINTS.userAll());
@@ -365,7 +365,7 @@ public class KudosTest
     {
         assertTrue(USAGE_ENDPOINTS.usageByUri());
         System.out.println("*******************End TEST Usage Endpoints");
-    }
+    } */
     
     private void waitForIt()
     {
