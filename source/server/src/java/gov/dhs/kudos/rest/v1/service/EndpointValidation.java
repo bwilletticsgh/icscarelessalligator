@@ -476,9 +476,9 @@ public class EndpointValidation extends WiredService
      */
     private boolean orgHasUser(User user, String orgName)
     {
-        if(user.getOrganization() == null)
+        if(user.getOrgName() == null)
             return false;
         
-        return (user.getOrganization().getOrgName().equals(orgName));
+        return (user.getOrgName().equals(orgName));
     }
 }
