@@ -1,5 +1,5 @@
 $gray-lighter : #eee;
-$body-bg:               #fff !default;
+$body-bg:               transparent !default;
 $navbar-inverse-color: white;
 $gray:                   #666 !default;
 $input-border: $gray !default;
@@ -39,10 +39,21 @@ $fa-font-path: "../bower_components/font-awesome/fonts/";
 body {
   padding-top: 70px;
 }
-
-body.body-background-image {
-  background-image: url('../images/kudos_background.png');
+html,body{
+  height:100%;
+}
+html.body-background-image {
+  background: url('../images/kudos_background.png') no-repeat center center fixed;
   background-size: cover;
+  background-color: #55D8CE;
+}
+
+@media screen and (max-width: $screen-xs-max) {
+  html.body-background-image {
+    background: url('../images/kudos_background_mobile.png') no-repeat center center fixed;
+    background-position-y:300px;
+    background-color: #55D8CE;
+  }
 }
 
 .form-signin{
