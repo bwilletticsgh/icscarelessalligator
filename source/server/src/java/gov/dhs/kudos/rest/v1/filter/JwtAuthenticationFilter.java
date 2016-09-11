@@ -51,7 +51,9 @@ public class JwtAuthenticationFilter implements Filter
         User user = null;
         String path = ((HttpServletRequest) request).getPathInfo();
         
-        if(!path.startsWith("/v1/user/login") && !path.startsWith("/v1/user/register"))
+        if(!path.startsWith("/v1/user/login") 
+                && !path.startsWith("/v1/user/register")
+                && !path.startsWith("/v1/org/all"))
         {
             try
             {
