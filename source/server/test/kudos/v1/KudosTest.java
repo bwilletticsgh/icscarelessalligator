@@ -364,6 +364,12 @@ public class KudosTest
     public void test54_USAGE_usageByUri()
     {
         assertTrue(USAGE_ENDPOINTS.usageByUri());
+    }
+    
+    @Test
+    public void test55_KUDOS_searchCatUsers()
+    {
+        assertTrue(KUDOS_ENDPOINTS.kudoCatUserSearch(USER_ENDPOINTS.getTestUser().getFirstName()));
         System.out.println("*******************End TEST Usage Endpoints");
     } */
     

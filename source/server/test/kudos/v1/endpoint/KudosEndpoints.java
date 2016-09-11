@@ -4,6 +4,7 @@ import java.util.List;
 import kudos.v1.client.KudosTestClient;
 import kudos.v1.to.Kudos;
 import kudos.v1.to.KudosCategory;
+import kudos.v1.to.SearchResultTO;
 import kudos.v1.to.User;
 import kudos.v1.to.UserLoginTO;
 
@@ -146,6 +147,20 @@ public class KudosEndpoints extends Endpoints
         List<Kudos> kudosList = jsonToList(result, Kudos.class);
         
         boolean success = (kudosList != null && !kudosList.isEmpty());
+        
+        System.out.printf("%-60s\n", (success ? "PASS" : "FAILED"));
+        
+        return success;
+    }
+    
+    public boolean kudoCatUserSearch(String search) 
+    {
+        System.out.printf("%-60s", "Testing search kudos cat and users wihtout input...");
+        
+        String result = client.sendGet("/v1/kudos/search/" + search);
+        List<SearchResultTO> resultList = jsonToList(result, SearchResultTO.class);
+        
+        boolean success = (resultList != null && !resultList.isEmpty());
         
         System.out.printf("%-60s\n", (success ? "PASS" : "FAILED"));
         
