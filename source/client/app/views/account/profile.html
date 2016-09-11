@@ -19,6 +19,11 @@
     <span ng-show="profileForm.Username.$error.email && profileForm.Username.$touched" class="help-block">This is not a valid email</span>
   </div>
 
+  <div class="form-group">
+    <label class="sr-only" for="organization">Organization</label>
+    <p id="organization" class="form-control-static">{{(vm.editUser.orgName ? vm.editUser.orgName : 'No Organization')}}</p>
+  </div>
+
   <!--<div class="form-group" ng-class="{'has-error': profileForm.password.$error.required && !profileForm.password.$pristine}">-->
     <!--<label class="sr-only" for="password">Password</label>-->
     <!--<input type="password" name="password" class="form-control" id="password" ng-model="vm.Password" placeholder="Password" required>-->

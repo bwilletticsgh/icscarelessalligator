@@ -12,6 +12,10 @@
       },
       response: function(response){
         if (response.headers('Authorization')){
+
+          // var h = response.headers('Authorization');
+          // console.log('auth', h);
+
           $cookieStore.put('token', response.headers('Authorization'));
         }
         return response;

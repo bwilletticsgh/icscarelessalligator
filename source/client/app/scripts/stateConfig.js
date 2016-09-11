@@ -135,7 +135,12 @@
         allowAnon: true,
         templateUrl: 'views/account/register.html',
         controller: 'RegisterCtrl as vm',
-        url:'/account/register'
+        url:'/account/register',
+        resolve: {
+          organizations: function(organizations){
+            return organizations.getAll();
+          }
+        }
       });
   });
 })();

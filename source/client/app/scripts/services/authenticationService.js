@@ -15,7 +15,7 @@
           return _isAuthenticated;
         }
 
-        function register(email, password, firstName, lastName) {
+        function register(email, password, firstName, lastName, orgId) {
           var ret = {
             success:true,
             message:'Success'
@@ -25,8 +25,11 @@
             email: email,
             password: password,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            orgId: orgId
           };
+
+          console.log(newUser);
 
           var deferred = $q.defer();
 

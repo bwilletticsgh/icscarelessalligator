@@ -38,6 +38,13 @@
     <span ng-show="registerForm.password2.$error.equalsElement && registerForm.password2.$touched" class="help-block">Passwords don't match</span>
   </div>
 
+  <div class="form-group" ng-class="{'has-error': createForm.toUser.$invalid && !createForm.toUser.$pristine}">
+    <label class="sr-only" for="orgId">Organization</label>
+    <select class="form-control" required name="orgId" id="orgId" ng-model="vm.orgId">
+      <option ng-repeat="org in vm.organizations | orderBy:'orgName'" value="{{org.id}}">{{org.orgName}}</option>
+    </select>
+  </div>
+
   <div class="form-group">
     <label class="sr-only" for="password2">Profile Picture (URL)</label>
     <input type="text" name="avatarUrl" id="avatarUrl" class="form-control" ng-model="vm.avatarUrl" placeholder="Profile Picture (URL)">

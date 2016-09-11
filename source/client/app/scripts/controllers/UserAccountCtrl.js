@@ -15,7 +15,7 @@ angular.module('kudosApp')
     vm.updateUserAccount = function() {
 
       function showSuccess(){
-        swal("Account Updated", "The account has been updated", "success");
+        swal('Account Updated', 'The account has been updated', "success");
       }
 
       var promises = [];
