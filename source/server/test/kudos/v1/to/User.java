@@ -1,19 +1,33 @@
 package kudos.v1.to;
 
+
+
 /**
  * The entity representing a User object
  * @author bsuneson
  */
-@SuppressWarnings("serial")
 public class User extends BaseEntity
-{
+{ 
     private String email;
     private String firstName;
     private String lastName;    
     private String password;
     private String avatarUrl;
     private boolean isAdmin;
+    private boolean isHr;
     private boolean isDeleted;
+    private Organization organization;
+
+    public User(String email, String firstName, String lastName, String password, String avatarUrl, boolean isAdmin, boolean isDeleted, Organization organization) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.avatarUrl = avatarUrl;
+        this.isAdmin = isAdmin;
+        this.isDeleted = isDeleted;
+        this.organization = organization;
+    }
 
     public User(String email, String firstName, String lastName, String password, boolean isAdmin) {
         this.email = email;
@@ -42,6 +56,14 @@ public class User extends BaseEntity
     }
 
     public User() {
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public String getFirstName() {
@@ -101,4 +123,16 @@ public class User extends BaseEntity
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
+    public boolean isIsHr()
+    {
+        return isHr;
+    }
+
+    public void setIsHr(boolean isHr)
+    {
+        this.isHr = isHr;
+    }
+    
+    
 }

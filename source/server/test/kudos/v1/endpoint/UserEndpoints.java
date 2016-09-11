@@ -2,7 +2,9 @@ package kudos.v1.endpoint;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import kudos.v1.client.KudosTestClient;
+import kudos.v1.to.Organization;
 import kudos.v1.to.User;
 import kudos.v1.to.UserLoginTO;
 import kudos.v1.to.UserRegisterTO;
@@ -25,7 +27,7 @@ public class UserEndpoints extends Endpoints
     {
         System.out.printf("%-60s", "Testing register with no password...");
         
-        String result = client.sendPost("/v1/user/register", new UserRegisterTO("BobBarker@nowhere.com", "Bob", "Barker", ""));
+        String result = client.sendPost("/v1/user/register", new UserRegisterTO("BobBarker@nowhere.com", "Bob", "Barker", "", ""));
         
         boolean success = (errorEquals(result, "error: A required field for registration was empty"));
         
@@ -38,7 +40,7 @@ public class UserEndpoints extends Endpoints
     {
         System.out.printf("%-60s", "Testing register with invalid password...");
         
-        String result = client.sendPost("/v1/user/register", new UserRegisterTO("BobBarker@nowhere.com", "Bob", "Barker", "12345"));
+        String result = client.sendPost("/v1/user/register", new UserRegisterTO("BobBarker@nowhere.com", "Bob", "Barker", "12345", ""));
         
         boolean success = (errorEquals(result, "error: Password must be at least six characters"));
         
@@ -51,7 +53,7 @@ public class UserEndpoints extends Endpoints
     {
         System.out.printf("%-60s", "Testing register with no email...");
         
-        String result = client.sendPost("/v1/user/register", new UserRegisterTO("", "Bob", "Barker", "1234567"));
+        String result = client.sendPost("/v1/user/register", new UserRegisterTO("", "Bob", "Barker", "1234567", ""));
         
         boolean success = (errorEquals(result, "error: A required field for registration was invalid - need valid email"));
         
@@ -64,7 +66,11 @@ public class UserEndpoints extends Endpoints
     {
         System.out.printf("%-60s", "Testing register with valid credentails...");
         
-        String result = client.sendPost("/v1/user/register", new UserRegisterTO("TestUser" + new Date().hashCode() + "@kudos.com", "Bob", "Barker", "11!!qqQQaaAAzzZZ"));
+        String result = client.sendGet("/v1/org/all");
+        
+        List<Organization> orgs = jsonToList(result, Organization.class);
+        
+        result = client.sendPost("/v1/user/register", new UserRegisterTO("TestUser" + new Date().hashCode() + "@kudos.com", "Bob", "Barker", "11!!qqQQaaAAzzZZ", (String)((Map)orgs.get(0)).get("id")));
         
         testUser = jsonToObject(result, User.class);
         testUser.setPassword("11!!qqQQaaAAzzZZ");
