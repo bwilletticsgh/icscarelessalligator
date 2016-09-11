@@ -8,6 +8,7 @@ angular.module('kudosApp')
     vm.Username='';
     vm.Password='';
     vm.orgId  = '';
+    vm.startDate = '';
     vm.message='';
     vm.successMessage='You have successfully registered.';
     vm.failed = false;
@@ -17,7 +18,7 @@ angular.module('kudosApp')
     vm.Register = function() {
       vm.failed = false;
       //function register(email, password, firstName, lastName) {
-      var promise = authentication.register(vm.Username, vm.Password, vm.firstName, vm.lastName, vm.orgId);
+      var promise = authentication.register(vm.Username, vm.Password, vm.firstName, vm.lastName, vm.orgId, vm.startDate);
       promise.then(function(result) {
         vm.failed = false;
         if (result.success) {

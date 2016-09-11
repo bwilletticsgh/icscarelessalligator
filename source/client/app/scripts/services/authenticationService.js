@@ -15,7 +15,7 @@
           return _isAuthenticated;
         }
 
-        function register(email, password, firstName, lastName, orgId) {
+        function register(email, password, firstName, lastName, orgId, startDate) {
           var ret = {
             success:true,
             message:'Success'
@@ -26,7 +26,8 @@
             password: password,
             firstName: firstName,
             lastName: lastName,
-            orgId: orgId
+            orgId: orgId,
+            startDate: startDate.toJSON()
           };
 
           console.log(newUser);
