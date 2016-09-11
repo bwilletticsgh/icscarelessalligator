@@ -22,8 +22,9 @@ public class User extends BaseEntity
     private boolean isHr;
     private boolean isDeleted;
     private String orgName;
+    private String startDate;
 
-    public User(String email, String firstName, String lastName, String password, String avatarUrl, boolean isAdmin, boolean isDeleted, String organization) {
+    public User(String email, String firstName, String lastName, String password, String avatarUrl, boolean isAdmin, boolean isDeleted, String orgName) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,6 +62,14 @@ public class User extends BaseEntity
     }
 
     public User() {
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getOrgName() {

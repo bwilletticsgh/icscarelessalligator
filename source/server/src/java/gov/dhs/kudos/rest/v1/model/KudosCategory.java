@@ -14,6 +14,15 @@ public class KudosCategory extends BaseEntity
     private String desc;
     private String icon;
     private String color;
+    private int points;
+
+    public KudosCategory(String name, String desc, String icon, String color, int points) {
+        this.name = name;
+        this.desc = desc;
+        this.icon = icon;
+        this.color = color;
+        this.points = points;
+    }
 
     public KudosCategory(String name, String desc, String icon, String color) {
         this.name = name;
@@ -34,6 +43,14 @@ public class KudosCategory extends BaseEntity
     }
 
     public KudosCategory() {
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getName() {

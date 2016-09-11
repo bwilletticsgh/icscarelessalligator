@@ -11,6 +11,7 @@ public class UserRegisterTO
     private String lastName;    
     private String password;
     private String orgId;
+    private String startDate;
 
     public UserRegisterTO(String email, String firstName, String lastName, String password, String orgId) {
         this.email = email;
@@ -21,6 +22,14 @@ public class UserRegisterTO
     }
 
     public UserRegisterTO() {
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getOrgId() {
