@@ -60,7 +60,7 @@ angular
                 authentication.setAuthenticationFromToken($cookieStore.get('token')).then(
                   function() {
                     defer.resolve();
-                    if (toState.adminOnly && !users.getCurrentUser().isAdmin) {
+                    if (toState.hrOnly && !users.getCurrentUser().isAdmin && !users.getCurrentUser().isHrUser) {
                       event.preventDefault();
                       $state.go('app.accessDenied');
                     }
