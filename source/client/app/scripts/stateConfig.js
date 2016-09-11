@@ -133,6 +133,7 @@
       })
       .state('app.register', {
         allowAnon: true,
+        backgroundImage: true,
         templateUrl: 'views/account/register.html',
         controller: 'RegisterCtrl as vm',
         url:'/account/register',

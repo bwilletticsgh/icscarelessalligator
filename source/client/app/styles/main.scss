@@ -68,6 +68,11 @@ html body {
 
 .form-signin{
   width:350px;
+  input, select{
+    background-color: white;
+  }
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
