@@ -215,4 +215,15 @@ public class UserService extends OrganizationService
         
         return userRepo.save(user);
     }
+    
+    public User toggleHrUser(String id)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Toggling user as HR Director by id");
+        
+        User user = userRepo.findOne(id);
+        user.setIsHr((!user.isIsHr()));
+        
+        return userRepo.save(user);
+    }
 }

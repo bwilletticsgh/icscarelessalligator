@@ -313,4 +313,19 @@ public class UserEndpoints extends Endpoints
         
         return success;
     }
+    
+    public boolean makeUserHr() 
+    {
+        System.out.printf("%-60s", "Testing make user an admin...");
+        
+        String result = client.sendPost("/v1/user/toggleHr/" + testUser.getId(), null);
+        
+        testUser = jsonToObject(result, User.class);
+        
+        boolean success = (testUser != null);
+        
+        System.out.printf("%-60s\n", (success ? "PASS" : "FAILED"));
+        
+        return success;
+    }
 }

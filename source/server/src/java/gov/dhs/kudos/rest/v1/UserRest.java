@@ -274,4 +274,22 @@ public class UserRest
             return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
         }
     }
+    
+    @RequestMapping(value = "/toggleHr/{id}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity toggleHr(@PathVariable String id, HttpServletRequest request)
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/user/toggleHr/{id}] id: " + (id == null ? "NO id SUPPLIED" : id));
+        
+        try
+        {
+            kudosService.validateHrUserMod(request, id);
+            return new ResponseEntity(kudosService.toggleHrUser(id), HttpStatus.OK);
+        }
+        catch(KudosException e)
+        {
+            LOG.error(e);
+            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
+        }
+    }    
 }

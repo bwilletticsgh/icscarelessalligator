@@ -379,6 +379,24 @@ public class EndpointValidation extends WiredService
             throw new KudosException("Don't mod yourself!", HttpStatus.BAD_REQUEST);
     }
     
+    
+    public void validateHrUserMod(HttpServletRequest request, String id) throws KudosException
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("Validating required fields for toggling HR User");
+        
+        if(request == null)
+            throw new KudosException("No HttpRequest associated", HttpStatus.BAD_REQUEST);
+        if(request.getAttribute("kudosUser") == null)
+            throw new KudosException("No User object associated in the HttpRequest", HttpStatus.BAD_REQUEST);
+        if(id == null || id.trim().length() == 0 || !userExists(id))
+            throw new KudosException("Kudos user doesn't exists", HttpStatus.BAD_REQUEST);
+        if(!((User)request.getAttribute("kudosUser")).isIsAdmin() && !((User)request.getAttribute("kudosUser")).isIsHr())
+            throw new KudosException("Admin or HR rights are required for this operation", HttpStatus.UNAUTHORIZED);
+        if(((User)request.getAttribute("kudosUser")).getId().equals(id))
+            throw new KudosException("Don't mod yourself!", HttpStatus.BAD_REQUEST);
+    }
+    
     /**
      * Determines if the kudos category already exists by id
      * @param id The id of the kudos category

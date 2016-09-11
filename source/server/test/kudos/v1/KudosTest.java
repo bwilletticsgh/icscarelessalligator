@@ -373,6 +373,12 @@ public class KudosTest
         System.out.println("*******************End TEST Usage Endpoints");
     } */
     
+    @Test
+    public void test55_USER_searchCatUsers()
+    {
+        assertTrue(USER_ENDPOINTS.makeUserHr());
+    }
+    
     private void waitForIt()
     {
         String message = "Waiting for kudos to standup within docker image's tomcat container...";
