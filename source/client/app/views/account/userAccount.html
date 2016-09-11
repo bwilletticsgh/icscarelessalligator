@@ -2,9 +2,16 @@
 
   <div class="checkbox">
   	<label>
-  		<input type="checkbox" ng-model="vm.editUser.isAdmin">
+  		<input type="checkbox" ng-model="vm.editUser.isAdmin" ng-disabled="!vm.allowMakeAdmin">
   		Admin
   	</label>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="vm.editUser.isHrUser">
+      HR Director
+    </label>
   </div>
 
   <div class="form-group" ng-class="{'has-error': profileForm.firstName.$error.required && !profileForm.firstName.$pristine}">

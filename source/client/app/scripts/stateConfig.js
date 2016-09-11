@@ -47,7 +47,7 @@
         url:'/account/profile'
       })
       .state('app.userAccount', {
-        adminOnly: true,
+        hrOnly: true,
         pageTitle: 'User Account',
         templateUrl: 'views/account/userAccount.html',
         controller: 'UserAccountCtrl as vm',

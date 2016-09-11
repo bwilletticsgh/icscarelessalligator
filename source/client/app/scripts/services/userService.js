@@ -12,7 +12,8 @@
           getUserById: {method:"get",url: url + "/byId/:id"},
           update: {method:"POST",url: url + "/update"},
           updateUserProfile: {method:"POST",url: url + "/updateProfile"},
-          toggleAdminUser: {method:"POST",url: url + "/toggleAdmin/:id", params: {id:"@id"}}
+          toggleAdminUser: {method:"POST",url: url + "/toggleAdmin/:id", params: {id:"@id"}},
+          toggleHrUser: {method:"POST",url: url + "/toggleHrUser/:id", params: {id:"@id"}}
         });
 
         var _currentUser;
@@ -23,7 +24,10 @@
 
         function toggleAdmin(userId){
           return userResource.toggleAdminUser({id:userId}).$promise;
-          //test
+        }
+
+        function toggleHrUser(userId){
+          return userResource.toggleHrUser({id:userId}).$promise;
         }
 
         function getCurrentUser() {
@@ -61,6 +65,7 @@
         return {
           getUsers: getUsers,
           toggleAdmin: toggleAdmin,
+          toggleHrUser: toggleHrUser,
           getUser : getUser,
           setCurrentUser : setCurrentUser,
           getCurrentUser : getCurrentUser,
