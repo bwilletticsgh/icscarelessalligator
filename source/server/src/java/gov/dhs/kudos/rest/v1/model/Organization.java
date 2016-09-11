@@ -15,19 +15,11 @@ public class Organization extends BaseEntity
     @Indexed(unique=true)
     private String orgName;
     @DBRef
-    private List<User> users;
-    @DBRef
     private List<KudosCategory> kudosCategories;
 
-    public Organization(String orgName, List<User> users, List<KudosCategory> kudosCategories) {
+    public Organization(String orgName, List<KudosCategory> kudosCategories) {
         this.orgName = orgName;
-        this.users = users;
         this.kudosCategories = kudosCategories;
-    }
-
-    public Organization(String orgName, List<User> users) {
-        this.orgName = orgName;
-        this.users = users;
     }
 
     public Organization(String orgName) {
@@ -36,13 +28,6 @@ public class Organization extends BaseEntity
 
     public Organization() {
     }
-    
-    public void addUser(User user){
-        if(users == null)
-            users = new ArrayList<>();
-        
-        users.add(user);
-    }
 
     public String getOrgName() {
         return orgName;
@@ -50,14 +35,6 @@ public class Organization extends BaseEntity
 
     public void setOrgName(String orgName) {
         this.orgName = orgName;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     public List<KudosCategory> getKudosCategories()

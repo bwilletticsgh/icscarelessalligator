@@ -3,6 +3,7 @@ package gov.dhs.kudos.rest.v1.model;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 
 /**
@@ -21,6 +22,19 @@ public class User extends BaseEntity
     private boolean isAdmin;
     private boolean isHr;
     private boolean isDeleted;
+    @DBRef
+    private Organization organization;
+
+    public User(String email, String firstName, String lastName, String password, String avatarUrl, boolean isAdmin, boolean isDeleted, Organization organization) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.avatarUrl = avatarUrl;
+        this.isAdmin = isAdmin;
+        this.isDeleted = isDeleted;
+        this.organization = organization;
+    }
 
     public User(String email, String firstName, String lastName, String password, boolean isAdmin) {
         this.email = email;
@@ -49,6 +63,14 @@ public class User extends BaseEntity
     }
 
     public User() {
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public String getFirstName() {

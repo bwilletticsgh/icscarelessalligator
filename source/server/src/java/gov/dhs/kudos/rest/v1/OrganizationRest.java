@@ -3,7 +3,6 @@ package gov.dhs.kudos.rest.v1;
 import gov.dhs.kudos.rest.v1.exception.KudosException;
 import gov.dhs.kudos.rest.v1.model.KudosCategory;
 import gov.dhs.kudos.rest.v1.model.Organization;
-import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.service.KudosService;
 import gov.dhs.kudos.rest.v1.util.LogUtils;
 import org.apache.log4j.Logger;
@@ -101,33 +100,6 @@ public class OrganizationRest
         {
             kudosService.validateOrgUpdate(org);
             return new ResponseEntity(kudosService.saveOrg(org), HttpStatus.OK);
-        }
-        catch(KudosException e)
-        {
-            LOG.error(e);
-            return new ResponseEntity("error: " + e.getMessage(), e.getHttpStatus());
-        }
-    }
-    
-    /**
-     * Endpoint for adding a user to an organization
-     * @param orgName The PathVariable of the organizations name
-     * @param user The RequestBody object containing a user - must be valid user, organization must exists, and user must not already be a member
-     * @return The updated organization object
-     */
-    @RequestMapping(value = "/addUser/{orgName}", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity orgAddUser(@PathVariable String orgName, @RequestBody(required = false) User user)
-    {
-        if(LOG.isDebugEnabled())
-        {
-            LOG.debug("[/v1/org/addUser/{orgName}] user: " + (user == null ? "NO user OBJECT" : LogUtils.objectToJson(user)));
-            LOG.debug("[/v1/org/addUser/{orgName}] orgName: " + (orgName == null ? "NO ORGNAME SUPPLIED" : orgName));
-        }            
-        
-        try
-        {
-            kudosService.validateOrgAddUser(user, orgName);
-            return new ResponseEntity(kudosService.addOrgUser(user, orgName), HttpStatus.OK);
         }
         catch(KudosException e)
         {

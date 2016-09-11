@@ -31,23 +31,6 @@ public class OrganizationService extends StatsService
         
         return organizationRepo.save(org);
     }
-    
-    /**
-     * Adds a user to an organization
-     * @param user The user object to add
-     * @param orgName The organization name to add the user into
-     * @return The updated organization object
-     */
-    public Organization addOrgUser(User user, String orgName)
-    {
-        if(LOG.isDebugEnabled())
-            LOG.debug("Adding user to organization");
-        
-        Organization org = organizationRepo.findByOrgNameIgnoreCase(orgName);
-        org.addUser(user);
-        
-        return organizationRepo.save(org);
-    }
 
     /**
      * Finds all organizations

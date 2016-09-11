@@ -10,15 +10,25 @@ public class UserRegisterTO
     private String firstName;
     private String lastName;    
     private String password;
+    private String orgId;
 
-    public UserRegisterTO(String email, String firstName, String lastName, String password) {
+    public UserRegisterTO(String email, String firstName, String lastName, String password, String orgId) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.orgId = orgId;
     }
 
     public UserRegisterTO() {
+    }
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
     }
 
     public String getEmail() {

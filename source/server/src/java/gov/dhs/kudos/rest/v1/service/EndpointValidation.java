@@ -45,6 +45,10 @@ public class EndpointValidation extends WiredService
             throw new KudosException("A required field for registration was invalid - need valid email", HttpStatus.BAD_REQUEST);
         if(userRegTO.getPassword().trim().length() < 6)
             throw new KudosException("Password must be at least six characters", HttpStatus.BAD_REQUEST);
+        if(userRegTO.getOrgId() == null || userRegTO.getOrgId().trim().length() == 0)
+            throw new KudosException("Must supply orgId", HttpStatus.BAD_REQUEST);
+        if(!orgExistsById(userRegTO.getOrgId()))
+            throw new KudosException("Organization doesn't exists", HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -449,6 +453,11 @@ public class EndpointValidation extends WiredService
         return (organizationRepo.findByOrgNameIgnoreCase(orgName) != null);
     }
     
+    private boolean orgExistsById(String orgId)
+    {
+        return (organizationRepo.findOne(orgId) != null);
+    }
+    
     /**
      * Determines if the user already exists based on id
      * @param userId The id of the user
@@ -467,11 +476,9 @@ public class EndpointValidation extends WiredService
      */
     private boolean orgHasUser(User user, String orgName)
     {
-        Organization org = organizationRepo.findByOrgNameIgnoreCase(orgName);
-        
-        if(org == null || org.getUsers() == null)
+        if(user.getOrganization() == null)
             return false;
         
-        return org.getUsers().contains(user);
+        return (user.getOrganization().getOrgName().equals(orgName));
     }
 }

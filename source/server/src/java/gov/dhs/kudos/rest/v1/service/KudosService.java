@@ -236,7 +236,8 @@ public class KudosService extends KudosCategoryService
                                                                                                                     dhsKudosCat6,dhsKudosCat7,dhsKudosCat8,
                                                                                                                     dhsKudosCat9,dhsKudosCat10,dhsKudosCat11
                                                                                                                 })));
-            
+            admin.setOrganization(dhs);
+			userRepo.save(admin);
             kudosCatRepo.save(new KudosCategory("GLOBAL 1", "BANG"));
         }
     }

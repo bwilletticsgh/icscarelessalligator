@@ -1,6 +1,7 @@
 package gov.dhs.kudos.rest.v1.service;
 
 import gov.dhs.kudos.rest.v1.exception.KudosException;
+import gov.dhs.kudos.rest.v1.model.Organization;
 import gov.dhs.kudos.rest.v1.model.User;
 import gov.dhs.kudos.rest.v1.to.UserLoginTO;
 import gov.dhs.kudos.rest.v1.to.UserRegisterTO;
@@ -40,7 +41,9 @@ public class UserService extends OrganizationService
                 throw new KudosException("You have been previously deleted by a Site Admin.  Please contact Kudos for reactivation.", HttpStatus.UNAUTHORIZED);
         }
         
+        Organization org = organizationRepo.findOne(userRegTO.getOrgId());
         User user = new User(userRegTO.getEmail().trim(), userRegTO.getFirstName().trim(), userRegTO.getLastName().trim(), userRegTO.getPassword().trim(), false);
+        user.setOrganization(org);
         
         return userRepo.save(user);
     }
