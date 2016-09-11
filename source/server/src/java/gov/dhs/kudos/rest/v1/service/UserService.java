@@ -44,6 +44,7 @@ public class UserService extends OrganizationService
         Organization org = organizationRepo.findOne(userRegTO.getOrgId());
         User user = new User(userRegTO.getEmail().trim(), userRegTO.getFirstName().trim(), userRegTO.getLastName().trim(), userRegTO.getPassword().trim(), false);
         user.setOrgName(org.getOrgName());
+        user.setStartDate(userRegTO.getStartDate());
         
         return userRepo.save(user);
     }
