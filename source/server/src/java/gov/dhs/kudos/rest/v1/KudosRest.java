@@ -204,4 +204,17 @@ public class KudosRest
         
         return new ResponseEntity(kudosService.count(userId), HttpStatus.OK);
     }
+    
+    /**
+     * Endpoint for retrieving all kudos 
+     * @return All kudos
+     */
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getKudosAll()
+    {
+        if(LOG.isDebugEnabled())
+            LOG.debug("[/v1/kudos/all]");
+        
+        return new ResponseEntity(kudosService.getAll(), HttpStatus.OK);
+    }
 }

@@ -202,6 +202,15 @@ public class KudosService extends KudosCategoryService
         return resultList;
     }
     
+    /**
+     * Get all kudos
+     * @return All kudos
+     */
+    public List<Kudos> getAll()
+    {
+        return kudosRepo.findAll();
+    }
+    
     public void initAdminData() 
     {
         Organization dhs = organizationRepo.findByOrgName("DHS");
