@@ -1,4 +1,4 @@
-<form class="form" role="form" ng-submit="vm.saveKudos()" novalidate name="createForm">
+<form class="form" role="form" ng-submit="vm.theForm=createForm; vm.saveKudos()" novalidate name="createForm">
 
   <div class="form-group" ng-class="{'has-error': createForm.toUser.$invalid && !createForm.toUser.$pristine}">
     <label for="toUser" class="control-label">Name</label>
