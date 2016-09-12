@@ -5,10 +5,10 @@ describe('the homepage', function() {
   });
 
   it('should have title', function() {
-    expect(browser.getTitle()).toEqual('KUDOS Home');
+    expect(browser.getTitle()).toEqual('KUDOS');
   });
 
-  it('should click sendKudos', function() {
-    element(by.id('sendKudos')).click();
+  it('the send kudos button should be hidden for non logged in users', function() {
+    expect(element(by.id('sendKudos')).isDisplayed()).toBeFalsy();
   });
 });

@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
-<testsuite name="PhantomJS 2.1.1 (Windows 8 0.0.0)" package="" timestamp="2016-09-11T17:07:58" id="0" hostname="irpw-tclark3" tests="28" errors="0" failures="0" time="0.251">
+<testsuite name="PhantomJS 2.1.1 (Windows 8 0.0.0)" package="" timestamp="2016-09-12T03:51:14" id="0" hostname="irpw-tclark3" tests="28" errors="0" failures="0" time="0.357">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1"/>
   </properties>
-  <testcase name="Unit: App App Abstract Route redirects a user that is not logged in" time="0.047" classname="Unit: App"/>
-  <testcase name="The NavBarCtrl should log out the logged in user" time="0.01" classname="The NavBarCtrl"/>
-  <testcase name="The NavBarCtrl should redirect the user to home when logging out" time="0.009" classname="The NavBarCtrl"/>
-  <testcase name="The NavBarCtrl shows the users full name" time="0.006" classname="The NavBarCtrl"/>
-  <testcase name="The NavBarCtrl shows the users avatar" time="0.005" classname="The NavBarCtrl"/>
-  <testcase name="The NavBarCtrl has the current user" time="0.006" classname="The NavBarCtrl"/>
-  <testcase name="The NavBarCtrl redirects the user to the search state with the correct query string" time="0.009" classname="The NavBarCtrl"/>
-  <testcase name="The ProfileCtrl should update the current user's profile" time="0.019" classname="The ProfileCtrl"/>
-  <testcase name="The UserAccountCtrl should not allow a non admin to update to admin" time="0.006" classname="The UserAccountCtrl"/>
-  <testcase name="The UserAccountCtrl should allow a hr user to update hr users" time="0.005" classname="The UserAccountCtrl"/>
-  <testcase name="The KudosCtrl should not let a user give a kudos to themselves" time="0.008" classname="The KudosCtrl"/>
-  <testcase name="The KudosCtrl gets all kudos categories" time="0.006" classname="The KudosCtrl"/>
-  <testcase name="The KudosCtrl calls add kudos when saveKudos is called" time="0.006" classname="The KudosCtrl"/>
-  <testcase name="The login controller should display an error message on bad login" time="0.015" classname="The login controller"/>
-  <testcase name="The login controller should display success message on good login" time="0.007" classname="The login controller"/>
-  <testcase name="The login controller should call the authentication service with the right parameters" time="0.006" classname="The login controller"/>
-  <testcase name="The MainCtrl should set the last kudos for the user if they are logged in" time="0.013" classname="The MainCtrl"/>
-  <testcase name="The MainCtrl should not set the last kudos for the user if they are not logged in" time="0.006" classname="The MainCtrl"/>
-  <testcase name="The MainCtrl should set lastSentNotificationDismissed cookie when clicking hide notification" time="0.009" classname="The MainCtrl"/>
-  <testcase name="The MainCtrl should set notificationDismissed when the cookie is present" time="0.006" classname="The MainCtrl"/>
-  <testcase name="Controller: RegisterCtrl should allow a user to register" time="0.007" classname="Controller: RegisterCtrl"/>
-  <testcase name="Controller: RegisterCtrl should set the failure message to the message returned by the authentication service" time="0.006" classname="Controller: RegisterCtrl"/>
-  <testcase name="Controller: UsersCtrl should have a list of users on the scope" time="0.007" classname="Controller: UsersCtrl"/>
-  <testcase name="The formatTime filter should show a friendly formatting string" time="0.008" classname="The formatTime filter"/>
-  <testcase name="The full username filter should show a first and last name concatenated" time="0.005" classname="The full username filter"/>
-  <testcase name="The full username filter should return a blank string for a null user" time="0.005" classname="The full username filter"/>
-  <testcase name="The full username filter should return a blank string for an undefined user" time="0.004" classname="The full username filter"/>
-  <testcase name="The full username filter should an undefined string for a non user object" time="0.005" classname="The full username filter"/>
+  <testcase name="Unit: App App Abstract Route redirects a user that is not logged in" time="0.066" classname="Unit: App"/>
+  <testcase name="The NavBarCtrl should log out the logged in user" time="0.015" classname="The NavBarCtrl"/>
+  <testcase name="The NavBarCtrl should redirect the user to home when logging out" time="0.014" classname="The NavBarCtrl"/>
+  <testcase name="The NavBarCtrl shows the users full name" time="0.009" classname="The NavBarCtrl"/>
+  <testcase name="The NavBarCtrl shows the users avatar" time="0.008" classname="The NavBarCtrl"/>
+  <testcase name="The NavBarCtrl has the current user" time="0.008" classname="The NavBarCtrl"/>
+  <testcase name="The NavBarCtrl redirects the user to the search state with the correct query string" time="0.017" classname="The NavBarCtrl"/>
+  <testcase name="The ProfileCtrl should update the current user's profile" time="0.026" classname="The ProfileCtrl"/>
+  <testcase name="The UserAccountCtrl should not allow a non admin to update to admin" time="0.009" classname="The UserAccountCtrl"/>
+  <testcase name="The UserAccountCtrl should allow a hr user to update hr users" time="0.007" classname="The UserAccountCtrl"/>
+  <testcase name="The KudosCtrl should not let a user give a kudos to themselves" time="0.012" classname="The KudosCtrl"/>
+  <testcase name="The KudosCtrl gets all kudos categories" time="0.008" classname="The KudosCtrl"/>
+  <testcase name="The KudosCtrl calls add kudos when saveKudos is called" time="0.01" classname="The KudosCtrl"/>
+  <testcase name="The login controller should display an error message on bad login" time="0.02" classname="The login controller"/>
+  <testcase name="The login controller should display success message on good login" time="0.009" classname="The login controller"/>
+  <testcase name="The login controller should call the authentication service with the right parameters" time="0.009" classname="The login controller"/>
+  <testcase name="The MainCtrl should set the last kudos for the user if they are logged in" time="0.019" classname="The MainCtrl"/>
+  <testcase name="The MainCtrl should not set the last kudos for the user if they are not logged in" time="0.008" classname="The MainCtrl"/>
+  <testcase name="The MainCtrl should set lastSentNotificationDismissed cookie when clicking hide notification" time="0.012" classname="The MainCtrl"/>
+  <testcase name="The MainCtrl should set notificationDismissed when the cookie is present" time="0.009" classname="The MainCtrl"/>
+  <testcase name="Controller: RegisterCtrl should allow a user to register" time="0.009" classname="Controller: RegisterCtrl"/>
+  <testcase name="Controller: RegisterCtrl should set the failure message to the message returned by the authentication service" time="0.008" classname="Controller: RegisterCtrl"/>
+  <testcase name="Controller: UsersCtrl should have a list of users on the scope" time="0.008" classname="Controller: UsersCtrl"/>
+  <testcase name="The formatTime filter should show a friendly formatting string" time="0.011" classname="The formatTime filter"/>
+  <testcase name="The full username filter should show a first and last name concatenated" time="0.006" classname="The full username filter"/>
+  <testcase name="The full username filter should return a blank string for a null user" time="0.006" classname="The full username filter"/>
+  <testcase name="The full username filter should return a blank string for an undefined user" time="0.007" classname="The full username filter"/>
+  <testcase name="The full username filter should an undefined string for a non user object" time="0.007" classname="The full username filter"/>
   <system-out>
     <![CDATA[
 ]]>

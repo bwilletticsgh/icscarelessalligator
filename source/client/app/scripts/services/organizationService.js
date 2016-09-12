@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   angular.module('kudosApp')
-    .factory('organizations', function(_, $resource, restUrl, $q) {
+    .factory('organizations', function(_, $resource, restUrl) {
 
       var url = restUrl + 'org';
 

@@ -14,11 +14,6 @@ describe('The UserAccountCtrl', function () {
     scope;
 
 
-
-  function resolve(val){
-    return $q(function(resolve){ resolve(val); });
-  }
-
   beforeEach(module('kudosApp'));
 
   // Initialize the controller and a mock scope
