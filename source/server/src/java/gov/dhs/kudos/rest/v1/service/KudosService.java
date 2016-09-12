@@ -215,29 +215,25 @@ public class KudosService extends KudosCategoryService
             organizationRepo.deleteAll();
             
             User admin = userRepo.save(new User("admin@kudos.com", "kudos", "admin", "11!!qqQQaaAAzzZZ", true));
-            KudosCategory dhsKudosCat0 = kudosCatRepo.save(new KudosCategory("AWWW SNAP!", "Outstanding performance. We are all impressed!","fa-thumbs-up",getRandomColor()));
-            KudosCategory dhsKudosCat1 = kudosCatRepo.save(new KudosCategory("Good Citizenship", "Promoting positive morale through actions of godd spirit","fa-smile-o",getRandomColor()));
-            KudosCategory dhsKudosCat2 = kudosCatRepo.save(new KudosCategory("Collaboration / Helping / Mentoring", "Leading others through partnership","fa-group",getRandomColor()));
-            KudosCategory dhsKudosCat3 = kudosCatRepo.save(new KudosCategory("Bright Idea / Creativity", "Honoring the creative problem solver","fa-lightbulb-o",getRandomColor()));
-            KudosCategory dhsKudosCat4 = kudosCatRepo.save(new KudosCategory("Above and Beyond", "Modeling superior service","fa-bolt",getRandomColor()));
-            KudosCategory dhsKudosCat5 = kudosCatRepo.save(new KudosCategory("Make it Happen", "Relentlessly resourceful and productive","fa-coffee",getRandomColor()));
-            KudosCategory dhsKudosCat6 = kudosCatRepo.save(new KudosCategory("Unsung Hero", "Working behind the scenes","fa-star-half-o",getRandomColor()));
-            KudosCategory dhsKudosCat7 = kudosCatRepo.save(new KudosCategory("Going Green", "Providing outstanding contributions towards sustainability","fa-tree",getRandomColor()));
-            KudosCategory dhsKudosCat8 = kudosCatRepo.save(new KudosCategory("Saved Money", "Reduced cost or prevented unnecessary expenditures","fa-money",getRandomColor()));
-            KudosCategory dhsKudosCat9 = kudosCatRepo.save(new KudosCategory("Increased Throughput", "Increased the speed or productivity of peers or processes","fa-fighter-jet",getRandomColor()));
-            KudosCategory dhsKudosCat10 = kudosCatRepo.save(new KudosCategory("Enhanced Quality", "Enhanced the output of people or processes","fa-check",getRandomColor()));
-            KudosCategory dhsKudosCat11 = kudosCatRepo.save(new KudosCategory("Holy Grail of Efficiency", "Saved Money, Increased Throughput and Enhanced Quality all at once","fa-thumbs-up",getRandomColor()));
+            KudosCategory dhsKudosCat0 = kudosCatRepo.save(new KudosCategory("Teamwork", "Outstanding performance. We are all impressed!","fa-thumbs-up",getRandomColor()));
+            KudosCategory dhsKudosCat1 = kudosCatRepo.save(new KudosCategory("Improvement", "Promoting positive morale through actions of good spirit","fa-smile-o",getRandomColor()));
+            KudosCategory dhsKudosCat2 = kudosCatRepo.save(new KudosCategory("Experiment", "Leading others through partnership","fa-group",getRandomColor()));
+//            KudosCategory dhsKudosCat3 = kudosCatRepo.save(new KudosCategory("Bright Idea / Creativity", "Honoring the creative problem solver","fa-lightbulb-o",getRandomColor()));
+//            KudosCategory dhsKudosCat4 = kudosCatRepo.save(new KudosCategory("Above and Beyond", "Modeling superior service","fa-bolt",getRandomColor()));
+//            KudosCategory dhsKudosCat5 = kudosCatRepo.save(new KudosCategory("Make it Happen", "Relentlessly resourceful and productive","fa-coffee",getRandomColor()));
+//            KudosCategory dhsKudosCat6 = kudosCatRepo.save(new KudosCategory("Unsung Hero", "Working behind the scenes","fa-star-half-o",getRandomColor()));
+//            KudosCategory dhsKudosCat7 = kudosCatRepo.save(new KudosCategory("Going Green", "Providing outstanding contributions towards sustainability","fa-tree",getRandomColor()));
+//            KudosCategory dhsKudosCat8 = kudosCatRepo.save(new KudosCategory("Saved Money", "Reduced cost or prevented unnecessary expenditures","fa-money",getRandomColor()));
+//            KudosCategory dhsKudosCat9 = kudosCatRepo.save(new KudosCategory("Increased Throughput", "Increased the speed or productivity of peers or processes","fa-fighter-jet",getRandomColor()));
+//            KudosCategory dhsKudosCat10 = kudosCatRepo.save(new KudosCategory("Enhanced Quality", "Enhanced the output of people or processes","fa-check",getRandomColor()));
+//            KudosCategory dhsKudosCat11 = kudosCatRepo.save(new KudosCategory("Holy Grail of Efficiency", "Saved Money, Increased Throughput and Enhanced Quality all at once","fa-thumbs-up",getRandomColor()));
             
-            dhs = organizationRepo.save(new Organization("DHS", Arrays.<KudosCategory>asList(new KudosCategory[]{
-                                                                                            dhsKudosCat0,dhsKudosCat1,dhsKudosCat2,
-                                                                                            dhsKudosCat3,dhsKudosCat4,dhsKudosCat5,
-                                                                                            dhsKudosCat6,dhsKudosCat7,dhsKudosCat8,
-                                                                                            dhsKudosCat9,dhsKudosCat10,dhsKudosCat11
-                                                                                        })));
+            dhs = organizationRepo.save(new Organization("DHS", Arrays.<KudosCategory>asList(new KudosCategory[]{dhsKudosCat0,dhsKudosCat1,dhsKudosCat2})));
+            
             
             admin.setOrgName(dhs.getOrgName());
-			userRepo.save(admin);
-            kudosCatRepo.save(new KudosCategory("GLOBAL 1", "BANG"));
+            userRepo.save(admin);
+            //kudosCatRepo.save(new KudosCategory("GLOBAL-1", "BANG"));
         }
     }
     
