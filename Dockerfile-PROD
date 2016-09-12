@@ -13,7 +13,7 @@ COPY source/client/bower.json /usr/src/app/
 COPY source/client/Gruntfile.js /usr/src/app/
 
 RUN grunt build
-
+#
 
 RUN cp -R /usr/src/app/dist/* /var/www/html/
 
