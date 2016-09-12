@@ -87,7 +87,8 @@
         }
       })
       .state('app.createKudos', {
-        pageTitle: 'Create Kudos',
+        backgroundImage: true,
+        pageTitle: 'Give a Kudos!',
         templateUrl: 'views/kudos/create.html',
         controller: 'KudosCtrl as vm',
         url: '/kudos/create/{userId}'
@@ -132,6 +133,11 @@
         controller: 'Login as vm',
         url:'/account/login'
       })
+      // .state('app.faq', {
+      //   allowAnon: true,
+      //   templateUrl: 'views/faq.html',
+      //   url:'/faq'
+      // })
       .state('app.register', {
         allowAnon: true,
         backgroundImage: true,
