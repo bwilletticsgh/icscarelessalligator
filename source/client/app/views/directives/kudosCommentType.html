@@ -1,14 +1,14 @@
 <div class="kudosCommentType">
   <div class="kudos-comment">
     <div class="row">
-      <div class="col-xs-1">
-        <a ui-sref="app.user({ id: '{{comment.fromUser.id}}' })">
-          <div class="circle-border-micro circle-avatar small-circle-avatar" style="margin-top:5px;background-image:url({{comment.fromUser.avatarUrl}})"></div>
+      <div class="col-xs-2 col-sm-1 no-right-pad">
+        <a ui-sref="app.user({ id: '{{comment.fromUser.id}}' })" class="pull-right">
+          <img ng-src="{{comment.fromUser.avatarUrl}}" class="circle-border-micro circle-avatar small-circle-avatar " width="36" height="36" />
         </a>
       </div>
-      <div class="col-xs-11">
+      <div class="col-xs-10 col-sm-11">
         <a ui-sref="app.user({ id: '{{comment.fromUser.id}}' })">{{comment.fromUser | fullUserName}}</a>: {{comment.comments}}<br />
-        <small>{{comment.dateCreated | formatTime}}</small>
+        <small class="text-muted">{{comment.dateCreated | formatTime}}</small>
       </div>
     </div>
   </div>
