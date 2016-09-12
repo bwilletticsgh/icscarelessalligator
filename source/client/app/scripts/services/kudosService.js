@@ -48,6 +48,7 @@
         getKudosByCategory: { method: 'get', isArray: true, url: url + '/cat/all/:catId'},
         addComment: { method: 'post', url: url + '/subComment/:id', params: {id:"@id"} },
         search: { method: 'get', isArray: true, url: url + '/search/:searchString'},
+        all: { method: 'get', isArray: true, url: url + '/all'},
         create: { method: 'post', url: url + '/create/:fromUserId/:toUserId/:kudosCatId'}
       });
 
@@ -86,6 +87,12 @@
         return kudos;
       }
 
+      function all() {
+        console.log('asd')
+        var kudos = kudosResources.all();
+        return kudos;
+      }
+
       function addComment(id, comment) {
         return kudosResources.addComment({ id: id }, { comment: comment });
       }
@@ -102,6 +109,7 @@
       }
 
       return {
+        all: all,
         addComment: addComment,
         addKudos: addKudos,
         getKudosByCategory: getKudosByCategory,

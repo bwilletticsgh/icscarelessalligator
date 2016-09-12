@@ -1,0 +1,42 @@
+<select ng-model="theFilter">
+  <option value="Enhanced Quality">
+    Enhanced Quality
+  </option>
+  <option value="Experiment">
+    Experiment
+  </option>
+  <option value="Delivery">
+    Delivery
+  </option>
+</select>
+<table class="table table-striped">
+  <thead>
+  <th>From</th>
+  <th>To</th>
+  <th>Sent</th>
+  <th>Comments</th>
+  <th>Category</th>
+  </thead>
+  <tbody ng-repeat="kudo in vm.kudos | filter: theFilter">
+  <tr >
+    <td>
+      {{kudo.fromUser | fullUserName}}
+    </td>
+    <td>
+      {{kudo.toUser | fullUserName}}
+    </td>
+    <td>
+      {{kudo.dateCreated | formatTime}}
+    </td>
+    <td>
+      {{kudo.comments}}
+    </td>
+    <td>
+      {{kudo.kudosCat.name}}
+    </td>
+    <!--<td><a ui-sref="app.user({id:kudos.fromUser.id})">{{kudos.fromUser.firstName}} {{kudos.fromUser.lastName}}</a></td>-->
+    <!--<td><a ui-sref="app.user({id:kudos.toUser.id})">{{kudos.toUser.firstName}} {{kudos.toUser.lastName}}</a></td>-->
+    <!--<td class="text-nowrap">{{kudos.dateCreated | formatTime}}</td>-->
+  </tr>
+  </tbody>
+</table>

@@ -46,6 +46,7 @@
           <!--<li ui-sref-active="active" ng-show="vm.authentication.isAuthenticated()"><a ui-sref="app.leaderboard" title="View Leaderboard">Leaderboard</a></li>-->
           <li ui-sref-active="active" ng-show="vm.authentication.isAuthenticated()"><a ui-sref="app.users" title="View all users">Users</a></li>
           <li><a href="/KudosREST/swagger-ui.html" title="View API">API</a></li>
+          <li><a ui-sref="app.points" title="Points">Points</a></li>
         </ul>
         <form ng-show="vm.authentication.isAuthenticated()" class="navbar-form navbar-left" role="search">
           <div class="input-group">
@@ -125,6 +126,7 @@
 <script src="scripts/controllers/ProfileCtrl.js"></script>
 <script src="scripts/controllers/UserAccountCtrl.js"></script>
 <script src="scripts/controllers/searchCtrl.js"></script>
+<script src="scripts/controllers/pointsCtrl.js"></script>
 
 <script src="scripts/directives/kudosCategoryType.js"></script>
 <script src="scripts/directives/equalsElement.js"></script>

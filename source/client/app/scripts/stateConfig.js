@@ -133,11 +133,11 @@
         controller: 'Login as vm',
         url:'/account/login'
       })
-      // .state('app.faq', {
-      //   allowAnon: true,
-      //   templateUrl: 'views/faq.html',
-      //   url:'/faq'
-      // })
+      .state('app.points', {
+        templateUrl: 'views/kudos/points.html',
+        url:'/kudos/all',
+        controller: 'pointsCtrl as vm',
+      })
       .state('app.register', {
         allowAnon: true,
         backgroundImage: true,
